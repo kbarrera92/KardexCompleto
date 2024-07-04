@@ -202,7 +202,7 @@ Partial Class frmVerTraslados
         Me.CheckBox1.AutoSize = True
         Me.CheckBox1.BackColor = System.Drawing.Color.Yellow
         Me.CheckBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CheckBox1.Location = New System.Drawing.Point(466, 303)
+        Me.CheckBox1.Location = New System.Drawing.Point(467, 303)
         Me.CheckBox1.Name = "CheckBox1"
         Me.CheckBox1.Size = New System.Drawing.Size(310, 19)
         Me.CheckBox1.TabIndex = 12
