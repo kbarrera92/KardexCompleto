@@ -177,4 +177,17 @@
             FormCerrarCaja.Show()
         End If
     End Sub
+
+    Private Sub VerTurnosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles VerTurnosToolStripMenuItem.Click
+        If rolUsuarioActual = Nothing Then
+            MessageBox.Show("No tiene permisos para este módulo", "No tiene permisos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Return
+        Else
+            FormVerTurnos.Show()
+        End If
+    End Sub
+
+    Private Sub FormMenuNew_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
 End Class
