@@ -6,41 +6,10 @@ Public Class frmCobrar
 
     Dim sql As String = "SELECT idSerie, letra FROM SERIEFACTURA WHERE sucursal = " & sucActual
 
-    Sub actualizarVenta()
-        Dim sqlUpdate As String = "UPDATE VENTA SET cliente = @cli, documento = @doc, fechaVenta = @fech, total = @t, efectivo = @ef, tarjeta = @tar, autorizacion = @aut WHERE nVenta = @nv"
-        Dim cmd As SqlCommand
-
-        Try
-            cmd = New SqlCommand(sqlUpdate, conn)
-            With cmd.Parameters
-                .AddWithValue("cli", Trim(txtnit.Text))
-                .AddWithValue("doc", If(Trim(txtFactura.Text) = "", DBNull.Value, CInt(txtFactura.Text)))
-                .AddWithValue("fech", Convert.ToDateTime(txtfecha.Text))
-                .AddWithValue("t", CDbl(txttotal.Text))
-                .AddWithValue("ef", (CDbl(txtpago.Text) + CDbl(txttarjeta.Text)) - CDbl(txtcambio.Text))
-                .AddWithValue("tar", CDbl(txttarjeta.Text))
-                .AddWithValue("aut", txtautori.Text)
-                If pv = 1 Then
-                    .AddWithValue("nv", CInt(frmPuntoDeVentaMejorado.txtcorrelativo.Text))
-
-                End If
-
-            End With
-
-            openConnection()
-            cmd.ExecuteNonQuery()
-            closeConnection()
-            MsgBox("Se grabo correctamente el registro", MsgBoxStyle.Information, "Éxito")
-            ImprimeTicket()
-        Catch ex As Exception
-            MsgBox(ex.Message)
-        End Try
-    End Sub
-
     Function GrabaVenta(ByVal table As DataTable) As Boolean
         Dim cmd As SqlCommand
         Dim msg As String
-        Dim rc As Integer
+        Dim rc As Integer, nventa As Integer
         Try
             cmd = New SqlCommand()
             With cmd
@@ -61,6 +30,7 @@ Public Class frmCobrar
                 .AddWithValue("codempleado", CInt(TextBoxCodigoEmpleado.Text))
                 .Add("@MSG", SqlDbType.VarChar, 200).Direction = ParameterDirection.Output
                 .Add("@rc", SqlDbType.Int).Direction = ParameterDirection.Output
+                .Add("@nVenta", SqlDbType.Int).Direction = ParameterDirection.Output
                 .AddWithValue("detalles", table)
 
             End With
@@ -68,10 +38,11 @@ Public Class frmCobrar
             openConnection()
             cmd.ExecuteNonQuery()
             rc = CInt(cmd.Parameters("@rc").Value)
-            msg = CStr(cmd.Parameters("@MSG").Value.ToString())
+            msg = cmd.Parameters("@MSG").Value.ToString()
+            nventa = CInt(cmd.Parameters("@nVenta").Value)
             MessageBox.Show(msg, If(rc = 0, "Éxito", "Error"), MessageBoxButtons.OK, If(rc = 0, MessageBoxIcon.Information, MessageBoxIcon.Error))
             closeConnection()
-            ImprimeTicket()
+            ImprimeTicket(nventa)
         Catch ex As Exception
             MessageBox.Show($"Hubo un error al grabar la venta. {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             rc = -3
