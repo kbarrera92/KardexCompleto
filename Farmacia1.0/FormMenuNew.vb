@@ -7,6 +7,7 @@
             rolUsuarioActual = Nothing
             nameUsuarioActual = ""
             nombreRol = ""
+            usuarioActual = 0
             sucActual = 0
         End If
     End Sub
@@ -151,14 +152,29 @@
     End Sub
 
     Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
-        frmPuntoDeVentaMejorado.Show()
+        If rolUsuarioActual = Nothing Then
+            MessageBox.Show("No tiene permisos para este módulo", "No tiene permisos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Return
+        Else
+            frmPuntoDeVentaMejorado.Show()
+        End If
     End Sub
 
     Private Sub ToolStripMenuItem9_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem9.Click
-        FormAbrirCaja.Show()
+        If rolUsuarioActual = Nothing Then
+            MessageBox.Show("No tiene permisos para este módulo", "No tiene permisos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Return
+        Else
+            FormAbrirCaja.Show()
+        End If
     End Sub
 
     Private Sub ToolStripMenuItem10_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem10.Click
-        FormCerrarCaja.Show()
+        If rolUsuarioActual = Nothing Then
+            MessageBox.Show("No tiene permisos para este módulo", "No tiene permisos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Return
+        Else
+            FormCerrarCaja.Show()
+        End If
     End Sub
 End Class

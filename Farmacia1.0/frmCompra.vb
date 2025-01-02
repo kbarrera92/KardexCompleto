@@ -287,7 +287,6 @@ Public Class frmCompra
             cmd.ExecuteNonQuery()
             closeConnection()
             MsgBox("Se grabo correctamente el registro", MsgBoxStyle.Information, "Éxito")
-            ImprimeTicket()
         Catch ex As Exception
             MessageBox.Show($"Hubo un error al grabar la compra. {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try

@@ -88,12 +88,13 @@ Public Class FormCerrarCaja
             rc = CInt(cmd.Parameters("@rc").Value)
             msg = cmd.Parameters("@MSG").Value.ToString()
             inicial = CDec(cmd.Parameters("@saldoinicial").Value.ToString())
-            dif = CDec(If(cmd.Parameters("@diferencia").Value = Nothing, 0, cmd.Parameters("@diferencia").Value.ToString()))
-            totalfisico = CDec(If(cmd.Parameters("@totalfisico").Value = Nothing, 0, cmd.Parameters("@totalfisico").Value.ToString()))
-            totalsistema = CDec(If(cmd.Parameters("@totalsistema").Value = Nothing, 0, cmd.Parameters("@totalsistema").Value.ToString()))
+            dif = CDec(If(IsDBNull(cmd.Parameters("@diferencia").Value), 0, cmd.Parameters("@diferencia").Value.ToString()))
+            totalfisico = CDec(If(IsDBNull(cmd.Parameters("@totalfisico").Value), 0, cmd.Parameters("@totalfisico").Value))
+            totalsistema = CDec(If(IsDBNull(cmd.Parameters("@totalsistema").Value), 0, cmd.Parameters("@totalsistema").Value))
 
             MessageBox.Show(msg, If(rc = 0, "Éxito", "Error"), MessageBoxButtons.OK, If(rc = 0, MessageBoxIcon.Information, MessageBoxIcon.Error))
             closeConnection()
+            ImprimeTicketCuadre(inicial, totalsistema, totalfisico, dif)
         Catch ex As Exception
             MessageBox.Show($"Hubo un error al grabar el registro. {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             rc = -3
