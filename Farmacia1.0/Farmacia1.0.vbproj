@@ -61,7 +61,7 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Aha-Soft-Large-Home-Drugstore.ico</ApplicationIcon>
+    <ApplicationIcon>Paomedia-Small-N-Flat-Shop %281%29.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
@@ -118,6 +118,18 @@
     <Compile Include="Form1.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormCerrarCaja.Designer.vb">
+      <DependentUpon>FormCerrarCaja.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormCerrarCaja.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAbrirCaja.Designer.vb">
+      <DependentUpon>FormAbrirCaja.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormAbrirCaja.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormMenuNew.Designer.vb">
       <DependentUpon>FormMenuNew.vb</DependentUpon>
     </Compile>
@@ -128,6 +140,18 @@
       <DependentUpon>FormRecibirTraslado.vb</DependentUpon>
     </Compile>
     <Compile Include="FormRecibirTraslado.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormReporteUtilidad.Designer.vb">
+      <DependentUpon>FormReporteUtilidad.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormReporteUtilidad.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormVerTurnos.Designer.vb">
+      <DependentUpon>FormVerTurnos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormVerTurnos.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmAbono.designer.vb">
@@ -470,6 +494,12 @@
       <DependentUpon>rptTraslado.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="rptUtilidad.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptUtilidad.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="rptVentas.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -478,17 +508,28 @@
     </Compile>
     <Compile Include="Utils\clsFunciones.vb" />
     <Compile Include="Utils\ModuleUtils.vb" />
-    <Compile Include="Utils\Security.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormCerrarCaja.resx">
+      <DependentUpon>FormCerrarCaja.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAbrirCaja.resx">
+      <DependentUpon>FormAbrirCaja.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormMenuNew.resx">
       <DependentUpon>FormMenuNew.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormRecibirTraslado.resx">
       <DependentUpon>FormRecibirTraslado.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormReporteUtilidad.resx">
+      <DependentUpon>FormReporteUtilidad.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormVerTurnos.resx">
+      <DependentUpon>FormVerTurnos.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmAbono.resx">
       <DependentUpon>frmAbono.vb</DependentUpon>
@@ -660,6 +701,10 @@
     <EmbeddedResource Include="rptTraslado.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>rptTraslado.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptUtilidad.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptUtilidad.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="rptVentas.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -884,12 +929,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Aha-Soft-Large-Home-Drugstore.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Utilidades\Utilidades.csproj">
-      <Project>{79a14b61-1c7f-4427-a30f-2ae93b8848f2}</Project>
-      <Name>Utilidades</Name>
-    </ProjectReference>
+    <Content Include="Paomedia-Small-N-Flat-Shop %281%29.ico" />
+    <None Include="Resources\Custom-Icon-Design-Flatastic-8-Schedule.32.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

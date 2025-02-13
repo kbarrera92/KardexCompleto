@@ -209,11 +209,10 @@ Public Class clsFunciones
                 Try
                     printFont = New Font("Lucida Sans Typewriter", 8)
                     Dim pd As PrintDocument = New PrintDocument()
-
-                    AddHandler pd.PrintPage, AddressOf Me.pd_PrintPage
-
                     pd.PrinterSettings.PrinterName = impresora
                     pd.DocumentName = "Ticket" & DateTime.Now.ToShortDateString()
+
+                    AddHandler pd.PrintPage, AddressOf Me.pd_PrintPage
 
                     pd.Print()
                 Catch ex As Exception

@@ -7,6 +7,7 @@
             rolUsuarioActual = Nothing
             nameUsuarioActual = ""
             nombreRol = ""
+            usuarioActual = 0
             sucActual = 0
         End If
     End Sub
@@ -151,6 +152,50 @@
     End Sub
 
     Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
-        frmPuntoDeVentaMejorado.Show()
+        If rolUsuarioActual = Nothing Then
+            MessageBox.Show("No tiene permisos para este módulo", "No tiene permisos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Return
+        Else
+            frmPuntoDeVentaMejorado.Show()
+        End If
+    End Sub
+
+    Private Sub ToolStripMenuItem9_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem9.Click
+        If rolUsuarioActual = Nothing Then
+            MessageBox.Show("No tiene permisos para este módulo", "No tiene permisos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Return
+        Else
+            FormAbrirCaja.Show()
+        End If
+    End Sub
+
+    Private Sub ToolStripMenuItem10_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem10.Click
+        If rolUsuarioActual = Nothing Then
+            MessageBox.Show("No tiene permisos para este módulo", "No tiene permisos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Return
+        Else
+            FormCerrarCaja.Show()
+        End If
+    End Sub
+
+    Private Sub VerTurnosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles VerTurnosToolStripMenuItem.Click
+        If rolUsuarioActual = Nothing Then
+            MessageBox.Show("No tiene permisos para este módulo", "No tiene permisos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Return
+        Else
+            FormVerTurnos.Show()
+        End If
+    End Sub
+
+    Private Sub FormMenuNew_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
+
+    Private Sub ReporteDeUtilidadToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReporteDeUtilidadToolStripMenuItem.Click
+        If nombreRol <> "ADMINISTRADOR" Then
+            MessageBox.Show("No tiene permisos para este módulo", "No tiene permisos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Return
+        End If
+        FormReporteUtilidad.Show()
     End Sub
 End Class

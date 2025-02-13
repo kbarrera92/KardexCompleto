@@ -1,4 +1,5 @@
 ﻿Public Class frmMenu
+
     Private Sub frmMenu_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Button1.Text = vbCrLf & "INICIAR SESIÓN"
         Button2.Text = vbCrLf & "NUEVA VENTA"
