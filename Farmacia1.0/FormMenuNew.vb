@@ -190,4 +190,12 @@
     Private Sub FormMenuNew_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
+
+    Private Sub ReporteDeUtilidadToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReporteDeUtilidadToolStripMenuItem.Click
+        If nombreRol <> "ADMINISTRADOR" Then
+            MessageBox.Show("No tiene permisos para este módulo", "No tiene permisos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Return
+        End If
+        FormReporteUtilidad.Show()
+    End Sub
 End Class

@@ -150,17 +150,80 @@ Public Class frmCatalogoProducto
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        If RegOAct = 1 Then
+        Try
+            If RegOAct = 1 Then
 
-            If Trim(txtdesc.Text) = "" Then
-                MsgBox("Todos los campos son obligatorios", MsgBoxStyle.Information, "Faltan datos")
+                If Trim(txtdesc.Text) = "" Then
+                    MsgBox("Todos los campos son obligatorios", MsgBoxStyle.Information, "Faltan datos")
+                Else
+                    If MessageBox.Show("¿Desea guardar este registro?", "Guardar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
+
+
+                        Dim sql As String = "INSERT INTO PRODUCTO VALUES(@desc, @comp, @pres, @at, @indi, @con, @obs, @pro, @med, @cat, @lab, @prec, @cost, @fi, @est, @bar, @stock)"
+                        Dim cmd As SqlCommand
+                        cmd = New SqlCommand(sql, conn)
+
+                        cmd.Parameters.AddWithValue("desc", Trim(txtdesc.Text))
+                        cmd.Parameters.AddWithValue("comp", Trim(txtcomp.Text))
+
+                        cmd.Parameters.AddWithValue("pres", Trim(txtpres.Text))
+                        cmd.Parameters.AddWithValue("at", Trim(txtat.Text))
+                        cmd.Parameters.AddWithValue("indi", Trim(txtindi.Text))
+
+                        cmd.Parameters.AddWithValue("con", Trim(txtcontra.Text))
+                        cmd.Parameters.AddWithValue("obs", Trim(txtobs.Text))
+                        cmd.Parameters.AddWithValue("pro", Trim(cmbpro.SelectedValue))
+                        cmd.Parameters.AddWithValue("med", Trim(txtmed.Text))
+                        cmd.Parameters.AddWithValue("cat", Trim(cmbcat.SelectedValue))
+                        cmd.Parameters.AddWithValue("lab", Trim(txtlab.Text))
+                        cmd.Parameters.AddWithValue("prec", CDbl(txtprecio.Text))
+                        cmd.Parameters.AddWithValue("cost", CDbl(txtcosto.Text))
+                        cmd.Parameters.AddWithValue("fi", DateTimePicker1.Value)
+                        cmd.Parameters.AddWithValue("est", If(txtEstanteria.Text.Trim() = "", DBNull.Value, CInt(txtEstanteria.Text)))
+                        cmd.Parameters.AddWithValue("bar", Trim(txtbarcode.Text))
+                        cmd.Parameters.AddWithValue("stock", If(String.IsNullOrEmpty(txtstockmin.Text), 0, CInt(txtstockmin.Text)))
+                        Try
+                            openConnection()
+                            cmd.ExecuteNonQuery()
+                            MessageBox.Show("El registro se guardó correctamente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                            TextBox1.Clear()
+                            txtdesc.Clear()
+                            txtcomp.Clear()
+
+                            txtpres.Clear()
+                            txtat.Clear()
+                            DateTimePicker1.Value = Today
+                            txtindi.Clear()
+                            txtcontra.Clear()
+                            cmbpro.SelectedIndex = -1
+                            txtobs.Clear()
+                            txtmed.Clear()
+                            txtlab.Clear()
+                            txtprecio.Clear()
+                            txtcosto.Clear()
+                            txtEstanteria.Clear()
+                            cmbcat.SelectedIndex = -1
+                            txtbarcode.Clear()
+                            txtstockmin.Clear()
+                        Catch ex As Exception
+                            MessageBox.Show(ex.Message, "Algo salió mal", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        Finally
+                            closeConnection()
+                            cargarDGVProd()
+                        End Try
+                    End If
+                End If
+
+                RegOAct = 0
+
             Else
-                If MessageBox.Show("¿Desea guardar este registro?", "Guardar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
-
-
-                    Dim sql As String = "INSERT INTO PRODUCTO VALUES(@desc, @comp, @pres, @at, @indi, @con, @obs, @pro, @med, @cat, @lab, @prec, @cost, @fi, @est, @bar, @stock)"
+                If MessageBox.Show("¿Desea guardar los cambios de este registro?", "Guardar cambios", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
+                    Dim sqlupdate As String = "UPDATE PRODUCTO SET dProducto = @desc, " _
+                                              & "composicion = @comp, presentacion = @pres, aterapeutica = @at, " _
+                                              & "indicaciones = @indi, contraindicaciones = @con, observaciones = @obs, " _
+                                              & "proveedor = @pro, medida = @med, categoria = @cat, laboratorio = @lab, precio = @prec, costo = @cost, fechaRegistro = @fi, estanteria = @est, barcode = @bar, stockmin = @stock WHERE idProducto = @id"
                     Dim cmd As SqlCommand
-                    cmd = New SqlCommand(sql, conn)
+                    cmd = New SqlCommand(sqlupdate, conn)
 
                     cmd.Parameters.AddWithValue("desc", Trim(txtdesc.Text))
                     cmd.Parameters.AddWithValue("comp", Trim(txtcomp.Text))
@@ -178,87 +241,29 @@ Public Class frmCatalogoProducto
                     cmd.Parameters.AddWithValue("prec", CDbl(txtprecio.Text))
                     cmd.Parameters.AddWithValue("cost", CDbl(txtcosto.Text))
                     cmd.Parameters.AddWithValue("fi", DateTimePicker1.Value)
-                    cmd.Parameters.AddWithValue("est", If(txtEstanteria.Text.Trim() = "", DBNull.Value, CInt(txtEstanteria.Text)))
+                    cmd.Parameters.AddWithValue("id", CInt(txtcod.Text))
+                    cmd.Parameters.AddWithValue("est", CInt(txtEstanteria.Text))
                     cmd.Parameters.AddWithValue("bar", Trim(txtbarcode.Text))
-                    cmd.Parameters.AddWithValue("stock", CInt(txtstockmin.Text))
+                    cmd.Parameters.AddWithValue("stock", CInt(Val(txtstockmin.Text)))
                     Try
                         openConnection()
                         cmd.ExecuteNonQuery()
-                        MessageBox.Show("El registro se guardó correctamente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information)
                         TextBox1.Clear()
-                        txtdesc.Clear()
-                        txtcomp.Clear()
 
-                        txtpres.Clear()
-                        txtat.Clear()
-                        DateTimePicker1.Value = Today
-                        txtindi.Clear()
-                        txtcontra.Clear()
-                        cmbpro.SelectedIndex = -1
-                        txtobs.Clear()
-                        txtmed.Clear()
-                        txtlab.Clear()
-                        txtprecio.Clear()
-                        txtcosto.Clear()
-                        txtEstanteria.Clear()
-                        cmbcat.SelectedIndex = -1
-                        txtbarcode.Clear()
-                        txtstockmin.Clear()
+
+                        MessageBox.Show("La información del producto se actualizó de forma correcta", "Actualizado", MessageBoxButtons.OK, MessageBoxIcon.Information)
                     Catch ex As Exception
-                        MessageBox.Show(ex.Message, "Algo salió mal", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        MessageBox.Show("Algo salió mal" & vbCrLf & "Error: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                     Finally
                         closeConnection()
                         cargarDGVProd()
                     End Try
                 End If
             End If
+        Catch ex As Exception
+            MessageBox.Show("Error en el ingreso de los datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
 
-            RegOAct = 0
-
-        Else
-            If MessageBox.Show("¿Desea guardar los cambios de este registro?", "Guardar cambios", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
-                Dim sqlupdate As String = "UPDATE PRODUCTO SET dProducto = @desc, " _
-                                          & "composicion = @comp, presentacion = @pres, aterapeutica = @at, " _
-                                          & "indicaciones = @indi, contraindicaciones = @con, observaciones = @obs, " _
-                                          & "proveedor = @pro, medida = @med, categoria = @cat, laboratorio = @lab, precio = @prec, costo = @cost, fechaRegistro = @fi, estanteria = @est, barcode = @bar, stockmin = @stock WHERE idProducto = @id"
-                Dim cmd As SqlCommand
-                cmd = New SqlCommand(sqlupdate, conn)
-
-                cmd.Parameters.AddWithValue("desc", Trim(txtdesc.Text))
-                cmd.Parameters.AddWithValue("comp", Trim(txtcomp.Text))
-
-                cmd.Parameters.AddWithValue("pres", Trim(txtpres.Text))
-                cmd.Parameters.AddWithValue("at", Trim(txtat.Text))
-                cmd.Parameters.AddWithValue("indi", Trim(txtindi.Text))
-
-                cmd.Parameters.AddWithValue("con", Trim(txtcontra.Text))
-                cmd.Parameters.AddWithValue("obs", Trim(txtobs.Text))
-                cmd.Parameters.AddWithValue("pro", Trim(cmbpro.SelectedValue))
-                cmd.Parameters.AddWithValue("med", Trim(txtmed.Text))
-                cmd.Parameters.AddWithValue("cat", Trim(cmbcat.SelectedValue))
-                cmd.Parameters.AddWithValue("lab", Trim(txtlab.Text))
-                cmd.Parameters.AddWithValue("prec", CDbl(txtprecio.Text))
-                cmd.Parameters.AddWithValue("cost", CDbl(txtcosto.Text))
-                cmd.Parameters.AddWithValue("fi", DateTimePicker1.Value)
-                cmd.Parameters.AddWithValue("id", CInt(txtcod.Text))
-                cmd.Parameters.AddWithValue("est", CInt(txtEstanteria.Text))
-                cmd.Parameters.AddWithValue("bar", Trim(txtbarcode.Text))
-                cmd.Parameters.AddWithValue("stock", CInt(Val(txtstockmin.Text)))
-                Try
-                    openConnection()
-                    cmd.ExecuteNonQuery()
-                    TextBox1.Clear()
-
-
-                    MessageBox.Show("La información del producto se actualizó de forma correcta", "Actualizado", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                Catch ex As Exception
-                    MessageBox.Show("Algo salió mal" & vbCrLf & "Error: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                Finally
-                    closeConnection()
-                    cargarDGVProd()
-                End Try
-            End If
-        End If
     End Sub
 
 

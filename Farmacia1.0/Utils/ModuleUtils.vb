@@ -84,7 +84,7 @@ Module ModuleUtils
             ticket.textoIzquierda(" ")
             ticket.agregaTotales("Efectivo: ", Double.Parse(frmCobrar.txtpago.Text))
             ticket.agregaTotales("Cambio: ", Double.Parse(frmCobrar.txtcambio.Text))
-
+            ticket.textoIzquierda(" ")
 
             ticket.textoIzquierda(" ")
             ticket.textoCentro("**********************************")

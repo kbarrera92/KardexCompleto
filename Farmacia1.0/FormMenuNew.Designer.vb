@@ -23,8 +23,10 @@ Partial Class FormMenuNew
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
-        Me.ToolStripButtonLogin = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripButtonLogin = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSplitButtonAdmin = New System.Windows.Forms.ToolStripSplitButton()
         Me.CatálogoDeProductosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProveedoresToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -49,13 +51,13 @@ Partial Class FormMenuNew
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripMenuItem7 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem8 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripSeparator7 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ReporteDeUtilidadToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSplitButton1 = New System.Windows.Forms.ToolStripSplitButton()
         Me.ToolStripMenuItem9 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem10 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
         Me.VerTurnosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -71,6 +73,21 @@ Partial Class FormMenuNew
         Me.ToolStrip1.TabIndex = 0
         Me.ToolStrip1.Text = "ToolStrip1"
         '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 58)
+        '
+        'ToolStripSeparator5
+        '
+        Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
+        Me.ToolStripSeparator5.Size = New System.Drawing.Size(6, 58)
+        '
+        'ToolStripSeparator6
+        '
+        Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
+        Me.ToolStripSeparator6.Size = New System.Drawing.Size(6, 58)
+        '
         'ToolStripButtonLogin
         '
         Me.ToolStripButtonLogin.Image = Global.Farmacia1._0.My.Resources.Resources.Everaldo_Crystal_Clear_App_login_manager_32
@@ -79,11 +96,6 @@ Partial Class FormMenuNew
         Me.ToolStripButtonLogin.Size = New System.Drawing.Size(131, 55)
         Me.ToolStripButtonLogin.Text = "Iniciar sesión"
         Me.ToolStripButtonLogin.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage
-        '
-        'ToolStripSeparator1
-        '
-        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 58)
         '
         'ToolStripSplitButtonAdmin
         '
@@ -196,7 +208,7 @@ Partial Class FormMenuNew
         '
         'ToolStripSplitButtonReportes
         '
-        Me.ToolStripSplitButtonReportes.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem3, Me.CorteDeCajaToolStripMenuItem, Me.ToolStripMenuItem6, Me.ToolStripSeparator4, Me.ToolStripMenuItem7, Me.ToolStripMenuItem8})
+        Me.ToolStripSplitButtonReportes.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem3, Me.CorteDeCajaToolStripMenuItem, Me.ToolStripMenuItem6, Me.ToolStripSeparator4, Me.ToolStripMenuItem7, Me.ToolStripMenuItem8, Me.ToolStripSeparator7, Me.ReporteDeUtilidadToolStripMenuItem})
         Me.ToolStripSplitButtonReportes.Image = Global.Farmacia1._0.My.Resources.Resources.Gartoon_Team_Gartoon_Apps_Gnome_power_statistics_32
         Me.ToolStripSplitButtonReportes.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripSplitButtonReportes.Name = "ToolStripSplitButtonReportes"
@@ -239,10 +251,16 @@ Partial Class FormMenuNew
         Me.ToolStripMenuItem8.Size = New System.Drawing.Size(253, 24)
         Me.ToolStripMenuItem8.Text = "Ventas eliminadas"
         '
-        'ToolStripSeparator5
+        'ToolStripSeparator7
         '
-        Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
-        Me.ToolStripSeparator5.Size = New System.Drawing.Size(6, 58)
+        Me.ToolStripSeparator7.Name = "ToolStripSeparator7"
+        Me.ToolStripSeparator7.Size = New System.Drawing.Size(250, 6)
+        '
+        'ReporteDeUtilidadToolStripMenuItem
+        '
+        Me.ReporteDeUtilidadToolStripMenuItem.Name = "ReporteDeUtilidadToolStripMenuItem"
+        Me.ReporteDeUtilidadToolStripMenuItem.Size = New System.Drawing.Size(253, 24)
+        Me.ReporteDeUtilidadToolStripMenuItem.Text = "Reporte de utilidad"
         '
         'ToolStripSplitButton1
         '
@@ -257,19 +275,20 @@ Partial Class FormMenuNew
         'ToolStripMenuItem9
         '
         Me.ToolStripMenuItem9.Name = "ToolStripMenuItem9"
-        Me.ToolStripMenuItem9.Size = New System.Drawing.Size(180, 24)
+        Me.ToolStripMenuItem9.Size = New System.Drawing.Size(163, 24)
         Me.ToolStripMenuItem9.Text = "Abrir Turno"
         '
         'ToolStripMenuItem10
         '
         Me.ToolStripMenuItem10.Name = "ToolStripMenuItem10"
-        Me.ToolStripMenuItem10.Size = New System.Drawing.Size(180, 24)
+        Me.ToolStripMenuItem10.Size = New System.Drawing.Size(163, 24)
         Me.ToolStripMenuItem10.Text = "Cerrar Turno"
         '
-        'ToolStripSeparator6
+        'VerTurnosToolStripMenuItem
         '
-        Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
-        Me.ToolStripSeparator6.Size = New System.Drawing.Size(6, 58)
+        Me.VerTurnosToolStripMenuItem.Name = "VerTurnosToolStripMenuItem"
+        Me.VerTurnosToolStripMenuItem.Size = New System.Drawing.Size(163, 24)
+        Me.VerTurnosToolStripMenuItem.Text = "Ver Turnos"
         '
         'ToolStripButton1
         '
@@ -279,12 +298,6 @@ Partial Class FormMenuNew
         Me.ToolStripButton1.Size = New System.Drawing.Size(129, 55)
         Me.ToolStripButton1.Text = "Nueva venta"
         Me.ToolStripButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage
-        '
-        'VerTurnosToolStripMenuItem
-        '
-        Me.VerTurnosToolStripMenuItem.Name = "VerTurnosToolStripMenuItem"
-        Me.VerTurnosToolStripMenuItem.Size = New System.Drawing.Size(180, 24)
-        Me.VerTurnosToolStripMenuItem.Text = "Ver Turnos"
         '
         'FormMenuNew
         '
@@ -337,4 +350,6 @@ Partial Class FormMenuNew
     Friend WithEvents ToolStripMenuItem9 As ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem10 As ToolStripMenuItem
     Friend WithEvents VerTurnosToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator7 As ToolStripSeparator
+    Friend WithEvents ReporteDeUtilidadToolStripMenuItem As ToolStripMenuItem
 End Class

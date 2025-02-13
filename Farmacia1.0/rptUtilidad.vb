@@ -18,7 +18,7 @@ Imports System
 Imports System.ComponentModel
 
 
-Public Class rptAjuste
+Public Class rptUtilidad
     Inherits ReportClass
     
     Public Sub New()
@@ -27,7 +27,7 @@ Public Class rptAjuste
     
     Public Overrides Property ResourceName() As String
         Get
-            Return "rptAjuste.rpt"
+            Return "rptUtilidad.rpt"
         End Get
         Set
             'Do nothing
@@ -45,7 +45,7 @@ Public Class rptAjuste
     
     Public Overrides Property FullResourceName() As String
         Get
-            Return "Farmacia1._0.rptAjuste.rpt"
+            Return "Farmacia1._0.rptUtilidad.rpt"
         End Get
         Set
             'Do nothing
@@ -94,7 +94,7 @@ Public Class rptAjuste
     
     <Browsable(false),  _
      DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property Parameter_nAjuste() As CrystalDecisions.[Shared].IParameterField
+    Public ReadOnly Property Parameter_fechainicio() As CrystalDecisions.[Shared].IParameterField
         Get
             Return Me.DataDefinition.ParameterFields(0)
         End Get
@@ -102,39 +102,15 @@ Public Class rptAjuste
     
     <Browsable(false),  _
      DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property Parameter_fecha() As CrystalDecisions.[Shared].IParameterField
+    Public ReadOnly Property Parameter_fechafin() As CrystalDecisions.[Shared].IParameterField
         Get
             Return Me.DataDefinition.ParameterFields(1)
-        End Get
-    End Property
-    
-    <Browsable(false),  _
-     DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property Parameter_concepto() As CrystalDecisions.[Shared].IParameterField
-        Get
-            Return Me.DataDefinition.ParameterFields(2)
-        End Get
-    End Property
-    
-    <Browsable(false),  _
-     DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property Parameter_tipo() As CrystalDecisions.[Shared].IParameterField
-        Get
-            Return Me.DataDefinition.ParameterFields(3)
-        End Get
-    End Property
-    
-    <Browsable(false),  _
-     DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property Parameter_sucursal() As CrystalDecisions.[Shared].IParameterField
-        Get
-            Return Me.DataDefinition.ParameterFields(4)
         End Get
     End Property
 End Class
 
 <System.Drawing.ToolboxBitmapAttribute(GetType(CrystalDecisions.[Shared].ExportOptions), "report.bmp")>  _
-Public Class CachedrptAjuste
+Public Class CachedrptUtilidad
     Inherits Component
     Implements ICachedReport
     
@@ -176,7 +152,7 @@ Public Class CachedrptAjuste
     End Property
     
     Public Overridable Function CreateReport() As CrystalDecisions.CrystalReports.Engine.ReportDocument Implements CrystalDecisions.ReportSource.ICachedReport.CreateReport
-        Dim rpt As rptAjuste = New rptAjuste()
+        Dim rpt As rptUtilidad = New rptUtilidad()
         rpt.Site = Me.Site
         Return rpt
     End Function
