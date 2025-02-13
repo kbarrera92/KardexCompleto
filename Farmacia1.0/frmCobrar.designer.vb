@@ -33,6 +33,8 @@ Partial Class frmCobrar
         Me.txttarjeta = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.TextBoxCodigoEmpleado = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.txtautori = New System.Windows.Forms.TextBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
@@ -123,9 +125,9 @@ Partial Class frmCobrar
         'Button1
         '
         Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.Location = New System.Drawing.Point(16, 251)
+        Me.Button1.Location = New System.Drawing.Point(18, 601)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(113, 47)
+        Me.Button1.Size = New System.Drawing.Size(238, 47)
         Me.Button1.TabIndex = 4
         Me.Button1.Text = "Cobrar"
         Me.Button1.UseVisualStyleBackColor = True
@@ -133,9 +135,9 @@ Partial Class frmCobrar
         'Button2
         '
         Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button2.Location = New System.Drawing.Point(143, 251)
+        Me.Button2.Location = New System.Drawing.Point(268, 601)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(111, 47)
+        Me.Button2.Size = New System.Drawing.Size(267, 47)
         Me.Button2.TabIndex = 5
         Me.Button2.Text = "Cancelar"
         Me.Button2.UseVisualStyleBackColor = True
@@ -161,9 +163,9 @@ Partial Class frmCobrar
         'GroupBox1
         '
         Me.GroupBox1.BackColor = System.Drawing.Color.SpringGreen
+        Me.GroupBox1.Controls.Add(Me.Label14)
+        Me.GroupBox1.Controls.Add(Me.TextBoxCodigoEmpleado)
         Me.GroupBox1.Controls.Add(Me.Label5)
-        Me.GroupBox1.Controls.Add(Me.Button2)
-        Me.GroupBox1.Controls.Add(Me.Button1)
         Me.GroupBox1.Controls.Add(Me.txtautori)
         Me.GroupBox1.Controls.Add(Me.Label4)
         Me.GroupBox1.Controls.Add(Me.txttarjeta)
@@ -175,11 +177,29 @@ Partial Class frmCobrar
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Tarjeta"
         '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label14.Location = New System.Drawing.Point(12, 218)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(206, 24)
+        Me.Label14.TabIndex = 4
+        Me.Label14.Text = "Código de empleado"
+        '
+        'TextBoxCodigoEmpleado
+        '
+        Me.TextBoxCodigoEmpleado.Font = New System.Drawing.Font("Microsoft Sans Serif", 40.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBoxCodigoEmpleado.Location = New System.Drawing.Point(16, 245)
+        Me.TextBoxCodigoEmpleado.Name = "TextBoxCodigoEmpleado"
+        Me.TextBoxCodigoEmpleado.Size = New System.Drawing.Size(238, 68)
+        Me.TextBoxCodigoEmpleado.TabIndex = 5
+        '
         'Label5
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(12, 122)
+        Me.Label5.Location = New System.Drawing.Point(12, 118)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(192, 24)
         Me.Label5.TabIndex = 2
@@ -188,7 +208,7 @@ Partial Class frmCobrar
         'txtautori
         '
         Me.txtautori.Font = New System.Drawing.Font("Microsoft Sans Serif", 40.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtautori.Location = New System.Drawing.Point(16, 149)
+        Me.txtautori.Location = New System.Drawing.Point(16, 145)
         Me.txtautori.Name = "txtautori"
         Me.txtautori.Size = New System.Drawing.Size(238, 68)
         Me.txtautori.TabIndex = 3
@@ -409,17 +429,16 @@ Partial Class frmCobrar
         Me.ShapeContainer1.TabIndex = 0
         Me.ShapeContainer1.TabStop = False
         '
-        'PrintDocument1
-        '
-        '
         'frmCobrar
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(553, 603)
+        Me.ClientSize = New System.Drawing.Size(553, 649)
         Me.Controls.Add(Me.Panel1)
+        Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.txtcambio)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.txtpago)
@@ -472,4 +491,6 @@ Partial Class frmCobrar
     Friend WithEvents Label13 As Label
     Private WithEvents ShapeContainer1 As PowerPacks.ShapeContainer
     Friend WithEvents PrintDocument1 As Printing.PrintDocument
+    Friend WithEvents Label14 As Label
+    Friend WithEvents TextBoxCodigoEmpleado As TextBox
 End Class

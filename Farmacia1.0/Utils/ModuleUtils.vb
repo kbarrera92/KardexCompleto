@@ -44,17 +44,20 @@ Module ModuleUtils
         Return Split(cadena, ";")
     End Function
 
-    Public Sub ImprimeTicket()
+    Public Sub ImprimeTicket(ByVal nventa As Integer)
         If ConsultaParametro("imprimeTicket") = "S" Then
+            Dim fechaActual As Date = Date.Now
+            Dim formato As String = "yyyy-MM-dd HH:mm:ss"
+            Dim fechaFormateada As String = fechaActual.ToString(formato)
             Dim ticket As clsFunciones.crearTicket = New clsFunciones.crearTicket()
 
             ticket.textoCentro(ConsultaParametro("nombreEmpresa"))
             ticket.textoCentro("****************************************")
             ticket.textoCentro("TICKET DE VENTA")
             If pv = 1 Then
-                ticket.textoIzquierda("No. de Ticket: " & frmPuntoDeVentaMejorado.txtcorrelativo.Text)
+                ticket.textoIzquierda("No. de Ticket: " & nventa.ToString())
 
-                ticket.textoIzquierda("Fecha: " & frmPuntoDeVentaMejorado.DateTimePicker1.Text)
+                ticket.textoIzquierda("Fecha: " & fechaFormateada)
                 ticket.textoIzquierda("Le atendió: " & nameUsuarioActual)
                 ticket.textoIzquierda(" ")
                 ticket.lineasGuion()
@@ -81,11 +84,47 @@ Module ModuleUtils
             ticket.textoIzquierda(" ")
             ticket.agregaTotales("Efectivo: ", Double.Parse(frmCobrar.txtpago.Text))
             ticket.agregaTotales("Cambio: ", Double.Parse(frmCobrar.txtcambio.Text))
-
+            ticket.textoIzquierda(" ")
 
             ticket.textoIzquierda(" ")
             ticket.textoCentro("**********************************")
             ticket.textoCentro("*     Gracias por preferirnos    *")
+            ticket.textoCentro("**********************************")
+            ticket.textoIzquierda(" ")
+
+            ticket.imprimirTicket(ConsultaParametro("nombreImpresora"))
+        End If
+    End Sub
+
+    Public Sub ImprimeTicketCuadre(ByVal inicial As Decimal, ByVal sistema As Decimal, ByVal fisico As Decimal, ByVal diferencia As Decimal)
+        If ConsultaParametro("imprimeTicketCuadre") = "S" Then
+            Dim fechaActual As Date = Date.Now
+            Dim formato As String = "yyyy-MM-dd HH:mm:ss"
+            Dim fechaFormateada As String = fechaActual.ToString(formato)
+            Dim ticket As clsFunciones.crearTicket = New clsFunciones.crearTicket()
+
+            ticket.textoCentro(ConsultaParametro("nombreEmpresa"))
+            ticket.textoCentro("****************************************")
+            ticket.textoCentro("TICKET DE CUADRE")
+            If pv = 1 Then
+                ticket.textoIzquierda("Fecha: " & fechaFormateada)
+                ticket.textoIzquierda("Usuario: " & nameUsuarioActual)
+                ticket.textoIzquierda(" ")
+                ticket.lineasGuion()
+                ticket.textoIzquierda(" ")
+            End If
+
+            ticket.agregaTotales("Inicial: ", inicial)
+            ticket.textoIzquierda(" ")
+            ticket.agregaTotales("Sistema: ", sistema)
+            ticket.textoIzquierda(" ")
+            ticket.agregaTotales("Físico: ", fisico)
+            ticket.textoIzquierda(" ")
+            ticket.agregaTotales("Diferencia: ", diferencia)
+
+            ticket.textoIzquierda(" ")
+            ticket.textoCentro("**********************************")
+            ticket.textoCentro("*            Farmavela           *")
             ticket.textoCentro("**********************************")
             ticket.textoIzquierda(" ")
 

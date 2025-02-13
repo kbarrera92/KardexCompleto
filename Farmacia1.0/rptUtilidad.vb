@@ -18,7 +18,7 @@ Imports System
 Imports System.ComponentModel
 
 
-Public Class rptVentas
+Public Class rptUtilidad
     Inherits ReportClass
     
     Public Sub New()
@@ -27,7 +27,7 @@ Public Class rptVentas
     
     Public Overrides Property ResourceName() As String
         Get
-            Return "rptVentas.rpt"
+            Return "rptUtilidad.rpt"
         End Get
         Set
             'Do nothing
@@ -45,7 +45,7 @@ Public Class rptVentas
     
     Public Overrides Property FullResourceName() As String
         Get
-            Return "Farmacia1._0.rptVentas.rpt"
+            Return "Farmacia1._0.rptUtilidad.rpt"
         End Get
         Set
             'Do nothing
@@ -94,7 +94,7 @@ Public Class rptVentas
     
     <Browsable(false),  _
      DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property Parameter_nombreEmpresa() As CrystalDecisions.[Shared].IParameterField
+    Public ReadOnly Property Parameter_fechainicio() As CrystalDecisions.[Shared].IParameterField
         Get
             Return Me.DataDefinition.ParameterFields(0)
         End Get
@@ -102,7 +102,7 @@ Public Class rptVentas
     
     <Browsable(false),  _
      DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property Parameter_slogan() As CrystalDecisions.[Shared].IParameterField
+    Public ReadOnly Property Parameter_fechafin() As CrystalDecisions.[Shared].IParameterField
         Get
             Return Me.DataDefinition.ParameterFields(1)
         End Get
@@ -110,7 +110,7 @@ Public Class rptVentas
 End Class
 
 <System.Drawing.ToolboxBitmapAttribute(GetType(CrystalDecisions.[Shared].ExportOptions), "report.bmp")>  _
-Public Class CachedrptVentas
+Public Class CachedrptUtilidad
     Inherits Component
     Implements ICachedReport
     
@@ -152,7 +152,7 @@ Public Class CachedrptVentas
     End Property
     
     Public Overridable Function CreateReport() As CrystalDecisions.CrystalReports.Engine.ReportDocument Implements CrystalDecisions.ReportSource.ICachedReport.CreateReport
-        Dim rpt As rptVentas = New rptVentas()
+        Dim rpt As rptUtilidad = New rptUtilidad()
         rpt.Site = Me.Site
         Return rpt
     End Function
