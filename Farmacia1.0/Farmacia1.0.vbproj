@@ -74,7 +74,6 @@
       <HintPath>..\packages\iTextSharp.5.5.13.1\lib\itextsharp.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.VisualBasic.PowerPacks, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\VisualBasic.PowerPacks.Vs.1.0.0\lib\Microsoft.VisualBasic.PowerPacks.Vs.dll</HintPath>
     </Reference>
@@ -321,12 +320,6 @@
       <DependentUpon>frmProveedores.vb</DependentUpon>
     </Compile>
     <Compile Include="frmProveedores.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmPuntoDeVenta.Designer.vb">
-      <DependentUpon>frmPuntoDeVenta.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmPuntoDeVenta.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmPuntoDeVentaMejorado.designer.vb">
@@ -629,9 +622,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmProveedores.resx">
       <DependentUpon>frmProveedores.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmPuntoDeVenta.resx">
-      <DependentUpon>frmPuntoDeVenta.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPuntoDeVentaMejorado.resx">
       <DependentUpon>frmPuntoDeVentaMejorado.vb</DependentUpon>
@@ -959,12 +949,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Aha-Soft-Large-Home-Drugstore.ico" />
-    <Content Include="DbHelpers\AESHelper.cs" />
-    <Content Include="DbHelpers\Constants.cs" />
-    <Content Include="DbHelpers\SQLService.cs" />
-    <Content Include="DbHelpers\Utils.cs" />
     <Content Include="Paomedia-Small-N-Flat-Shop %281%29.ico" />
     <None Include="Resources\Custom-Icon-Design-Flatastic-8-Schedule.32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Helpers\Helpers.csproj">
+      <Project>{b0239496-75bf-4a7a-b5be-76d1168c5830}</Project>
+      <Name>Helpers</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,6 +1,4 @@
 ﻿Imports System.Data.SqlClient
-Imports System.IO
-Imports System.Text
 
 Public Class frmCobrar
 
@@ -71,26 +69,15 @@ Public Class frmCobrar
         Dim res As Boolean
         If Val(txtcambio.Text) >= 0 Then
             If MessageBox.Show("¿Desea guardar esta venta?", "Guardando", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
-                'guardarVenta2()
                 If saveClient = True Then
                     saveinfoclient()
                     saveClient = False
                 End If
                 If Me.CheckBox1.Checked = True Then
-                    'Guardar detalles
-                    'guardarDetalleVenta2()
-                    'Actualizar la venta
-                    'actualizarVenta()
                     res = GrabaVenta(table)
                     guardarFactura()
-                    'aca deberia de mostrar la factura
                 Else
-                    'Guardar detalles
-                    'guardarDetalleVenta2()
-                    'Actualizar la venta
-                    'actualizarVenta()
                     res = GrabaVenta(table)
-
 
                 End If
 
