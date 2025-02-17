@@ -1,4 +1,6 @@
 ﻿Imports System.Data.SqlClient
+Imports Serilog
+
 Public Class Form1
 
     Sub login()
@@ -34,46 +36,31 @@ Public Class Form1
                     MsgBox("Bienvenido al sistema: " & nameUsuarioActual.ToString, MsgBoxStyle.Information, ConsultaParametro("nombreEmpresa"))
                     reader.Close()
                     Me.Close()
-                    'frmMenu.Select()
                     FormMenuNew.ToolStripButtonLogin.Text = "Cerrar sesión"
-                    'frmMenu.Button3.Enabled = True
-                    'frmMenu.Button2.Enabled = True
-                    'frmMenu.Button4.Enabled = True
-                    'frmMenu.btnTraslados.Enabled = True
-                    'frmMenu.Button6.Enabled = True
-                    'frmMenu.Button7.Enabled = True
-                    'frmMenu.Button8.Enabled = True
-                    'frmMenu.Button9.Enabled = True
-                    'frmMenu.btnRecibirTraslado.Enabled = True
-                    'frmMenu.Button11.Enabled = True
-                    GrabaBitacora(params, grabaBitacoraSp)
+
+                    Log.Information(Environment.MachineName & " - " & Environment.UserName)
+                    Log.Information("Inicio de sesión: " & nameUsuarioActual & ", desde: " & ConsultaParametro("sucursalFisica"))
                 Else
                     If (sucActual = reader(4) And (reader(3).ToString() = "VENDEDOR")) Then
                         MsgBox("Bienvenido al sistema: " & nameUsuarioActual.ToString, MsgBoxStyle.Information, ConsultaParametro("nombreEmpresa"))
                         reader.Close()
                         Me.Close()
-                        'frmMenu.Select()
                         FormMenuNew.ToolStripButtonLogin.Text = "Cerrar sesión"
-                        'frmMenu.Button2.Enabled = True
-                        'frmMenu.btnTraslados.Enabled = True
-                        'frmMenu.btnRecibirTraslado.Enabled = True
-                        GrabaBitacora(params, grabaBitacoraSp)
+
+                        Log.Information("Inicio de sesión: " & nameUsuarioActual & ", desde: " & ConsultaParametro("sucursalFisica"))
                     Else
                         If (sucActual = reader(4) And (reader(3).ToString = "BODEGUERO")) Then
                             MsgBox("Bienvenido al sistema: " & nameUsuarioActual.ToString, MsgBoxStyle.Information, ConsultaParametro("nombreEmpresa"))
                             reader.Close()
                             Me.Close()
-                            'frmMenu.Select()
                             FormMenuNew.ToolStripButtonLogin.Text = "Cerrar sesión"
-                            'frmMenu.Button8.Enabled = True
-                            'frmMenu.btnTraslados.Enabled = True
-                            'frmMenu.btnRecibirTraslado.Enabled = True
-                            GrabaBitacora(params, grabaBitacoraSp)
+
+                            Log.Information("Inicio de sesión: " & nameUsuarioActual & ", desde: " & ConsultaParametro("sucursalFisica"))
                         Else
-                            params(2) = "Inicio de sesión no autorizado: " & nameUsuarioActual & ", desde: " & ConsultaParametro("sucursalFisica")
                             MsgBox("No se encontraron coincidencias", MsgBoxStyle.Critical, "Error en los datos")
                             reader.Close()
-                            GrabaBitacora(params, grabaBitacoraSp)
+
+                            Log.Information("Inicio de sesión no autorizado: " & nameUsuarioActual & ", desde: " & ConsultaParametro("sucursalFisica"))
                         End If
 
                     End If
@@ -84,9 +71,10 @@ Public Class Form1
 
 
         Catch ex As Exception
-            MsgBox("No se encontraron coincidencias", MsgBoxStyle.Critical, "Error en los datos")
+            Log.Information($"Ocurrio un error. Error: {ex.Message}")
         Finally
             closeConnection()
+            Log.Information("Finaliza Login")
         End Try
     End Sub
 
