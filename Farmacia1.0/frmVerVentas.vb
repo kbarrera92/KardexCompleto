@@ -276,12 +276,17 @@ Public Class frmVerVentas
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
         If DataGridView1.Rows.Count > 0 Then
-            Dim informe As New rptVentas
+            Try
+                Dim informe As New rptVentas
 
-            informe.SetDataSource(ds.Tables("dtVentasXsuc"))
+                informe.SetDataSource(ds.Tables("dtVentasXsuc"))
+                informe.SetParameterValue(0, ConsultaParametro("nombreEmpresa"))
+                informe.SetParameterValue(1, ConsultaParametro("eslogan"))
+                frmVerReportes.CrystalReportViewer1.ReportSource = informe
+                frmVerReportes.Show()
+            Catch ex As Exception
 
-            frmVerReportes.CrystalReportViewer1.ReportSource = informe
-            frmVerReportes.Show()
+            End Try
         Else
             MessageBox.Show("No se eligió ninguna sucursal", "Faltan datos", MessageBoxButtons.OK, MessageBoxIcon.Warning)
 

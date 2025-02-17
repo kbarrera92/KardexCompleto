@@ -82,14 +82,20 @@ Public Class frmVerTraslados
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         If DataGridView1.SelectedRows.Count > 0 Then
-            llenarDTSMP()
-            Dim informe As New rptTraslado
+            Try
+                llenarDTSMP()
+                Dim informe As New rptTraslado
 
-            informe.SetDataSource(ds.Tables("dtDetTraslados"))
-            informe.SetParameterValue("nTraslado", CInt(TextBox1.Text))
+                informe.SetDataSource(ds.Tables("dtDetTraslados"))
+                informe.SetParameterValue("nTraslado", CInt(TextBox1.Text))
+                informe.SetParameterValue(1, ConsultaParametro("nombreEmpresa"))
 
-            frmVerReportes.CrystalReportViewer1.ReportSource = informe
-            frmVerReportes.Show()
+                frmVerReportes.CrystalReportViewer1.ReportSource = informe
+                frmVerReportes.Show()
+            Catch ex As Exception
+
+            End Try
+
         Else
             MsgBox("Debe seleccionar un traslado para imprimir su reporte", MsgBoxStyle.Exclamation, "Faltan datos")
         End If
