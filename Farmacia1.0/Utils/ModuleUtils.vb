@@ -44,6 +44,74 @@ Module ModuleUtils
         Return Split(cadena, ";")
     End Function
 
+    Public Function EjecutarStoredProcedureMultiple(ByVal conexionString As String,
+                                               ByVal nombreSP As String,
+                                               ByVal parametros As List(Of SqlParameter)) As (List(Of DataTable), String, List(Of SqlParameter))
+        Dim dataTables As New List(Of DataTable)()  ' Lista para almacenar los DataTables resultantes
+        Dim salida As String = String.Empty  ' Variable para el mensaje de salida
+        Dim parametrosSalida As New List(Of SqlParameter)()  ' Lista para los parámetros de salida
+
+        ' Usamos una conexión a la base de datos SQL Server
+        Using conexion As New SqlConnection(conexionString)
+            ' Definimos el comando para ejecutar el SP
+            Using cmd As New SqlCommand(nombreSP, conexion)
+                cmd.CommandType = CommandType.StoredProcedure
+
+                ' Agregar los parámetros a la colección del comando
+                If parametros IsNot Nothing Then
+                    For Each parametro As SqlParameter In parametros
+                        cmd.Parameters.Add(parametro)
+                    Next
+                End If
+
+                ' Intentamos abrir la conexión y ejecutar el SP
+                Try
+                    conexion.Open()
+
+                    ' Ejecutar el stored procedure y leer los resultados
+                    Using reader As SqlDataReader = cmd.ExecuteReader()
+                        ' Mientras haya más conjuntos de resultados
+                        Do
+                            ' Crear un DataTable para almacenar el conjunto actual de resultados
+                            Dim dt As New DataTable()
+                            dt.Load(reader)  ' Cargar los resultados en el DataTable
+                            dataTables.Add(dt)  ' Añadir el DataTable a la lista
+                        Loop While reader.NextResult() ' Continuar leyendo si hay más resultados
+
+                    End Using
+
+                    ' Extraer los parámetros de salida (si existen)
+                    For Each param As SqlParameter In cmd.Parameters
+                        If param.Direction = ParameterDirection.Output OrElse param.Direction = ParameterDirection.InputOutput Then
+                            parametrosSalida.Add(param)  ' Guardamos los parámetros de salida
+                        End If
+                    Next
+
+                    ' Verificar si hay parámetros de salida y construir un mensaje
+                    If parametrosSalida.Count > 0 Then
+                        salida = "Parámetros de salida: "
+                        For Each param As SqlParameter In parametrosSalida
+                            salida &= param.ParameterName & " = " & param.Value.ToString() & ", "
+                        Next
+                        salida = salida.TrimEnd(","c, " "c)
+                    Else
+                        salida = "Sin parámetros de salida."
+                    End If
+
+                Catch ex As Exception
+                    ' Manejo de excepciones en caso de error al ejecutar el SP
+                    salida = "Error: " & ex.Message
+                Finally
+                    conexion.Close()  ' Cerrar la conexión
+                End Try
+            End Using
+        End Using
+
+        ' Devolver la lista de DataTables, la respuesta (mensaje de salida), y los parámetros de salida
+        Return (dataTables, salida, parametrosSalida)
+    End Function
+
+
     Public Sub ImprimeTicket(ByVal nventa As Integer)
         If ConsultaParametro("imprimeTicket") = "S" Then
             Dim fechaActual As Date = Date.Now

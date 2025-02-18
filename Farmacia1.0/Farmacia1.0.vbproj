@@ -952,12 +952,6 @@
     <Content Include="Paomedia-Small-N-Flat-Shop %281%29.ico" />
     <None Include="Resources\Custom-Icon-Design-Flatastic-8-Schedule.32.png" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Helpers\Helpers.csproj">
-      <Project>{b0239496-75bf-4a7a-b5be-76d1168c5830}</Project>
-      <Name>Helpers</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

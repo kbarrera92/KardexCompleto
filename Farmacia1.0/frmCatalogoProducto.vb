@@ -1,4 +1,5 @@
 ﻿Imports System.Data.SqlClient
+Imports Serilog
 
 Public Class frmCatalogoProducto
     Dim RegOAct As Integer = 0
@@ -19,13 +20,14 @@ Public Class frmCatalogoProducto
             da.Fill(dt)
             Return dt
         Catch ex As Exception
-            MsgBox(ex.Message)
+            MessageBox.Show("Ocurrio un error, revise el log.")
+            Log.Error($"Ocurrió un error. Error: {ex.Message}")
             Return Nothing
         End Try
     End Function
 
     Sub getDatos()
-        
+
         Dim ind1 As Integer
         Dim ind2 As Integer
 
@@ -61,7 +63,7 @@ Public Class frmCatalogoProducto
             txtstockmin.Clear()
             txtstockmin.Text = DataGridView1.Rows(fila).Cells(17).Value
         Catch ex As Exception
-
+            Log.Error($"Ocurrió un error. Error: {ex.Message}")
         End Try
     End Sub
 
@@ -97,56 +99,67 @@ Public Class frmCatalogoProducto
 
             dv = dt.DefaultView
             DataGridView1.DataSource = dv
-            'ds.Tables(0).DefaultView
         Catch ex As Exception
-            MsgBox("Error al cargar los datos" & vbCrLf & "Error: " & ex.ToString)
+            MsgBox("Error al cargar los datos")
+            Log.Error($"Ocurrió un error. Error: {ex.Message}")
         Finally
             closeConnection()
         End Try
     End Sub
 
     Private Sub frmCatalogoProducto_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        cmbcat.DataSource = updateList(sqlCat)
-        cmbcat.ValueMember = updateList(sqlCat).Columns(0).ToString
-        cmbcat.DisplayMember = updateList(sqlCat).Columns(1).ToString
+        Try
+            cmbcat.DataSource = updateList(sqlCat)
+            cmbcat.ValueMember = updateList(sqlCat).Columns(0).ToString
+            cmbcat.DisplayMember = updateList(sqlCat).Columns(1).ToString
 
-        cmbpro.DataSource = updateList(sqlProv)
-        cmbpro.ValueMember = updateList(sqlProv).Columns(0).ToString
-        cmbpro.DisplayMember = updateList(sqlProv).Columns(1).ToString
+            cmbpro.DataSource = updateList(sqlProv)
+            cmbpro.ValueMember = updateList(sqlProv).Columns(0).ToString
+            cmbpro.DisplayMember = updateList(sqlProv).Columns(1).ToString
 
-        cargarDGVProd()
-        cmbcat.SelectedIndex = -1
-        cmbpro.SelectedIndex = -1
-        ComboBox1.SelectedIndex = 0
-        DateTimePicker1.CustomFormat = "dd/MM/yyyy"
-        DateTimePicker1.Value = Now
-        getDatos()
-        'Timer1.Start()
+            cargarDGVProd()
+            cmbcat.SelectedIndex = -1
+            cmbpro.SelectedIndex = -1
+            ComboBox1.SelectedIndex = 0
+            DateTimePicker1.CustomFormat = "dd/MM/yyyy"
+            DateTimePicker1.Value = Now
+            getDatos()
+        Catch ex As Exception
+            MessageBox.Show("Error al cargar la información", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Log.Error($"Ocurrió un error. Error: {ex.Message}")
+        End Try
+
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        txtcod.Text = getCorrelativoTrasiego(correlativo) + 1
-        txtdesc.Clear()
-        txtcomp.Clear()
-        DateTimePicker1.Value = Today
-        txtpres.Clear()
-        txtat.Clear()
+        Try
+            txtcod.Text = getCorrelativoTrasiego(correlativo) + 1
+            txtdesc.Clear()
+            txtcomp.Clear()
+            DateTimePicker1.Value = Today
+            txtpres.Clear()
+            txtat.Clear()
 
-        txtindi.Clear()
-        txtcontra.Clear()
-        cmbpro.SelectedIndex = -1
-        txtobs.Clear()
-        txtmed.Clear()
-        txtlab.Clear()
-        cmbcat.SelectedIndex = -1
-        txtdesc.Select()
-        txtprecio.Text = "0.0"
-        txtcosto.Text = "0.0"
-        txtutilidad.Text = "0.0"
-        txtEstanteria.Clear()
-        txtbarcode.Clear()
-        txtstockmin.Clear()
-        RegOAct = 1
+            txtindi.Clear()
+            txtcontra.Clear()
+            cmbpro.SelectedIndex = -1
+            txtobs.Clear()
+            txtmed.Clear()
+            txtlab.Clear()
+            cmbcat.SelectedIndex = -1
+            txtdesc.Select()
+            txtprecio.Text = "0.0"
+            txtcosto.Text = "0.0"
+            txtutilidad.Text = "0.0"
+            txtEstanteria.Clear()
+            txtbarcode.Clear()
+            txtstockmin.Clear()
+            RegOAct = 1
+        Catch ex As Exception
+            MessageBox.Show("Error al cargar la información", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Log.Error($"Ocurrió un error. Error: {ex.Message}")
+        End Try
+
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
@@ -262,6 +275,7 @@ Public Class frmCatalogoProducto
             End If
         Catch ex As Exception
             MessageBox.Show("Error en el ingreso de los datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Log.Error($"Ocurrió un error. Error: {ex.Message}")
         End Try
 
     End Sub
@@ -269,50 +283,56 @@ Public Class frmCatalogoProducto
 
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
-        If Trim(txtcod.Text) = "" Or Trim(txtdesc.Text) = "" Then
-            MessageBox.Show("No se ha elegido ningún registro para eliminar", "Faltan datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-        Else
+        Try
+            If Trim(txtcod.Text) = "" Or Trim(txtdesc.Text) = "" Then
+                MessageBox.Show("No se ha elegido ningún registro para eliminar", "Faltan datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Else
 
 
-            If MessageBox.Show("¿Desea eliminar este registro?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
-                Dim sqldelete As String = "DELETE FROM PRODUCTO WHERE idProducto = @id"
-                Dim comand As SqlCommand
+                If MessageBox.Show("¿Desea eliminar este registro?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
+                    Dim sqldelete As String = "DELETE FROM PRODUCTO WHERE idProducto = @id"
+                    Dim comand As SqlCommand
 
-                comand = New SqlCommand(sqldelete, conn)
-                comand.Parameters.AddWithValue("id", CInt(txtcod.Text))
-                Try
-                    openConnection()
-                    comand.ExecuteNonQuery()
-                    MessageBox.Show("El registro se eliminó de forma correcta", "Eliminado", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    TextBox1.Clear()
-                    txtcod.Clear()
-                    txtdesc.Clear()
-                    txtcomp.Clear()
+                    comand = New SqlCommand(sqldelete, conn)
+                    comand.Parameters.AddWithValue("id", CInt(txtcod.Text))
+                    Try
+                        openConnection()
+                        comand.ExecuteNonQuery()
+                        MessageBox.Show("El registro se eliminó de forma correcta", "Eliminado", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        TextBox1.Clear()
+                        txtcod.Clear()
+                        txtdesc.Clear()
+                        txtcomp.Clear()
 
-                    txtpres.Clear()
-                    txtat.Clear()
+                        txtpres.Clear()
+                        txtat.Clear()
 
-                    txtindi.Clear()
-                    txtcontra.Clear()
-                    cmbpro.SelectedIndex = -1
-                    txtobs.Clear()
-                    txtmed.Clear()
-                    txtlab.Clear()
-                    txtprecio.Clear()
-                    txtcosto.Clear()
-                    txtbarcode.Clear()
-                    txtstockmin.Clear()
-                    txtEstanteria.Clear()
-                    cmbcat.SelectedIndex = -1
-                    DataGridView1.Select()
-                Catch ex As Exception
-                    MessageBox.Show("Algo salió mal" & vbCrLf & "Error: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                Finally
-                    closeConnection()
-                    cargarDGVProd()
-                End Try
+                        txtindi.Clear()
+                        txtcontra.Clear()
+                        cmbpro.SelectedIndex = -1
+                        txtobs.Clear()
+                        txtmed.Clear()
+                        txtlab.Clear()
+                        txtprecio.Clear()
+                        txtcosto.Clear()
+                        txtbarcode.Clear()
+                        txtstockmin.Clear()
+                        txtEstanteria.Clear()
+                        cmbcat.SelectedIndex = -1
+                        DataGridView1.Select()
+                    Catch ex As Exception
+                        MessageBox.Show("Algo salió mal" & vbCrLf & "Error: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                    Finally
+                        closeConnection()
+                        cargarDGVProd()
+                    End Try
+                End If
             End If
-        End If
+        Catch ex As Exception
+            MessageBox.Show("Error al borrar el registro", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Log.Error($"Ocurrió un error. Error: {ex.Message}")
+        End Try
+
     End Sub
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
@@ -322,7 +342,11 @@ Public Class frmCatalogoProducto
     End Sub
 
     Private Sub txtcosto_TextChanged(sender As Object, e As EventArgs) Handles txtcosto.TextChanged
-        txtutilidad.Text = Val(txtprecio.Text) - Val(txtcosto.Text)
+        Try
+            txtutilidad.Text = Val(txtprecio.Text) - Val(txtcosto.Text)
+        Catch ex As Exception
+
+        End Try
     End Sub
 
     Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
@@ -363,7 +387,11 @@ Public Class frmCatalogoProducto
             End If
         End If
 
-        dv.RowFilter = String.Format("Convert(" & criterio & ", 'System.String') LIKE '%{0}%'", Trim(TextBox1.Text))
+        Try
+            dv.RowFilter = String.Format("Convert(" & criterio & ", 'System.String') LIKE '%{0}%'", Trim(TextBox1.Text))
+        Catch ex As Exception
+
+        End Try
     End Sub
 
 
