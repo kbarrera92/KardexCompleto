@@ -57,6 +57,7 @@ Partial Class frmElegirSucursal
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(405, 54)
         Me.Button1.TabIndex = 2
+        Me.Button1.Tag = "DB,WB"
         Me.Button1.Text = "Elegir sucursal"
         Me.Button1.UseVisualStyleBackColor = False
         '

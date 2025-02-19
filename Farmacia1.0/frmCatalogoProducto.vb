@@ -145,6 +145,17 @@ Public Class frmCatalogoProducto
     End Sub
 
     Private Sub frmCatalogoProducto_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        With DataGridView1
+            .EnableHeadersVisualStyles = False
+            .ColumnHeadersDefaultCellStyle.BackColor = Color.DarkBlue
+            .ColumnHeadersDefaultCellStyle.ForeColor = Color.White
+            .DefaultCellStyle.SelectionBackColor = Color.LightBlue
+            .BorderStyle = BorderStyle.None
+            .CellBorderStyle = DataGridViewCellBorderStyle.SingleVertical
+        End With
+
+        Estilos.AplicarEstilos(Me)
+
         Try
             cmbcat.DataSource = updateList(sqlCat)
             cmbcat.ValueMember = updateList(sqlCat).Columns(0).ToString

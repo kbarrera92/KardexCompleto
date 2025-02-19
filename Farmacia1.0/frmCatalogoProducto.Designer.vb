@@ -115,7 +115,7 @@ Partial Class frmCatalogoProducto
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(950, 17)
+        Me.Label2.Location = New System.Drawing.Point(950, 15)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(73, 15)
         Me.Label2.TabIndex = 2
@@ -135,7 +135,7 @@ Partial Class frmCatalogoProducto
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(13, 17)
+        Me.Label1.Location = New System.Drawing.Point(13, 15)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(213, 15)
         Me.Label1.TabIndex = 0
@@ -290,7 +290,7 @@ Partial Class frmCatalogoProducto
         Me.ShapeContainer1.Margin = New System.Windows.Forms.Padding(0)
         Me.ShapeContainer1.Name = "ShapeContainer1"
         Me.ShapeContainer1.Shapes.AddRange(New Microsoft.VisualBasic.PowerPacks.Shape() {Me.RectangleShape1})
-        Me.ShapeContainer1.Size = New System.Drawing.Size(1255, 714)
+        Me.ShapeContainer1.Size = New System.Drawing.Size(1255, 691)
         Me.ShapeContainer1.TabIndex = 2
         Me.ShapeContainer1.TabStop = False
         '
@@ -318,7 +318,7 @@ Partial Class frmCatalogoProducto
         Me.txtcod.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtcod.Location = New System.Drawing.Point(26, 387)
         Me.txtcod.Name = "txtcod"
-        Me.txtcod.Size = New System.Drawing.Size(133, 26)
+        Me.txtcod.Size = New System.Drawing.Size(129, 26)
         Me.txtcod.TabIndex = 1
         '
         'txtdesc
@@ -326,7 +326,7 @@ Partial Class frmCatalogoProducto
         Me.txtdesc.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtdesc.Location = New System.Drawing.Point(26, 439)
         Me.txtdesc.Name = "txtdesc"
-        Me.txtdesc.Size = New System.Drawing.Size(391, 26)
+        Me.txtdesc.Size = New System.Drawing.Size(295, 26)
         Me.txtdesc.TabIndex = 4
         '
         'Label4
@@ -344,7 +344,7 @@ Partial Class frmCatalogoProducto
         Me.txtcomp.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtcomp.Location = New System.Drawing.Point(26, 492)
         Me.txtcomp.Name = "txtcomp"
-        Me.txtcomp.Size = New System.Drawing.Size(391, 26)
+        Me.txtcomp.Size = New System.Drawing.Size(295, 26)
         Me.txtcomp.TabIndex = 5
         '
         'Label5
@@ -441,12 +441,13 @@ Partial Class frmCatalogoProducto
         '
         'txtobs
         '
-        Me.txtobs.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtobs.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtobs.Location = New System.Drawing.Point(645, 387)
         Me.txtobs.Multiline = True
         Me.txtobs.Name = "txtobs"
         Me.txtobs.Size = New System.Drawing.Size(333, 78)
         Me.txtobs.TabIndex = 15
+        Me.txtobs.Tag = "PS"
         '
         'Label13
         '
@@ -544,10 +545,9 @@ Partial Class frmCatalogoProducto
         '
         'Button4
         '
-        Me.Button4.FlatAppearance.BorderSize = 2
         Me.Button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button4.Image = Global.Farmacia1._0.My.Resources.Resources.Windows_Close_Program_icon
-        Me.Button4.Location = New System.Drawing.Point(136, 20)
+        Me.Button4.Location = New System.Drawing.Point(170, 20)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(37, 34)
         Me.Button4.TabIndex = 3
@@ -555,10 +555,9 @@ Partial Class frmCatalogoProducto
         '
         'Button3
         '
-        Me.Button3.FlatAppearance.BorderSize = 2
         Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button3.Image = Global.Farmacia1._0.My.Resources.Resources.trash_icon
-        Me.Button3.Location = New System.Drawing.Point(93, 20)
+        Me.Button3.Location = New System.Drawing.Point(127, 20)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(37, 34)
         Me.Button3.TabIndex = 2
@@ -566,10 +565,9 @@ Partial Class frmCatalogoProducto
         '
         'Button2
         '
-        Me.Button2.FlatAppearance.BorderSize = 2
         Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button2.Image = Global.Farmacia1._0.My.Resources.Resources.Save_icon__2_
-        Me.Button2.Location = New System.Drawing.Point(50, 20)
+        Me.Button2.Location = New System.Drawing.Point(84, 20)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(37, 34)
         Me.Button2.TabIndex = 1
@@ -577,10 +575,9 @@ Partial Class frmCatalogoProducto
         '
         'Button1
         '
-        Me.Button1.FlatAppearance.BorderSize = 2
         Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button1.Image = Global.Farmacia1._0.My.Resources.Resources.new_file_icon
-        Me.Button1.Location = New System.Drawing.Point(7, 20)
+        Me.Button1.Location = New System.Drawing.Point(41, 20)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(37, 34)
         Me.Button1.TabIndex = 0
@@ -595,19 +592,22 @@ Partial Class frmCatalogoProducto
         Me.GroupBox2.ForeColor = System.Drawing.Color.Black
         Me.GroupBox2.Location = New System.Drawing.Point(1006, 427)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(242, 196)
+        Me.GroupBox2.Size = New System.Drawing.Size(242, 250)
         Me.GroupBox2.TabIndex = 20
         Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Tag = ""
         Me.GroupBox2.Text = "Estantería"
         '
         'Button5
         '
+        Me.Button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button5.ForeColor = System.Drawing.Color.Black
         Me.Button5.Image = Global.Farmacia1._0.My.Resources.Resources.Zoom_icon
         Me.Button5.Location = New System.Drawing.Point(37, 151)
         Me.Button5.Name = "Button5"
         Me.Button5.Size = New System.Drawing.Size(176, 27)
         Me.Button5.TabIndex = 1
+        Me.Button5.Tag = "FO"
         Me.Button5.Text = "   Ver estanterías"
         Me.Button5.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.Button5.UseVisualStyleBackColor = True
@@ -619,6 +619,7 @@ Partial Class frmCatalogoProducto
         Me.txtEstanteria.Name = "txtEstanteria"
         Me.txtEstanteria.Size = New System.Drawing.Size(176, 113)
         Me.txtEstanteria.TabIndex = 0
+        Me.txtEstanteria.Tag = "PS"
         Me.txtEstanteria.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'txtutilidad
@@ -626,17 +627,18 @@ Partial Class frmCatalogoProducto
         Me.txtutilidad.BackColor = System.Drawing.Color.Blue
         Me.txtutilidad.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtutilidad.ForeColor = System.Drawing.Color.Yellow
-        Me.txtutilidad.Location = New System.Drawing.Point(430, 492)
+        Me.txtutilidad.Location = New System.Drawing.Point(332, 492)
         Me.txtutilidad.Name = "txtutilidad"
-        Me.txtutilidad.Size = New System.Drawing.Size(203, 26)
+        Me.txtutilidad.Size = New System.Drawing.Size(301, 26)
         Me.txtutilidad.TabIndex = 11
+        Me.txtutilidad.Tag = "E"
         Me.txtutilidad.Text = "0.0"
         '
         'Label17
         '
         Me.Label17.AutoSize = True
         Me.Label17.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label17.Location = New System.Drawing.Point(427, 474)
+        Me.Label17.Location = New System.Drawing.Point(329, 474)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(57, 15)
         Me.Label17.TabIndex = 73
@@ -646,7 +648,7 @@ Partial Class frmCatalogoProducto
         '
         Me.Label18.AutoSize = True
         Me.Label18.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label18.Location = New System.Drawing.Point(427, 421)
+        Me.Label18.Location = New System.Drawing.Point(329, 421)
         Me.Label18.Name = "Label18"
         Me.Label18.Size = New System.Drawing.Size(43, 15)
         Me.Label18.TabIndex = 72
@@ -657,17 +659,18 @@ Partial Class frmCatalogoProducto
         Me.txtprecio.BackColor = System.Drawing.Color.Blue
         Me.txtprecio.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtprecio.ForeColor = System.Drawing.Color.Yellow
-        Me.txtprecio.Location = New System.Drawing.Point(430, 387)
+        Me.txtprecio.Location = New System.Drawing.Point(332, 387)
         Me.txtprecio.Name = "txtprecio"
-        Me.txtprecio.Size = New System.Drawing.Size(203, 26)
+        Me.txtprecio.Size = New System.Drawing.Size(301, 26)
         Me.txtprecio.TabIndex = 9
+        Me.txtprecio.Tag = "E"
         Me.txtprecio.Text = "0.0"
         '
         'Label19
         '
         Me.Label19.AutoSize = True
         Me.Label19.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label19.Location = New System.Drawing.Point(427, 369)
+        Me.Label19.Location = New System.Drawing.Point(329, 369)
         Me.Label19.Name = "Label19"
         Me.Label19.Size = New System.Drawing.Size(48, 15)
         Me.Label19.TabIndex = 70
@@ -678,10 +681,11 @@ Partial Class frmCatalogoProducto
         Me.txtcosto.BackColor = System.Drawing.Color.Blue
         Me.txtcosto.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtcosto.ForeColor = System.Drawing.Color.Yellow
-        Me.txtcosto.Location = New System.Drawing.Point(430, 439)
+        Me.txtcosto.Location = New System.Drawing.Point(332, 439)
         Me.txtcosto.Name = "txtcosto"
-        Me.txtcosto.Size = New System.Drawing.Size(203, 26)
+        Me.txtcosto.Size = New System.Drawing.Size(301, 26)
         Me.txtcosto.TabIndex = 10
+        Me.txtcosto.Tag = "E"
         Me.txtcosto.Text = "0.0"
         '
         'Label9
@@ -708,7 +712,7 @@ Partial Class frmCatalogoProducto
         Me.txtbarcode.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtbarcode.Location = New System.Drawing.Point(165, 387)
         Me.txtbarcode.Name = "txtbarcode"
-        Me.txtbarcode.Size = New System.Drawing.Size(211, 26)
+        Me.txtbarcode.Size = New System.Drawing.Size(117, 26)
         Me.txtbarcode.TabIndex = 2
         '
         'Label20
@@ -723,7 +727,7 @@ Partial Class frmCatalogoProducto
         '
         'Button6
         '
-        Me.Button6.Location = New System.Drawing.Point(382, 385)
+        Me.Button6.Location = New System.Drawing.Point(286, 384)
         Me.Button6.Name = "Button6"
         Me.Button6.Size = New System.Drawing.Size(35, 29)
         Me.Button6.TabIndex = 3
@@ -751,7 +755,7 @@ Partial Class frmCatalogoProducto
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1255, 714)
+        Me.ClientSize = New System.Drawing.Size(1255, 691)
         Me.Controls.Add(Me.txtstockmin)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.Button6)
