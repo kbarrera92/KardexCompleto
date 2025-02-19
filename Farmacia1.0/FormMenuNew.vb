@@ -188,7 +188,8 @@
     End Sub
 
     Private Sub FormMenuNew_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        Estilos.AplicarEstilos(Me)
+        Estilos.AplicarEstilosToolStrip(ToolStrip1)
     End Sub
 
     Private Sub ReporteDeUtilidadToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReporteDeUtilidadToolStripMenuItem.Click

@@ -25,6 +25,7 @@ Public Class frmElegirSucursal
     End Function
 
     Private Sub frmElegirSucursal_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Estilos.AplicarEstilos(Me)
         Dim sqlSucursal As String = "SELECT idSucursal, nombreSuc FROM SUCURSAL where idSucursal = @idSuc"
 
         Try
