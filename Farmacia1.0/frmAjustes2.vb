@@ -91,6 +91,8 @@ Public Class frmAjustes2
 
         ComboBox1.SelectedIndex = -1
         ComboBox2.SelectedIndex = -1
+
+        Estilos.AplicarEstilos(Me)
     End Sub
 
 
