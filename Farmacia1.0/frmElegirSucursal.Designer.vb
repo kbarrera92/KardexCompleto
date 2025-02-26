@@ -36,6 +36,7 @@ Partial Class frmElegirSucursal
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(247, 26)
         Me.Label1.TabIndex = 0
+        Me.Label1.Tag = "PS"
         Me.Label1.Text = "Listado de Sucursales"
         '
         'ListBox1

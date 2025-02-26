@@ -205,6 +205,7 @@ Public Class frmCompra
         cmbFP.SelectedIndex = 0
         mskfecha.Text = Format(DateTime.Now, "dd/MM/yyyy")
         fillDGVSP("sp_infoProdCompras", DataGridView1, Me, sucActual)
+        Estilos.AplicarEstilos(Me)
     End Sub
 
 
@@ -342,21 +343,24 @@ Public Class frmCompra
 
 
     Private Sub btnDescartar_Click(sender As Object, e As EventArgs) Handles btnDescartar.Click
-        Dim sqlDescartar As String = "DELETE FROM COMPRA WHERE inCompra = @nc"
-        Dim cmd As SqlCommand
+        'Dim sqlDescartar As String = "DELETE FROM COMPRA WHERE inCompra = @nc"
+        'Dim cmd As SqlCommand
 
-        Try
-            cmd = New SqlCommand(sqlDescartar, conn)
+        'Try
+        '    cmd = New SqlCommand(sqlDescartar, conn)
 
-            cmd.Parameters.AddWithValue("nc", getCorrelativoTrasiego(correlativo))
+        '    cmd.Parameters.AddWithValue("nc", getCorrelativoTrasiego(correlativo))
 
-            openConnection()
-            cmd.ExecuteNonQuery()
-            closeConnection()
-            MsgBox("Compra descartada", MsgBoxStyle.Exclamation, "Descartada")
-        Catch ex As Exception
-            MsgBox("Ha ocurrido un error", MsgBoxStyle.Critical, "Error")
-        End Try
+        '    openConnection()
+        '    cmd.ExecuteNonQuery()
+        '    closeConnection()
+        '    MsgBox("Compra descartada", MsgBoxStyle.Exclamation, "Descartada")
+        'Catch ex As Exception
+        '    MsgBox("Ha ocurrido un error", MsgBoxStyle.Critical, "Error")
+        'End Try
+        If MessageBox.Show("¿Desea descartar esta compra y salir de esta pantalla?", "Descartar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+            Close()
+        End If
     End Sub
 
 
