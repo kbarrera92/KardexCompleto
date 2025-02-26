@@ -241,6 +241,7 @@ Partial Class frmCompra
         Me.txtcodpro.Name = "txtcodpro"
         Me.txtcodpro.Size = New System.Drawing.Size(119, 26)
         Me.txtcodpro.TabIndex = 10
+        Me.txtcodpro.Tag = "ES"
         '
         'txtdescpro
         '
@@ -249,6 +250,7 @@ Partial Class frmCompra
         Me.txtdescpro.Name = "txtdescpro"
         Me.txtdescpro.Size = New System.Drawing.Size(472, 26)
         Me.txtdescpro.TabIndex = 12
+        Me.txtdescpro.Tag = "ES"
         '
         'Label5
         '
@@ -269,6 +271,7 @@ Partial Class frmCompra
         Me.txtcantidad.Name = "txtcantidad"
         Me.txtcantidad.Size = New System.Drawing.Size(93, 60)
         Me.txtcantidad.TabIndex = 22
+        Me.txtcantidad.Tag = "E"
         Me.txtcantidad.Text = "0"
         Me.txtcantidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -291,6 +294,7 @@ Partial Class frmCompra
         Me.txtexistencia.Name = "txtexistencia"
         Me.txtexistencia.Size = New System.Drawing.Size(93, 60)
         Me.txtexistencia.TabIndex = 20
+        Me.txtexistencia.Tag = "E"
         Me.txtexistencia.Text = "0"
         Me.txtexistencia.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -313,6 +317,7 @@ Partial Class frmCompra
         Me.txtprecio.Name = "txtprecio"
         Me.txtprecio.Size = New System.Drawing.Size(205, 60)
         Me.txtprecio.TabIndex = 18
+        Me.txtprecio.Tag = "E"
         Me.txtprecio.Text = "0.00"
         Me.txtprecio.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -390,6 +395,7 @@ Partial Class frmCompra
         Me.btnnuevaventa.Name = "btnnuevaventa"
         Me.btnnuevaventa.Size = New System.Drawing.Size(168, 31)
         Me.btnnuevaventa.TabIndex = 29
+        Me.btnnuevaventa.Tag = "WB"
         Me.btnnuevaventa.Text = "Nueva Compra"
         Me.btnnuevaventa.UseVisualStyleBackColor = True
         '
@@ -403,6 +409,7 @@ Partial Class frmCompra
         Me.btnagregard.Name = "btnagregard"
         Me.btnagregard.Size = New System.Drawing.Size(91, 66)
         Me.btnagregard.TabIndex = 30
+        Me.btnagregard.Tag = "WB"
         Me.btnagregard.Text = "Agregar detalle"
         Me.btnagregard.UseVisualStyleBackColor = True
         '
@@ -416,6 +423,7 @@ Partial Class frmCompra
         Me.btneliminard.Name = "btneliminard"
         Me.btneliminard.Size = New System.Drawing.Size(91, 66)
         Me.btneliminard.TabIndex = 31
+        Me.btneliminard.Tag = "WB"
         Me.btneliminard.Text = "Eliminar detalle"
         Me.btneliminard.UseVisualStyleBackColor = True
         '
@@ -429,6 +437,7 @@ Partial Class frmCompra
         Me.btnregistrarc.Name = "btnregistrarc"
         Me.btnregistrarc.Size = New System.Drawing.Size(91, 66)
         Me.btnregistrarc.TabIndex = 32
+        Me.btnregistrarc.Tag = "WB"
         Me.btnregistrarc.Text = "Registrar compra"
         Me.btnregistrarc.UseVisualStyleBackColor = True
         '
@@ -442,6 +451,7 @@ Partial Class frmCompra
         Me.btnsalir.Name = "btnsalir"
         Me.btnsalir.Size = New System.Drawing.Size(91, 66)
         Me.btnsalir.TabIndex = 33
+        Me.btnsalir.Tag = "WB"
         Me.btnsalir.Text = "Salir"
         Me.btnsalir.UseVisualStyleBackColor = True
         '
@@ -454,6 +464,7 @@ Partial Class frmCompra
         Me.txttotal.Name = "txttotal"
         Me.txttotal.Size = New System.Drawing.Size(204, 53)
         Me.txttotal.TabIndex = 35
+        Me.txttotal.Tag = "E"
         Me.txttotal.Text = "0.00"
         Me.txttotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -474,6 +485,7 @@ Partial Class frmCompra
         Me.txtFactura.Name = "txtFactura"
         Me.txtFactura.Size = New System.Drawing.Size(158, 26)
         Me.txtFactura.TabIndex = 3
+        Me.txtFactura.Tag = "ES"
         '
         'txtpres
         '
@@ -482,6 +494,7 @@ Partial Class frmCompra
         Me.txtpres.Name = "txtpres"
         Me.txtpres.Size = New System.Drawing.Size(296, 26)
         Me.txtpres.TabIndex = 14
+        Me.txtpres.Tag = "ES"
         '
         'Label9
         '
@@ -500,6 +513,7 @@ Partial Class frmCompra
         Me.txtmedida.Name = "txtmedida"
         Me.txtmedida.Size = New System.Drawing.Size(292, 26)
         Me.txtmedida.TabIndex = 16
+        Me.txtmedida.Tag = "ES"
         '
         'Label10
         '
@@ -521,6 +535,7 @@ Partial Class frmCompra
         Me.btnDescartar.Name = "btnDescartar"
         Me.btnDescartar.Size = New System.Drawing.Size(168, 31)
         Me.btnDescartar.TabIndex = 36
+        Me.btnDescartar.Tag = "WB"
         Me.btnDescartar.Text = "Descartar Compra"
         Me.btnDescartar.UseVisualStyleBackColor = True
         '
@@ -531,6 +546,7 @@ Partial Class frmCompra
         Me.txtFechaPago.Name = "txtFechaPago"
         Me.txtFechaPago.Size = New System.Drawing.Size(158, 29)
         Me.txtFechaPago.TabIndex = 40
+        Me.txtFechaPago.Tag = "ES"
         Me.txtFechaPago.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label8
@@ -595,6 +611,7 @@ Partial Class frmCompra
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(91, 66)
         Me.Button1.TabIndex = 43
+        Me.Button1.Tag = "WB"
         Me.Button1.Text = "Ver Compras"
         Me.Button1.UseVisualStyleBackColor = True
         '
@@ -651,8 +668,6 @@ Partial Class frmCompra
 
     End Sub
     Friend WithEvents lblNoCompra As System.Windows.Forms.Label
-    Friend WithEvents ShapeContainer1 As Microsoft.VisualBasic.PowerPacks.ShapeContainer
-    Friend WithEvents LineShape1 As Microsoft.VisualBasic.PowerPacks.LineShape
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents txtbuscapro As System.Windows.Forms.TextBox
     Friend WithEvents mskfecha As System.Windows.Forms.MaskedTextBox
@@ -702,4 +717,6 @@ Partial Class frmCompra
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents Button1 As System.Windows.Forms.Button
+    Private WithEvents ShapeContainer1 As PowerPacks.ShapeContainer
+    Private WithEvents LineShape1 As PowerPacks.LineShape
 End Class

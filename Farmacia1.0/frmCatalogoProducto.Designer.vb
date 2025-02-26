@@ -118,7 +118,7 @@ Partial Class frmCatalogoProducto
         Me.Label2.Location = New System.Drawing.Point(950, 15)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(73, 15)
-        Me.Label2.TabIndex = 2
+        Me.Label2.TabIndex = 3
         Me.Label2.Text = "Bucar por:"
         '
         'ComboBox1
@@ -129,7 +129,7 @@ Partial Class frmCatalogoProducto
         Me.ComboBox1.Location = New System.Drawing.Point(953, 35)
         Me.ComboBox1.Name = "ComboBox1"
         Me.ComboBox1.Size = New System.Drawing.Size(285, 24)
-        Me.ComboBox1.TabIndex = 1
+        Me.ComboBox1.TabIndex = 4
         '
         'Label1
         '
@@ -138,7 +138,7 @@ Partial Class frmCatalogoProducto
         Me.Label1.Location = New System.Drawing.Point(13, 15)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(213, 15)
-        Me.Label1.TabIndex = 0
+        Me.Label1.TabIndex = 1
         Me.Label1.Text = "Buscar porductos en el catálogo"
         '
         'TextBox1
@@ -147,7 +147,7 @@ Partial Class frmCatalogoProducto
         Me.TextBox1.Location = New System.Drawing.Point(13, 35)
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.Size = New System.Drawing.Size(922, 26)
-        Me.TextBox1.TabIndex = 0
+        Me.TextBox1.TabIndex = 2
         '
         'DataGridView1
         '
@@ -163,7 +163,7 @@ Partial Class frmCatalogoProducto
         Me.DataGridView1.ReadOnly = True
         Me.DataGridView1.RowHeadersVisible = False
         Me.DataGridView1.Size = New System.Drawing.Size(1255, 270)
-        Me.DataGridView1.TabIndex = 1
+        Me.DataGridView1.TabIndex = 5
         '
         'codigo
         '
@@ -310,7 +310,7 @@ Partial Class frmCatalogoProducto
         Me.Label3.Location = New System.Drawing.Point(23, 369)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(136, 15)
-        Me.Label3.TabIndex = 3
+        Me.Label3.TabIndex = 6
         Me.Label3.Text = "Código del producto"
         '
         'txtcod
@@ -319,7 +319,7 @@ Partial Class frmCatalogoProducto
         Me.txtcod.Location = New System.Drawing.Point(26, 387)
         Me.txtcod.Name = "txtcod"
         Me.txtcod.Size = New System.Drawing.Size(129, 26)
-        Me.txtcod.TabIndex = 1
+        Me.txtcod.TabIndex = 7
         '
         'txtdesc
         '
@@ -327,7 +327,7 @@ Partial Class frmCatalogoProducto
         Me.txtdesc.Location = New System.Drawing.Point(26, 439)
         Me.txtdesc.Name = "txtdesc"
         Me.txtdesc.Size = New System.Drawing.Size(295, 26)
-        Me.txtdesc.TabIndex = 4
+        Me.txtdesc.TabIndex = 12
         '
         'Label4
         '
@@ -336,7 +336,7 @@ Partial Class frmCatalogoProducto
         Me.Label4.Location = New System.Drawing.Point(23, 421)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(83, 15)
-        Me.Label4.TabIndex = 5
+        Me.Label4.TabIndex = 11
         Me.Label4.Text = "Descripción"
         '
         'txtcomp
@@ -345,7 +345,7 @@ Partial Class frmCatalogoProducto
         Me.txtcomp.Location = New System.Drawing.Point(26, 492)
         Me.txtcomp.Name = "txtcomp"
         Me.txtcomp.Size = New System.Drawing.Size(295, 26)
-        Me.txtcomp.TabIndex = 5
+        Me.txtcomp.TabIndex = 14
         '
         'Label5
         '
@@ -354,7 +354,7 @@ Partial Class frmCatalogoProducto
         Me.Label5.Location = New System.Drawing.Point(23, 474)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(94, 15)
-        Me.Label5.TabIndex = 7
+        Me.Label5.TabIndex = 13
         Me.Label5.Text = "Composición "
         '
         'txtat
@@ -363,7 +363,7 @@ Partial Class frmCatalogoProducto
         Me.txtat.Location = New System.Drawing.Point(26, 545)
         Me.txtat.Name = "txtat"
         Me.txtat.Size = New System.Drawing.Size(295, 26)
-        Me.txtat.TabIndex = 6
+        Me.txtat.TabIndex = 16
         '
         'Label7
         '
@@ -372,7 +372,7 @@ Partial Class frmCatalogoProducto
         Me.Label7.Location = New System.Drawing.Point(23, 527)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(125, 15)
-        Me.Label7.TabIndex = 11
+        Me.Label7.TabIndex = 15
         Me.Label7.Text = "Acción terapeutica"
         '
         'txtindi
@@ -381,7 +381,7 @@ Partial Class frmCatalogoProducto
         Me.txtindi.Location = New System.Drawing.Point(26, 650)
         Me.txtindi.Name = "txtindi"
         Me.txtindi.Size = New System.Drawing.Size(295, 26)
-        Me.txtindi.TabIndex = 8
+        Me.txtindi.TabIndex = 20
         '
         'Label8
         '
@@ -390,7 +390,7 @@ Partial Class frmCatalogoProducto
         Me.Label8.Location = New System.Drawing.Point(23, 632)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(88, 15)
-        Me.Label8.TabIndex = 13
+        Me.Label8.TabIndex = 19
         Me.Label8.Text = "Indicaciones"
         '
         'txtcontra
@@ -399,7 +399,7 @@ Partial Class frmCatalogoProducto
         Me.txtcontra.Location = New System.Drawing.Point(332, 545)
         Me.txtcontra.Name = "txtcontra"
         Me.txtcontra.Size = New System.Drawing.Size(301, 26)
-        Me.txtcontra.TabIndex = 12
+        Me.txtcontra.TabIndex = 28
         '
         'Label10
         '
@@ -408,7 +408,7 @@ Partial Class frmCatalogoProducto
         Me.Label10.Location = New System.Drawing.Point(329, 527)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(130, 15)
-        Me.Label10.TabIndex = 17
+        Me.Label10.TabIndex = 27
         Me.Label10.Text = "Contraindicaciones"
         '
         'txtpres
@@ -417,7 +417,7 @@ Partial Class frmCatalogoProducto
         Me.txtpres.Location = New System.Drawing.Point(26, 597)
         Me.txtpres.Name = "txtpres"
         Me.txtpres.Size = New System.Drawing.Size(295, 26)
-        Me.txtpres.TabIndex = 7
+        Me.txtpres.TabIndex = 18
         '
         'Label11
         '
@@ -426,7 +426,7 @@ Partial Class frmCatalogoProducto
         Me.Label11.Location = New System.Drawing.Point(23, 579)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(91, 15)
-        Me.Label11.TabIndex = 19
+        Me.Label11.TabIndex = 17
         Me.Label11.Text = "Presentación"
         '
         'Label12
@@ -436,7 +436,7 @@ Partial Class frmCatalogoProducto
         Me.Label12.Location = New System.Drawing.Point(329, 579)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(72, 15)
-        Me.Label12.TabIndex = 21
+        Me.Label12.TabIndex = 29
         Me.Label12.Text = "Proveedor"
         '
         'txtobs
@@ -446,7 +446,7 @@ Partial Class frmCatalogoProducto
         Me.txtobs.Multiline = True
         Me.txtobs.Name = "txtobs"
         Me.txtobs.Size = New System.Drawing.Size(333, 78)
-        Me.txtobs.TabIndex = 15
+        Me.txtobs.TabIndex = 34
         Me.txtobs.Tag = "PS"
         '
         'Label13
@@ -456,7 +456,7 @@ Partial Class frmCatalogoProducto
         Me.Label13.Location = New System.Drawing.Point(642, 369)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(101, 15)
-        Me.Label13.TabIndex = 23
+        Me.Label13.TabIndex = 33
         Me.Label13.Text = "Observaciones"
         '
         'txtmed
@@ -465,7 +465,7 @@ Partial Class frmCatalogoProducto
         Me.txtmed.Location = New System.Drawing.Point(645, 492)
         Me.txtmed.Name = "txtmed"
         Me.txtmed.Size = New System.Drawing.Size(333, 26)
-        Me.txtmed.TabIndex = 16
+        Me.txtmed.TabIndex = 36
         '
         'Label14
         '
@@ -474,7 +474,7 @@ Partial Class frmCatalogoProducto
         Me.Label14.Location = New System.Drawing.Point(642, 474)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(55, 15)
-        Me.Label14.TabIndex = 25
+        Me.Label14.TabIndex = 35
         Me.Label14.Text = "Medida"
         '
         'Label15
@@ -484,7 +484,7 @@ Partial Class frmCatalogoProducto
         Me.Label15.Location = New System.Drawing.Point(642, 527)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(69, 15)
-        Me.Label15.TabIndex = 27
+        Me.Label15.TabIndex = 37
         Me.Label15.Text = "Categoría"
         '
         'txtlab
@@ -493,7 +493,7 @@ Partial Class frmCatalogoProducto
         Me.txtlab.Location = New System.Drawing.Point(645, 597)
         Me.txtlab.Name = "txtlab"
         Me.txtlab.Size = New System.Drawing.Size(333, 26)
-        Me.txtlab.TabIndex = 18
+        Me.txtlab.TabIndex = 40
         '
         'Label16
         '
@@ -502,7 +502,7 @@ Partial Class frmCatalogoProducto
         Me.Label16.Location = New System.Drawing.Point(642, 579)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(81, 15)
-        Me.Label16.TabIndex = 29
+        Me.Label16.TabIndex = 39
         Me.Label16.Text = "Laboratorio"
         '
         'cmbpro
@@ -510,10 +510,11 @@ Partial Class frmCatalogoProducto
         Me.cmbpro.DisplayMember = "idProveedor"
         Me.cmbpro.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbpro.FormattingEnabled = True
+        Me.cmbpro.ItemHeight = 20
         Me.cmbpro.Location = New System.Drawing.Point(332, 597)
         Me.cmbpro.Name = "cmbpro"
         Me.cmbpro.Size = New System.Drawing.Size(301, 28)
-        Me.cmbpro.TabIndex = 13
+        Me.cmbpro.TabIndex = 30
         Me.cmbpro.ValueMember = "idProveedor"
         '
         'cmbcat
@@ -524,7 +525,7 @@ Partial Class frmCatalogoProducto
         Me.cmbcat.Location = New System.Drawing.Point(645, 544)
         Me.cmbcat.Name = "cmbcat"
         Me.cmbcat.Size = New System.Drawing.Size(333, 28)
-        Me.cmbcat.TabIndex = 17
+        Me.cmbcat.TabIndex = 38
         Me.cmbcat.ValueMember = "idCategoria"
         '
         'GroupBox1
@@ -539,7 +540,7 @@ Partial Class frmCatalogoProducto
         Me.GroupBox1.Location = New System.Drawing.Point(1006, 355)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(242, 66)
-        Me.GroupBox1.TabIndex = 21
+        Me.GroupBox1.TabIndex = 43
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Acciones"
         '
@@ -550,7 +551,7 @@ Partial Class frmCatalogoProducto
         Me.Button4.Location = New System.Drawing.Point(170, 20)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(37, 34)
-        Me.Button4.TabIndex = 3
+        Me.Button4.TabIndex = 47
         Me.Button4.UseVisualStyleBackColor = True
         '
         'Button3
@@ -560,7 +561,7 @@ Partial Class frmCatalogoProducto
         Me.Button3.Location = New System.Drawing.Point(127, 20)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(37, 34)
-        Me.Button3.TabIndex = 2
+        Me.Button3.TabIndex = 46
         Me.Button3.UseVisualStyleBackColor = True
         '
         'Button2
@@ -570,7 +571,7 @@ Partial Class frmCatalogoProducto
         Me.Button2.Location = New System.Drawing.Point(84, 20)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(37, 34)
-        Me.Button2.TabIndex = 1
+        Me.Button2.TabIndex = 45
         Me.Button2.UseVisualStyleBackColor = True
         '
         'Button1
@@ -580,7 +581,7 @@ Partial Class frmCatalogoProducto
         Me.Button1.Location = New System.Drawing.Point(41, 20)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(37, 34)
-        Me.Button1.TabIndex = 0
+        Me.Button1.TabIndex = 44
         Me.Button1.UseVisualStyleBackColor = True
         '
         'GroupBox2
@@ -593,7 +594,7 @@ Partial Class frmCatalogoProducto
         Me.GroupBox2.Location = New System.Drawing.Point(1006, 427)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(242, 250)
-        Me.GroupBox2.TabIndex = 20
+        Me.GroupBox2.TabIndex = 48
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Tag = ""
         Me.GroupBox2.Text = "Estantería"
@@ -606,7 +607,7 @@ Partial Class frmCatalogoProducto
         Me.Button5.Location = New System.Drawing.Point(37, 151)
         Me.Button5.Name = "Button5"
         Me.Button5.Size = New System.Drawing.Size(176, 27)
-        Me.Button5.TabIndex = 1
+        Me.Button5.TabIndex = 50
         Me.Button5.Tag = "FO"
         Me.Button5.Text = "   Ver estanterías"
         Me.Button5.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
@@ -618,7 +619,7 @@ Partial Class frmCatalogoProducto
         Me.txtEstanteria.Location = New System.Drawing.Point(37, 32)
         Me.txtEstanteria.Name = "txtEstanteria"
         Me.txtEstanteria.Size = New System.Drawing.Size(176, 113)
-        Me.txtEstanteria.TabIndex = 0
+        Me.txtEstanteria.TabIndex = 49
         Me.txtEstanteria.Tag = "PS"
         Me.txtEstanteria.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -630,7 +631,7 @@ Partial Class frmCatalogoProducto
         Me.txtutilidad.Location = New System.Drawing.Point(332, 492)
         Me.txtutilidad.Name = "txtutilidad"
         Me.txtutilidad.Size = New System.Drawing.Size(301, 26)
-        Me.txtutilidad.TabIndex = 11
+        Me.txtutilidad.TabIndex = 26
         Me.txtutilidad.Tag = "E"
         Me.txtutilidad.Text = "0.0"
         '
@@ -641,7 +642,7 @@ Partial Class frmCatalogoProducto
         Me.Label17.Location = New System.Drawing.Point(329, 474)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(57, 15)
-        Me.Label17.TabIndex = 73
+        Me.Label17.TabIndex = 25
         Me.Label17.Text = "Utilidad"
         '
         'Label18
@@ -651,7 +652,7 @@ Partial Class frmCatalogoProducto
         Me.Label18.Location = New System.Drawing.Point(329, 421)
         Me.Label18.Name = "Label18"
         Me.Label18.Size = New System.Drawing.Size(43, 15)
-        Me.Label18.TabIndex = 72
+        Me.Label18.TabIndex = 23
         Me.Label18.Text = "Costo"
         '
         'txtprecio
@@ -662,7 +663,7 @@ Partial Class frmCatalogoProducto
         Me.txtprecio.Location = New System.Drawing.Point(332, 387)
         Me.txtprecio.Name = "txtprecio"
         Me.txtprecio.Size = New System.Drawing.Size(301, 26)
-        Me.txtprecio.TabIndex = 9
+        Me.txtprecio.TabIndex = 22
         Me.txtprecio.Tag = "E"
         Me.txtprecio.Text = "0.0"
         '
@@ -673,7 +674,7 @@ Partial Class frmCatalogoProducto
         Me.Label19.Location = New System.Drawing.Point(329, 369)
         Me.Label19.Name = "Label19"
         Me.Label19.Size = New System.Drawing.Size(48, 15)
-        Me.Label19.TabIndex = 70
+        Me.Label19.TabIndex = 21
         Me.Label19.Text = "Precio"
         '
         'txtcosto
@@ -684,7 +685,7 @@ Partial Class frmCatalogoProducto
         Me.txtcosto.Location = New System.Drawing.Point(332, 439)
         Me.txtcosto.Name = "txtcosto"
         Me.txtcosto.Size = New System.Drawing.Size(301, 26)
-        Me.txtcosto.TabIndex = 10
+        Me.txtcosto.TabIndex = 24
         Me.txtcosto.Tag = "E"
         Me.txtcosto.Text = "0.0"
         '
@@ -695,7 +696,7 @@ Partial Class frmCatalogoProducto
         Me.Label9.Location = New System.Drawing.Point(642, 632)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(119, 15)
-        Me.Label9.TabIndex = 77
+        Me.Label9.TabIndex = 41
         Me.Label9.Text = "Fecha de registro"
         '
         'DateTimePicker1
@@ -705,7 +706,7 @@ Partial Class frmCatalogoProducto
         Me.DateTimePicker1.Location = New System.Drawing.Point(645, 651)
         Me.DateTimePicker1.Name = "DateTimePicker1"
         Me.DateTimePicker1.Size = New System.Drawing.Size(333, 26)
-        Me.DateTimePicker1.TabIndex = 19
+        Me.DateTimePicker1.TabIndex = 42
         '
         'txtbarcode
         '
@@ -713,7 +714,7 @@ Partial Class frmCatalogoProducto
         Me.txtbarcode.Location = New System.Drawing.Point(165, 387)
         Me.txtbarcode.Name = "txtbarcode"
         Me.txtbarcode.Size = New System.Drawing.Size(117, 26)
-        Me.txtbarcode.TabIndex = 2
+        Me.txtbarcode.TabIndex = 9
         '
         'Label20
         '
@@ -722,7 +723,7 @@ Partial Class frmCatalogoProducto
         Me.Label20.Location = New System.Drawing.Point(162, 369)
         Me.Label20.Name = "Label20"
         Me.Label20.Size = New System.Drawing.Size(117, 15)
-        Me.Label20.TabIndex = 79
+        Me.Label20.TabIndex = 8
         Me.Label20.Text = "Código de barras"
         '
         'Button6
@@ -730,7 +731,7 @@ Partial Class frmCatalogoProducto
         Me.Button6.Location = New System.Drawing.Point(286, 384)
         Me.Button6.Name = "Button6"
         Me.Button6.Size = New System.Drawing.Size(35, 29)
-        Me.Button6.TabIndex = 3
+        Me.Button6.TabIndex = 10
         Me.Button6.UseVisualStyleBackColor = True
         '
         'txtstockmin
@@ -739,7 +740,7 @@ Partial Class frmCatalogoProducto
         Me.txtstockmin.Location = New System.Drawing.Point(332, 650)
         Me.txtstockmin.Name = "txtstockmin"
         Me.txtstockmin.Size = New System.Drawing.Size(301, 26)
-        Me.txtstockmin.TabIndex = 14
+        Me.txtstockmin.TabIndex = 32
         '
         'Label6
         '
@@ -748,7 +749,7 @@ Partial Class frmCatalogoProducto
         Me.Label6.Location = New System.Drawing.Point(329, 632)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(125, 15)
-        Me.Label6.TabIndex = 82
+        Me.Label6.TabIndex = 31
         Me.Label6.Text = "Existencía mínima"
         '
         'frmCatalogoProducto

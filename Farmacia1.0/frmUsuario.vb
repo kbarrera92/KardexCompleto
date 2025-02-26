@@ -80,6 +80,8 @@ Public Class frmUsuario
         ListBox1.DataSource = updateList(sqlUsuarios)
         ListBox1.ValueMember = updateList(sqlUsuarios).Columns(0).ToString
         ListBox1.DisplayMember = updateList(sqlUsuarios).Columns(1).ToString
+
+        Estilos.AplicarEstilos(Me)
     End Sub
 
     Private Sub ListBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListBox1.SelectedIndexChanged
