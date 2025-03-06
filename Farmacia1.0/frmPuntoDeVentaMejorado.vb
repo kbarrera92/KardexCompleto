@@ -4,6 +4,17 @@ Public Class frmPuntoDeVentaMejorado
 
     Dim correlativo As String = "SELECT IDENT_CURRENT ('VENTA') AS Current_Identity"
     Private Sub frmPuntoDeVentaMejorado_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        With DataGridView1
+            .EnableHeadersVisualStyles = False
+            .ColumnHeadersDefaultCellStyle.BackColor = Color.DarkBlue
+            .ColumnHeadersDefaultCellStyle.ForeColor = Color.White
+            .DefaultCellStyle.ForeColor = Color.DarkBlue
+            .DefaultCellStyle.SelectionBackColor = Color.LightBlue
+            .BorderStyle = BorderStyle.None
+            .CellBorderStyle = DataGridViewCellBorderStyle.SingleVertical
+        End With
+
+        Estilos.AplicarEstilos(Me)
         lblNota.Text = "Nota" & vbCrLf _
             & "Puede identificar el artículo " & vbCrLf _
             & "con el código de barra o" & vbCrLf _

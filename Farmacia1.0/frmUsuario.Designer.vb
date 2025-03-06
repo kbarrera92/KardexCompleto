@@ -51,7 +51,7 @@ Partial Class frmUsuario
         Me.TextBox8.Location = New System.Drawing.Point(362, 40)
         Me.TextBox8.Name = "TextBox8"
         Me.TextBox8.Size = New System.Drawing.Size(261, 20)
-        Me.TextBox8.TabIndex = 50
+        Me.TextBox8.TabIndex = 3
         '
         'Label9
         '
@@ -60,7 +60,7 @@ Partial Class frmUsuario
         Me.Label9.Location = New System.Drawing.Point(359, 19)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(63, 17)
-        Me.Label9.TabIndex = 49
+        Me.Label9.TabIndex = 2
         Me.Label9.Text = "Código:"
         '
         'GroupBox1
@@ -75,7 +75,7 @@ Partial Class frmUsuario
         Me.GroupBox1.Location = New System.Drawing.Point(362, 446)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(261, 66)
-        Me.GroupBox1.TabIndex = 44
+        Me.GroupBox1.TabIndex = 16
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Acciones"
         '
@@ -87,7 +87,7 @@ Partial Class frmUsuario
         Me.Button4.Location = New System.Drawing.Point(176, 22)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(37, 34)
-        Me.Button4.TabIndex = 16
+        Me.Button4.TabIndex = 3
         Me.Button4.UseVisualStyleBackColor = True
         '
         'Button3
@@ -98,7 +98,7 @@ Partial Class frmUsuario
         Me.Button3.Location = New System.Drawing.Point(133, 22)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(37, 34)
-        Me.Button3.TabIndex = 15
+        Me.Button3.TabIndex = 2
         Me.Button3.UseVisualStyleBackColor = True
         '
         'Button2
@@ -109,7 +109,7 @@ Partial Class frmUsuario
         Me.Button2.Location = New System.Drawing.Point(90, 22)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(37, 34)
-        Me.Button2.TabIndex = 14
+        Me.Button2.TabIndex = 1
         Me.Button2.UseVisualStyleBackColor = True
         '
         'Button1
@@ -120,7 +120,7 @@ Partial Class frmUsuario
         Me.Button1.Location = New System.Drawing.Point(47, 22)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(37, 34)
-        Me.Button1.TabIndex = 13
+        Me.Button1.TabIndex = 0
         Me.Button1.UseVisualStyleBackColor = True
         '
         'Label5
@@ -130,7 +130,7 @@ Partial Class frmUsuario
         Me.Label5.Location = New System.Drawing.Point(359, 228)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(122, 17)
-        Me.Label5.TabIndex = 40
+        Me.Label5.TabIndex = 10
         Me.Label5.Text = "Tipo de usuario"
         '
         'TextBox3
@@ -138,7 +138,7 @@ Partial Class frmUsuario
         Me.TextBox3.Location = New System.Drawing.Point(365, 197)
         Me.TextBox3.Name = "TextBox3"
         Me.TextBox3.Size = New System.Drawing.Size(261, 20)
-        Me.TextBox3.TabIndex = 39
+        Me.TextBox3.TabIndex = 9
         '
         'Label4
         '
@@ -147,7 +147,7 @@ Partial Class frmUsuario
         Me.Label4.Location = New System.Drawing.Point(362, 177)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(96, 17)
-        Me.Label4.TabIndex = 38
+        Me.Label4.TabIndex = 8
         Me.Label4.Text = "Contraseña:"
         '
         'TextBox2
@@ -155,7 +155,7 @@ Partial Class frmUsuario
         Me.TextBox2.Location = New System.Drawing.Point(362, 143)
         Me.TextBox2.Name = "TextBox2"
         Me.TextBox2.Size = New System.Drawing.Size(261, 20)
-        Me.TextBox2.TabIndex = 37
+        Me.TextBox2.TabIndex = 7
         '
         'Label3
         '
@@ -164,7 +164,7 @@ Partial Class frmUsuario
         Me.Label3.Location = New System.Drawing.Point(359, 122)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(83, 17)
-        Me.Label3.TabIndex = 36
+        Me.Label3.TabIndex = 6
         Me.Label3.Text = "Nickname:"
         '
         'TextBox1
@@ -172,7 +172,7 @@ Partial Class frmUsuario
         Me.TextBox1.Location = New System.Drawing.Point(362, 91)
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.Size = New System.Drawing.Size(261, 20)
-        Me.TextBox1.TabIndex = 35
+        Me.TextBox1.TabIndex = 5
         '
         'Label2
         '
@@ -181,7 +181,7 @@ Partial Class frmUsuario
         Me.Label2.Location = New System.Drawing.Point(359, 70)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(69, 17)
-        Me.Label2.TabIndex = 34
+        Me.Label2.TabIndex = 4
         Me.Label2.Text = "Nombre:"
         '
         'ListBox1
@@ -190,7 +190,7 @@ Partial Class frmUsuario
         Me.ListBox1.Location = New System.Drawing.Point(21, 40)
         Me.ListBox1.Name = "ListBox1"
         Me.ListBox1.Size = New System.Drawing.Size(312, 472)
-        Me.ListBox1.TabIndex = 33
+        Me.ListBox1.TabIndex = 1
         '
         'Label1
         '
@@ -199,7 +199,7 @@ Partial Class frmUsuario
         Me.Label1.Location = New System.Drawing.Point(18, 19)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(159, 17)
-        Me.Label1.TabIndex = 32
+        Me.Label1.TabIndex = 0
         Me.Label1.Text = "Usuarios registrados"
         '
         'ComboBox1
@@ -209,7 +209,7 @@ Partial Class frmUsuario
         Me.ComboBox1.Location = New System.Drawing.Point(362, 249)
         Me.ComboBox1.Name = "ComboBox1"
         Me.ComboBox1.Size = New System.Drawing.Size(264, 21)
-        Me.ComboBox1.TabIndex = 51
+        Me.ComboBox1.TabIndex = 11
         Me.ComboBox1.ValueMember = "idTipoUsuario"
         '
         'Label6
@@ -219,7 +219,7 @@ Partial Class frmUsuario
         Me.Label6.Location = New System.Drawing.Point(359, 286)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(71, 17)
-        Me.Label6.TabIndex = 40
+        Me.Label6.TabIndex = 12
         Me.Label6.Text = "Sucursal"
         '
         'ComboBox2
@@ -229,7 +229,7 @@ Partial Class frmUsuario
         Me.ComboBox2.Location = New System.Drawing.Point(362, 307)
         Me.ComboBox2.Name = "ComboBox2"
         Me.ComboBox2.Size = New System.Drawing.Size(264, 21)
-        Me.ComboBox2.TabIndex = 51
+        Me.ComboBox2.TabIndex = 13
         Me.ComboBox2.ValueMember = "idTipoUsuario"
         '
         'ComboBox3
@@ -239,7 +239,7 @@ Partial Class frmUsuario
         Me.ComboBox3.Location = New System.Drawing.Point(362, 365)
         Me.ComboBox3.Name = "ComboBox3"
         Me.ComboBox3.Size = New System.Drawing.Size(264, 21)
-        Me.ComboBox3.TabIndex = 53
+        Me.ComboBox3.TabIndex = 15
         Me.ComboBox3.ValueMember = "idTipoUsuario"
         '
         'Label7
@@ -249,7 +249,7 @@ Partial Class frmUsuario
         Me.Label7.Location = New System.Drawing.Point(359, 344)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(58, 17)
-        Me.Label7.TabIndex = 52
+        Me.Label7.TabIndex = 14
         Me.Label7.Text = "Estado"
         '
         'frmUsuario

@@ -74,6 +74,10 @@
     End Sub
 
     Private Sub NuevoTrasladoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NuevoTrasladoToolStripMenuItem.Click
+        If rolUsuarioActual = Nothing Then
+            MessageBox.Show("No tiene permisos para este módulo", "No tiene permisos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Return
+        End If
         frmTraslados.Show()
     End Sub
 
