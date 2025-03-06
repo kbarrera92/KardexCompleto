@@ -191,7 +191,7 @@ Public Class frmAjustes2
                 Try
                     openConnection()
                     Dim query As String = "SELECT dProducto, PRO.rzProveedor, costo " _
-                                          & "FROM PRODUCTO " _
+                                          & "FROM PRODUCTOS " _
                                           & "INNER JOIN PROVEEDOR PRO " _
                                           & "ON proveedor = PRO.idProveedor " _
                                           & "WHERE idProducto = @id"
@@ -383,7 +383,7 @@ Public Class frmAjustes2
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         Try
-            Dim sqlRegis As String = "UPDATE PRODUCTO SET barcode = @bar WHERE idProducto = @id"
+            Dim sqlRegis As String = "UPDATE PRODUCTOS SET barcode = @bar WHERE idProducto = @id"
             Dim cmd As SqlCommand
 
             cmd = New SqlCommand(sqlRegis, conn)

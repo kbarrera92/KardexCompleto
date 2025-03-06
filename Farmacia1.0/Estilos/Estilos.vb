@@ -18,6 +18,8 @@ Public Class Estilos
                                 textbox.ForeColor = Color.White
                             Case "ES"
                                 textbox.Font = New Font("Segoe UI", 10, FontStyle.Bold)
+                            Case "SE"
+                                Return
 
                         End Select
 
@@ -36,12 +38,24 @@ Public Class Estilos
                     Dim label As Label = CType(ctrl, Label)
                     label.ForeColor = Color.DarkBlue
 
-                    Dim tagValue As String = If(label.Tag IsNot Nothing, label.Tag.ToString(), "")
+                    Dim estilos As String() = If(label.Tag IsNot Nothing, label.Tag.ToString().Split(","c), New String() {})
+                    For Each estilo As String In estilos
+                        Select Case estilo.ToUpper()
+                            Case "PS"
+                                Return
+                            Case "FO"
+                                label.ForeColor = Color.White
+                            Case Else
+                                label.Font = New Font("Segoe UI", 10, FontStyle.Bold)
+                                label.ForeColor = Color.DarkBlue
+                        End Select
+                    Next
+                    'Dim tagValue As String = If(label.Tag IsNot Nothing, label.Tag.ToString(), "")
 
-                    If tagValue <> "PS" Then
-                        label.Font = New Font("Segoe UI", 10, FontStyle.Bold)
-                        label.ForeColor = Color.DarkBlue
-                    End If
+                    'If tagValue <> "PS" Then
+                    '    label.Font = New Font("Segoe UI", 10, FontStyle.Bold)
+                    '    label.ForeColor = Color.DarkBlue
+                    'End If
                 End If
 
                 If TypeOf ctrl Is Button Then
@@ -64,6 +78,8 @@ Public Class Estilos
                                 button.FlatAppearance.BorderColor = Color.DarkBlue
                             Case "FO"
                                 button.BackColor = Color.WhiteSmoke
+                            Case "SE"
+                                Return
                         End Select
                     Next
                 End If
@@ -80,6 +96,18 @@ Public Class Estilos
                     toolStrip.BackColor = Color.DarkBlue
                 End If
 
+                If TypeOf ctrl Is Panel Then
+                    Dim panel As Panel = CType(ctrl, Panel)
+
+                    Dim estilos As String() = If(panel.Tag IsNot Nothing, panel.Tag.ToString().Split(","c), New String() {})
+                    For Each estilo As String In estilos
+                        Select Case estilo.ToUpper()
+                            Case "G"
+                                panel.BackColor = Color.DarkBlue
+
+                        End Select
+                    Next
+                End If
 
                 If ctrl.HasChildren Then
                     AplicarEstilos(ctrl)
