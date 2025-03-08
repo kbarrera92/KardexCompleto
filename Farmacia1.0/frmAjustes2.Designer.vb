@@ -24,9 +24,9 @@ Partial Class frmAjustes2
     Private Sub InitializeComponent()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
+        Me.ComboBoxSucursal = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.ComboBoxTipoAjuste = New System.Windows.Forms.ComboBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.mskfecha = New System.Windows.Forms.MaskedTextBox()
@@ -81,16 +81,17 @@ Partial Class frmAjustes2
         CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'ComboBox2
+        'ComboBoxSucursal
         '
-        Me.ComboBox2.DisplayMember = "nombreSuc"
-        Me.ComboBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ComboBox2.FormattingEnabled = True
-        Me.ComboBox2.Location = New System.Drawing.Point(19, 28)
-        Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(284, 28)
-        Me.ComboBox2.TabIndex = 108
-        Me.ComboBox2.ValueMember = "idSucursal"
+        Me.ComboBoxSucursal.DisplayMember = "nombreSuc"
+        Me.ComboBoxSucursal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBoxSucursal.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ComboBoxSucursal.FormattingEnabled = True
+        Me.ComboBoxSucursal.Location = New System.Drawing.Point(19, 28)
+        Me.ComboBoxSucursal.Name = "ComboBoxSucursal"
+        Me.ComboBoxSucursal.Size = New System.Drawing.Size(284, 28)
+        Me.ComboBoxSucursal.TabIndex = 108
+        Me.ComboBoxSucursal.ValueMember = "idSucursal"
         '
         'Label1
         '
@@ -102,16 +103,17 @@ Partial Class frmAjustes2
         Me.Label1.TabIndex = 107
         Me.Label1.Text = "Sucursal"
         '
-        'ComboBox1
+        'ComboBoxTipoAjuste
         '
-        Me.ComboBox1.DisplayMember = "tipoAjuste"
-        Me.ComboBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(309, 28)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(171, 28)
-        Me.ComboBox1.TabIndex = 106
-        Me.ComboBox1.ValueMember = "idTipoAjuste"
+        Me.ComboBoxTipoAjuste.DisplayMember = "tipoAjuste"
+        Me.ComboBoxTipoAjuste.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBoxTipoAjuste.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ComboBoxTipoAjuste.FormattingEnabled = True
+        Me.ComboBoxTipoAjuste.Location = New System.Drawing.Point(309, 28)
+        Me.ComboBoxTipoAjuste.Name = "ComboBoxTipoAjuste"
+        Me.ComboBoxTipoAjuste.Size = New System.Drawing.Size(171, 28)
+        Me.ComboBoxTipoAjuste.TabIndex = 106
+        Me.ComboBoxTipoAjuste.ValueMember = "idTipoAjuste"
         '
         'Label7
         '
@@ -656,9 +658,9 @@ Partial Class frmAjustes2
         Me.Controls.Add(Me.btnnuevaventa)
         Me.Controls.Add(Me.txtconcep)
         Me.Controls.Add(Me.Label8)
-        Me.Controls.Add(Me.ComboBox2)
+        Me.Controls.Add(Me.ComboBoxSucursal)
         Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.ComboBox1)
+        Me.Controls.Add(Me.ComboBoxTipoAjuste)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.mskfecha)
@@ -673,9 +675,9 @@ Partial Class frmAjustes2
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents ComboBox2 As System.Windows.Forms.ComboBox
+    Friend WithEvents ComboBoxSucursal As System.Windows.Forms.ComboBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents ComboBox1 As System.Windows.Forms.ComboBox
+    Friend WithEvents ComboBoxTipoAjuste As System.Windows.Forms.ComboBox
     Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents mskfecha As System.Windows.Forms.MaskedTextBox

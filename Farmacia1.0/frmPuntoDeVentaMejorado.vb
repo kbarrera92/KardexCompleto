@@ -122,8 +122,6 @@ Public Class frmPuntoDeVentaMejorado
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         If DataGridView1.Rows.Count = 0 Then
             MsgBox("No se ha agregado ningún producto", MsgBoxStyle.Exclamation, "Faltan datos")
-            'ElseIf String.IsNullOrWhiteSpace(txtcorrelativo.Text) Then
-            '    MsgBox("Debes presionar sobre el botón Nueva Venta", MsgBoxStyle.Exclamation, "Faltan datos")
         Else
             'crear la datatable
             table = New DataTable()
