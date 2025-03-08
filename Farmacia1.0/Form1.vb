@@ -6,6 +6,10 @@ Public Class Form1
     Sub login()
         Dim reader As SqlDataReader
 
+        If sucActual = 0 Then
+            sucActual = Integer.Parse(ConsultaParametro("codigoSucursal"))
+        End If
+
         Try
             openConnection()
             Dim cmd As New SqlCommand()
@@ -25,12 +29,6 @@ Public Class Form1
                 nameUsuarioActual = reader(1).ToString
                 usuarioActual = Val(reader(0).ToString)
                 nombreRol = reader(3).ToString
-
-                Dim params(3) As String
-                params(0) = Trim(TextBox1.Text)
-                params(1) = Environment.MachineName & " - " & Environment.UserName
-                params(2) = "Inicio de sesión: " & nameUsuarioActual & ", desde: " & ConsultaParametro("sucursalFisica")
-
 
                 If ((reader(3).ToString() = "ADMINISTRADOR" Or reader(3).ToString() = "GERENTE")) Then
                     MsgBox("Bienvenido al sistema: " & nameUsuarioActual.ToString, MsgBoxStyle.Information, ConsultaParametro("nombreEmpresa"))

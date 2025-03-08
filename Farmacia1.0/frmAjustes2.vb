@@ -39,31 +39,28 @@ Public Class frmAjustes2
     End Function
 
     Private Sub btnnuevaventa_Click(sender As Object, e As EventArgs) Handles btnnuevaventa.Click
-        najuste = getCorrelativoTrasiego(correlativo) + 1
-        lblNoCompra.Text = "Ajuste No. " & najuste
-        txtbuscapro.Clear()
-        txtcodpro.Clear()
-        txtdescpro.Clear()
-        cmbProveedor.SelectedIndex = -1
-        txtcantidad.Text = "0"
-        txtprecio.Text = "0.00"
-        txttotal.Text = "0.00"
-        DataGridView2.DataSource = Nothing
-        DataGridView2.Rows.Clear()
-        txtbuscapro.Select()
-
-
-        'Guardar ajuste
         Try
-            guardarAjuste()
+            najuste = getCorrelativoTrasiego(correlativo) + 1
+            lblNoCompra.Text = "Ajuste No. " & najuste
+            txtbuscapro.Clear()
+            txtcodpro.Clear()
+            txtdescpro.Clear()
+            cmbProveedor.SelectedIndex = -1
+            txtcantidad.Text = "0"
+            txtprecio.Text = "0.00"
+            txttotal.Text = "0.00"
+            DataGridView2.DataSource = Nothing
+            DataGridView2.Rows.Clear()
+            txtbuscapro.Select()
+
+
+            'Guardar ajuste
+            'guardarAjuste()
         Catch ex As NullReferenceException
             lblNoCompra.Text = "Ajuste No."
             MsgBox("Faltan datos obligatorios", MsgBoxStyle.Critical, "Faltan datos")
-
         Catch ex As Exception
             MsgBox("No se pudo realizar esta acción" & vbCrLf & "Error: " & ex.Message, MsgBoxStyle.Critical, "Error")
-        Finally
-
         End Try
     End Sub
 
@@ -112,10 +109,10 @@ Public Class frmAjustes2
             MsgBox("Cantidad no válida", MsgBoxStyle.Critical, "Error")
         Else
             Try
-                Dim queryID As String = "INSERT INTO DETAJUSTE VALUES(@no, @trans, @prod, @cant, @precio, @subt);"
-                Dim comand As SqlCommand
+                'Dim queryID As String = "INSERT INTO DETAJUSTE VALUES(@no, @trans, @prod, @cant, @precio, @subt);"
+                'Dim comand As SqlCommand
 
-                comand = New SqlCommand(queryID, conn)
+                'comand = New SqlCommand(queryID, conn)
 
                 Dim det As Integer
                 If DataGridView2.Rows.Count = 0 Then
@@ -124,23 +121,25 @@ Public Class frmAjustes2
                     det = Me.DataGridView2.Rows(Me.DataGridView2.Rows.Count - 1).Cells(0).Value + 1
                 End If
 
-                comand.Parameters.AddWithValue("no", det)
-                comand.Parameters.AddWithValue("trans", najuste)
-                comand.Parameters.AddWithValue("prod", CInt(txtcodpro.Text))
-                comand.Parameters.AddWithValue("cant", CInt(txtcantidad.Text))
-                comand.Parameters.AddWithValue("subt", (CDbl(txtcantidad.Text) * CDbl(txtprecio.Text)))
-                comand.Parameters.AddWithValue("precio", CDbl(txtprecio.Text))
+                'comand.Parameters.AddWithValue("no", det)
+                'comand.Parameters.AddWithValue("trans", najuste)
+                'comand.Parameters.AddWithValue("prod", CInt(txtcodpro.Text))
+                'comand.Parameters.AddWithValue("cant", CInt(txtcantidad.Text))
+                'comand.Parameters.AddWithValue("subt", (CDbl(txtcantidad.Text) * CDbl(txtprecio.Text)))
+                'comand.Parameters.AddWithValue("precio", CDbl(txtprecio.Text))
 
 
-                openConnection()
-                comand.ExecuteNonQuery()
-                closeConnection()
+                'openConnection()
+                'comand.ExecuteNonQuery()
+                'closeConnection()
+
+                DataGridView2.Rows.Add(det, CInt(txtcodpro.Text), txtdescpro.Text.Trim(), CInt(txtcantidad.Text), CDbl(txtprecio.Text), (CDbl(txtcantidad.Text) * CDbl(txtprecio.Text)))
 
             Catch ex As Exception
                 MsgBox("Algo salió mal" & vbCrLf & "Error: " & ex.Message, MsgBoxStyle.Critical, "Error")
             Finally
 
-                fillDGVSP("detAjustes", DataGridView2, Me, najuste)
+                'fillDGVSP("detAjustes", DataGridView2, Me, najuste)
                 fillDGVSP("sp_infoProdCompras", DataGridView1, Me, CInt(ComboBox2.SelectedValue.ToString))
                 txttotal.Text = FormatNumber(calcularTotal(), 2)
                 txtbuscapro.Clear()
