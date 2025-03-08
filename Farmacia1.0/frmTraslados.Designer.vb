@@ -22,8 +22,8 @@ Partial Class frmTraslados
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.ShapeContainer1 = New Microsoft.VisualBasic.PowerPacks.ShapeContainer()
         Me.LineShape1 = New Microsoft.VisualBasic.PowerPacks.LineShape()
         Me.Button7 = New System.Windows.Forms.Button()
@@ -54,18 +54,18 @@ Partial Class frmTraslados
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.DataGridView2 = New System.Windows.Forms.DataGridView()
-        Me.cant = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.descPro = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.descPro = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cant = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.medida = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.proveedor = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.costo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.pres = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.marca = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.stock = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.stock = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.marca = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.pres = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.costo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.proveedor = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.medida = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.txtUsuarioEnvia = New System.Windows.Forms.TextBox()
         CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -373,14 +373,14 @@ Partial Class frmTraslados
         '
         Me.DataGridView2.AllowUserToAddRows = False
         Me.DataGridView2.AllowUserToDeleteRows = False
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView2.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView2.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.DataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.descPro, Me.cant})
         Me.DataGridView2.Location = New System.Drawing.Point(529, 189)
@@ -389,11 +389,11 @@ Partial Class frmTraslados
         Me.DataGridView2.Size = New System.Drawing.Size(523, 447)
         Me.DataGridView2.TabIndex = 0
         '
-        'cant
+        'DataGridViewTextBoxColumn1
         '
-        Me.cant.HeaderText = "Cant."
-        Me.cant.Name = "cant"
-        Me.cant.ReadOnly = True
+        Me.DataGridViewTextBoxColumn1.HeaderText = "Código"
+        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
+        Me.DataGridViewTextBoxColumn1.ReadOnly = True
         '
         'descPro
         '
@@ -402,24 +402,24 @@ Partial Class frmTraslados
         Me.descPro.ReadOnly = True
         Me.descPro.Width = 270
         '
-        'DataGridViewTextBoxColumn1
+        'cant
         '
-        Me.DataGridViewTextBoxColumn1.HeaderText = "Código"
-        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
-        Me.DataGridViewTextBoxColumn1.ReadOnly = True
+        Me.cant.HeaderText = "Cant."
+        Me.cant.Name = "cant"
+        Me.cant.ReadOnly = True
         '
         'DataGridView1
         '
         Me.DataGridView1.AllowUserToAddRows = False
         Me.DataGridView1.AllowUserToDeleteRows = False
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.stock, Me.marca, Me.pres, Me.costo, Me.proveedor, Me.medida})
         Me.DataGridView1.Location = New System.Drawing.Point(12, 318)
@@ -428,41 +428,11 @@ Partial Class frmTraslados
         Me.DataGridView1.Size = New System.Drawing.Size(504, 318)
         Me.DataGridView1.TabIndex = 1
         '
-        'medida
+        'DataGridViewTextBoxColumn2
         '
-        Me.medida.HeaderText = "Medida"
-        Me.medida.Name = "medida"
-        Me.medida.ReadOnly = True
-        '
-        'proveedor
-        '
-        Me.proveedor.HeaderText = "Proveedor"
-        Me.proveedor.Name = "proveedor"
-        Me.proveedor.ReadOnly = True
-        '
-        'costo
-        '
-        Me.costo.HeaderText = "Costo"
-        Me.costo.Name = "costo"
-        Me.costo.ReadOnly = True
-        '
-        'pres
-        '
-        Me.pres.HeaderText = "Presentación"
-        Me.pres.Name = "pres"
-        Me.pres.ReadOnly = True
-        '
-        'marca
-        '
-        Me.marca.HeaderText = "Marca"
-        Me.marca.Name = "marca"
-        Me.marca.ReadOnly = True
-        '
-        'stock
-        '
-        Me.stock.HeaderText = "Stock"
-        Me.stock.Name = "stock"
-        Me.stock.ReadOnly = True
+        Me.DataGridViewTextBoxColumn2.HeaderText = "Código"
+        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
+        Me.DataGridViewTextBoxColumn2.ReadOnly = True
         '
         'DataGridViewTextBoxColumn3
         '
@@ -471,11 +441,41 @@ Partial Class frmTraslados
         Me.DataGridViewTextBoxColumn3.ReadOnly = True
         Me.DataGridViewTextBoxColumn3.Width = 220
         '
-        'DataGridViewTextBoxColumn2
+        'stock
         '
-        Me.DataGridViewTextBoxColumn2.HeaderText = "Código"
-        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
-        Me.DataGridViewTextBoxColumn2.ReadOnly = True
+        Me.stock.HeaderText = "Stock"
+        Me.stock.Name = "stock"
+        Me.stock.ReadOnly = True
+        '
+        'marca
+        '
+        Me.marca.HeaderText = "Marca"
+        Me.marca.Name = "marca"
+        Me.marca.ReadOnly = True
+        '
+        'pres
+        '
+        Me.pres.HeaderText = "Presentación"
+        Me.pres.Name = "pres"
+        Me.pres.ReadOnly = True
+        '
+        'costo
+        '
+        Me.costo.HeaderText = "Costo"
+        Me.costo.Name = "costo"
+        Me.costo.ReadOnly = True
+        '
+        'proveedor
+        '
+        Me.proveedor.HeaderText = "Proveedor"
+        Me.proveedor.Name = "proveedor"
+        Me.proveedor.ReadOnly = True
+        '
+        'medida
+        '
+        Me.medida.HeaderText = "Medida"
+        Me.medida.Name = "medida"
+        Me.medida.ReadOnly = True
         '
         'Label11
         '
@@ -542,8 +542,6 @@ Partial Class frmTraslados
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents ShapeContainer1 As Microsoft.VisualBasic.PowerPacks.ShapeContainer
-    Friend WithEvents LineShape1 As Microsoft.VisualBasic.PowerPacks.LineShape
     Friend WithEvents Button2 As System.Windows.Forms.Button
     Friend WithEvents Button3 As System.Windows.Forms.Button
     Friend WithEvents Button4 As System.Windows.Forms.Button
@@ -586,4 +584,6 @@ Partial Class frmTraslados
     Friend WithEvents medida As DataGridViewTextBoxColumn
     Friend WithEvents Label11 As Label
     Friend WithEvents txtUsuarioEnvia As TextBox
+    Private WithEvents ShapeContainer1 As PowerPacks.ShapeContainer
+    Private WithEvents LineShape1 As PowerPacks.LineShape
 End Class
