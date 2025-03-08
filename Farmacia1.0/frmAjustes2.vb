@@ -355,6 +355,7 @@ Public Class frmAjustes2
             Try
                 If DataGridView2.Rows.Count = 0 Then
                     MsgBox("No se ha agregado ningún producto", MsgBoxStyle.Exclamation, "Faltan datos")
+                    Return
                 Else
                     'crear la datatable
                     table = New DataTable()

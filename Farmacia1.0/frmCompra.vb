@@ -276,6 +276,7 @@ Public Class frmCompra
                 .AddWithValue("formapago", CInt(cmbFP.SelectedValue.ToString()))
                 .AddWithValue("fechapago", If(String.IsNullOrEmpty(txtFechaPago.Text.Trim), DBNull.Value, Convert.ToDateTime(txtFechaPago.Text)))
                 .AddWithValue("detalles", table)
+                .AddWithValue("horasDiferencia", CInt(ConsultaParametro("horasDiferencia")))
             End With
 
             Dim paramtodb As String = String.Empty

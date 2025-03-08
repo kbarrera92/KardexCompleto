@@ -30,7 +30,7 @@ Public Class frmCobrar
                 .Add("@rc", SqlDbType.Int).Direction = ParameterDirection.Output
                 .Add("@nVenta", SqlDbType.Int).Direction = ParameterDirection.Output
                 .AddWithValue("detalles", table)
-
+                .AddWithValue("horasDiferencia", CInt(ConsultaParametro("horasDiferencia")))
             End With
 
             openConnection()
