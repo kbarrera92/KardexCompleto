@@ -1,9 +1,33 @@
 ﻿Imports System.Data.SqlClient
+Imports Serilog
 
 Public Class FormReporteUtilidad
     Dim ds As DataSet
-    Private Sub FormReporteUtilidad_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Dim sqlSucursal As String = "SELECT idSucursal, nombreSuc FROM SUCURSAL"
+    Function updateList(ByVal sql As String) As DataTable
+        Dim da As SqlDataAdapter
+        Dim dt As New DataTable
 
+        Try
+            openConnection()
+            da = New SqlDataAdapter(sql, conn)
+            da.Fill(dt)
+            Return dt
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return Nothing
+        End Try
+    End Function
+    Private Sub FormReporteUtilidad_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Log.Information("Cargando sucursales en formulario de Reporte de utilidades")
+        Try
+            ComboBox1.DataSource = updateList(sqlSucursal)
+            ComboBox1.ValueMember = updateList(sqlSucursal).Columns(0).ToString
+            ComboBox1.DisplayMember = updateList(sqlSucursal).Columns(1).ToString
+
+        Catch ex As Exception
+            Log.Error($"Ocurrio un error. Error: {ex.Message}")
+        End Try
     End Sub
 
     Sub llenarDTSMP2()
@@ -21,6 +45,7 @@ Public Class FormReporteUtilidad
                 .Connection = conn
                 .Parameters.AddWithValue("fechainicial", DateTimePicker1.Value)
                 .Parameters.AddWithValue("fechafinal", DateTimePicker2.Value)
+                .Parameters.AddWithValue("sucursal", Integer.Parse(ComboBox1.SelectedValue.ToString()))
             End With
             dt = ds.Tables("dtutilidad")
 

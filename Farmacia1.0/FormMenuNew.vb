@@ -1,7 +1,13 @@
-﻿Public Class FormMenuNew
+﻿Imports Serilog
+
+Public Class FormMenuNew
     Private Sub ToolStripButtonLogin_Click(sender As Object, e As EventArgs) Handles ToolStripButtonLogin.Click
         If ToolStripButtonLogin.Text.ToUpper() = "INICIAR SESIÓN" Then
-            frmElegirSucursal.Show()
+            If ConsultaParametro("esAdmin") = "S" Then
+                frmElegirSucursal.Show()
+            Else
+                Form1.Show()
+            End If
         Else
             ToolStripButtonLogin.Text = "Iniciar sesión"
             rolUsuarioActual = Nothing
@@ -17,7 +23,7 @@
             MessageBox.Show("No tiene permisos para este módulo", "No tiene permisos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             Return
         End If
-
+        Log.Information("Ingresando al catálogo de productos")
         frmCatalogoProducto.Show()
     End Sub
 
@@ -90,7 +96,7 @@
     End Sub
 
     Private Sub RecibirTrasladoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RecibirTrasladoToolStripMenuItem.Click
-        If nombreRol <> "ADMINISTRADOR" Then
+        If rolUsuarioActual = Nothing Then
             MessageBox.Show("No tiene permisos para este módulo", "No tiene permisos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             Return
         End If

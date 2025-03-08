@@ -1,4 +1,6 @@
 ﻿Imports System.Data.SqlClient
+Imports Serilog
+
 Public Class frmProductos
     Dim criterio As String
     Dim sqlSucursal As String = "SELECT idSucursal, nombreSuc FROM SUCURSAL"
@@ -170,6 +172,7 @@ Public Class frmProductos
                         params(1) = Environment.MachineName & " - " & Environment.UserName
                         params(2) = String.Format("{0} cambió el precio del producto: {1}", nameUsuarioActual, DataGridView1.CurrentRow.Cells(0).Value)
                         GrabaBitacora(params, grabaBitacoraSp)
+                        Log.Warning(String.Format("{0} cambió el precio del producto: {1}. Fecha: {2}", nameUsuarioActual, DataGridView1.CurrentRow.Cells(0).Value), DateTime.Now)
                     End If
 
                     Me.Close()

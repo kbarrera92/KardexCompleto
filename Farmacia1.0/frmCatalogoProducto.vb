@@ -83,40 +83,51 @@ Public Class frmCatalogoProducto
     End Sub
 
     Public Sub IAProducto(ByVal accion As String)
-        Dim parametros As New List(Of SqlParameter) From {
-            New SqlParameter("@accion", SqlDbType.VarChar, 10) With {.Value = accion},
-            New SqlParameter("@dProducto", SqlDbType.VarChar, 150) With {.Value = txtdesc.Text},
-            New SqlParameter("@composicion", SqlDbType.VarChar, 150) With {.Value = txtcomp.Text},
-            New SqlParameter("@presentacion", SqlDbType.VarChar, 100) With {.Value = txtpres.Text},
-            New SqlParameter("@aterapeutica", SqlDbType.VarChar, 150) With {.Value = txtat.Text},
-            New SqlParameter("@indicaciones", SqlDbType.VarChar, 150) With {.Value = txtindi.Text},
-            New SqlParameter("@contraindicaciones", SqlDbType.VarChar, 150) With {.Value = txtcontra.Text},
-            New SqlParameter("@observaciones", SqlDbType.VarChar, 250) With {.Value = txtobs.Text},
-            New SqlParameter("@proveedor", SqlDbType.Int) With {.Value = Convert.ToInt32(cmbpro.SelectedValue)},
-            New SqlParameter("@medida", SqlDbType.VarChar, 75) With {.Value = txtmed.Text},
-            New SqlParameter("@categoria", SqlDbType.Int) With {.Value = Convert.ToInt32(cmbcat.SelectedValue)},
-            New SqlParameter("@laboratorio", SqlDbType.VarChar, 100) With {.Value = txtlab.Text},
-            New SqlParameter("@precio", SqlDbType.Decimal) With {.Value = Convert.ToDecimal(txtprecio.Text)},
-            New SqlParameter("@costo", SqlDbType.Decimal) With {.Value = Convert.ToDecimal(txtcosto.Text)},
-            New SqlParameter("@fechaRegistro", SqlDbType.Date) With {.Value = DateTime.Now},
-            New SqlParameter("@estanteria", SqlDbType.Int) With {.Value = DBNull.Value},
-            New SqlParameter("@barcode", SqlDbType.VarChar, 25) With {.Value = txtbarcode.Text},
-            New SqlParameter("@stockmin", SqlDbType.Int) With {.Value = Convert.ToInt32(txtstockmin.Text)},
-            New SqlParameter("@estado", SqlDbType.Bit) With {.Value = 1},
-            New SqlParameter("@msg", SqlDbType.VarChar, 200) With {.Direction = ParameterDirection.Output},
-            New SqlParameter("@returnValue", SqlDbType.Int) With {.Direction = ParameterDirection.ReturnValue}
-        }
+        Try
+            Dim parametros As New List(Of SqlParameter) From {
+                New SqlParameter("@accion", SqlDbType.VarChar, 10) With {.Value = accion},
+                New SqlParameter("@dProducto", SqlDbType.VarChar, 150) With {.Value = txtdesc.Text},
+                New SqlParameter("@composicion", SqlDbType.VarChar, 150) With {.Value = txtcomp.Text},
+                New SqlParameter("@presentacion", SqlDbType.VarChar, 100) With {.Value = txtpres.Text},
+                New SqlParameter("@aterapeutica", SqlDbType.VarChar, 150) With {.Value = txtat.Text},
+                New SqlParameter("@indicaciones", SqlDbType.VarChar, 150) With {.Value = txtindi.Text},
+                New SqlParameter("@contraindicaciones", SqlDbType.VarChar, 150) With {.Value = txtcontra.Text},
+                New SqlParameter("@observaciones", SqlDbType.VarChar, 250) With {.Value = txtobs.Text},
+                New SqlParameter("@proveedor", SqlDbType.Int) With {.Value = Convert.ToInt32(cmbpro.SelectedValue)},
+                New SqlParameter("@medida", SqlDbType.VarChar, 75) With {.Value = txtmed.Text},
+                New SqlParameter("@categoria", SqlDbType.Int) With {.Value = Convert.ToInt32(cmbcat.SelectedValue)},
+                New SqlParameter("@laboratorio", SqlDbType.VarChar, 100) With {.Value = txtlab.Text},
+                New SqlParameter("@precio", SqlDbType.Decimal) With {.Value = Convert.ToDecimal(txtprecio.Text)},
+                New SqlParameter("@costo", SqlDbType.Decimal) With {.Value = Convert.ToDecimal(txtcosto.Text)},
+                New SqlParameter("@fechaRegistro", SqlDbType.Date) With {.Value = DateTime.Now},
+                New SqlParameter("@estanteria", SqlDbType.Int) With {.Value = DBNull.Value},
+                New SqlParameter("@barcode", SqlDbType.VarChar, 25) With {.Value = txtbarcode.Text},
+                New SqlParameter("@stockmin", SqlDbType.Int) With {.Value = Convert.ToInt32(txtstockmin.Text)},
+                New SqlParameter("@estado", SqlDbType.Bit) With {.Value = 1},
+                New SqlParameter("@msg", SqlDbType.VarChar, 200) With {.Direction = ParameterDirection.Output},
+                New SqlParameter("@returnValue", SqlDbType.Int) With {.Direction = ParameterDirection.ReturnValue}
+            }
 
-        Dim parametroExtra As New SqlParameter("@idProducto", SqlDbType.Int) With {.Value = Convert.ToInt32(txtcod.Text)}
-        If accion = "ACTUALIZAR" Then
-            parametros.Add(parametroExtra)
-        End If
+            Dim parametroExtra As New SqlParameter("@idProducto", SqlDbType.Int) With {.Value = Convert.ToInt32(txtcod.Text)}
+            If accion = "ACTUALIZAR" Then
+                parametros.Add(parametroExtra)
+            End If
 
-        Dim resultado = EjecutarStoredProcedureMultiple("sp_CRUD_PRODUCTOS", parametros)
+            Dim paramtodb As String = String.Empty
+            For Each param As SqlParameter In parametros
+                paramtodb &= param.ParameterName & "=" & If(param.Value, """") & vbCrLf
+            Next
+            Log.Information($"Parametros enviados al sp: {vbCrLf}{paramtodb}")
 
-        Dim codigoRetorno As Integer = Convert.ToInt32(parametros.Find(Function(p) p.ParameterName = "@returnValue").Value)
-        Dim mensajeSalida As String = parametros.Find(Function(p) p.ParameterName = "@msg").Value.ToString()
-        MessageBox.Show(mensajeSalida, "Resultado", MessageBoxButtons.OK, IIf(codigoRetorno = 0, MessageBoxIcon.Information, MessageBoxIcon.Error))
+            Dim resultado = EjecutarStoredProcedureMultiple("sp_CRUD_PRODUCTOS", parametros)
+
+            Dim codigoRetorno As Integer = Convert.ToInt32(parametros.Find(Function(p) p.ParameterName = "@returnValue").Value)
+            Dim mensajeSalida As String = parametros.Find(Function(p) p.ParameterName = "@msg").Value.ToString()
+            MessageBox.Show(mensajeSalida, "Resultado", MessageBoxButtons.OK, IIf(codigoRetorno = 0, MessageBoxIcon.Information, MessageBoxIcon.Error))
+        Catch ex As Exception
+            Log.Error($"Ocurrio un error. Error: {ex.Message}")
+        End Try
+
     End Sub
 
 
@@ -213,7 +224,7 @@ Public Class frmCatalogoProducto
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         Try
             If RegOAct = 1 Then
-
+                Log.Information("Iniciando el registro de un nuevo producto")
                 If Trim(txtdesc.Text) = "" Then
                     MsgBox("Todos los campos son obligatorios", MsgBoxStyle.Information, "Faltan datos")
                 Else
@@ -250,7 +261,7 @@ Public Class frmCatalogoProducto
                 RegOAct = 0
             Else
                 If MessageBox.Show("¿Desea guardar los cambios de este registro?", "Guardar cambios", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
-
+                    Log.Information("Iniciando la actualización de un producto")
                     Try
                         IAProducto("ACTUALIZAR")
                     Catch ex As Exception
@@ -327,7 +338,7 @@ Public Class frmCatalogoProducto
         Try
             txtutilidad.Text = Val(txtprecio.Text) - Val(txtcosto.Text)
         Catch ex As Exception
-
+            Log.Error($"Ocurrió un error. Error: {ex.Message}")
         End Try
     End Sub
 
@@ -372,7 +383,7 @@ Public Class frmCatalogoProducto
         Try
             dv.RowFilter = String.Format("Convert(" & criterio & ", 'System.String') LIKE '%{0}%'", Trim(TextBox1.Text))
         Catch ex As Exception
-
+            Log.Error($"Ocurrió un error. Error: {ex.Message}")
         End Try
     End Sub
 
@@ -382,7 +393,7 @@ Public Class frmCatalogoProducto
             fila = DataGridView1.CurrentRow.Index
             getDatos()
         Catch ex As Exception
-
+            Log.Error($"Ocurrió un error. Error: {ex.Message}")
         End Try
     End Sub
 
