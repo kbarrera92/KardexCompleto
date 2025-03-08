@@ -1,5 +1,6 @@
 ﻿Imports System.Data.SqlClient
 Imports System.Globalization
+Imports Serilog
 
 Public Class frmCompra
 
@@ -213,8 +214,6 @@ Public Class frmCompra
     Private Sub btnregistrarc_Click(sender As Object, e As EventArgs) Handles btnregistrarc.Click
         If DataGridView2.Rows.Count = 0 Then
             MsgBox("No se ha agregado ningún producto", MsgBoxStyle.Exclamation, "Faltan datos")
-            'ElseIf String.IsNullOrWhiteSpace(txtcorrelativo.Text) Then
-            '    MsgBox("Debes presionar sobre el botón Nueva Venta", MsgBoxStyle.Exclamation, "Faltan datos")
         Else
             'crear la datatable
             table = New DataTable()
@@ -251,12 +250,7 @@ Public Class frmCompra
                 DataGridView2.Rows.Clear()
                 'actualizarCompra()
             Catch ex As Exception
-                Dim params(3) As String
-                params(0) = nameUsuarioActual
-                params(1) = Environment.MachineName & " - " & Environment.UserName
-                params(2) = "Error al grabar compra: " & ex.Message & ", desde: " & ConsultaParametro("sucursalFisica")
-
-                GrabaBitacora(params, grabaBitacoraSp)
+                Log.Error($"Ocurrió un error. Error: {ex.Message}")
             End Try
 
         End If
@@ -284,20 +278,47 @@ Public Class frmCompra
                 .AddWithValue("detalles", table)
             End With
 
+            Dim paramtodb As String = String.Empty
+            For Each param As SqlParameter In cmd.Parameters
+                If TypeOf param.Value Is DataTable Then
+                    ' Si el parámetro es un DataTable, convertirlo a string
+                    Dim dt As DataTable = DirectCast(param.Value, DataTable)
+                    paramtodb &= param.ParameterName & "= [DataTable] " & vbCrLf
+
+                    ' Convertir las filas y columnas del DataTable en texto
+                    For Each row As DataRow In dt.Rows
+                        paramtodb &= "  - "
+                        For Each col As DataColumn In dt.Columns
+                            paramtodb &= $"{col.ColumnName}: {row(col)} | "
+                        Next
+                        paramtodb &= vbCrLf
+                    Next
+                Else
+                    paramtodb &= param.ParameterName & "=" & If(param.Value, """") & vbCrLf
+                End If
+            Next
+            Log.Information($"Parametros enviados al sp: {vbCrLf}{paramtodb}")
+
             openConnection()
             cmd.ExecuteNonQuery()
             closeConnection()
             MsgBox("Se grabo correctamente el registro", MsgBoxStyle.Information, "Éxito")
+            Log.Information("Se grabo correctamente la compra")
         Catch ex As Exception
+            Log.Error($"Ocurrió un error. Error: {ex.Message}")
             MessageBox.Show($"Hubo un error al grabar la compra. {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
 
     Private Sub txtbuscapro_TextChanged(sender As Object, e As EventArgs) Handles txtbuscapro.TextChanged
         Dim filt As String
+        Try
+            filt = String.Format("dProducto like '%{0}%' Or presentacion like '%{0}%' Or Convert(idProducto,'System.String') like '{0}%'", txtbuscapro.Text)
+            dv.RowFilter = filt
+        Catch ex As Exception
+            Log.Error($"Ocurrió un error. Error: {ex.Message}")
+        End Try
 
-        filt = String.Format("dProducto like '%{0}%' Or presentacion like '%{0}%' Or Convert(idProducto,'System.String') like '{0}%'", txtbuscapro.Text)
-        dv.RowFilter = filt
     End Sub
 
     Private Sub txtbuscapro_KeyDown(sender As Object, e As KeyEventArgs) Handles txtbuscapro.KeyDown
@@ -343,21 +364,6 @@ Public Class frmCompra
 
 
     Private Sub btnDescartar_Click(sender As Object, e As EventArgs) Handles btnDescartar.Click
-        'Dim sqlDescartar As String = "DELETE FROM COMPRA WHERE inCompra = @nc"
-        'Dim cmd As SqlCommand
-
-        'Try
-        '    cmd = New SqlCommand(sqlDescartar, conn)
-
-        '    cmd.Parameters.AddWithValue("nc", getCorrelativoTrasiego(correlativo))
-
-        '    openConnection()
-        '    cmd.ExecuteNonQuery()
-        '    closeConnection()
-        '    MsgBox("Compra descartada", MsgBoxStyle.Exclamation, "Descartada")
-        'Catch ex As Exception
-        '    MsgBox("Ha ocurrido un error", MsgBoxStyle.Critical, "Error")
-        'End Try
         If MessageBox.Show("¿Desea descartar esta compra y salir de esta pantalla?", "Descartar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
             Close()
         End If
@@ -375,7 +381,7 @@ Public Class frmCompra
                 formaPago = CInt(cmbFP.SelectedValue.ToString)
                 txtFechaPago.Clear()
             Catch ex As Exception
-
+                Log.Error($"Ocurrió un error. Error: {ex.Message}")
             End Try
 
         End If

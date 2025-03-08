@@ -3,6 +3,7 @@ Imports System.Configuration
 Imports System.ComponentModel
 Imports System.IO
 Imports System.Globalization
+Imports Serilog
 
 Module FVPublicas
 
@@ -142,9 +143,9 @@ Module FVPublicas
         'cmd.Parameters.AddWithValue("total", CDbl(frmAjuste.txttotal.Text))
         cmd.Parameters.AddWithValue("total", 0.0)
         cmd.Parameters.AddWithValue("concep", Trim(frmAjustes2.txtconcep.Text))
-        cmd.Parameters.AddWithValue("suc", CInt(frmAjustes2.ComboBox2.SelectedValue.ToString))
+        cmd.Parameters.AddWithValue("suc", CInt(frmAjustes2.ComboBoxSucursal.SelectedValue.ToString))
 
-        cmd.Parameters.AddWithValue("tipo", CInt(frmAjustes2.ComboBox1.SelectedValue.ToString))
+        cmd.Parameters.AddWithValue("tipo", CInt(frmAjustes2.ComboBoxTipoAjuste.SelectedValue.ToString))
 
 
         Try
@@ -505,7 +506,8 @@ Module FVPublicas
             dgv.DataSource = dv
 
         Catch ex As Exception
-            MsgBox("Error al cargar los datos" & vbCrLf & "Error: " & ex.ToString)
+            Log.Error($"Ocurrió un error. Error: {ex.Message}")
+            MsgBox("Error al cargar los datos.", MsgBoxStyle.Critical, "Error")
         Finally
             closeConnection()
         End Try
