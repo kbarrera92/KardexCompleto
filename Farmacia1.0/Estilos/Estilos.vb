@@ -93,7 +93,15 @@ Public Class Estilos
 
                 If TypeOf ctrl Is ToolStrip Then
                     Dim toolStrip As ToolStrip = CType(ctrl, ToolStrip)
-                    toolStrip.BackColor = Color.DarkBlue
+                    Dim estilos As String() = If(toolStrip.Tag IsNot Nothing, toolStrip.Tag.ToString().Split(","c), New String() {})
+                    For Each estilo As String In estilos
+                        Select Case estilo.ToUpper()
+                            Case "G"
+                                toolStrip.BackColor = Color.DarkBlue
+
+                        End Select
+                    Next
+
                 End If
 
                 If TypeOf ctrl Is Panel Then

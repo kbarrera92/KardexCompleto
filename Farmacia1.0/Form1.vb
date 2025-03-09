@@ -63,6 +63,8 @@ Public Class Form1
 
                     End If
                 End If
+                FormMenuNew.StatusStripPrincipal.BackColor = Color.LimeGreen
+                FormMenuNew.ToolStripStatusLabelConnectionStatus.Text = $"Estado de la conexión: conectado, Usuario: {nameUsuarioActual}, Sucursal: {nameSucActual}"
             Else
                 MsgBox("No se encontraron coincidencias", MsgBoxStyle.Critical, "Error en los datos")
             End If
