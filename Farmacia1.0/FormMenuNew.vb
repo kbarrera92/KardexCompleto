@@ -3,18 +3,22 @@
 Public Class FormMenuNew
     Private Sub ToolStripButtonLogin_Click(sender As Object, e As EventArgs) Handles ToolStripButtonLogin.Click
         If ToolStripButtonLogin.Text.ToUpper() = "INICIAR SESIÓN" Then
-            If ConsultaParametro("esAdmin") = "S" Then
-                frmElegirSucursal.Show()
-            Else
-                Form1.Show()
-            End If
+            frmElegirSucursal.Show()
         Else
+            For Each frm As Form In Application.OpenForms.Cast(Of Form).ToList()
+                If frm IsNot Me Then
+                    frm.Close()
+                End If
+            Next
+
             ToolStripButtonLogin.Text = "Iniciar sesión"
             rolUsuarioActual = Nothing
             nameUsuarioActual = ""
             nombreRol = ""
             usuarioActual = 0
             sucActual = 0
+            StatusStripPrincipal.BackColor = Color.Salmon
+            ToolStripStatusLabelConnectionStatus.Text = "Estado de la conexión: "
         End If
     End Sub
 
@@ -200,6 +204,7 @@ Public Class FormMenuNew
     Private Sub FormMenuNew_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Estilos.AplicarEstilos(Me)
         Estilos.AplicarEstilosToolStrip(ToolStrip1)
+        ToolStripStatusLabelConnectionStatus.Text &= "desconectado"
     End Sub
 
     Private Sub ReporteDeUtilidadToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReporteDeUtilidadToolStripMenuItem.Click
