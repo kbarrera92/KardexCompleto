@@ -1,4 +1,4 @@
-USE [farmaciahorro_ispro2]
+USE [db_ab10ba_kbarreradev]
 GO
 
 /****** Object:  Table [dbo].[PRODUCTO]    Script Date: 18/02/2025 11:09:44 a. m. ******/
@@ -44,9 +44,6 @@ GO
 
 ALTER TABLE [dbo].[PRODUCTOS]  WITH CHECK ADD  CONSTRAINT [FK_PRODUCTOS_ESTANTERIA] FOREIGN KEY([estanteria])
 REFERENCES [dbo].[ESTANTERIA] ([idEstanteria])
-GO
-
-ALTER TABLE [dbo].[PRODUCTOS] CHECK CONSTRAINT [FK_PRODUCTOS_ESTANTERIA]
 GO
 
 ALTER TABLE [dbo].[PRODUCTOS]  WITH CHECK ADD  CONSTRAINT [FK_PRODUCTOS_PROVEEDOR] FOREIGN KEY([proveedor])

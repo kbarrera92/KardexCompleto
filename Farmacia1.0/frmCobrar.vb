@@ -37,7 +37,7 @@ Public Class frmCobrar
             cmd.ExecuteNonQuery()
             rc = CInt(cmd.Parameters("@rc").Value)
             msg = cmd.Parameters("@MSG").Value.ToString()
-            nventa = CInt(cmd.Parameters("@nVenta").Value)
+            nventa = CInt(If(cmd.Parameters("@nVenta").Value, 0))
             MessageBox.Show(msg, If(rc = 0, "Éxito", "Error"), MessageBoxButtons.OK, If(rc = 0, MessageBoxIcon.Information, MessageBoxIcon.Error))
             closeConnection()
             ImprimeTicket(nventa)

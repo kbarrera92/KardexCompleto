@@ -133,6 +133,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="Controles\TarjetaVentasDia.Designer.vb">
+      <DependentUpon>TarjetaVentasDia.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\TarjetaVentasDia.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="dsReportes.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -534,6 +540,9 @@
     <Compile Include="Utils\ModuleUtils.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Controles\TarjetaVentasDia.resx">
+      <DependentUpon>TarjetaVentasDia.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
     </EmbeddedResource>

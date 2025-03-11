@@ -87,7 +87,7 @@ Public Class FormCerrarCaja
             cmd.ExecuteNonQuery()
             rc = CInt(cmd.Parameters("@rc").Value)
             msg = cmd.Parameters("@MSG").Value.ToString()
-            inicial = CDec(cmd.Parameters("@saldoinicial").Value.ToString())
+            inicial = CDec(If(IsDBNull(cmd.Parameters("@saldoinicial").Value), 0, cmd.Parameters("@saldoinicial").Value.ToString()))
             dif = CDec(If(IsDBNull(cmd.Parameters("@diferencia").Value), 0, cmd.Parameters("@diferencia").Value.ToString()))
             totalfisico = CDec(If(IsDBNull(cmd.Parameters("@totalfisico").Value), 0, cmd.Parameters("@totalfisico").Value))
             totalsistema = CDec(If(IsDBNull(cmd.Parameters("@totalsistema").Value), 0, cmd.Parameters("@totalsistema").Value))

@@ -34,8 +34,7 @@ Public Class frmCatalogoProducto
         Try
 
             txtcod.Text = DataGridView1.Rows(fila).Cells(0).Value
-            txtdesc.Text = DataGridView1.Rows(fila).Cells(1).Value _
-                & " " & DataGridView1.Rows(fila).Cells(3).Value & " " & DataGridView1.Rows(fila).Cells(9).Value
+            txtdesc.Text = DataGridView1.Rows(fila).Cells(1).Value
             txtcomp.Text = DataGridView1.Rows(fila).Cells(2).Value
 
             txtpres.Text = DataGridView1.Rows(fila).Cells(3).Value

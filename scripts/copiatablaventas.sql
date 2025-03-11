@@ -1,4 +1,4 @@
-USE farmaciahorro_ispro2
+USE db_ab10ba_kbarreradev
 GO
 
 BEGIN TRAN MEJORAVENTA
