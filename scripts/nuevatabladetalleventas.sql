@@ -1,4 +1,4 @@
-USE [farmaciahorro_ispro2]
+USE db_ab10ba_kbarreradev
 GO
 
 /****** Object:  Table [dbo].[DETALLEVENTA]    Script Date: 28/02/2025 11:21:51 a. m. ******/

@@ -1,4 +1,6 @@
 ﻿Imports System.Data.SqlClient
+Imports Serilog
+
 Public Class frmVerVentas
 
     Dim sql As String = "SELECT idSucursal, nombreSuc FROM SUCURSAL"
@@ -260,7 +262,7 @@ Public Class frmVerVentas
 
             End If
         End If
-        
+
     End Sub
 
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
@@ -301,23 +303,58 @@ Public Class frmVerVentas
         End If
     End Sub
 
-    
+
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         If MessageBox.Show("¿Desea eliminar este registro?" & vbCrLf & "Se eliminarán los datos asociados a él.", "Eliminando", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
-            Dim sqlDelete As String = "DELETE FROM VENTA WHERE nVenta = @nv"
-            Dim cmd As SqlCommand
             Try
-                cmd = New SqlCommand(sqlDelete, conn)
-
-                cmd.Parameters.AddWithValue("nv", CInt(DataGridView1.CurrentRow.Cells(0).Value))
-
-                openConnection()
-                cmd.ExecuteNonQuery()
-                closeConnection()
+                EliminaVenta()
                 MsgBox("Registro eliminado exitosamente", MsgBoxStyle.Information, "Eliminado")
             Catch ex As Exception
-                MsgBox(ex.Message)
+                Log.Error($"Ocurrió un error. Error: {ex.Message}")
+                MsgBox("Ocurrió un error. Revise el log del programa", MsgBoxStyle.Critical, "Error")
             End Try
         End If
+    End Sub
+
+    Private Sub EliminaVenta()
+        Try
+            Dim parametros As New List(Of SqlParameter) From {
+                New SqlParameter("@idVenta", SqlDbType.Int) With {.Value = Convert.ToInt32(DataGridView1.CurrentRow.Cells(0).Value)},
+                New SqlParameter("@nameSucursal", SqlDbType.VarChar, 40) With {.Value = Convert.ToString(DataGridView1.CurrentRow.Cells(5).Value)},
+                New SqlParameter("@message", SqlDbType.VarChar, 200) With {.Direction = ParameterDirection.Output},
+                New SqlParameter("@returnValue", SqlDbType.Int) With {.Direction = ParameterDirection.ReturnValue}
+            }
+
+            Dim paramtodb As String = String.Empty
+            For Each param As SqlParameter In parametros
+                If TypeOf param.Value Is DataTable Then
+                    ' Si el parámetro es un DataTable, convertirlo a string
+                    Dim dt As DataTable = DirectCast(param.Value, DataTable)
+                    paramtodb &= param.ParameterName & "= [DataTable] " & vbCrLf
+
+                    ' Convertir las filas y columnas del DataTable en texto
+                    For Each row As DataRow In dt.Rows
+                        paramtodb &= "  - "
+                        For Each col As DataColumn In dt.Columns
+                            paramtodb &= $"{col.ColumnName}: {row(col)} | "
+                        Next
+                        paramtodb &= vbCrLf
+                    Next
+                Else
+                    paramtodb &= param.ParameterName & "=" & If(param.Value, """") & vbCrLf
+                End If
+            Next
+            Log.Information($"Parametros enviados al sp: {vbCrLf}{paramtodb}")
+
+            Dim resultado = EjecutarStoredProcedureMultiple("sp_eliminaVenta", parametros)
+
+            Dim codigoRetorno As Integer = Convert.ToInt32(parametros.Find(Function(p) p.ParameterName = "@returnValue").Value)
+            Dim mensajeSalida As String = parametros.Find(Function(p) p.ParameterName = "@message").Value.ToString()
+            MessageBox.Show(mensajeSalida, "Resultado", MessageBoxButtons.OK, IIf(codigoRetorno = 0, MessageBoxIcon.Information, MessageBoxIcon.Error))
+        Catch ex As Exception
+            Log.Error($"Ocurrio un error. Error: {ex.Message}, Trace: {ex.StackTrace}")
+            Throw
+        End Try
+
     End Sub
 End Class

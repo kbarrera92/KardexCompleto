@@ -1,4 +1,4 @@
-USE [farmaciahorro_ispro2]
+USE db_ab10ba_kbarreradev
 GO
 
 /****** Object:  Table [dbo].[VENTAS]    Script Date: 28/02/2025 11:16:46 a. m. ******/
@@ -9,7 +9,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [dbo].[VENTAS](
-	[nVenta] [int] IDENTITY(1,1) NOT NULL,
+	[nVenta] [int] NOT NULL,
 	[fechaVenta] [datetime] NULL,
 	[usuario] [int] NULL,
 	[total] [decimal](18, 2) NULL,
