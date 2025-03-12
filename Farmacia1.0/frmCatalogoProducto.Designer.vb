@@ -728,10 +728,13 @@ Partial Class frmCatalogoProducto
         '
         'Button6
         '
+        Me.Button6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button6.Location = New System.Drawing.Point(286, 384)
         Me.Button6.Name = "Button6"
         Me.Button6.Size = New System.Drawing.Size(35, 29)
         Me.Button6.TabIndex = 10
+        Me.Button6.Tag = "WB"
+        Me.Button6.Text = "BC"
         Me.Button6.UseVisualStyleBackColor = True
         '
         'txtstockmin

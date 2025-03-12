@@ -23,13 +23,8 @@ Partial Class FormMenuNew
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
-        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
-        Me.StatusStripPrincipal = New System.Windows.Forms.StatusStrip()
-        Me.ToolStripStatusLabelConnectionStatus = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
         Me.ToolStripButtonLogin = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripSplitButtonAdmin = New System.Windows.Forms.ToolStripSplitButton()
         Me.CatálogoDeProductosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProveedoresToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -56,11 +51,16 @@ Partial Class FormMenuNew
         Me.ToolStripMenuItem8 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator7 = New System.Windows.Forms.ToolStripSeparator()
         Me.ReporteDeUtilidadToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripSplitButton1 = New System.Windows.Forms.ToolStripSplitButton()
         Me.ToolStripMenuItem9 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem10 = New System.Windows.Forms.ToolStripMenuItem()
         Me.VerTurnosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
+        Me.StatusStripPrincipal = New System.Windows.Forms.StatusStrip()
+        Me.ToolStripStatusLabelConnectionStatus = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
         Me.ToolStrip1.SuspendLayout()
         Me.StatusStripPrincipal.SuspendLayout()
         Me.SuspendLayout()
@@ -78,48 +78,6 @@ Partial Class FormMenuNew
         Me.ToolStrip1.Tag = "G"
         Me.ToolStrip1.Text = "ToolStrip1"
         '
-        'ToolStripSeparator1
-        '
-        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 58)
-        '
-        'ToolStripSeparator5
-        '
-        Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
-        Me.ToolStripSeparator5.Size = New System.Drawing.Size(6, 58)
-        '
-        'ToolStripSeparator6
-        '
-        Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
-        Me.ToolStripSeparator6.Size = New System.Drawing.Size(6, 58)
-        '
-        'StatusStripPrincipal
-        '
-        Me.StatusStripPrincipal.BackColor = System.Drawing.Color.Salmon
-        Me.StatusStripPrincipal.Font = New System.Drawing.Font("Segoe UI", 12.0!)
-        Me.StatusStripPrincipal.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabelConnectionStatus})
-        Me.StatusStripPrincipal.Location = New System.Drawing.Point(0, 466)
-        Me.StatusStripPrincipal.Name = "StatusStripPrincipal"
-        Me.StatusStripPrincipal.Size = New System.Drawing.Size(1168, 26)
-        Me.StatusStripPrincipal.TabIndex = 1
-        Me.StatusStripPrincipal.Text = "StatusStrip1"
-        '
-        'ToolStripStatusLabelConnectionStatus
-        '
-        Me.ToolStripStatusLabelConnectionStatus.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold)
-        Me.ToolStripStatusLabelConnectionStatus.Name = "ToolStripStatusLabelConnectionStatus"
-        Me.ToolStripStatusLabelConnectionStatus.Size = New System.Drawing.Size(185, 21)
-        Me.ToolStripStatusLabelConnectionStatus.Text = "Estado de la conexión: "
-        '
-        'FlowLayoutPanel1
-        '
-        Me.FlowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.FlowLayoutPanel1.Location = New System.Drawing.Point(0, 58)
-        Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
-        Me.FlowLayoutPanel1.Padding = New System.Windows.Forms.Padding(10)
-        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(1168, 408)
-        Me.FlowLayoutPanel1.TabIndex = 2
-        '
         'ToolStripButtonLogin
         '
         Me.ToolStripButtonLogin.Image = Global.Farmacia1._0.My.Resources.Resources.Everaldo_Crystal_Clear_App_login_manager_32
@@ -128,6 +86,11 @@ Partial Class FormMenuNew
         Me.ToolStripButtonLogin.Size = New System.Drawing.Size(131, 55)
         Me.ToolStripButtonLogin.Text = "Iniciar sesión"
         Me.ToolStripButtonLogin.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 58)
         '
         'ToolStripSplitButtonAdmin
         '
@@ -294,6 +257,11 @@ Partial Class FormMenuNew
         Me.ReporteDeUtilidadToolStripMenuItem.Size = New System.Drawing.Size(253, 24)
         Me.ReporteDeUtilidadToolStripMenuItem.Text = "Reporte de utilidad"
         '
+        'ToolStripSeparator5
+        '
+        Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
+        Me.ToolStripSeparator5.Size = New System.Drawing.Size(6, 58)
+        '
         'ToolStripSplitButton1
         '
         Me.ToolStripSplitButton1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem9, Me.ToolStripMenuItem10, Me.VerTurnosToolStripMenuItem})
@@ -322,6 +290,11 @@ Partial Class FormMenuNew
         Me.VerTurnosToolStripMenuItem.Size = New System.Drawing.Size(163, 24)
         Me.VerTurnosToolStripMenuItem.Text = "Ver Turnos"
         '
+        'ToolStripSeparator6
+        '
+        Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
+        Me.ToolStripSeparator6.Size = New System.Drawing.Size(6, 58)
+        '
         'ToolStripButton1
         '
         Me.ToolStripButton1.Image = Global.Farmacia1._0.My.Resources.Resources.cash_register_icon
@@ -330,6 +303,33 @@ Partial Class FormMenuNew
         Me.ToolStripButton1.Size = New System.Drawing.Size(129, 55)
         Me.ToolStripButton1.Text = "Nueva venta"
         Me.ToolStripButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage
+        '
+        'StatusStripPrincipal
+        '
+        Me.StatusStripPrincipal.BackColor = System.Drawing.Color.Salmon
+        Me.StatusStripPrincipal.Font = New System.Drawing.Font("Segoe UI", 12.0!)
+        Me.StatusStripPrincipal.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabelConnectionStatus})
+        Me.StatusStripPrincipal.Location = New System.Drawing.Point(0, 466)
+        Me.StatusStripPrincipal.Name = "StatusStripPrincipal"
+        Me.StatusStripPrincipal.Size = New System.Drawing.Size(1168, 26)
+        Me.StatusStripPrincipal.TabIndex = 1
+        Me.StatusStripPrincipal.Text = "StatusStrip1"
+        '
+        'ToolStripStatusLabelConnectionStatus
+        '
+        Me.ToolStripStatusLabelConnectionStatus.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold)
+        Me.ToolStripStatusLabelConnectionStatus.Name = "ToolStripStatusLabelConnectionStatus"
+        Me.ToolStripStatusLabelConnectionStatus.Size = New System.Drawing.Size(185, 21)
+        Me.ToolStripStatusLabelConnectionStatus.Text = "Estado de la conexión: "
+        '
+        'FlowLayoutPanel1
+        '
+        Me.FlowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.FlowLayoutPanel1.Location = New System.Drawing.Point(0, 58)
+        Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
+        Me.FlowLayoutPanel1.Padding = New System.Windows.Forms.Padding(10)
+        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(1168, 408)
+        Me.FlowLayoutPanel1.TabIndex = 2
         '
         'FormMenuNew
         '
