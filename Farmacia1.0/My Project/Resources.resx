@@ -124,8 +124,8 @@
   <data name="arrow-back-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\arrow-back-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Reports-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Reports-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Developer-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Developer-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SEO-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SEO-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -136,23 +136,20 @@
   <data name="User-Group-icon (2)" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\User-Group-icon (2).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="login1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\login1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Zoom-icon1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Zoom-icon1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Zoom-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Zoom-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Success-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Success-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="list" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\list.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="User-Clients-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\User-Clients-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="cash-register-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\cash-register-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="farma" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\farma.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -166,11 +163,8 @@
   <data name="trash-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\trash-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="new-file-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\new-file-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Close-2-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Close-2-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Gartoon-Team-Gartoon-Apps-Gnome-power-statistics.32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Gartoon-Team-Gartoon-Apps-Gnome-power-statistics.32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Custom-Icon-Design-Pretty-Office-3-Sales-report.32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Custom-Icon-Design-Pretty-Office-3-Sales-report.32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -184,6 +178,9 @@
   <data name="login" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\login.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Pay-Per-Click-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Pay-Per-Click-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="traslado" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\traslado.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -193,11 +190,14 @@
   <data name="Everaldo-Crystal-Clear-App-login-manager.32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Everaldo-Crystal-Clear-App-login-manager.32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="ojo2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ojo2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Backup-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Backup-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Sales-report-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Sales-report-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="new-file-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\new-file-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="62850-magnifying-glass-tilted-left-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\62850-magnifying-glass-tilted-left-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -208,8 +208,11 @@
   <data name="lG1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\lG1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Developer-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Developer-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Custom-Icon-Design-Flatastic-8-Schedule.32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Custom-Icon-Design-Flatastic-8-Schedule.32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Close-2-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Close-2-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="trasiego" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\trasiego.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -217,14 +220,14 @@
   <data name="Actions-edit-clear-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Actions-edit-clear-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="surveys-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\surveys-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Save-icon (2)" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Save-icon (2).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Folder-Data-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Folder-Data-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="print-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\print-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Webalys-Kameleon.pics-Settings-2.32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Webalys-Kameleon.pics-Settings-2.32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -232,8 +235,8 @@
   <data name="User_login_man" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\User_login_man.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Pay-Per-Click-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Pay-Per-Click-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="cash-register-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cash-register-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Shop-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Shop-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -244,11 +247,11 @@
   <data name="lab-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\lab-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Button-Next-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Button-Next-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="brand-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\brand-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Gartoon-Team-Gartoon-Apps-Gnome-power-statistics.32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Gartoon-Team-Gartoon-Apps-Gnome-power-statistics.32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Cash-Register-icon (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Cash-Register-icon (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -256,28 +259,28 @@
   <data name="62950-key-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\62950-key-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="print-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\print-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="surveys-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\surveys-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="shelving" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\shelving.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Button-Next-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Button-Next-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Sales-report-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Sales-report-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="edit-validated-icon (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\edit-validated-icon (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="login1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\login1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Reports-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Reports-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Product-sale-report-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Product-sale-report-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ojo2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ojo2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Success-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Success-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Custom-Icon-Design-Flatastic-8-Schedule.32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Custom-Icon-Design-Flatastic-8-Schedule.32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="paymenticon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\paymenticon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

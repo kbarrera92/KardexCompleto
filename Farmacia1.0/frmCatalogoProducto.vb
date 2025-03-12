@@ -4,7 +4,7 @@ Imports Serilog
 Public Class frmCatalogoProducto
     Dim RegOAct As Integer = 0
     Dim ds As New DataSet
-    Dim correlativo As String = "SELECT IDENT_CURRENT ('PRODUCTO') AS Current_Identity"
+    Dim correlativo As String = "SELECT IDENT_CURRENT ('PRODUCTOS') AS Current_Identity"
     Dim sqlCat As String = "SELECT idCategoria, categoria FROM CATEGORIA"
     Dim sqlProv As String = "SELECT idProveedor, rzProveedor FROM PROVEEDOR"
     Dim fila As Integer
@@ -83,6 +83,13 @@ Public Class frmCatalogoProducto
 
     Public Sub IAProducto(ByVal accion As String)
         Try
+            Dim estanteria As Object
+            If Integer.TryParse(txtEstanteria.Text, New Integer()) Then
+                estanteria = Integer.Parse(txtEstanteria.Text)
+            Else
+                estanteria = DBNull.Value
+            End If
+
             Dim parametros As New List(Of SqlParameter) From {
                 New SqlParameter("@accion", SqlDbType.VarChar, 10) With {.Value = accion},
                 New SqlParameter("@dProducto", SqlDbType.VarChar, 150) With {.Value = txtdesc.Text},
@@ -98,16 +105,16 @@ Public Class frmCatalogoProducto
                 New SqlParameter("@laboratorio", SqlDbType.VarChar, 100) With {.Value = txtlab.Text},
                 New SqlParameter("@precio", SqlDbType.Decimal) With {.Value = Convert.ToDecimal(txtprecio.Text)},
                 New SqlParameter("@costo", SqlDbType.Decimal) With {.Value = Convert.ToDecimal(txtcosto.Text)},
-                New SqlParameter("@fechaRegistro", SqlDbType.Date) With {.Value = DateTime.Now},
-                New SqlParameter("@estanteria", SqlDbType.Int) With {.Value = DBNull.Value},
+                New SqlParameter("@fechaRegistro", SqlDbType.Date) With {.Value = Date.Now},
+                New SqlParameter("@estanteria", SqlDbType.Int) With {.Value = estanteria},
                 New SqlParameter("@barcode", SqlDbType.VarChar, 25) With {.Value = txtbarcode.Text},
-                New SqlParameter("@stockmin", SqlDbType.Int) With {.Value = Convert.ToInt32(txtstockmin.Text)},
+                New SqlParameter("@stockmin", SqlDbType.Int) With {.Value = Convert.ToInt32(If(String.IsNullOrWhiteSpace(txtstockmin.Text), 0, txtstockmin.Text))},
                 New SqlParameter("@estado", SqlDbType.Bit) With {.Value = 1},
                 New SqlParameter("@msg", SqlDbType.VarChar, 200) With {.Direction = ParameterDirection.Output},
                 New SqlParameter("@returnValue", SqlDbType.Int) With {.Direction = ParameterDirection.ReturnValue}
             }
 
-            Dim parametroExtra As New SqlParameter("@idProducto", SqlDbType.Int) With {.Value = Convert.ToInt32(txtcod.Text)}
+            Dim parametroExtra As New SqlParameter("@idProducto", SqlDbType.Int) With {.Value = If(Integer.TryParse(txtcod.Text, New Integer()), Convert.ToInt32(txtcod.Text), DBNull.Value)}
             If accion = "ACTUALIZAR" Then
                 parametros.Add(parametroExtra)
             End If
@@ -191,7 +198,7 @@ Public Class frmCatalogoProducto
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Try
-            txtcod.Text = getCorrelativoTrasiego(correlativo) + 1
+            txtcod.Clear()
             txtdesc.Clear()
             txtcomp.Clear()
             DateTimePicker1.Value = Today

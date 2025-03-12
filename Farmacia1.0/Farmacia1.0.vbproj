@@ -960,6 +960,7 @@
   <ItemGroup>
     <Content Include="Aha-Soft-Large-Home-Drugstore.ico" />
     <Content Include="Paomedia-Small-N-Flat-Shop %281%29.ico" />
+    <None Include="Resources\paymenticon.png" />
     <None Include="Resources\Custom-Icon-Design-Flatastic-8-Schedule.32.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

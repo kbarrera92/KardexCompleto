@@ -11,6 +11,8 @@ Public Class FormMenuNew
                 End If
             Next
 
+            Me.FlowLayoutPanel1.Controls.Clear()
+
             ToolStripButtonLogin.Text = "Iniciar sesión"
             rolUsuarioActual = Nothing
             nameUsuarioActual = ""
@@ -205,7 +207,10 @@ Public Class FormMenuNew
         Estilos.AplicarEstilos(Me)
         Estilos.AplicarEstilosToolStrip(ToolStrip1)
         ToolStripStatusLabelConnectionStatus.Text &= "desconectado"
+
     End Sub
+
+
 
     Private Sub ReporteDeUtilidadToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReporteDeUtilidadToolStripMenuItem.Click
         If nombreRol <> "ADMINISTRADOR" Then

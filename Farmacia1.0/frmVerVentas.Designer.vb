@@ -277,6 +277,7 @@ Partial Class frmVerVentas
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ShapeContainer1)
         Me.Name = "frmVerVentas"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Reporte de ventas"
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
@@ -287,8 +288,6 @@ Partial Class frmVerVentas
     Friend WithEvents ComboBox1 As System.Windows.Forms.ComboBox
     Friend WithEvents ComboBox2 As System.Windows.Forms.ComboBox
     Friend WithEvents Label2 As System.Windows.Forms.Label
-    Friend WithEvents ShapeContainer1 As Microsoft.VisualBasic.PowerPacks.ShapeContainer
-    Friend WithEvents LineShape1 As Microsoft.VisualBasic.PowerPacks.LineShape
     Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
     Friend WithEvents nventa As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents fecha As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -307,4 +306,6 @@ Partial Class frmVerVentas
     Friend WithEvents Button5 As System.Windows.Forms.Button
     Friend WithEvents Button6 As System.Windows.Forms.Button
     Friend WithEvents Button1 As System.Windows.Forms.Button
+    Private WithEvents ShapeContainer1 As PowerPacks.ShapeContainer
+    Private WithEvents LineShape1 As PowerPacks.LineShape
 End Class
