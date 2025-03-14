@@ -2,15 +2,7 @@
 Imports Serilog
 
 Public Class Form1
-    Private Sub AbrirFormularioDetalles()
-        If rolUsuarioActual = Nothing Then
-            MessageBox.Show("No tiene permisos para este módulo", "No tiene permisos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-            Return
-        Else
-            frmVerVentas.Show()
-        End If
 
-    End Sub
 
     Sub login()
         Dim reader As SqlDataReader
@@ -20,12 +12,6 @@ Public Class Form1
         End If
 
         Try
-            Dim tarjeta As New TarjetaVentasDia()
-            tarjeta.AccionAlHacerClick = Sub()
-                                             AbrirFormularioDetalles()
-                                         End Sub
-            tarjeta.CargarVentas($"SELECT SUM(total) FROM VENTAS WHERE CONVERT(DATE, fechaVenta) = CONVERT(DATE, GETDATE()) AND idSucursal = {sucActual}", "Ventas Diarias")
-
             openConnection()
             Dim cmd As New SqlCommand()
             With cmd
@@ -45,14 +31,13 @@ Public Class Form1
                 usuarioActual = Val(reader(0).ToString)
                 nombreRol = reader(3).ToString
 
-
-                FormMenuNew.FlowLayoutPanel1.Controls.Add(tarjeta)
-
                 If ((reader(3).ToString() = "ADMINISTRADOR" Or reader(3).ToString() = "GERENTE")) Then
                     MsgBox("Bienvenido al sistema: " & nameUsuarioActual.ToString, MsgBoxStyle.Information, ConsultaParametro("nombreEmpresa"))
                     reader.Close()
                     Me.Close()
                     FormMenuNew.ToolStripButtonLogin.Text = "Cerrar sesión"
+
+                    DibujaTarjetasResumen()
 
                     Log.Information(Environment.MachineName & " - " & Environment.UserName)
                     Log.Information("Inicio de sesión: " & nameUsuarioActual & ", desde: " & ConsultaParametro("sucursalFisica"))

@@ -147,6 +147,8 @@
     <Compile Include="dsReportes.vb">
       <DependentUpon>dsReportes.xsd</DependentUpon>
     </Compile>
+    <Compile Include="EgresosTools\Egreso.vb" />
+    <Compile Include="EgresosTools\EgresoValidator.vb" />
     <Compile Include="Estilos\Estilos.vb" />
     <Compile Include="Form1.designer.vb">
       <DependentUpon>Form1.vb</DependentUpon>
@@ -164,6 +166,12 @@
       <DependentUpon>FormAbrirCaja.vb</DependentUpon>
     </Compile>
     <Compile Include="FormAbrirCaja.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEgresos.Designer.vb">
+      <DependentUpon>FormEgresos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormEgresos.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormMenuNew.Designer.vb">
@@ -551,6 +559,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormAbrirCaja.resx">
       <DependentUpon>FormAbrirCaja.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEgresos.resx">
+      <DependentUpon>FormEgresos.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormMenuNew.resx">
       <DependentUpon>FormMenuNew.vb</DependentUpon>

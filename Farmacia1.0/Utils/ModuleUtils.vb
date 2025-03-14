@@ -17,6 +17,39 @@ Module ModuleUtils
         Return retValue
     End Function
 
+    Private Sub AbrirFormularioDetalles(formulario As Form)
+        If rolUsuarioActual = Nothing Then
+            MessageBox.Show("No tiene permisos para este módulo", "No tiene permisos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Return
+        Else
+            formulario.Show()
+        End If
+    End Sub
+
+    Public Sub DibujaTarjetasResumen()
+        Try
+            FormMenuNew.FlowLayoutPanel1.Controls.Clear()
+
+            Dim tarjeta As New TarjetaVentasDia()
+            tarjeta.AccionAlHacerClick = Sub()
+                                             AbrirFormularioDetalles(frmCorteCaja)
+                                         End Sub
+            tarjeta.CargarVentas($"SELECT SUM(total) FROM VENTAS WHERE CONVERT(DATE, fechaVenta) = CONVERT(DATE, GETDATE()) AND idSucursal = {sucActual}", "Ventas Diarias")
+
+            Dim tarjetaEgresos As New TarjetaVentasDia()
+            tarjetaEgresos.AccionAlHacerClick = Sub()
+                                                    AbrirFormularioDetalles(FormEgresos)
+                                                End Sub
+            tarjetaEgresos.CargarVentas($"SELECT SUM(total) FROM EGRESOS WHERE CONVERT(DATE, fechaEgreso) = CONVERT(DATE, GETDATE()) AND sucursal = {sucActual} and estado = 1", "Egresos del día")
+
+            FormMenuNew.FlowLayoutPanel1.Controls.Add(tarjeta)
+            FormMenuNew.FlowLayoutPanel1.Controls.Add(tarjetaEgresos)
+        Catch ex As Exception
+            Serilog.Log.Error($"Ocurrió un error. Error: {ex.Message}")
+        End Try
+
+    End Sub
+
     Public Sub GrabaBitacora(ByVal params As String(), ByVal sp As String)
         Dim cmd As SqlCommand
         Try
