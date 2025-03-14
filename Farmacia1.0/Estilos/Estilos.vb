@@ -50,12 +50,7 @@ Public Class Estilos
                                 label.ForeColor = Color.DarkBlue
                         End Select
                     Next
-                    'Dim tagValue As String = If(label.Tag IsNot Nothing, label.Tag.ToString(), "")
 
-                    'If tagValue <> "PS" Then
-                    '    label.Font = New Font("Segoe UI", 10, FontStyle.Bold)
-                    '    label.ForeColor = Color.DarkBlue
-                    'End If
                 End If
 
                 If TypeOf ctrl Is Button Then
