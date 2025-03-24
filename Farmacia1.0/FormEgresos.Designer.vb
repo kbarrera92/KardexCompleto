@@ -23,6 +23,8 @@ Partial Class FormEgresos
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.ButtonLimpiar = New System.Windows.Forms.Button()
         Me.ButtonGuardar = New System.Windows.Forms.Button()
         Me.TextBoxUsuarioRegistra = New System.Windows.Forms.TextBox()
         Me.TextBoxTotalEgreso = New System.Windows.Forms.TextBox()
@@ -37,9 +39,8 @@ Partial Class FormEgresos
         Me.DateTimePickerFechaEgreso = New System.Windows.Forms.DateTimePicker()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.TextBoxSumatoria = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.DataGridViewEgresos = New System.Windows.Forms.DataGridView()
         Me.idEgreso = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -49,17 +50,16 @@ Partial Class FormEgresos
         Me.totalEgreso = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.usuarioRegistraEgreso = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.sucursalEgreso = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ButtonLimpiar = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.DateTimePickerFiltro = New System.Windows.Forms.DateTimePicker()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
         CType(Me.DataGridViewEgresos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Panel1
         '
-        Me.Panel1.Controls.Add(Me.Button1)
         Me.Panel1.Controls.Add(Me.ButtonLimpiar)
         Me.Panel1.Controls.Add(Me.ButtonGuardar)
         Me.Panel1.Controls.Add(Me.TextBoxUsuarioRegistra)
@@ -79,6 +79,24 @@ Partial Class FormEgresos
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(903, 174)
         Me.Panel1.TabIndex = 0
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(816, 53)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.TabIndex = 16
+        Me.Button1.Text = "Descartar"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'ButtonLimpiar
+        '
+        Me.ButtonLimpiar.Location = New System.Drawing.Point(501, 139)
+        Me.ButtonLimpiar.Name = "ButtonLimpiar"
+        Me.ButtonLimpiar.Size = New System.Drawing.Size(75, 23)
+        Me.ButtonLimpiar.TabIndex = 15
+        Me.ButtonLimpiar.Text = "Limpiar"
+        Me.ButtonLimpiar.UseVisualStyleBackColor = True
         '
         'ButtonGuardar
         '
@@ -116,6 +134,7 @@ Partial Class FormEgresos
         'ComboBoxSucursal
         '
         Me.ComboBoxSucursal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBoxSucursal.Enabled = False
         Me.ComboBoxSucursal.FormattingEnabled = True
         Me.ComboBoxSucursal.Location = New System.Drawing.Point(501, 112)
         Me.ComboBoxSucursal.Name = "ComboBoxSucursal"
@@ -193,10 +212,9 @@ Partial Class FormEgresos
         '
         'Panel2
         '
-        Me.Panel2.Controls.Add(Me.TextBox1)
+        Me.Panel2.Controls.Add(Me.Button1)
+        Me.Panel2.Controls.Add(Me.TextBoxSumatoria)
         Me.Panel2.Controls.Add(Me.Label7)
-        Me.Panel2.Controls.Add(Me.GroupBox3)
-        Me.Panel2.Controls.Add(Me.GroupBox2)
         Me.Panel2.Controls.Add(Me.GroupBox1)
         Me.Panel2.Controls.Add(Me.DataGridViewEgresos)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
@@ -204,6 +222,17 @@ Partial Class FormEgresos
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(903, 381)
         Me.Panel2.TabIndex = 1
+        '
+        'TextBoxSumatoria
+        '
+        Me.TextBoxSumatoria.BackColor = System.Drawing.Color.DarkBlue
+        Me.TextBoxSumatoria.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBoxSumatoria.ForeColor = System.Drawing.Color.White
+        Me.TextBoxSumatoria.Location = New System.Drawing.Point(682, 323)
+        Me.TextBoxSumatoria.Name = "TextBoxSumatoria"
+        Me.TextBoxSumatoria.Size = New System.Drawing.Size(208, 38)
+        Me.TextBoxSumatoria.TabIndex = 6
+        Me.TextBoxSumatoria.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label7
         '
@@ -215,38 +244,16 @@ Partial Class FormEgresos
         Me.Label7.TabIndex = 5
         Me.Label7.Text = "Filtros:"
         '
-        'GroupBox3
-        '
-        Me.GroupBox3.BackColor = System.Drawing.Color.DarkBlue
-        Me.GroupBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox3.ForeColor = System.Drawing.Color.White
-        Me.GroupBox3.Location = New System.Drawing.Point(609, 23)
-        Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(281, 36)
-        Me.GroupBox3.TabIndex = 2
-        Me.GroupBox3.TabStop = False
-        Me.GroupBox3.Text = "Descripción"
-        '
-        'GroupBox2
-        '
-        Me.GroupBox2.BackColor = System.Drawing.Color.DarkBlue
-        Me.GroupBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox2.ForeColor = System.Drawing.Color.White
-        Me.GroupBox2.Location = New System.Drawing.Point(310, 23)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(281, 36)
-        Me.GroupBox2.TabIndex = 2
-        Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Categoría"
-        '
         'GroupBox1
         '
         Me.GroupBox1.BackColor = System.Drawing.Color.DarkBlue
+        Me.GroupBox1.Controls.Add(Me.Button2)
+        Me.GroupBox1.Controls.Add(Me.DateTimePickerFiltro)
         Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox1.ForeColor = System.Drawing.Color.White
         Me.GroupBox1.Location = New System.Drawing.Point(11, 23)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(281, 36)
+        Me.GroupBox1.Size = New System.Drawing.Size(446, 53)
         Me.GroupBox1.TabIndex = 1
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Fecha"
@@ -258,10 +265,10 @@ Partial Class FormEgresos
         Me.DataGridViewEgresos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DataGridViewEgresos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridViewEgresos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.idEgreso, Me.fechaEgreso, Me.categoriaEgreso, Me.descripcionCategoriaEgreso, Me.totalEgreso, Me.usuarioRegistraEgreso, Me.sucursalEgreso})
-        Me.DataGridViewEgresos.Location = New System.Drawing.Point(11, 65)
+        Me.DataGridViewEgresos.Location = New System.Drawing.Point(11, 82)
         Me.DataGridViewEgresos.Name = "DataGridViewEgresos"
         Me.DataGridViewEgresos.ReadOnly = True
-        Me.DataGridViewEgresos.Size = New System.Drawing.Size(879, 257)
+        Me.DataGridViewEgresos.Size = New System.Drawing.Size(879, 240)
         Me.DataGridViewEgresos.TabIndex = 0
         '
         'idEgreso
@@ -306,34 +313,22 @@ Partial Class FormEgresos
         Me.sucursalEgreso.Name = "sucursalEgreso"
         Me.sucursalEgreso.ReadOnly = True
         '
-        'ButtonLimpiar
+        'DateTimePickerFiltro
         '
-        Me.ButtonLimpiar.Location = New System.Drawing.Point(501, 139)
-        Me.ButtonLimpiar.Name = "ButtonLimpiar"
-        Me.ButtonLimpiar.Size = New System.Drawing.Size(75, 23)
-        Me.ButtonLimpiar.TabIndex = 15
-        Me.ButtonLimpiar.Text = "Limpiar"
-        Me.ButtonLimpiar.UseVisualStyleBackColor = True
+        Me.DateTimePickerFiltro.Location = New System.Drawing.Point(9, 19)
+        Me.DateTimePickerFiltro.Name = "DateTimePickerFiltro"
+        Me.DateTimePickerFiltro.Size = New System.Drawing.Size(391, 20)
+        Me.DateTimePickerFiltro.TabIndex = 0
         '
-        'Button1
+        'Button2
         '
-        Me.Button1.Location = New System.Drawing.Point(682, 139)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
-        Me.Button1.TabIndex = 16
-        Me.Button1.Text = "Descartar"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
-        'TextBox1
-        '
-        Me.TextBox1.BackColor = System.Drawing.Color.DarkBlue
-        Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.ForeColor = System.Drawing.Color.White
-        Me.TextBox1.Location = New System.Drawing.Point(682, 323)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(208, 38)
-        Me.TextBox1.TabIndex = 6
-        Me.TextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.Button2.ForeColor = System.Drawing.Color.DarkBlue
+        Me.Button2.Location = New System.Drawing.Point(406, 19)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(24, 21)
+        Me.Button2.TabIndex = 1
+        Me.Button2.Text = "B"
+        Me.Button2.UseVisualStyleBackColor = True
         '
         'FormEgresos
         '
@@ -349,6 +344,7 @@ Partial Class FormEgresos
         Me.Panel1.PerformLayout()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
+        Me.GroupBox1.ResumeLayout(False)
         CType(Me.DataGridViewEgresos, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
@@ -369,8 +365,6 @@ Partial Class FormEgresos
     Friend WithEvents Panel2 As Panel
     Friend WithEvents DataGridViewEgresos As DataGridView
     Friend WithEvents Label7 As Label
-    Friend WithEvents GroupBox3 As GroupBox
-    Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents TextBoxUsuarioRegistra As TextBox
     Friend WithEvents ButtonGuardar As Button
@@ -383,5 +377,7 @@ Partial Class FormEgresos
     Friend WithEvents sucursalEgreso As DataGridViewTextBoxColumn
     Friend WithEvents ButtonLimpiar As Button
     Friend WithEvents Button1 As Button
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents TextBoxSumatoria As TextBox
+    Friend WithEvents Button2 As Button
+    Friend WithEvents DateTimePickerFiltro As DateTimePicker
 End Class
