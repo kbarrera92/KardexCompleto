@@ -17,6 +17,48 @@ Module ModuleUtils
         Return retValue
     End Function
 
+    ''' <summary>
+    ''' Calcula la suma de una columna numérica del DataGridView
+    ''' </summary>
+    ''' <param name="dgv">DataGridView que contiene los datos</param>
+    ''' <param name="nombreColumna">Nombre de la columna a sumar</param>
+    ''' <returns>La suma total de los valores de la columna</returns>
+    Public Function SumarColumnaDataGridView(dgv As DataGridView, nombreColumna As String) As Decimal
+        Dim total As Decimal = 0
+
+        Try
+            ' Verificar que el DataGridView tenga filas
+            If dgv Is Nothing OrElse dgv.Rows.Count = 0 Then
+                Return 0
+            End If
+
+            ' Verificar que la columna existe
+            If Not dgv.Columns.Contains(nombreColumna) Then
+                Throw New ArgumentException($"La columna '{nombreColumna}' no existe en el DataGridView")
+            End If
+
+            ' Recorrer todas las filas y sumar la columna especificada
+            For Each fila As DataGridViewRow In dgv.Rows
+                ' Ignorar la fila nueva que se muestra al final (si está presente)
+                If Not fila.IsNewRow Then
+                    ' Obtener el valor de la celda
+                    Dim valor = fila.Cells(nombreColumna).Value
+
+                    ' Verificar que no sea nulo y sea numérico
+                    If valor IsNot Nothing AndAlso IsNumeric(valor) Then
+                        total += Convert.ToDecimal(valor)
+                    End If
+                End If
+            Next
+
+            Return total
+        Catch ex As Exception
+            ' Manejar cualquier error que pueda ocurrir
+            MessageBox.Show($"Error al sumar la columna: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return 0
+        End Try
+    End Function
+
     Private Sub AbrirFormularioDetalles(formulario As Form)
         If rolUsuarioActual = Nothing Then
             MessageBox.Show("No tiene permisos para este módulo", "No tiene permisos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)

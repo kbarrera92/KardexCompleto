@@ -55,6 +55,11 @@ Public Class FormEgresos
 
     Private Sub FormEgresos_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
+            If nombreRol = "ADMINISTRADOR" Then
+                ComboBoxSucursal.Enabled = True
+            End If
+
+            TextBoxSumatoria.Text = SumarColumnaDataGridView(DataGridViewEgresos, "totalEgreso").ToString()
             ConfigurarControles()
             With DataGridViewEgresos
                 .EnableHeadersVisualStyles = False
@@ -95,13 +100,24 @@ Public Class FormEgresos
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles ButtonGuardar.Click
         Try
+            If MessageBox.Show("¿Desea grabar este registro?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.No Then
+                Return
+            End If
+
+            Dim sucursal As Integer
+            If nombreRol = "ADMINISTRADOR" Then
+                sucursal = If(ComboBoxSucursal.SelectedValue IsNot Nothing, Convert.ToInt32(ComboBoxSucursal.SelectedValue), 0)
+            Else
+                sucursal = sucActual
+            End If
+
             Dim gasto As New Egreso With {
             .Fecha = DateTimePickerFechaEgreso.Value,
             .IdCategoria = If(ComboBoxCategoria.SelectedValue IsNot Nothing, Convert.ToInt32(ComboBoxCategoria.SelectedValue), 0),
             .Descripcion = TextBoxDescripcion.Text,
             .Total = If(Decimal.TryParse(TextBoxTotalEgreso.Text, Nothing), Decimal.Parse(TextBoxTotalEgreso.Text), 0),
             .IdUsuario = TextBoxUsuarioRegistra.Text,
-            .IdSucursal = If(ComboBoxSucursal.SelectedValue IsNot Nothing, Convert.ToInt32(ComboBoxSucursal.SelectedValue), 0)
+            .IdSucursal = sucursal
             }
 
             Dim controles As New Dictionary(Of String, Control) From {
@@ -117,7 +133,10 @@ Public Class FormEgresos
                 ' Guardar en la base de datos
                 If GuardarGasto(gasto, "I") Then
                     LimpiarFormulario()
+                    ListarEgresos("L", DateTime.Now, sucActual)
+                    TextBoxSumatoria.Text = SumarColumnaDataGridView(DataGridViewEgresos, "totalEgreso").ToString()
                     DibujaTarjetasResumen()
+                    Me.BringToFront()
                 End If
             End If
         Catch ex As Exception
@@ -200,19 +219,19 @@ Public Class FormEgresos
             TextBoxDescripcion.Clear()
             TextBoxTotalEgreso.Clear()
             TextBoxUsuarioRegistra.Text = nameUsuarioActual
-            ListarEgresos("L")
+
         Catch ex As Exception
             Log.Error($"Ocurrió un error. Error: {ex.Message}")
         End Try
 
     End Sub
 
-    Private Sub ListarEgresos(opcion As String)
+    Private Sub ListarEgresos(opcion As String, fecha As DateTime, sucursal As Integer)
         Try
             Dim parametros As New List(Of SqlParameter) From {
                 New SqlParameter("@opcion", SqlDbType.Char) With {.Value = opcion},
-                New SqlParameter("@fechaEgreso", SqlDbType.DateTime) With {.Value = DateTimePickerFechaEgreso.Value},
-                New SqlParameter("@sucursal", SqlDbType.Int) With {.Value = sucActual}
+                New SqlParameter("@fechaEgreso", SqlDbType.DateTime) With {.Value = fecha},
+                New SqlParameter("@sucursal", SqlDbType.Int) With {.Value = sucursal}
             }
 
             Dim paramtodb As String = String.Empty
@@ -268,16 +287,25 @@ Public Class FormEgresos
     Private Sub ButtonLimpiar_Click(sender As Object, e As EventArgs) Handles ButtonLimpiar.Click
         Try
             LimpiarFormulario()
+            ListarEgresos("L", DateTime.Now, sucActual)
+            TextBoxSumatoria.Text = SumarColumnaDataGridView(DataGridViewEgresos, "totalEgreso").ToString()
         Catch ex As Exception
-
+            Log.Error($"Ocurrió un error. Error: {ex.Message}")
         End Try
     End Sub
 
     Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
         Try
+            If MessageBox.Show("¿Desea eliminar este registro?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.No Then
+                Return
+            End If
+
             If DataGridViewEgresos.CurrentRow IsNot Nothing AndAlso DataGridViewEgresos.CurrentRow.Index >= 0 Then
                 DescartarGasto("D")
+                ListarEgresos("L", DateTime.Now, sucActual)
+                TextBoxSumatoria.Text = SumarColumnaDataGridView(DataGridViewEgresos, "totalEgreso").ToString()
                 DibujaTarjetasResumen()
+                BringToFront()
             Else
                 MessageBox.Show("Debe seleccionar una fila para descartarla", "Faltan datos", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             End If
@@ -285,6 +313,26 @@ Public Class FormEgresos
             Log.Error($"Ocurrió un error. Error {ex.Message}")
         End Try
 
+
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        Try
+            Dim dv As DataView = TryCast(DataGridViewEgresos.DataSource, DataView)
+
+            If dv IsNot Nothing Then
+                Dim dtVacio As DataTable = dv.Table.Clone()
+                Dim dvVacio As New DataView(dtVacio)
+                DataGridViewEgresos.DataSource = dvVacio
+            Else
+                DataGridViewEgresos.Rows.Clear()
+            End If
+
+            ListarEgresos("L", DateTimePickerFiltro.Value, sucActual)
+            TextBoxSumatoria.Text = SumarColumnaDataGridView(DataGridViewEgresos, "totalEgreso").ToString()
+        Catch ex As Exception
+            Log.Error($"Ocurrió un error. Error: {ex.Message}")
+        End Try
 
     End Sub
 End Class

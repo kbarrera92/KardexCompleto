@@ -219,4 +219,13 @@ Public Class FormMenuNew
         End If
         FormReporteUtilidad.Show()
     End Sub
+
+    Private Sub ToolStripButton2_Click(sender As Object, e As EventArgs) Handles ToolStripButton2.Click
+        If rolUsuarioActual = Nothing Then
+            MessageBox.Show("No tiene permisos para este módulo", "No tiene permisos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Return
+        Else
+            FormCategoriaEgreso.Show()
+        End If
+    End Sub
 End Class
