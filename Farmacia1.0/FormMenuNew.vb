@@ -225,6 +225,15 @@ Public Class FormMenuNew
             MessageBox.Show("No tiene permisos para este módulo", "No tiene permisos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             Return
         Else
+            FormEgresos.Show()
+        End If
+    End Sub
+
+    Private Sub CategoríasEgresosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CategoríasEgresosToolStripMenuItem.Click
+        If rolUsuarioActual = Nothing Then
+            MessageBox.Show("No tiene permisos para este módulo", "No tiene permisos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Return
+        Else
             FormCategoriaEgreso.Show()
         End If
     End Sub

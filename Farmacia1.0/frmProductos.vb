@@ -102,7 +102,7 @@ Public Class frmProductos
         Try
             dv.RowFilter = String.Format("Convert(" & criterio & ", 'System.String') LIKE '%{0}%'", Trim(txtbuscar.Text))
         Catch ex As Exception
-            MsgBox(ex.Message)
+            Log.Error($"Ocurrió un error al buscar. Error {ex.Message}")
         End Try
 
     End Sub

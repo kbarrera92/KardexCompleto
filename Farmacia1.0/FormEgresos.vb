@@ -34,7 +34,8 @@ Public Class FormEgresos
         Try
             ' Asumiendo que tienes una conexión a la BD
             openConnection()
-            Dim comando As New SqlCommand("SELECT IdCategoriaEgreso, nombreCategoriaEgreso FROM CATEGORIAEGRESO")
+            Dim comando As New SqlCommand("SELECT IdCategoriaEgreso, nombreCategoriaEgreso FROM CATEGORIAEGRESO WHERE estado = @estado")
+            comando.Parameters.AddWithValue("@estado", True)
             comando.Connection = conn
             Dim adaptador As New SqlDataAdapter(comando)
             Dim tablaCategoria As New DataTable()
