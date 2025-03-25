@@ -28,11 +28,11 @@ Partial Class FormCategoriaEgreso
         Me.Label1 = New System.Windows.Forms.Label()
         Me.chkEstado = New System.Windows.Forms.CheckBox()
         Me.dgvCategorias = New System.Windows.Forms.DataGridView()
-        Me.ButtonLimpiar = New System.Windows.Forms.Button()
-        Me.btnGuardar = New System.Windows.Forms.Button()
         Me.idcategoriaegreso = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.nombreCategoria = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.estadoCategoria = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.ButtonLimpiar = New System.Windows.Forms.Button()
+        Me.btnGuardar = New System.Windows.Forms.Button()
         Me.chkMostrarInactivos = New System.Windows.Forms.CheckBox()
         Me.lblContador = New System.Windows.Forms.Label()
         Me.txtBuscar = New System.Windows.Forms.TextBox()
@@ -97,24 +97,6 @@ Partial Class FormCategoriaEgreso
         Me.dgvCategorias.Size = New System.Drawing.Size(752, 225)
         Me.dgvCategorias.TabIndex = 18
         '
-        'ButtonLimpiar
-        '
-        Me.ButtonLimpiar.Location = New System.Drawing.Point(451, 49)
-        Me.ButtonLimpiar.Name = "ButtonLimpiar"
-        Me.ButtonLimpiar.Size = New System.Drawing.Size(92, 23)
-        Me.ButtonLimpiar.TabIndex = 20
-        Me.ButtonLimpiar.Text = "Limpiar"
-        Me.ButtonLimpiar.UseVisualStyleBackColor = True
-        '
-        'btnGuardar
-        '
-        Me.btnGuardar.Location = New System.Drawing.Point(549, 49)
-        Me.btnGuardar.Name = "btnGuardar"
-        Me.btnGuardar.Size = New System.Drawing.Size(87, 23)
-        Me.btnGuardar.TabIndex = 19
-        Me.btnGuardar.Text = "Guardar"
-        Me.btnGuardar.UseVisualStyleBackColor = True
-        '
         'idcategoriaegreso
         '
         Me.idcategoriaegreso.HeaderText = "Id Categoría"
@@ -133,11 +115,27 @@ Partial Class FormCategoriaEgreso
         Me.estadoCategoria.Name = "estadoCategoria"
         Me.estadoCategoria.ReadOnly = True
         '
+        'ButtonLimpiar
+        '
+        Me.ButtonLimpiar.Location = New System.Drawing.Point(451, 49)
+        Me.ButtonLimpiar.Name = "ButtonLimpiar"
+        Me.ButtonLimpiar.Size = New System.Drawing.Size(92, 23)
+        Me.ButtonLimpiar.TabIndex = 20
+        Me.ButtonLimpiar.Text = "Limpiar"
+        Me.ButtonLimpiar.UseVisualStyleBackColor = True
+        '
+        'btnGuardar
+        '
+        Me.btnGuardar.Location = New System.Drawing.Point(549, 49)
+        Me.btnGuardar.Name = "btnGuardar"
+        Me.btnGuardar.Size = New System.Drawing.Size(87, 23)
+        Me.btnGuardar.TabIndex = 19
+        Me.btnGuardar.Text = "Guardar"
+        Me.btnGuardar.UseVisualStyleBackColor = True
+        '
         'chkMostrarInactivos
         '
         Me.chkMostrarInactivos.AutoSize = True
-        Me.chkMostrarInactivos.Checked = True
-        Me.chkMostrarInactivos.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkMostrarInactivos.Location = New System.Drawing.Point(236, 55)
         Me.chkMostrarInactivos.Name = "chkMostrarInactivos"
         Me.chkMostrarInactivos.Size = New System.Drawing.Size(106, 17)
@@ -191,6 +189,7 @@ Partial Class FormCategoriaEgreso
         Me.Controls.Add(Me.txtId)
         Me.Controls.Add(Me.Label6)
         Me.Name = "FormCategoriaEgreso"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Categoría de Egresos"
         CType(Me.dgvCategorias, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)

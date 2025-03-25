@@ -7,6 +7,15 @@
         _errorProvider = errorProvider
     End Sub
 
+    Public Function ValidarCategoriaEgreso(categoriaNombre As String, controles As Dictionary(Of String, Control)) As Boolean
+        _errorProvider.Clear()
+
+        Dim esValido As Boolean = True
+
+        If Not ValidaNombreCategoriaEgreso(categoriaNombre, controles("NombreCategoria")) Then esValido = False
+        Return esValido
+    End Function
+
     ' Método para validar todos los campos
     Public Function ValidarGasto(gasto As Egreso, controles As Dictionary(Of String, Control)) As Boolean
         ' Limpiar errores previos
@@ -52,6 +61,19 @@
     Private Function ValidarCategoria(idCategoria As Integer, control As Control) As Boolean
         If idCategoria <= 0 Then
             _errorProvider.SetError(control, "Debe seleccionar una categoría")
+            Return False
+        End If
+
+        _errorProvider.SetError(control, "")
+        Return True
+    End Function
+
+    Private Function ValidaNombreCategoriaEgreso(nombreCategoria As String, control As Control) As Boolean
+        If String.IsNullOrWhiteSpace(nombreCategoria) Then
+            _errorProvider.SetError(control, "La descripción no puede estar vacía")
+            Return False
+        ElseIf nombreCategoria.Length > 20 Then
+            _errorProvider.SetError(control, "La descripción excede el límite permitido")
             Return False
         End If
 
