@@ -398,6 +398,7 @@ Public Class frmCatalogoProducto
         Try
             fila = DataGridView1.CurrentRow.Index
             getDatos()
+            RegOAct = 0
         Catch ex As Exception
             Log.Error($"Ocurrió un error. Error: {ex.Message}")
         End Try
