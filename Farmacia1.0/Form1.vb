@@ -38,6 +38,7 @@ Public Class Form1
                     FormMenuNew.ToolStripButtonLogin.Text = "Cerrar sesión"
 
                     DibujaTarjetasResumen()
+                    FormMenuNew.FlowLayoutPanelDashboard.Visible = True
 
                     Log.Information(Environment.MachineName & " - " & Environment.UserName)
                     Log.Information("Inicio de sesión: " & nameUsuarioActual & ", desde: " & ConsultaParametro("sucursalFisica"))

@@ -50,7 +50,7 @@ Public Class frmCorteCaja
     End Sub
 
     Private Sub ComboBox2_Click(sender As Object, e As EventArgs) Handles ComboBox2.Click
-        Dim sql2 As String = "SELECT idUsuario, nombreUsuario FROM USUARIO WHERE sucursal = " & CInt(ComboBox1.SelectedValue.ToString)
+        Dim sql2 As String = "SELECT idUsuario, nombreUsuario FROM USUARIO" ' WHERE sucursal = " & CInt(ComboBox1.SelectedValue.ToString)
         ComboBox2.DataSource = updateCm(sql2)
         ComboBox2.DisplayMember = updateCm(sql2).Columns(1).ToString
         ComboBox2.ValueMember = updateCm(sql2).Columns(0).ToString
@@ -121,4 +121,6 @@ Public Class frmCorteCaja
 
         End If
     End Sub
+
+
 End Class
