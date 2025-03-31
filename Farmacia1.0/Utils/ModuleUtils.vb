@@ -70,7 +70,7 @@ Module ModuleUtils
 
     Public Sub DibujaTarjetasResumen()
         Try
-            FormMenuNew.FlowLayoutPanel1.Controls.Clear()
+            FormMenuNew.FlowLayoutPanelDashboard.Controls.Clear()
 
             Dim tarjeta As New TarjetaVentasDia()
             tarjeta.AccionAlHacerClick = Sub()
@@ -84,8 +84,8 @@ Module ModuleUtils
                                                 End Sub
             tarjetaEgresos.CargarVentas($"SELECT SUM(total) FROM EGRESOS WHERE CONVERT(DATE, fechaEgreso) = CONVERT(DATE, GETDATE()) AND sucursal = {sucActual} and estado = 1", "Egresos del día")
 
-            FormMenuNew.FlowLayoutPanel1.Controls.Add(tarjeta)
-            FormMenuNew.FlowLayoutPanel1.Controls.Add(tarjetaEgresos)
+            FormMenuNew.FlowLayoutPanelDashboard.Controls.Add(tarjeta)
+            FormMenuNew.FlowLayoutPanelDashboard.Controls.Add(tarjetaEgresos)
         Catch ex As Exception
             Serilog.Log.Error($"Ocurrió un error. Error: {ex.Message}")
         End Try

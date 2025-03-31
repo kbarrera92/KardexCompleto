@@ -32,6 +32,7 @@ Partial Class FormMenuNew
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.UsuariosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SucursalesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CategoríasEgresosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSplitButtonKardex = New System.Windows.Forms.ToolStripSplitButton()
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
@@ -61,8 +62,7 @@ Partial Class FormMenuNew
         Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
         Me.StatusStripPrincipal = New System.Windows.Forms.StatusStrip()
         Me.ToolStripStatusLabelConnectionStatus = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
-        Me.CategoríasEgresosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.FlowLayoutPanelDashboard = New System.Windows.Forms.FlowLayoutPanel()
         Me.ToolStrip1.SuspendLayout()
         Me.StatusStripPrincipal.SuspendLayout()
         Me.SuspendLayout()
@@ -138,6 +138,12 @@ Partial Class FormMenuNew
         Me.SucursalesToolStripMenuItem.Name = "SucursalesToolStripMenuItem"
         Me.SucursalesToolStripMenuItem.Size = New System.Drawing.Size(232, 24)
         Me.SucursalesToolStripMenuItem.Text = "Sucursales"
+        '
+        'CategoríasEgresosToolStripMenuItem
+        '
+        Me.CategoríasEgresosToolStripMenuItem.Name = "CategoríasEgresosToolStripMenuItem"
+        Me.CategoríasEgresosToolStripMenuItem.Size = New System.Drawing.Size(232, 24)
+        Me.CategoríasEgresosToolStripMenuItem.Text = "Categorías Egresos"
         '
         'ToolStripSplitButtonKardex
         '
@@ -333,27 +339,22 @@ Partial Class FormMenuNew
         Me.ToolStripStatusLabelConnectionStatus.Size = New System.Drawing.Size(185, 21)
         Me.ToolStripStatusLabelConnectionStatus.Text = "Estado de la conexión: "
         '
-        'FlowLayoutPanel1
+        'FlowLayoutPanelDashboard
         '
-        Me.FlowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.FlowLayoutPanel1.Location = New System.Drawing.Point(0, 58)
-        Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
-        Me.FlowLayoutPanel1.Padding = New System.Windows.Forms.Padding(10)
-        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(1168, 408)
-        Me.FlowLayoutPanel1.TabIndex = 2
-        '
-        'CategoríasEgresosToolStripMenuItem
-        '
-        Me.CategoríasEgresosToolStripMenuItem.Name = "CategoríasEgresosToolStripMenuItem"
-        Me.CategoríasEgresosToolStripMenuItem.Size = New System.Drawing.Size(232, 24)
-        Me.CategoríasEgresosToolStripMenuItem.Text = "Categorías Egresos"
+        Me.FlowLayoutPanelDashboard.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.FlowLayoutPanelDashboard.Location = New System.Drawing.Point(0, 58)
+        Me.FlowLayoutPanelDashboard.Name = "FlowLayoutPanelDashboard"
+        Me.FlowLayoutPanelDashboard.Padding = New System.Windows.Forms.Padding(10)
+        Me.FlowLayoutPanelDashboard.Size = New System.Drawing.Size(1168, 408)
+        Me.FlowLayoutPanelDashboard.TabIndex = 2
+        Me.FlowLayoutPanelDashboard.Visible = False
         '
         'FormMenuNew
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1168, 492)
-        Me.Controls.Add(Me.FlowLayoutPanel1)
+        Me.Controls.Add(Me.FlowLayoutPanelDashboard)
         Me.Controls.Add(Me.StatusStripPrincipal)
         Me.Controls.Add(Me.ToolStrip1)
         Me.Name = "FormMenuNew"
@@ -407,7 +408,7 @@ Partial Class FormMenuNew
     Friend WithEvents ReporteDeUtilidadToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents StatusStripPrincipal As StatusStrip
     Friend WithEvents ToolStripStatusLabelConnectionStatus As ToolStripStatusLabel
-    Friend WithEvents FlowLayoutPanel1 As FlowLayoutPanel
+    Friend WithEvents FlowLayoutPanelDashboard As FlowLayoutPanel
     Friend WithEvents ToolStripButton2 As ToolStripButton
     Friend WithEvents CategoríasEgresosToolStripMenuItem As ToolStripMenuItem
 End Class

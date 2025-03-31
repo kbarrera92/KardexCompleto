@@ -11,7 +11,7 @@ Public Class FormMenuNew
                 End If
             Next
 
-            Me.FlowLayoutPanel1.Controls.Clear()
+            Me.FlowLayoutPanelDashboard.Controls.Clear()
 
             ToolStripButtonLogin.Text = "Iniciar sesión"
             rolUsuarioActual = Nothing
