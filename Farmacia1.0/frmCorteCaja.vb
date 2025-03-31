@@ -1,4 +1,6 @@
 ﻿Imports System.Data.SqlClient
+Imports Serilog
+
 Public Class frmCorteCaja
 
     Dim sql As String = "SELECT idSucursal, nombreSuc FROM SUCURSAL"
@@ -113,7 +115,7 @@ Public Class frmCorteCaja
                 frmVerReportes.CrystalReportViewer1.ReportSource = informe
                 frmVerReportes.Show()
             Catch ex As Exception
-
+                Log.Error($"Ocurrio un error. Error: {ex.Message}")
             End Try
 
         Else
