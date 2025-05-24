@@ -108,6 +108,7 @@ Public Class frmTraslados
                                        DataGridView2.Rows(index).Cells(2).Value, 0, 0)
                     Next
 
+                    Log.Information("Inicia proceso de guardar traslado")
                     ProcesarTraslado()
                     Button2.PerformClick()
                 End If
