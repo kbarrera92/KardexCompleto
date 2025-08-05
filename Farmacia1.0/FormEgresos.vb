@@ -136,10 +136,12 @@ Public Class FormEgresos
                     LimpiarFormulario()
                     ListarEgresos("L", DateTime.Now, sucActual)
                     TextBoxSumatoria.Text = SumarColumnaDataGridView(DataGridViewEgresos, "totalEgreso").ToString()
-                    DibujaTarjetasResumen()
+                    If nombreRol = "ADMINISTRADOR" Then
+                        DibujaTarjetasResumen()
+                    End If
                     Me.BringToFront()
+                    End If
                 End If
-            End If
         Catch ex As Exception
 
         End Try
@@ -305,10 +307,12 @@ Public Class FormEgresos
                 DescartarGasto("D")
                 ListarEgresos("L", DateTime.Now, sucActual)
                 TextBoxSumatoria.Text = SumarColumnaDataGridView(DataGridViewEgresos, "totalEgreso").ToString()
-                DibujaTarjetasResumen()
+                If nombreRol = "ADMINISTRADOR" Then
+                    DibujaTarjetasResumen()
+                End If
                 BringToFront()
-            Else
-                MessageBox.Show("Debe seleccionar una fila para descartarla", "Faltan datos", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Else
+                    MessageBox.Show("Debe seleccionar una fila para descartarla", "Faltan datos", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             End If
         Catch ex As Exception
             Log.Error($"Ocurrió un error. Error {ex.Message}")

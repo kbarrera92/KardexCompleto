@@ -12,7 +12,9 @@
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
-    <PublishUrl>publicar\</PublishUrl>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
+    <PublishUrl>C:\Users\PC\OneDrive\FarmaVela\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -22,12 +24,12 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
+    <AutorunEnabled>true</AutorunEnabled>
+    <ApplicationRevision>1</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -63,6 +65,18 @@
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>Paomedia-Small-N-Flat-Shop %281%29.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>7E1D8EE8086212753127CD34B60C9316509ADB0E</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>Farmacia1.0_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
@@ -180,10 +194,22 @@
     <Compile Include="FormEgresos.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormInventarioPorLab.Designer.vb">
+      <DependentUpon>FormInventarioPorLab.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormInventarioPorLab.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormMenuNew.Designer.vb">
       <DependentUpon>FormMenuNew.vb</DependentUpon>
     </Compile>
     <Compile Include="FormMenuNew.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPreciosXSucursal.Designer.vb">
+      <DependentUpon>FormPreciosXSucursal.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormPreciosXSucursal.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormRecibirTraslado.Designer.vb">
@@ -481,7 +507,13 @@
     <Compile Include="frmVerVentasElim.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FVPublicas.vb" />
+    <Compile Include="rptInventario2.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptInventario2.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Utils\FVPublicas.vb" />
     <Compile Include="IS_PRO2DataSet.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -552,6 +584,8 @@
     </Compile>
     <Compile Include="Utils\clsFunciones.vb" />
     <Compile Include="Utils\ModuleUtils.vb" />
+    <Compile Include="Utils\PasswordHelper.vb" />
+    <Compile Include="Utils\UserMigrationOnce.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Controles\TarjetaVentasDia.resx">
@@ -572,8 +606,14 @@
     <EmbeddedResource Include="FormEgresos.resx">
       <DependentUpon>FormEgresos.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormInventarioPorLab.resx">
+      <DependentUpon>FormInventarioPorLab.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormMenuNew.resx">
       <DependentUpon>FormMenuNew.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPreciosXSucursal.resx">
+      <DependentUpon>FormPreciosXSucursal.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormRecibirTraslado.resx">
       <DependentUpon>FormRecibirTraslado.vb</DependentUpon>
@@ -744,6 +784,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>rptInventario.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="rptInventario2.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptInventario2.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="rptStockMin.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>rptStockMin.vb</LastGenOutput>
@@ -773,6 +817,7 @@
     <None Include="dsReportes.xss">
       <DependentUpon>dsReportes.xsd</DependentUpon>
     </None>
+    <None Include="Farmacia1.0_TemporaryKey.pfx" />
     <None Include="IS_PRO2DataSet.xsc">
       <DependentUpon>IS_PRO2DataSet.xsd</DependentUpon>
     </None>

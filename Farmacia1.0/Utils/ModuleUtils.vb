@@ -278,4 +278,28 @@ Module ModuleUtils
         End If
     End Sub
 
+    Public Function DataTableToString(dt As DataTable) As String
+        If dt Is Nothing OrElse dt.Rows.Count = 0 Then
+            Return "DataTable vacío o nulo."
+        End If
+
+        Dim sb As New System.Text.StringBuilder()
+
+        ' Encabezados
+        For Each col As DataColumn In dt.Columns
+            sb.Append(col.ColumnName & vbTab)
+        Next
+        sb.AppendLine()
+
+        ' Filas
+        For Each row As DataRow In dt.Rows
+            For Each col As DataColumn In dt.Columns
+                sb.Append(If(row(col) IsNot Nothing, row(col).ToString(), "NULL") & vbTab)
+            Next
+            sb.AppendLine()
+        Next
+
+        Return sb.ToString()
+    End Function
+
 End Module

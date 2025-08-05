@@ -41,7 +41,9 @@ Public Class frmCobrar
             MessageBox.Show(msg, If(rc = 0, "Éxito", "Error"), MessageBoxButtons.OK, If(rc = 0, MessageBoxIcon.Information, MessageBoxIcon.Error))
             closeConnection()
             ImprimeTicket(nventa)
-            DibujaTarjetasResumen()
+            If nombreRol = "ADMINISTRADOR" Then
+                DibujaTarjetasResumen()
+            End If
         Catch ex As Exception
             MessageBox.Show($"Hubo un error al grabar la venta. {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             rc = -3

@@ -210,6 +210,7 @@ Public Class clsFunciones
                     printFont = New Font("Lucida Sans Typewriter", 8)
                     Dim pd As PrintDocument = New PrintDocument()
                     pd.PrinterSettings.PrinterName = impresora
+                    pd.PrinterSettings.Copies = 2
                     pd.DocumentName = "Ticket" & DateTime.Now.ToShortDateString()
 
                     AddHandler pd.PrintPage, AddressOf Me.pd_PrintPage

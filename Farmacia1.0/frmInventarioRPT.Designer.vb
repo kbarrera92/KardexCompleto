@@ -27,6 +27,9 @@ Partial Class frmInventarioRPT
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.ComboBox2 = New System.Windows.Forms.ComboBox()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
@@ -40,9 +43,6 @@ Partial Class frmInventarioRPT
         Me.lab = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.cat = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.stock = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Button3 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -88,9 +88,39 @@ Partial Class frmInventarioRPT
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.Location = New System.Drawing.Point(971, 17)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(157, 24)
+        Me.Label2.Size = New System.Drawing.Size(176, 24)
         Me.Label2.TabIndex = 4
-        Me.Label2.Text = "Elegir categoría"
+        Me.Label2.Text = "Elegir Laboratorio"
+        '
+        'Button3
+        '
+        Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button3.Image = Global.Farmacia1._0.My.Resources.Resources.Sales_report_icon
+        Me.Button3.Location = New System.Drawing.Point(439, 24)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(65, 50)
+        Me.Button3.TabIndex = 3
+        Me.Button3.UseVisualStyleBackColor = True
+        '
+        'Button2
+        '
+        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button2.Image = Global.Farmacia1._0.My.Resources.Resources.Eraser_icon
+        Me.Button2.Location = New System.Drawing.Point(370, 24)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(65, 50)
+        Me.Button2.TabIndex = 3
+        Me.Button2.UseVisualStyleBackColor = True
+        '
+        'Button1
+        '
+        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button1.Image = Global.Farmacia1._0.My.Resources.Resources._62850_magnifying_glass_tilted_left_icon
+        Me.Button1.Location = New System.Drawing.Point(301, 24)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(65, 50)
+        Me.Button1.TabIndex = 2
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'ComboBox1
         '
@@ -197,36 +227,6 @@ Partial Class frmInventarioRPT
         Me.stock.HeaderText = "Existencia"
         Me.stock.Name = "stock"
         Me.stock.ReadOnly = True
-        '
-        'Button3
-        '
-        Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button3.Image = Global.Farmacia1._0.My.Resources.Resources.Sales_report_icon
-        Me.Button3.Location = New System.Drawing.Point(439, 24)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(65, 50)
-        Me.Button3.TabIndex = 3
-        Me.Button3.UseVisualStyleBackColor = True
-        '
-        'Button2
-        '
-        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button2.Image = Global.Farmacia1._0.My.Resources.Resources.Eraser_icon
-        Me.Button2.Location = New System.Drawing.Point(370, 24)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(65, 50)
-        Me.Button2.TabIndex = 3
-        Me.Button2.UseVisualStyleBackColor = True
-        '
-        'Button1
-        '
-        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button1.Image = Global.Farmacia1._0.My.Resources.Resources._62850_magnifying_glass_tilted_left_icon
-        Me.Button1.Location = New System.Drawing.Point(301, 24)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(65, 50)
-        Me.Button1.TabIndex = 2
-        Me.Button1.UseVisualStyleBackColor = True
         '
         'frmInventarioRPT
         '

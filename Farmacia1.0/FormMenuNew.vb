@@ -1,6 +1,7 @@
 ﻿Imports Serilog
 
 Public Class FormMenuNew
+
     Private Sub ToolStripButtonLogin_Click(sender As Object, e As EventArgs) Handles ToolStripButtonLogin.Click
         If ToolStripButtonLogin.Text.ToUpper() = "INICIAR SESIÓN" Then
             frmElegirSucursal.Show()
@@ -207,7 +208,9 @@ Public Class FormMenuNew
         Estilos.AplicarEstilos(Me)
         Estilos.AplicarEstilosToolStrip(ToolStrip1)
         ToolStripStatusLabelConnectionStatus.Text &= "desconectado"
-
+#If DEBUG Then
+        ActualizaUsuariosToolStripMenuItem.Visible = True
+#End If
     End Sub
 
 
@@ -236,5 +239,22 @@ Public Class FormMenuNew
         Else
             FormCategoriaEgreso.Show()
         End If
+    End Sub
+
+    Private Sub ImprimirInventarioToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImprimirInventarioToolStripMenuItem.Click
+        If rolUsuarioActual = Nothing Then
+            MessageBox.Show("No tiene permisos para este módulo", "No tiene permisos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Return
+        End If
+
+        frmInventarioRPT.Show()
+    End Sub
+
+    Private Sub ActualizaUsuariosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ActualizaUsuariosToolStripMenuItem.Click
+        Try
+            MigrarContrasenasAHash()
+        Catch ex As Exception
+            Log.Error("Error: " + ex.Message)
+        End Try
     End Sub
 End Class

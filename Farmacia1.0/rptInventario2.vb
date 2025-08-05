@@ -18,7 +18,7 @@ Imports System
 Imports System.ComponentModel
 
 
-Public Class rptInventario
+Public Class rptInventario2
     Inherits ReportClass
     
     Public Sub New()
@@ -27,7 +27,7 @@ Public Class rptInventario
     
     Public Overrides Property ResourceName() As String
         Get
-            Return "rptInventario.rpt"
+            Return "rptInventario2.rpt"
         End Get
         Set
             'Do nothing
@@ -45,7 +45,7 @@ Public Class rptInventario
     
     Public Overrides Property FullResourceName() As String
         Get
-            Return "Farmacia1._0.rptInventario.rpt"
+            Return "Farmacia1._0.rptInventario2.rpt"
         End Get
         Set
             'Do nothing
@@ -94,7 +94,7 @@ Public Class rptInventario
     
     <Browsable(false),  _
      DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property Parameter_sucursal() As CrystalDecisions.[Shared].IParameterField
+    Public ReadOnly Property Parameter_laboratorio() As CrystalDecisions.[Shared].IParameterField
         Get
             Return Me.DataDefinition.ParameterFields(0)
         End Get
@@ -102,7 +102,7 @@ Public Class rptInventario
     
     <Browsable(false),  _
      DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property Parameter_laboratorio() As CrystalDecisions.[Shared].IParameterField
+    Public ReadOnly Property Parameter_sucursal() As CrystalDecisions.[Shared].IParameterField
         Get
             Return Me.DataDefinition.ParameterFields(1)
         End Get
@@ -110,7 +110,7 @@ Public Class rptInventario
 End Class
 
 <System.Drawing.ToolboxBitmapAttribute(GetType(CrystalDecisions.[Shared].ExportOptions), "report.bmp")>  _
-Public Class CachedrptInventario
+Public Class CachedrptInventario2
     Inherits Component
     Implements ICachedReport
     
@@ -152,7 +152,7 @@ Public Class CachedrptInventario
     End Property
     
     Public Overridable Function CreateReport() As CrystalDecisions.CrystalReports.Engine.ReportDocument Implements CrystalDecisions.ReportSource.ICachedReport.CreateReport
-        Dim rpt As rptInventario = New rptInventario()
+        Dim rpt As rptInventario2 = New rptInventario2()
         rpt.Site = Me.Site
         Return rpt
     End Function

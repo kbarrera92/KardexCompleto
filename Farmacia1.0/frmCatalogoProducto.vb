@@ -9,6 +9,7 @@ Public Class frmCatalogoProducto
     Dim sqlProv As String = "SELECT idProveedor, rzProveedor FROM PROVEEDOR"
     Dim fila As Integer
     Dim criterio As String
+    Private dtPreciosSucursal As DataTable
 
     Function updateList(ByVal sql As String) As DataTable
         Dim da As SqlDataAdapter
@@ -119,9 +120,20 @@ Public Class frmCatalogoProducto
                 parametros.Add(parametroExtra)
             End If
 
+            Dim parametro As New SqlParameter("@precios", SqlDbType.Structured)
+            parametro.TypeName = "dbo.PRECIOSXSUCURSAL" 'tipo definido en SQL Server
+            parametro.Value = dtPreciosSucursal
+            parametros.Add(parametro)
+
             Dim paramtodb As String = String.Empty
             For Each param As SqlParameter In parametros
-                paramtodb &= param.ParameterName & "=" & If(param.Value, """") & vbCrLf
+                If TypeOf param.Value Is DataTable Then
+                    ' Es un DataTable
+                    paramtodb &= param.ParameterName & "=" & If(DataTableToString(param.Value), """") & vbCrLf
+                Else
+                    paramtodb &= param.ParameterName & "=" & If(param.Value, """") & vbCrLf
+                End If
+
             Next
             Log.Information($"Parametros enviados al sp: {vbCrLf}{paramtodb}")
 
@@ -198,6 +210,7 @@ Public Class frmCatalogoProducto
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Try
+            dtPreciosSucursal = Nothing
             txtcod.Clear()
             txtdesc.Clear()
             txtcomp.Clear()
@@ -396,6 +409,7 @@ Public Class frmCatalogoProducto
 
     Private Sub DataGridView1_SelectionChanged(sender As Object, e As EventArgs) Handles DataGridView1.SelectionChanged
         Try
+            dtPreciosSucursal = Nothing
             fila = DataGridView1.CurrentRow.Index
             getDatos()
             RegOAct = 0
@@ -411,5 +425,26 @@ Public Class frmCatalogoProducto
 
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
         txtbarcode.Text = "A" & txtcod.Text & "A"
+    End Sub
+
+    Private Sub btnEditarPrecios_Click(sender As Object, e As EventArgs) Handles btnEditarPrecios.Click
+        Try
+            If Decimal.TryParse(txtprecio.Text, New Decimal()) And Decimal.Parse(txtprecio.Text) > 0 Then
+                Dim formPrecios As New FormPreciosXSucursal()
+
+                ' Si quieres pasar el ID del producto, puedes hacerlo también (opcional)
+                ' formPrecios.IdProducto = Me.txtIdProducto.Text
+
+                If formPrecios.ShowDialog() = DialogResult.OK Then
+                    dtPreciosSucursal = formPrecios.dtPrecios
+                End If
+            Else
+                MessageBox.Show("Se debe ingresar el precio por defecto", "Faltan datos", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            End If
+        Catch ex As Exception
+            Log.Error($"Ocurrio un error. Error: {ex.Message}")
+            MessageBox.Show("Se debe ingresar el precio por defecto", "Faltan datos", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        End Try
+
     End Sub
 End Class
