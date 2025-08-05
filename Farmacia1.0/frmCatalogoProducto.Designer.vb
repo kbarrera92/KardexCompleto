@@ -73,12 +73,7 @@ Partial Class frmCatalogoProducto
         Me.cmbpro = New System.Windows.Forms.ComboBox()
         Me.cmbcat = New System.Windows.Forms.ComboBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.Button4 = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.Button5 = New System.Windows.Forms.Button()
         Me.txtEstanteria = New System.Windows.Forms.TextBox()
         Me.txtutilidad = New System.Windows.Forms.TextBox()
         Me.Label17 = New System.Windows.Forms.Label()
@@ -93,6 +88,12 @@ Partial Class frmCatalogoProducto
         Me.Button6 = New System.Windows.Forms.Button()
         Me.txtstockmin = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
+        Me.btnEditarPrecios = New System.Windows.Forms.Button()
+        Me.Button5 = New System.Windows.Forms.Button()
+        Me.Button4 = New System.Windows.Forms.Button()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
@@ -544,46 +545,6 @@ Partial Class frmCatalogoProducto
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Acciones"
         '
-        'Button4
-        '
-        Me.Button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button4.Image = Global.Farmacia1._0.My.Resources.Resources.Windows_Close_Program_icon
-        Me.Button4.Location = New System.Drawing.Point(170, 20)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(37, 34)
-        Me.Button4.TabIndex = 47
-        Me.Button4.UseVisualStyleBackColor = True
-        '
-        'Button3
-        '
-        Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button3.Image = Global.Farmacia1._0.My.Resources.Resources.trash_icon
-        Me.Button3.Location = New System.Drawing.Point(127, 20)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(37, 34)
-        Me.Button3.TabIndex = 46
-        Me.Button3.UseVisualStyleBackColor = True
-        '
-        'Button2
-        '
-        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button2.Image = Global.Farmacia1._0.My.Resources.Resources.Save_icon__2_
-        Me.Button2.Location = New System.Drawing.Point(84, 20)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(37, 34)
-        Me.Button2.TabIndex = 45
-        Me.Button2.UseVisualStyleBackColor = True
-        '
-        'Button1
-        '
-        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button1.Image = Global.Farmacia1._0.My.Resources.Resources.new_file_icon
-        Me.Button1.Location = New System.Drawing.Point(41, 20)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(37, 34)
-        Me.Button1.TabIndex = 44
-        Me.Button1.UseVisualStyleBackColor = True
-        '
         'GroupBox2
         '
         Me.GroupBox2.BackColor = System.Drawing.SystemColors.ActiveCaption
@@ -598,20 +559,6 @@ Partial Class frmCatalogoProducto
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Tag = ""
         Me.GroupBox2.Text = "Estantería"
-        '
-        'Button5
-        '
-        Me.Button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button5.ForeColor = System.Drawing.Color.Black
-        Me.Button5.Image = Global.Farmacia1._0.My.Resources.Resources.Zoom_icon
-        Me.Button5.Location = New System.Drawing.Point(37, 151)
-        Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(176, 27)
-        Me.Button5.TabIndex = 50
-        Me.Button5.Tag = "FO"
-        Me.Button5.Text = "   Ver estanterías"
-        Me.Button5.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.Button5.UseVisualStyleBackColor = True
         '
         'txtEstanteria
         '
@@ -662,7 +609,7 @@ Partial Class frmCatalogoProducto
         Me.txtprecio.ForeColor = System.Drawing.Color.Yellow
         Me.txtprecio.Location = New System.Drawing.Point(332, 387)
         Me.txtprecio.Name = "txtprecio"
-        Me.txtprecio.Size = New System.Drawing.Size(301, 26)
+        Me.txtprecio.Size = New System.Drawing.Size(157, 26)
         Me.txtprecio.TabIndex = 22
         Me.txtprecio.Tag = "E"
         Me.txtprecio.Text = "0.0"
@@ -673,9 +620,9 @@ Partial Class frmCatalogoProducto
         Me.Label19.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label19.Location = New System.Drawing.Point(329, 369)
         Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(48, 15)
+        Me.Label19.Size = New System.Drawing.Size(124, 15)
         Me.Label19.TabIndex = 21
-        Me.Label19.Text = "Precio"
+        Me.Label19.Text = "Precio por defecto"
         '
         'txtcosto
         '
@@ -755,11 +702,77 @@ Partial Class frmCatalogoProducto
         Me.Label6.TabIndex = 31
         Me.Label6.Text = "Existencía mínima"
         '
+        'btnEditarPrecios
+        '
+        Me.btnEditarPrecios.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnEditarPrecios.Location = New System.Drawing.Point(495, 384)
+        Me.btnEditarPrecios.Name = "btnEditarPrecios"
+        Me.btnEditarPrecios.Size = New System.Drawing.Size(138, 29)
+        Me.btnEditarPrecios.TabIndex = 49
+        Me.btnEditarPrecios.Tag = "WB"
+        Me.btnEditarPrecios.Text = "Editar precios"
+        Me.btnEditarPrecios.UseVisualStyleBackColor = True
+        '
+        'Button5
+        '
+        Me.Button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button5.ForeColor = System.Drawing.Color.Black
+        Me.Button5.Image = Global.Farmacia1._0.My.Resources.Resources.Zoom_icon
+        Me.Button5.Location = New System.Drawing.Point(37, 151)
+        Me.Button5.Name = "Button5"
+        Me.Button5.Size = New System.Drawing.Size(176, 27)
+        Me.Button5.TabIndex = 50
+        Me.Button5.Tag = "FO"
+        Me.Button5.Text = "   Ver estanterías"
+        Me.Button5.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.Button5.UseVisualStyleBackColor = True
+        '
+        'Button4
+        '
+        Me.Button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button4.Image = Global.Farmacia1._0.My.Resources.Resources.Windows_Close_Program_icon
+        Me.Button4.Location = New System.Drawing.Point(170, 20)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(37, 34)
+        Me.Button4.TabIndex = 47
+        Me.Button4.UseVisualStyleBackColor = True
+        '
+        'Button3
+        '
+        Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button3.Image = Global.Farmacia1._0.My.Resources.Resources.trash_icon
+        Me.Button3.Location = New System.Drawing.Point(127, 20)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(37, 34)
+        Me.Button3.TabIndex = 46
+        Me.Button3.UseVisualStyleBackColor = True
+        '
+        'Button2
+        '
+        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button2.Image = Global.Farmacia1._0.My.Resources.Resources.Save_icon__2_
+        Me.Button2.Location = New System.Drawing.Point(84, 20)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(37, 34)
+        Me.Button2.TabIndex = 45
+        Me.Button2.UseVisualStyleBackColor = True
+        '
+        'Button1
+        '
+        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button1.Image = Global.Farmacia1._0.My.Resources.Resources.new_file_icon
+        Me.Button1.Location = New System.Drawing.Point(41, 20)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(37, 34)
+        Me.Button1.TabIndex = 44
+        Me.Button1.UseVisualStyleBackColor = True
+        '
         'frmCatalogoProducto
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1255, 691)
+        Me.Controls.Add(Me.btnEditarPrecios)
         Me.Controls.Add(Me.txtstockmin)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.Button6)
@@ -886,4 +899,5 @@ Partial Class frmCatalogoProducto
     Friend WithEvents Label6 As System.Windows.Forms.Label
     Private WithEvents ShapeContainer1 As PowerPacks.ShapeContainer
     Private WithEvents RectangleShape1 As PowerPacks.RectangleShape
+    Friend WithEvents btnEditarPrecios As Button
 End Class

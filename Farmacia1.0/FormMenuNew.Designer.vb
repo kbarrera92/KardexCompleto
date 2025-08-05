@@ -43,6 +43,8 @@ Partial Class FormMenuNew
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripMenuItem4 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem5 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ImprimirInventarioToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSplitButtonReportes = New System.Windows.Forms.ToolStripSplitButton()
         Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
         Me.CorteDeCajaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -63,6 +65,7 @@ Partial Class FormMenuNew
         Me.StatusStripPrincipal = New System.Windows.Forms.StatusStrip()
         Me.ToolStripStatusLabelConnectionStatus = New System.Windows.Forms.ToolStripStatusLabel()
         Me.FlowLayoutPanelDashboard = New System.Windows.Forms.FlowLayoutPanel()
+        Me.ActualizaUsuariosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStrip1.SuspendLayout()
         Me.StatusStripPrincipal.SuspendLayout()
         Me.SuspendLayout()
@@ -96,7 +99,7 @@ Partial Class FormMenuNew
         '
         'ToolStripSplitButtonAdmin
         '
-        Me.ToolStripSplitButtonAdmin.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CatálogoDeProductosToolStripMenuItem, Me.ProveedoresToolStripMenuItem, Me.CategoríasToolStripMenuItem, Me.ToolStripSeparator2, Me.UsuariosToolStripMenuItem, Me.SucursalesToolStripMenuItem, Me.CategoríasEgresosToolStripMenuItem})
+        Me.ToolStripSplitButtonAdmin.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CatálogoDeProductosToolStripMenuItem, Me.ProveedoresToolStripMenuItem, Me.CategoríasToolStripMenuItem, Me.ToolStripSeparator2, Me.UsuariosToolStripMenuItem, Me.SucursalesToolStripMenuItem, Me.CategoríasEgresosToolStripMenuItem, Me.ActualizaUsuariosToolStripMenuItem})
         Me.ToolStripSplitButtonAdmin.Image = Global.Farmacia1._0.My.Resources.Resources.Webalys_Kameleon_pics_Settings_2_32
         Me.ToolStripSplitButtonAdmin.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripSplitButtonAdmin.Name = "ToolStripSplitButtonAdmin"
@@ -147,7 +150,7 @@ Partial Class FormMenuNew
         '
         'ToolStripSplitButtonKardex
         '
-        Me.ToolStripSplitButtonKardex.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1, Me.ToolStripMenuItem2, Me.TrasladosToolStripMenuItem, Me.ToolStripSeparator3, Me.ToolStripMenuItem4, Me.ToolStripMenuItem5})
+        Me.ToolStripSplitButtonKardex.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1, Me.ToolStripMenuItem2, Me.TrasladosToolStripMenuItem, Me.ToolStripSeparator3, Me.ToolStripMenuItem4, Me.ToolStripMenuItem5, Me.ToolStripSeparator8, Me.ImprimirInventarioToolStripMenuItem})
         Me.ToolStripSplitButtonKardex.Image = Global.Farmacia1._0.My.Resources.Resources.Custom_Icon_Design_Pretty_Office_3_Sales_report_32
         Me.ToolStripSplitButtonKardex.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripSplitButtonKardex.Name = "ToolStripSplitButtonKardex"
@@ -158,20 +161,20 @@ Partial Class FormMenuNew
         'ToolStripMenuItem1
         '
         Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(197, 24)
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(209, 24)
         Me.ToolStripMenuItem1.Text = "Compras"
         '
         'ToolStripMenuItem2
         '
         Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
-        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(197, 24)
+        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(209, 24)
         Me.ToolStripMenuItem2.Text = "Ajustes"
         '
         'TrasladosToolStripMenuItem
         '
         Me.TrasladosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NuevoTrasladoToolStripMenuItem, Me.VerTrasladosToolStripMenuItem, Me.RecibirTrasladoToolStripMenuItem})
         Me.TrasladosToolStripMenuItem.Name = "TrasladosToolStripMenuItem"
-        Me.TrasladosToolStripMenuItem.Size = New System.Drawing.Size(197, 24)
+        Me.TrasladosToolStripMenuItem.Size = New System.Drawing.Size(209, 24)
         Me.TrasladosToolStripMenuItem.Text = "Traslados"
         '
         'NuevoTrasladoToolStripMenuItem
@@ -195,19 +198,30 @@ Partial Class FormMenuNew
         'ToolStripSeparator3
         '
         Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-        Me.ToolStripSeparator3.Size = New System.Drawing.Size(194, 6)
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(206, 6)
         '
         'ToolStripMenuItem4
         '
         Me.ToolStripMenuItem4.Name = "ToolStripMenuItem4"
-        Me.ToolStripMenuItem4.Size = New System.Drawing.Size(197, 24)
+        Me.ToolStripMenuItem4.Size = New System.Drawing.Size(209, 24)
         Me.ToolStripMenuItem4.Text = "Ventas"
         '
         'ToolStripMenuItem5
         '
         Me.ToolStripMenuItem5.Name = "ToolStripMenuItem5"
-        Me.ToolStripMenuItem5.Size = New System.Drawing.Size(197, 24)
+        Me.ToolStripMenuItem5.Size = New System.Drawing.Size(209, 24)
         Me.ToolStripMenuItem5.Text = "Ventas eliminadas"
+        '
+        'ToolStripSeparator8
+        '
+        Me.ToolStripSeparator8.Name = "ToolStripSeparator8"
+        Me.ToolStripSeparator8.Size = New System.Drawing.Size(206, 6)
+        '
+        'ImprimirInventarioToolStripMenuItem
+        '
+        Me.ImprimirInventarioToolStripMenuItem.Name = "ImprimirInventarioToolStripMenuItem"
+        Me.ImprimirInventarioToolStripMenuItem.Size = New System.Drawing.Size(209, 24)
+        Me.ImprimirInventarioToolStripMenuItem.Text = "Imprimir inventario"
         '
         'ToolStripSplitButtonReportes
         '
@@ -349,6 +363,13 @@ Partial Class FormMenuNew
         Me.FlowLayoutPanelDashboard.TabIndex = 2
         Me.FlowLayoutPanelDashboard.Visible = False
         '
+        'ActualizaUsuariosToolStripMenuItem
+        '
+        Me.ActualizaUsuariosToolStripMenuItem.Name = "ActualizaUsuariosToolStripMenuItem"
+        Me.ActualizaUsuariosToolStripMenuItem.Size = New System.Drawing.Size(232, 24)
+        Me.ActualizaUsuariosToolStripMenuItem.Text = "Actualiza usuarios"
+        Me.ActualizaUsuariosToolStripMenuItem.Visible = False
+        '
         'FormMenuNew
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -411,4 +432,7 @@ Partial Class FormMenuNew
     Friend WithEvents FlowLayoutPanelDashboard As FlowLayoutPanel
     Friend WithEvents ToolStripButton2 As ToolStripButton
     Friend WithEvents CategoríasEgresosToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator8 As ToolStripSeparator
+    Friend WithEvents ImprimirInventarioToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ActualizaUsuariosToolStripMenuItem As ToolStripMenuItem
 End Class
