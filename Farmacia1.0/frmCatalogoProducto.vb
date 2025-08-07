@@ -62,6 +62,15 @@ Public Class frmCatalogoProducto
             txtbarcode.Text = DataGridView1.Rows(fila).Cells(16).Value
             txtstockmin.Clear()
             txtstockmin.Text = DataGridView1.Rows(fila).Cells(17).Value
+            Dim flag As Char = If(DataGridView1.Rows(fila).Cells(18).Value, "N")
+            Select Case flag
+                Case "N"
+                    ComboBoxFlag.SelectedIndex = 0
+                Case "C"
+                    ComboBoxFlag.SelectedIndex = 1
+                Case Else
+                    ComboBoxFlag.SelectedIndex = 2
+            End Select
         Catch ex As Exception
             Log.Error($"Ocurrió un error. Error: {ex.Message}")
         End Try
@@ -111,6 +120,7 @@ Public Class frmCatalogoProducto
                 New SqlParameter("@barcode", SqlDbType.VarChar, 25) With {.Value = txtbarcode.Text},
                 New SqlParameter("@stockmin", SqlDbType.Int) With {.Value = Convert.ToInt32(If(String.IsNullOrWhiteSpace(txtstockmin.Text), 0, txtstockmin.Text))},
                 New SqlParameter("@estado", SqlDbType.Bit) With {.Value = 1},
+                New SqlParameter("@flag", SqlDbType.Char, 2) With {.Value = ComboBoxFlag.Text.Substring(0, 1)},
                 New SqlParameter("@msg", SqlDbType.VarChar, 200) With {.Direction = ParameterDirection.Output},
                 New SqlParameter("@returnValue", SqlDbType.Int) With {.Direction = ParameterDirection.ReturnValue}
             }

@@ -237,4 +237,26 @@ Public Class frmProductos
         End Try
 
     End Sub
+
+    Private Sub DataGridView1_DataBindingComplete(sender As Object, e As DataGridViewBindingCompleteEventArgs) Handles DataGridView1.DataBindingComplete
+        For Each row As DataGridViewRow In DataGridView1.Rows
+            ' 1) Extraer valor de la celda, sin errores
+            Dim valor = row.Cells("flag").Value
+            Dim flagChar As Char = "N"c
+            If valor IsNot Nothing AndAlso Not Convert.IsDBNull(valor) Then
+                Dim s = valor.ToString()
+                If s.Length > 0 Then flagChar = s(0)
+            End If
+
+            ' 2) Pintar la fila según el valor
+            Select Case flagChar
+                Case "C"c
+                    row.DefaultCellStyle.BackColor = Color.LimeGreen
+                Case "I"c
+                    row.DefaultCellStyle.BackColor = Color.Yellow
+                Case Else
+                    row.DefaultCellStyle.BackColor = Color.White
+            End Select
+        Next
+    End Sub
 End Class
