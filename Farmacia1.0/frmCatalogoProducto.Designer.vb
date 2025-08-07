@@ -28,24 +28,6 @@ Partial Class frmCatalogoProducto
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.codigo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.desc = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.compo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.presentacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.atera = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.indi = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.contra = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.obser = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.prov = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.med = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.cat = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.lab = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.precio = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.cost = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.fechReg = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.est = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.barcode = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.stockmin = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ShapeContainer1 = New Microsoft.VisualBasic.PowerPacks.ShapeContainer()
         Me.RectangleShape1 = New Microsoft.VisualBasic.PowerPacks.RectangleShape()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -73,7 +55,12 @@ Partial Class frmCatalogoProducto
         Me.cmbpro = New System.Windows.Forms.ComboBox()
         Me.cmbcat = New System.Windows.Forms.ComboBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Button4 = New System.Windows.Forms.Button()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.Button5 = New System.Windows.Forms.Button()
         Me.txtEstanteria = New System.Windows.Forms.TextBox()
         Me.txtutilidad = New System.Windows.Forms.TextBox()
         Me.Label17 = New System.Windows.Forms.Label()
@@ -89,11 +76,27 @@ Partial Class frmCatalogoProducto
         Me.txtstockmin = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.btnEditarPrecios = New System.Windows.Forms.Button()
-        Me.Button5 = New System.Windows.Forms.Button()
-        Me.Button4 = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.Label21 = New System.Windows.Forms.Label()
+        Me.ComboBoxFlag = New System.Windows.Forms.ComboBox()
+        Me.codigo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.desc = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.compo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.presentacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.atera = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.indi = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.contra = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.obser = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.prov = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.med = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cat = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.lab = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.precio = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cost = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.fechReg = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.est = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.barcode = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.stockmin = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.flag = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
@@ -156,7 +159,7 @@ Partial Class frmCatalogoProducto
         Me.DataGridView1.AllowUserToDeleteRows = False
         Me.DataGridView1.BackgroundColor = System.Drawing.Color.White
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.codigo, Me.desc, Me.compo, Me.presentacion, Me.atera, Me.indi, Me.contra, Me.obser, Me.prov, Me.med, Me.cat, Me.lab, Me.precio, Me.cost, Me.fechReg, Me.est, Me.barcode, Me.stockmin})
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.codigo, Me.desc, Me.compo, Me.presentacion, Me.atera, Me.indi, Me.contra, Me.obser, Me.prov, Me.med, Me.cat, Me.lab, Me.precio, Me.cost, Me.fechReg, Me.est, Me.barcode, Me.stockmin, Me.flag})
         Me.DataGridView1.Dock = System.Windows.Forms.DockStyle.Top
         Me.DataGridView1.Location = New System.Drawing.Point(0, 70)
         Me.DataGridView1.MultiSelect = False
@@ -165,125 +168,6 @@ Partial Class frmCatalogoProducto
         Me.DataGridView1.RowHeadersVisible = False
         Me.DataGridView1.Size = New System.Drawing.Size(1255, 270)
         Me.DataGridView1.TabIndex = 5
-        '
-        'codigo
-        '
-        Me.codigo.HeaderText = "Código"
-        Me.codigo.Name = "codigo"
-        Me.codigo.ReadOnly = True
-        '
-        'desc
-        '
-        Me.desc.HeaderText = "Descripción"
-        Me.desc.Name = "desc"
-        Me.desc.ReadOnly = True
-        Me.desc.Width = 200
-        '
-        'compo
-        '
-        Me.compo.HeaderText = "Composición"
-        Me.compo.Name = "compo"
-        Me.compo.ReadOnly = True
-        Me.compo.Width = 200
-        '
-        'presentacion
-        '
-        Me.presentacion.HeaderText = "Presentación"
-        Me.presentacion.Name = "presentacion"
-        Me.presentacion.ReadOnly = True
-        Me.presentacion.Width = 150
-        '
-        'atera
-        '
-        Me.atera.HeaderText = "Acción Terapeutica"
-        Me.atera.Name = "atera"
-        Me.atera.ReadOnly = True
-        Me.atera.Width = 250
-        '
-        'indi
-        '
-        Me.indi.HeaderText = "Indicaciones"
-        Me.indi.Name = "indi"
-        Me.indi.ReadOnly = True
-        Me.indi.Width = 300
-        '
-        'contra
-        '
-        Me.contra.HeaderText = "Contraindicaciones"
-        Me.contra.Name = "contra"
-        Me.contra.ReadOnly = True
-        Me.contra.Width = 300
-        '
-        'obser
-        '
-        Me.obser.HeaderText = "Observaciones"
-        Me.obser.Name = "obser"
-        Me.obser.ReadOnly = True
-        Me.obser.Width = 300
-        '
-        'prov
-        '
-        Me.prov.HeaderText = "Proveedor"
-        Me.prov.Name = "prov"
-        Me.prov.ReadOnly = True
-        Me.prov.Width = 150
-        '
-        'med
-        '
-        Me.med.HeaderText = "Medida"
-        Me.med.Name = "med"
-        Me.med.ReadOnly = True
-        Me.med.Width = 120
-        '
-        'cat
-        '
-        Me.cat.HeaderText = "Categoría"
-        Me.cat.Name = "cat"
-        Me.cat.ReadOnly = True
-        Me.cat.Width = 150
-        '
-        'lab
-        '
-        Me.lab.HeaderText = "Laboratorio"
-        Me.lab.Name = "lab"
-        Me.lab.ReadOnly = True
-        Me.lab.Width = 300
-        '
-        'precio
-        '
-        Me.precio.HeaderText = "Precio"
-        Me.precio.Name = "precio"
-        Me.precio.ReadOnly = True
-        '
-        'cost
-        '
-        Me.cost.HeaderText = "Costo"
-        Me.cost.Name = "cost"
-        Me.cost.ReadOnly = True
-        '
-        'fechReg
-        '
-        Me.fechReg.HeaderText = "Fecha de Registro"
-        Me.fechReg.Name = "fechReg"
-        Me.fechReg.ReadOnly = True
-        '
-        'est
-        '
-        Me.est.HeaderText = "Estantería"
-        Me.est.Name = "est"
-        Me.est.ReadOnly = True
-        '
-        'barcode
-        '
-        Me.barcode.HeaderText = "Código de barras"
-        Me.barcode.Name = "barcode"
-        Me.barcode.ReadOnly = True
-        '
-        'stockmin
-        '
-        Me.stockmin.HeaderText = "Stock Min"
-        Me.stockmin.Name = "stockmin"
-        Me.stockmin.ReadOnly = True
         '
         'ShapeContainer1
         '
@@ -509,6 +393,7 @@ Partial Class frmCatalogoProducto
         'cmbpro
         '
         Me.cmbpro.DisplayMember = "idProveedor"
+        Me.cmbpro.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbpro.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbpro.FormattingEnabled = True
         Me.cmbpro.ItemHeight = 20
@@ -521,6 +406,7 @@ Partial Class frmCatalogoProducto
         'cmbcat
         '
         Me.cmbcat.DisplayMember = "idCategoria"
+        Me.cmbcat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbcat.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbcat.FormattingEnabled = True
         Me.cmbcat.Location = New System.Drawing.Point(645, 544)
@@ -545,6 +431,46 @@ Partial Class frmCatalogoProducto
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Acciones"
         '
+        'Button4
+        '
+        Me.Button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button4.Image = Global.Farmacia1._0.My.Resources.Resources.Windows_Close_Program_icon
+        Me.Button4.Location = New System.Drawing.Point(170, 20)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(37, 34)
+        Me.Button4.TabIndex = 47
+        Me.Button4.UseVisualStyleBackColor = True
+        '
+        'Button3
+        '
+        Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button3.Image = Global.Farmacia1._0.My.Resources.Resources.trash_icon
+        Me.Button3.Location = New System.Drawing.Point(127, 20)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(37, 34)
+        Me.Button3.TabIndex = 46
+        Me.Button3.UseVisualStyleBackColor = True
+        '
+        'Button2
+        '
+        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button2.Image = Global.Farmacia1._0.My.Resources.Resources.Save_icon__2_
+        Me.Button2.Location = New System.Drawing.Point(84, 20)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(37, 34)
+        Me.Button2.TabIndex = 45
+        Me.Button2.UseVisualStyleBackColor = True
+        '
+        'Button1
+        '
+        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button1.Image = Global.Farmacia1._0.My.Resources.Resources.new_file_icon
+        Me.Button1.Location = New System.Drawing.Point(41, 20)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(37, 34)
+        Me.Button1.TabIndex = 44
+        Me.Button1.UseVisualStyleBackColor = True
+        '
         'GroupBox2
         '
         Me.GroupBox2.BackColor = System.Drawing.SystemColors.ActiveCaption
@@ -559,6 +485,20 @@ Partial Class frmCatalogoProducto
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Tag = ""
         Me.GroupBox2.Text = "Estantería"
+        '
+        'Button5
+        '
+        Me.Button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button5.ForeColor = System.Drawing.Color.Black
+        Me.Button5.Image = Global.Farmacia1._0.My.Resources.Resources.Zoom_icon
+        Me.Button5.Location = New System.Drawing.Point(37, 151)
+        Me.Button5.Name = "Button5"
+        Me.Button5.Size = New System.Drawing.Size(176, 27)
+        Me.Button5.TabIndex = 50
+        Me.Button5.Tag = "FO"
+        Me.Button5.Text = "   Ver estanterías"
+        Me.Button5.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.Button5.UseVisualStyleBackColor = True
         '
         'txtEstanteria
         '
@@ -652,7 +592,7 @@ Partial Class frmCatalogoProducto
         Me.DateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.DateTimePicker1.Location = New System.Drawing.Point(645, 651)
         Me.DateTimePicker1.Name = "DateTimePicker1"
-        Me.DateTimePicker1.Size = New System.Drawing.Size(333, 26)
+        Me.DateTimePicker1.Size = New System.Drawing.Size(170, 26)
         Me.DateTimePicker1.TabIndex = 42
         '
         'txtbarcode
@@ -713,65 +653,162 @@ Partial Class frmCatalogoProducto
         Me.btnEditarPrecios.Text = "Editar precios"
         Me.btnEditarPrecios.UseVisualStyleBackColor = True
         '
-        'Button5
+        'Label21
         '
-        Me.Button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button5.ForeColor = System.Drawing.Color.Black
-        Me.Button5.Image = Global.Farmacia1._0.My.Resources.Resources.Zoom_icon
-        Me.Button5.Location = New System.Drawing.Point(37, 151)
-        Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(176, 27)
-        Me.Button5.TabIndex = 50
-        Me.Button5.Tag = "FO"
-        Me.Button5.Text = "   Ver estanterías"
-        Me.Button5.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.Button5.UseVisualStyleBackColor = True
+        Me.Label21.AutoSize = True
+        Me.Label21.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label21.Location = New System.Drawing.Point(830, 632)
+        Me.Label21.Name = "Label21"
+        Me.Label21.Size = New System.Drawing.Size(61, 15)
+        Me.Label21.TabIndex = 50
+        Me.Label21.Text = "Bandera"
         '
-        'Button4
+        'ComboBoxFlag
         '
-        Me.Button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button4.Image = Global.Farmacia1._0.My.Resources.Resources.Windows_Close_Program_icon
-        Me.Button4.Location = New System.Drawing.Point(170, 20)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(37, 34)
-        Me.Button4.TabIndex = 47
-        Me.Button4.UseVisualStyleBackColor = True
+        Me.ComboBoxFlag.DisplayMember = "idCategoria"
+        Me.ComboBoxFlag.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBoxFlag.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ComboBoxFlag.FormattingEnabled = True
+        Me.ComboBoxFlag.Items.AddRange(New Object() {"N - Normal", "C - Controlado", "I - Incentivo"})
+        Me.ComboBoxFlag.Location = New System.Drawing.Point(833, 648)
+        Me.ComboBoxFlag.Name = "ComboBoxFlag"
+        Me.ComboBoxFlag.Size = New System.Drawing.Size(145, 28)
+        Me.ComboBoxFlag.TabIndex = 51
+        Me.ComboBoxFlag.ValueMember = "idCategoria"
         '
-        'Button3
+        'codigo
         '
-        Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button3.Image = Global.Farmacia1._0.My.Resources.Resources.trash_icon
-        Me.Button3.Location = New System.Drawing.Point(127, 20)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(37, 34)
-        Me.Button3.TabIndex = 46
-        Me.Button3.UseVisualStyleBackColor = True
+        Me.codigo.HeaderText = "Código"
+        Me.codigo.Name = "codigo"
+        Me.codigo.ReadOnly = True
         '
-        'Button2
+        'desc
         '
-        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button2.Image = Global.Farmacia1._0.My.Resources.Resources.Save_icon__2_
-        Me.Button2.Location = New System.Drawing.Point(84, 20)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(37, 34)
-        Me.Button2.TabIndex = 45
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.desc.HeaderText = "Descripción"
+        Me.desc.Name = "desc"
+        Me.desc.ReadOnly = True
+        Me.desc.Width = 200
         '
-        'Button1
+        'compo
         '
-        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button1.Image = Global.Farmacia1._0.My.Resources.Resources.new_file_icon
-        Me.Button1.Location = New System.Drawing.Point(41, 20)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(37, 34)
-        Me.Button1.TabIndex = 44
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.compo.HeaderText = "Composición"
+        Me.compo.Name = "compo"
+        Me.compo.ReadOnly = True
+        Me.compo.Width = 200
+        '
+        'presentacion
+        '
+        Me.presentacion.HeaderText = "Presentación"
+        Me.presentacion.Name = "presentacion"
+        Me.presentacion.ReadOnly = True
+        Me.presentacion.Width = 150
+        '
+        'atera
+        '
+        Me.atera.HeaderText = "Acción Terapeutica"
+        Me.atera.Name = "atera"
+        Me.atera.ReadOnly = True
+        Me.atera.Width = 250
+        '
+        'indi
+        '
+        Me.indi.HeaderText = "Indicaciones"
+        Me.indi.Name = "indi"
+        Me.indi.ReadOnly = True
+        Me.indi.Width = 300
+        '
+        'contra
+        '
+        Me.contra.HeaderText = "Contraindicaciones"
+        Me.contra.Name = "contra"
+        Me.contra.ReadOnly = True
+        Me.contra.Width = 300
+        '
+        'obser
+        '
+        Me.obser.HeaderText = "Observaciones"
+        Me.obser.Name = "obser"
+        Me.obser.ReadOnly = True
+        Me.obser.Width = 300
+        '
+        'prov
+        '
+        Me.prov.HeaderText = "Proveedor"
+        Me.prov.Name = "prov"
+        Me.prov.ReadOnly = True
+        Me.prov.Width = 150
+        '
+        'med
+        '
+        Me.med.HeaderText = "Medida"
+        Me.med.Name = "med"
+        Me.med.ReadOnly = True
+        Me.med.Width = 120
+        '
+        'cat
+        '
+        Me.cat.HeaderText = "Categoría"
+        Me.cat.Name = "cat"
+        Me.cat.ReadOnly = True
+        Me.cat.Width = 150
+        '
+        'lab
+        '
+        Me.lab.HeaderText = "Laboratorio"
+        Me.lab.Name = "lab"
+        Me.lab.ReadOnly = True
+        Me.lab.Width = 300
+        '
+        'precio
+        '
+        Me.precio.HeaderText = "Precio"
+        Me.precio.Name = "precio"
+        Me.precio.ReadOnly = True
+        '
+        'cost
+        '
+        Me.cost.HeaderText = "Costo"
+        Me.cost.Name = "cost"
+        Me.cost.ReadOnly = True
+        '
+        'fechReg
+        '
+        Me.fechReg.HeaderText = "Fecha de Registro"
+        Me.fechReg.Name = "fechReg"
+        Me.fechReg.ReadOnly = True
+        '
+        'est
+        '
+        Me.est.HeaderText = "Estantería"
+        Me.est.Name = "est"
+        Me.est.ReadOnly = True
+        '
+        'barcode
+        '
+        Me.barcode.HeaderText = "Código de barras"
+        Me.barcode.Name = "barcode"
+        Me.barcode.ReadOnly = True
+        '
+        'stockmin
+        '
+        Me.stockmin.HeaderText = "Stock Min"
+        Me.stockmin.Name = "stockmin"
+        Me.stockmin.ReadOnly = True
+        '
+        'flag
+        '
+        Me.flag.HeaderText = "Flag"
+        Me.flag.Name = "flag"
+        Me.flag.ReadOnly = True
+        Me.flag.Visible = False
         '
         'frmCatalogoProducto
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1255, 691)
+        Me.Controls.Add(Me.ComboBoxFlag)
+        Me.Controls.Add(Me.Label21)
         Me.Controls.Add(Me.btnEditarPrecios)
         Me.Controls.Add(Me.txtstockmin)
         Me.Controls.Add(Me.Label6)
@@ -877,27 +914,30 @@ Partial Class frmCatalogoProducto
     Friend WithEvents txtbarcode As System.Windows.Forms.TextBox
     Friend WithEvents Label20 As System.Windows.Forms.Label
     Friend WithEvents Button6 As System.Windows.Forms.Button
-    Friend WithEvents codigo As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents desc As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents compo As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents presentacion As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents atera As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents indi As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents contra As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents obser As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents prov As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents med As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents cat As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents lab As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents precio As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents cost As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents fechReg As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents est As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents barcode As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents stockmin As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents txtstockmin As System.Windows.Forms.TextBox
     Friend WithEvents Label6 As System.Windows.Forms.Label
     Private WithEvents ShapeContainer1 As PowerPacks.ShapeContainer
     Private WithEvents RectangleShape1 As PowerPacks.RectangleShape
     Friend WithEvents btnEditarPrecios As Button
+    Friend WithEvents Label21 As Label
+    Friend WithEvents ComboBoxFlag As ComboBox
+    Friend WithEvents codigo As DataGridViewTextBoxColumn
+    Friend WithEvents desc As DataGridViewTextBoxColumn
+    Friend WithEvents compo As DataGridViewTextBoxColumn
+    Friend WithEvents presentacion As DataGridViewTextBoxColumn
+    Friend WithEvents atera As DataGridViewTextBoxColumn
+    Friend WithEvents indi As DataGridViewTextBoxColumn
+    Friend WithEvents contra As DataGridViewTextBoxColumn
+    Friend WithEvents obser As DataGridViewTextBoxColumn
+    Friend WithEvents prov As DataGridViewTextBoxColumn
+    Friend WithEvents med As DataGridViewTextBoxColumn
+    Friend WithEvents cat As DataGridViewTextBoxColumn
+    Friend WithEvents lab As DataGridViewTextBoxColumn
+    Friend WithEvents precio As DataGridViewTextBoxColumn
+    Friend WithEvents cost As DataGridViewTextBoxColumn
+    Friend WithEvents fechReg As DataGridViewTextBoxColumn
+    Friend WithEvents est As DataGridViewTextBoxColumn
+    Friend WithEvents barcode As DataGridViewTextBoxColumn
+    Friend WithEvents stockmin As DataGridViewTextBoxColumn
+    Friend WithEvents flag As DataGridViewTextBoxColumn
 End Class
