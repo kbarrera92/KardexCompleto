@@ -44,15 +44,15 @@ Partial Class frmUsuario
         Me.ComboBox3 = New System.Windows.Forms.ComboBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.TextBoxPass1 = New System.Windows.Forms.TextBox()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.TextBoxPass2 = New System.Windows.Forms.TextBox()
-        Me.Label10 = New System.Windows.Forms.Label()
+        Me.btnPass3 = New System.Windows.Forms.Button()
+        Me.btnPass2 = New System.Windows.Forms.Button()
+        Me.btnPass1 = New System.Windows.Forms.Button()
         Me.TextBoxPass3 = New System.Windows.Forms.TextBox()
         Me.Label11 = New System.Windows.Forms.Label()
-        Me.btnPass1 = New System.Windows.Forms.Button()
-        Me.btnPass2 = New System.Windows.Forms.Button()
-        Me.btnPass3 = New System.Windows.Forms.Button()
+        Me.TextBoxPass2 = New System.Windows.Forms.TextBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.TextBoxPass1 = New System.Windows.Forms.TextBox()
+        Me.Label8 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
@@ -285,41 +285,35 @@ Partial Class frmUsuario
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Cambiar contraseña"
         '
-        'TextBoxPass1
+        'btnPass3
         '
-        Me.TextBoxPass1.Location = New System.Drawing.Point(15, 43)
-        Me.TextBoxPass1.Name = "TextBoxPass1"
-        Me.TextBoxPass1.Size = New System.Drawing.Size(211, 23)
-        Me.TextBoxPass1.TabIndex = 11
-        Me.TextBoxPass1.UseSystemPasswordChar = True
+        Me.btnPass3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnPass3.Location = New System.Drawing.Point(229, 135)
+        Me.btnPass3.Name = "btnPass3"
+        Me.btnPass3.Size = New System.Drawing.Size(30, 23)
+        Me.btnPass3.TabIndex = 18
+        Me.btnPass3.Text = "M"
+        Me.btnPass3.UseVisualStyleBackColor = True
         '
-        'Label8
+        'btnPass2
         '
-        Me.Label8.AutoSize = True
-        Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(12, 23)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(127, 15)
-        Me.Label8.TabIndex = 10
-        Me.Label8.Text = "Contraseña actual:"
+        Me.btnPass2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnPass2.Location = New System.Drawing.Point(229, 89)
+        Me.btnPass2.Name = "btnPass2"
+        Me.btnPass2.Size = New System.Drawing.Size(30, 23)
+        Me.btnPass2.TabIndex = 17
+        Me.btnPass2.Text = "M"
+        Me.btnPass2.UseVisualStyleBackColor = True
         '
-        'TextBoxPass2
+        'btnPass1
         '
-        Me.TextBoxPass2.Location = New System.Drawing.Point(15, 89)
-        Me.TextBoxPass2.Name = "TextBoxPass2"
-        Me.TextBoxPass2.Size = New System.Drawing.Size(211, 23)
-        Me.TextBoxPass2.TabIndex = 13
-        Me.TextBoxPass2.UseSystemPasswordChar = True
-        '
-        'Label10
-        '
-        Me.Label10.AutoSize = True
-        Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(12, 69)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(128, 15)
-        Me.Label10.TabIndex = 12
-        Me.Label10.Text = "Nueva Contraseña:"
+        Me.btnPass1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnPass1.Location = New System.Drawing.Point(229, 43)
+        Me.btnPass1.Name = "btnPass1"
+        Me.btnPass1.Size = New System.Drawing.Size(30, 23)
+        Me.btnPass1.TabIndex = 16
+        Me.btnPass1.Text = "M"
+        Me.btnPass1.UseVisualStyleBackColor = True
         '
         'TextBoxPass3
         '
@@ -339,32 +333,41 @@ Partial Class frmUsuario
         Me.Label11.TabIndex = 14
         Me.Label11.Text = "Confirmar contraseña"
         '
-        'btnPass1
+        'TextBoxPass2
         '
-        Me.btnPass1.Location = New System.Drawing.Point(229, 43)
-        Me.btnPass1.Name = "btnPass1"
-        Me.btnPass1.Size = New System.Drawing.Size(30, 23)
-        Me.btnPass1.TabIndex = 16
-        Me.btnPass1.Text = "M"
-        Me.btnPass1.UseVisualStyleBackColor = True
+        Me.TextBoxPass2.Location = New System.Drawing.Point(15, 89)
+        Me.TextBoxPass2.Name = "TextBoxPass2"
+        Me.TextBoxPass2.Size = New System.Drawing.Size(211, 23)
+        Me.TextBoxPass2.TabIndex = 13
+        Me.TextBoxPass2.UseSystemPasswordChar = True
         '
-        'btnPass2
+        'Label10
         '
-        Me.btnPass2.Location = New System.Drawing.Point(229, 89)
-        Me.btnPass2.Name = "btnPass2"
-        Me.btnPass2.Size = New System.Drawing.Size(30, 23)
-        Me.btnPass2.TabIndex = 17
-        Me.btnPass2.Text = "M"
-        Me.btnPass2.UseVisualStyleBackColor = True
+        Me.Label10.AutoSize = True
+        Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10.Location = New System.Drawing.Point(12, 69)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(128, 15)
+        Me.Label10.TabIndex = 12
+        Me.Label10.Text = "Nueva Contraseña:"
         '
-        'btnPass3
+        'TextBoxPass1
         '
-        Me.btnPass3.Location = New System.Drawing.Point(229, 135)
-        Me.btnPass3.Name = "btnPass3"
-        Me.btnPass3.Size = New System.Drawing.Size(30, 23)
-        Me.btnPass3.TabIndex = 18
-        Me.btnPass3.Text = "M"
-        Me.btnPass3.UseVisualStyleBackColor = True
+        Me.TextBoxPass1.Location = New System.Drawing.Point(15, 43)
+        Me.TextBoxPass1.Name = "TextBoxPass1"
+        Me.TextBoxPass1.Size = New System.Drawing.Size(211, 23)
+        Me.TextBoxPass1.TabIndex = 11
+        Me.TextBoxPass1.UseSystemPasswordChar = True
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.Location = New System.Drawing.Point(12, 23)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(127, 15)
+        Me.Label8.TabIndex = 10
+        Me.Label8.Text = "Contraseña actual:"
         '
         'frmUsuario
         '

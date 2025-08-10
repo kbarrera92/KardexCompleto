@@ -1,4 +1,5 @@
 ﻿Imports System.Data.SqlClient
+Imports Serilog
 
 Module UserMigrationOnce
     Public Sub MigrarContrasenasAHash()
@@ -22,13 +23,12 @@ Module UserMigrationOnce
         Const updateSql = "
         UPDATE USUARIO
            SET PasswordSalt   = @salt,
-               PasswordHash   = @hash,
-               contraUsuario  = NULL
+               PasswordHash   = @hash
          WHERE idUsuario      = @id"
 
         For Each u In toMigrate
-            Dim salt() = PasswordHelper.GenerateSalt()
-            Dim hash() = PasswordHelper.HashPassword(u.PlainPwd, salt)
+            Dim salt() = GenerateSalt()
+            Dim hash() = HashPassword(u.PlainPwd, salt)
 
             Using updCmd As New SqlCommand(updateSql, conn)
                 updCmd.Parameters.Add("@salt", SqlDbType.VarBinary, 128).Value = salt

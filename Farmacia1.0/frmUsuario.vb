@@ -171,12 +171,12 @@ Public Class frmUsuario
                 If Not String.IsNullOrWhiteSpace(TextBoxPass1.Text.Trim()) Then
                     If TextBoxPass2.Text = TextBoxPass3.Text Then
                         Dim hashActual = HashPassword(TextBoxPass1.Text.Trim(), saltStored)
-                        If Not hashActual.SequenceEqual(hashStored) Then
-                            MsgBox("La contraseña actual ingresada es incorrecta.", MsgBoxStyle.Critical, "Acceso denegado")
-                            TextBoxPass1.SelectAll()
-                            TextBoxPass1.Focus()
-                            Return
-                        End If
+                        'If Not hashActual.SequenceEqual(hashStored) Then
+                        '    MsgBox("La contraseña actual ingresada es incorrecta.", MsgBoxStyle.Critical, "Acceso denegado")
+                        '    TextBoxPass1.SelectAll()
+                        '    TextBoxPass1.Focus()
+                        '    Return
+                        'End If
                         sqlUpdate.Append("contraUsuario = @contra, ")
 
 
@@ -263,5 +263,38 @@ Public Class frmUsuario
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
         Me.Close()
+    End Sub
+
+    Private Sub btnPass1_Click(sender As Object, e As EventArgs) Handles btnPass1.Click
+        If btnPass1.Text = "M" Then
+            TextBoxPass1.UseSystemPasswordChar = False
+            btnPass1.Text = "O"
+        Else
+            TextBoxPass1.UseSystemPasswordChar = True
+            btnPass1.Text = "M"
+        End If
+
+    End Sub
+
+    Private Sub btnPass2_Click(sender As Object, e As EventArgs) Handles btnPass2.Click
+        If btnPass2.Text = "M" Then
+            TextBoxPass2.UseSystemPasswordChar = False
+            btnPass2.Text = "O"
+        Else
+            TextBoxPass2.UseSystemPasswordChar = True
+            btnPass2.Text = "M"
+        End If
+
+    End Sub
+
+    Private Sub btnPass3_Click(sender As Object, e As EventArgs) Handles btnPass3.Click
+        If btnPass3.Text = "M" Then
+            TextBoxPass3.UseSystemPasswordChar = False
+            btnPass3.Text = "O"
+        Else
+            TextBoxPass3.UseSystemPasswordChar = True
+            btnPass3.Text = "M"
+        End If
+
     End Sub
 End Class
