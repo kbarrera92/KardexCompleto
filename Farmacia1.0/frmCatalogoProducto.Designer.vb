@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmCatalogoProducto
     Inherits System.Windows.Forms.Form
 
     'Form reemplaza a Dispose para limpiar la lista de componentes.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class frmCatalogoProducto
     'NOTA: el Diseñador de Windows Forms necesita el siguiente procedimiento
     'Se puede modificar usando el Diseñador de Windows Forms.  
     'No lo modifique con el editor de código.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -28,24 +28,6 @@ Partial Class frmCatalogoProducto
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.codigo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.desc = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.compo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.presentacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.atera = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.indi = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.contra = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.obser = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.prov = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.med = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.cat = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.lab = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.precio = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.cost = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.fechReg = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.est = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.barcode = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.stockmin = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ShapeContainer1 = New Microsoft.VisualBasic.PowerPacks.ShapeContainer()
         Me.RectangleShape1 = New Microsoft.VisualBasic.PowerPacks.RectangleShape()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -87,12 +69,31 @@ Partial Class frmCatalogoProducto
         Me.Label19 = New System.Windows.Forms.Label()
         Me.txtcosto = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
         Me.txtbarcode = New System.Windows.Forms.TextBox()
         Me.Label20 = New System.Windows.Forms.Label()
         Me.Button6 = New System.Windows.Forms.Button()
         Me.txtstockmin = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
+        Me.ComboBoxEstado = New System.Windows.Forms.ComboBox()
+        Me.codigo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.desc = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.compo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.presentacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.atera = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.indi = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.contra = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.obser = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.prov = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.med = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cat = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.lab = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.precio = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cost = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.fechReg = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.est = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.barcode = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.stockmin = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.activo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
@@ -155,7 +156,7 @@ Partial Class frmCatalogoProducto
         Me.DataGridView1.AllowUserToDeleteRows = False
         Me.DataGridView1.BackgroundColor = System.Drawing.Color.White
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.codigo, Me.desc, Me.compo, Me.presentacion, Me.atera, Me.indi, Me.contra, Me.obser, Me.prov, Me.med, Me.cat, Me.lab, Me.precio, Me.cost, Me.fechReg, Me.est, Me.barcode, Me.stockmin})
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.codigo, Me.desc, Me.compo, Me.presentacion, Me.atera, Me.indi, Me.contra, Me.obser, Me.prov, Me.med, Me.cat, Me.lab, Me.precio, Me.cost, Me.fechReg, Me.est, Me.barcode, Me.stockmin, Me.activo})
         Me.DataGridView1.Dock = System.Windows.Forms.DockStyle.Top
         Me.DataGridView1.Location = New System.Drawing.Point(0, 70)
         Me.DataGridView1.MultiSelect = False
@@ -164,125 +165,6 @@ Partial Class frmCatalogoProducto
         Me.DataGridView1.RowHeadersVisible = False
         Me.DataGridView1.Size = New System.Drawing.Size(1255, 270)
         Me.DataGridView1.TabIndex = 1
-        '
-        'codigo
-        '
-        Me.codigo.HeaderText = "Código"
-        Me.codigo.Name = "codigo"
-        Me.codigo.ReadOnly = True
-        '
-        'desc
-        '
-        Me.desc.HeaderText = "Descripción"
-        Me.desc.Name = "desc"
-        Me.desc.ReadOnly = True
-        Me.desc.Width = 200
-        '
-        'compo
-        '
-        Me.compo.HeaderText = "Composición"
-        Me.compo.Name = "compo"
-        Me.compo.ReadOnly = True
-        Me.compo.Width = 200
-        '
-        'presentacion
-        '
-        Me.presentacion.HeaderText = "Presentación"
-        Me.presentacion.Name = "presentacion"
-        Me.presentacion.ReadOnly = True
-        Me.presentacion.Width = 150
-        '
-        'atera
-        '
-        Me.atera.HeaderText = "Acción Terapeutica"
-        Me.atera.Name = "atera"
-        Me.atera.ReadOnly = True
-        Me.atera.Width = 250
-        '
-        'indi
-        '
-        Me.indi.HeaderText = "Indicaciones"
-        Me.indi.Name = "indi"
-        Me.indi.ReadOnly = True
-        Me.indi.Width = 300
-        '
-        'contra
-        '
-        Me.contra.HeaderText = "Contraindicaciones"
-        Me.contra.Name = "contra"
-        Me.contra.ReadOnly = True
-        Me.contra.Width = 300
-        '
-        'obser
-        '
-        Me.obser.HeaderText = "Observaciones"
-        Me.obser.Name = "obser"
-        Me.obser.ReadOnly = True
-        Me.obser.Width = 300
-        '
-        'prov
-        '
-        Me.prov.HeaderText = "Proveedor"
-        Me.prov.Name = "prov"
-        Me.prov.ReadOnly = True
-        Me.prov.Width = 150
-        '
-        'med
-        '
-        Me.med.HeaderText = "Medida"
-        Me.med.Name = "med"
-        Me.med.ReadOnly = True
-        Me.med.Width = 120
-        '
-        'cat
-        '
-        Me.cat.HeaderText = "Categoría"
-        Me.cat.Name = "cat"
-        Me.cat.ReadOnly = True
-        Me.cat.Width = 150
-        '
-        'lab
-        '
-        Me.lab.HeaderText = "Laboratorio"
-        Me.lab.Name = "lab"
-        Me.lab.ReadOnly = True
-        Me.lab.Width = 300
-        '
-        'precio
-        '
-        Me.precio.HeaderText = "Precio"
-        Me.precio.Name = "precio"
-        Me.precio.ReadOnly = True
-        '
-        'cost
-        '
-        Me.cost.HeaderText = "Costo"
-        Me.cost.Name = "cost"
-        Me.cost.ReadOnly = True
-        '
-        'fechReg
-        '
-        Me.fechReg.HeaderText = "Fecha de Registro"
-        Me.fechReg.Name = "fechReg"
-        Me.fechReg.ReadOnly = True
-        '
-        'est
-        '
-        Me.est.HeaderText = "Estantería"
-        Me.est.Name = "est"
-        Me.est.ReadOnly = True
-        '
-        'barcode
-        '
-        Me.barcode.HeaderText = "Código de barras"
-        Me.barcode.Name = "barcode"
-        Me.barcode.ReadOnly = True
-        '
-        'stockmin
-        '
-        Me.stockmin.HeaderText = "Stock Min"
-        Me.stockmin.Name = "stockmin"
-        Me.stockmin.ReadOnly = True
         '
         'ShapeContainer1
         '
@@ -692,18 +574,9 @@ Partial Class frmCatalogoProducto
         Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label9.Location = New System.Drawing.Point(642, 632)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(119, 15)
+        Me.Label9.Size = New System.Drawing.Size(51, 15)
         Me.Label9.TabIndex = 77
-        Me.Label9.Text = "Fecha de registro"
-        '
-        'DateTimePicker1
-        '
-        Me.DateTimePicker1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.DateTimePicker1.Location = New System.Drawing.Point(645, 651)
-        Me.DateTimePicker1.Name = "DateTimePicker1"
-        Me.DateTimePicker1.Size = New System.Drawing.Size(333, 26)
-        Me.DateTimePicker1.TabIndex = 19
+        Me.Label9.Text = "Estado"
         '
         'txtbarcode
         '
@@ -749,17 +622,156 @@ Partial Class frmCatalogoProducto
         Me.Label6.TabIndex = 82
         Me.Label6.Text = "Existencía mínima"
         '
+        'ComboBoxEstado
+        '
+        Me.ComboBoxEstado.DisplayMember = "idCategoria"
+        Me.ComboBoxEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBoxEstado.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ComboBoxEstado.FormattingEnabled = True
+        Me.ComboBoxEstado.Items.AddRange(New Object() {"ACTIVO", "INACTIVO"})
+        Me.ComboBoxEstado.Location = New System.Drawing.Point(645, 650)
+        Me.ComboBoxEstado.Name = "ComboBoxEstado"
+        Me.ComboBoxEstado.Size = New System.Drawing.Size(333, 28)
+        Me.ComboBoxEstado.TabIndex = 83
+        Me.ComboBoxEstado.ValueMember = "idCategoria"
+        '
+        'codigo
+        '
+        Me.codigo.HeaderText = "Código"
+        Me.codigo.Name = "codigo"
+        Me.codigo.ReadOnly = True
+        '
+        'desc
+        '
+        Me.desc.HeaderText = "Descripción"
+        Me.desc.Name = "desc"
+        Me.desc.ReadOnly = True
+        Me.desc.Width = 200
+        '
+        'compo
+        '
+        Me.compo.HeaderText = "Composición"
+        Me.compo.Name = "compo"
+        Me.compo.ReadOnly = True
+        Me.compo.Width = 200
+        '
+        'presentacion
+        '
+        Me.presentacion.HeaderText = "Presentación"
+        Me.presentacion.Name = "presentacion"
+        Me.presentacion.ReadOnly = True
+        Me.presentacion.Width = 150
+        '
+        'atera
+        '
+        Me.atera.HeaderText = "Acción Terapeutica"
+        Me.atera.Name = "atera"
+        Me.atera.ReadOnly = True
+        Me.atera.Width = 250
+        '
+        'indi
+        '
+        Me.indi.HeaderText = "Indicaciones"
+        Me.indi.Name = "indi"
+        Me.indi.ReadOnly = True
+        Me.indi.Width = 300
+        '
+        'contra
+        '
+        Me.contra.HeaderText = "Contraindicaciones"
+        Me.contra.Name = "contra"
+        Me.contra.ReadOnly = True
+        Me.contra.Width = 300
+        '
+        'obser
+        '
+        Me.obser.HeaderText = "Observaciones"
+        Me.obser.Name = "obser"
+        Me.obser.ReadOnly = True
+        Me.obser.Width = 300
+        '
+        'prov
+        '
+        Me.prov.HeaderText = "Proveedor"
+        Me.prov.Name = "prov"
+        Me.prov.ReadOnly = True
+        Me.prov.Width = 150
+        '
+        'med
+        '
+        Me.med.HeaderText = "Medida"
+        Me.med.Name = "med"
+        Me.med.ReadOnly = True
+        Me.med.Width = 120
+        '
+        'cat
+        '
+        Me.cat.HeaderText = "Categoría"
+        Me.cat.Name = "cat"
+        Me.cat.ReadOnly = True
+        Me.cat.Width = 150
+        '
+        'lab
+        '
+        Me.lab.HeaderText = "Laboratorio"
+        Me.lab.Name = "lab"
+        Me.lab.ReadOnly = True
+        Me.lab.Width = 300
+        '
+        'precio
+        '
+        Me.precio.HeaderText = "Precio"
+        Me.precio.Name = "precio"
+        Me.precio.ReadOnly = True
+        '
+        'cost
+        '
+        Me.cost.HeaderText = "Costo"
+        Me.cost.Name = "cost"
+        Me.cost.ReadOnly = True
+        '
+        'fechReg
+        '
+        Me.fechReg.HeaderText = "Fecha de Registro"
+        Me.fechReg.Name = "fechReg"
+        Me.fechReg.ReadOnly = True
+        '
+        'est
+        '
+        Me.est.HeaderText = "Estantería"
+        Me.est.Name = "est"
+        Me.est.ReadOnly = True
+        '
+        'barcode
+        '
+        Me.barcode.HeaderText = "Código de barras"
+        Me.barcode.Name = "barcode"
+        Me.barcode.ReadOnly = True
+        '
+        'stockmin
+        '
+        Me.stockmin.HeaderText = "Stock Min"
+        Me.stockmin.Name = "stockmin"
+        Me.stockmin.ReadOnly = True
+        '
+        'activo
+        '
+        Me.activo.HeaderText = "Activo"
+        Me.activo.Name = "activo"
+        Me.activo.ReadOnly = True
+        Me.activo.Visible = False
+        '
         'frmCatalogoProducto
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1255, 714)
+        Me.Controls.Add(Me.ComboBoxEstado)
         Me.Controls.Add(Me.txtstockmin)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.Button6)
         Me.Controls.Add(Me.txtbarcode)
         Me.Controls.Add(Me.Label20)
-        Me.Controls.Add(Me.DateTimePicker1)
         Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.txtcosto)
         Me.Controls.Add(Me.txtutilidad)
@@ -854,30 +866,31 @@ Partial Class frmCatalogoProducto
     Friend WithEvents Label19 As System.Windows.Forms.Label
     Friend WithEvents txtcosto As System.Windows.Forms.TextBox
     Friend WithEvents Label9 As System.Windows.Forms.Label
-    Friend WithEvents DateTimePicker1 As System.Windows.Forms.DateTimePicker
     Friend WithEvents txtEstanteria As System.Windows.Forms.TextBox
     Friend WithEvents Button5 As System.Windows.Forms.Button
     Friend WithEvents txtbarcode As System.Windows.Forms.TextBox
     Friend WithEvents Label20 As System.Windows.Forms.Label
     Friend WithEvents Button6 As System.Windows.Forms.Button
-    Friend WithEvents codigo As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents desc As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents compo As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents presentacion As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents atera As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents indi As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents contra As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents obser As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents prov As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents med As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents cat As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents lab As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents precio As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents cost As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents fechReg As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents est As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents barcode As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents stockmin As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents txtstockmin As System.Windows.Forms.TextBox
     Friend WithEvents Label6 As System.Windows.Forms.Label
+    Friend WithEvents codigo As DataGridViewTextBoxColumn
+    Friend WithEvents desc As DataGridViewTextBoxColumn
+    Friend WithEvents compo As DataGridViewTextBoxColumn
+    Friend WithEvents presentacion As DataGridViewTextBoxColumn
+    Friend WithEvents atera As DataGridViewTextBoxColumn
+    Friend WithEvents indi As DataGridViewTextBoxColumn
+    Friend WithEvents contra As DataGridViewTextBoxColumn
+    Friend WithEvents obser As DataGridViewTextBoxColumn
+    Friend WithEvents prov As DataGridViewTextBoxColumn
+    Friend WithEvents med As DataGridViewTextBoxColumn
+    Friend WithEvents cat As DataGridViewTextBoxColumn
+    Friend WithEvents lab As DataGridViewTextBoxColumn
+    Friend WithEvents precio As DataGridViewTextBoxColumn
+    Friend WithEvents cost As DataGridViewTextBoxColumn
+    Friend WithEvents fechReg As DataGridViewTextBoxColumn
+    Friend WithEvents est As DataGridViewTextBoxColumn
+    Friend WithEvents barcode As DataGridViewTextBoxColumn
+    Friend WithEvents stockmin As DataGridViewTextBoxColumn
+    Friend WithEvents activo As DataGridViewTextBoxColumn
+    Friend WithEvents ComboBoxEstado As ComboBox
 End Class

@@ -51,44 +51,28 @@ Public Class frmCatalogoProducto
             txtlab.Text = DataGridView1.Rows(fila).Cells(11).Value
             txtprecio.Text = DataGridView1.Rows(fila).Cells(12).Value
             txtcosto.Text = DataGridView1.Rows(fila).Cells(13).Value
-            DateTimePicker1.Value = Convert.ToDateTime(DataGridView1.Rows(fila).Cells(14).Value)
             txtutilidad.Text = FormatNumber(Val(txtprecio.Text) - Val(txtcosto.Text), 2)
             txtEstanteria.Text = DataGridView1.Rows(fila).Cells(15).Value
             txtbarcode.Clear()
             txtbarcode.Text = DataGridView1.Rows(fila).Cells(16).Value
             txtstockmin.Clear()
             txtstockmin.Text = DataGridView1.Rows(fila).Cells(17).Value
+
+            ComboBoxEstado.SelectedIndex = If(Convert.ToBoolean(DataGridView1.Rows(fila).Cells(18).Value), 0, 1)
         Catch ex As Exception
 
         End Try
     End Sub
 
     Sub cargarDGVProd()
-        Dim sql As String
-        Dim cmd As SqlCommand
-        Dim da As SqlDataAdapter
-
-        Dim dt As New DataTable
-
-        sql = "SELECT p.idProducto, p.dProducto, ISNULL(p.composicion, ''), p.presentacion, ISNULL(p.aterapeutica, ''), ISNULL(p.indicaciones, ''), " _
-            & "ISNULL(p.contraindicaciones, ''), ISNULL(p.observaciones, ''), PROVEEDOR.rzProveedor, ISNULL(p.medida, ''), CATEGORIA.categoria, ISNULL(p.laboratorio, ''), p.precio, p.costo, p.fechaRegistro, ISNULL(p.estanteria, ''), ISNULL(p.barcode, ''), ISNULL(p.stockmin, '') " _
-            & "FROM CATEGORIA INNER JOIN " _
-            & "PRODUCTOS p ON CATEGORIA.idCategoria = p.categoria INNER JOIN " _
-            & "PROVEEDOR ON p.proveedor = dbo.PROVEEDOR.idProveedor " _
-            & "WHERE p.activo = 1"
+        Dim sqlParameters As New List(Of SqlParameter) From {
+            New SqlParameter("@Operacion", "LISTAR")
+        }
 
         Try
             openConnection()
-            cmd = New SqlCommand()
-
-            With cmd
-                cmd.CommandText = sql
-                cmd.CommandType = CommandType.Text
-                cmd.Connection = conn
-            End With
-
-            da = New SqlDataAdapter(cmd)
-            da.Fill(dt)
+            Dim spResult As SpResult = SqlHelper.ExecuteStoredProcedure("sp_mantProducto", sqlParameters)
+            Dim dt As DataTable = spResult.Data.Tables(0)
 
             For i = 0 To dt.Columns.Count - 1
                 DataGridView1.Columns(i).DataPropertyName = dt.Columns(i).ToString
@@ -96,7 +80,6 @@ Public Class frmCatalogoProducto
 
             dv = dt.DefaultView
             DataGridView1.DataSource = dv
-            'ds.Tables(0).DefaultView
         Catch ex As Exception
             MsgBox("Error al cargar los datos.")
             'Guardar en log
@@ -118,8 +101,6 @@ Public Class frmCatalogoProducto
         cmbcat.SelectedIndex = -1
         cmbpro.SelectedIndex = -1
         ComboBox1.SelectedIndex = 0
-        DateTimePicker1.CustomFormat = "dd/MM/yyyy"
-        DateTimePicker1.Value = Now
         getDatos()
         'Timer1.Start()
     End Sub
@@ -128,7 +109,6 @@ Public Class frmCatalogoProducto
         txtcod.Clear()
         txtdesc.Clear()
         txtcomposicion.Clear()
-        DateTimePicker1.Value = Today
         txtpres.Clear()
         txtat.Clear()
 
@@ -165,7 +145,7 @@ Public Class frmCatalogoProducto
             .Laboratorio = txtlab.Text.Trim(),
             .Precio = If(Not String.IsNullOrEmpty(txtprecio.Text) AndAlso Decimal.TryParse(txtprecio.Text.Trim(), resultDecimal), resultDecimal, 0),
             .Costo = If(Not String.IsNullOrEmpty(txtcosto.Text) AndAlso Decimal.TryParse(txtcosto.Text.Trim(), resultDecimal), resultDecimal, 0),
-            .FechaRegistro = DateTimePicker1.Value,
+            .FechaRegistro = Date.Now,
             .Estanteria = If(Not String.IsNullOrEmpty(txtEstanteria.Text) AndAlso Integer.TryParse(txtEstanteria.Text.Trim(), result), result, 0),
             .Barcode = txtbarcode.Text.Trim(),
             .Stockmin = If(Not String.IsNullOrEmpty(txtstockmin.Text) AndAlso Integer.TryParse(txtstockmin.Text.Trim(), result), result, 0)
@@ -195,7 +175,7 @@ Public Class frmCatalogoProducto
                         New SqlParameter("@laboratorio", If(String.IsNullOrWhiteSpace(txtlab.Text), DBNull.Value, txtlab.Text.Trim())),
                         New SqlParameter("@precio", If(String.IsNullOrWhiteSpace(txtprecio.Text), DBNull.Value, CDbl(txtprecio.Text))),
                         New SqlParameter("@costo", If(String.IsNullOrWhiteSpace(txtcosto.Text), DBNull.Value, CDbl(txtcosto.Text))),
-                        New SqlParameter("@fechaRegistro", DateTimePicker1.Value),
+                        New SqlParameter("@fechaRegistro", Date.Now),
                         New SqlParameter("@estanteria", If(String.IsNullOrWhiteSpace(txtEstanteria.Text), DBNull.Value, CInt(txtEstanteria.Text))),
                         New SqlParameter("@barcode", If(String.IsNullOrWhiteSpace(txtbarcode.Text), DBNull.Value, txtbarcode.Text.Trim())),
                         New SqlParameter("@stockmin", If(String.IsNullOrWhiteSpace(txtstockmin.Text), DBNull.Value, CInt(txtstockmin.Text))),
@@ -219,7 +199,6 @@ Public Class frmCatalogoProducto
 
                         txtpres.Clear()
                         txtat.Clear()
-                        DateTimePicker1.Value = Today
                         txtindi.Clear()
                         txtcontra.Clear()
                         cmbpro.SelectedIndex = -1
@@ -241,42 +220,44 @@ Public Class frmCatalogoProducto
                 End If
             Else
                 If MessageBox.Show("¿Desea guardar los cambios de este registro?", "Guardar cambios", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
-                    Dim sqlupdate As String = "UPDATE PRODUCTO SET dProducto = @desc, " _
-                                              & "composicion = @comp, presentacion = @pres, aterapeutica = @at, " _
-                                              & "indicaciones = @indi, contraindicaciones = @con, observaciones = @obs, " _
-                                              & "proveedor = @pro, medida = @med, categoria = @cat, laboratorio = @lab, precio = @prec, costo = @cost, fechaRegistro = @fi, estanteria = @est, barcode = @bar, stockmin = @stock WHERE idProducto = @id"
-                    Dim cmd As SqlCommand
-                    cmd = New SqlCommand(sqlupdate, conn)
 
-                    cmd.Parameters.AddWithValue("desc", Trim(txtdesc.Text))
-                    cmd.Parameters.AddWithValue("comp", Trim(txtcomposicion.Text))
+                    Dim sqlParameters As New List(Of SqlParameter) From {
+                        New SqlParameter("@Operacion", "ACTUALIZAR"),
+                        New SqlParameter("@idProducto", If(String.IsNullOrWhiteSpace(txtcod.Text), DBNull.Value, CInt(txtcod.Text))),
+                        New SqlParameter("@dProducto", If(String.IsNullOrWhiteSpace(txtdesc.Text), DBNull.Value, txtdesc.Text.Trim())),
+                        New SqlParameter("@composicion", If(String.IsNullOrWhiteSpace(txtcomposicion.Text), DBNull.Value, txtcomposicion.Text.Trim())),
+                        New SqlParameter("@presentacion", If(String.IsNullOrWhiteSpace(txtpres.Text), DBNull.Value, txtpres.Text.Trim())),
+                        New SqlParameter("@aterapeutica", If(String.IsNullOrWhiteSpace(txtat.Text), DBNull.Value, txtat.Text.Trim())),
+                        New SqlParameter("@indicaciones", If(String.IsNullOrWhiteSpace(txtindi.Text), DBNull.Value, txtindi.Text.Trim())),
+                        New SqlParameter("@contraindicaciones", If(String.IsNullOrWhiteSpace(txtcontra.Text), DBNull.Value, txtcontra.Text.Trim())),
+                        New SqlParameter("@observaciones", If(String.IsNullOrWhiteSpace(txtobs.Text), DBNull.Value, txtobs.Text.Trim())),
+                        New SqlParameter("@proveedor", If(cmbpro.SelectedValue Is Nothing, DBNull.Value, cmbpro.SelectedValue)),
+                        New SqlParameter("@medida", If(String.IsNullOrWhiteSpace(txtmed.Text), DBNull.Value, txtmed.Text.Trim())),
+                        New SqlParameter("@categoria", If(cmbcat.SelectedValue Is Nothing, DBNull.Value, cmbcat.SelectedValue)),
+                        New SqlParameter("@laboratorio", If(String.IsNullOrWhiteSpace(txtlab.Text), DBNull.Value, txtlab.Text.Trim())),
+                        New SqlParameter("@precio", If(String.IsNullOrWhiteSpace(txtprecio.Text), DBNull.Value, CDbl(txtprecio.Text))),
+                        New SqlParameter("@costo", If(String.IsNullOrWhiteSpace(txtcosto.Text), DBNull.Value, CDbl(txtcosto.Text))),
+                        New SqlParameter("@estanteria", If(String.IsNullOrWhiteSpace(txtEstanteria.Text), DBNull.Value, CInt(txtEstanteria.Text))),
+                        New SqlParameter("@barcode", If(String.IsNullOrWhiteSpace(txtbarcode.Text), DBNull.Value, txtbarcode.Text.Trim())),
+                        New SqlParameter("@stockmin", If(String.IsNullOrWhiteSpace(txtstockmin.Text), DBNull.Value, CInt(txtstockmin.Text))),
+                        New SqlParameter("@MSG", SqlDbType.VarChar, 200) With {.Direction = ParameterDirection.Output},
+                        New SqlParameter("@nuevoId", SqlDbType.Int) With {.Direction = ParameterDirection.Output}
+                    }
 
-                    cmd.Parameters.AddWithValue("pres", Trim(txtpres.Text))
-                    cmd.Parameters.AddWithValue("at", Trim(txtat.Text))
-                    cmd.Parameters.AddWithValue("indi", Trim(txtindi.Text))
-
-                    cmd.Parameters.AddWithValue("con", Trim(txtcontra.Text))
-                    cmd.Parameters.AddWithValue("obs", Trim(txtobs.Text))
-                    cmd.Parameters.AddWithValue("pro", Trim(cmbpro.SelectedValue))
-                    cmd.Parameters.AddWithValue("med", Trim(txtmed.Text))
-                    cmd.Parameters.AddWithValue("cat", Trim(cmbcat.SelectedValue))
-                    cmd.Parameters.AddWithValue("lab", Trim(txtlab.Text))
-                    cmd.Parameters.AddWithValue("prec", CDbl(txtprecio.Text))
-                    cmd.Parameters.AddWithValue("cost", CDbl(txtcosto.Text))
-                    cmd.Parameters.AddWithValue("fi", DateTimePicker1.Value)
-                    cmd.Parameters.AddWithValue("id", CInt(txtcod.Text))
-                    cmd.Parameters.AddWithValue("est", CInt(If(txtEstanteria.Text, 0)))
-                    cmd.Parameters.AddWithValue("bar", Trim(txtbarcode.Text))
-                    cmd.Parameters.AddWithValue("stock", CInt(Val(txtstockmin.Text)))
                     Try
                         openConnection()
-                        cmd.ExecuteNonQuery()
+                        Dim spResult As SpResult = SqlHelper.ExecuteStoredProcedure("sp_mantProducto", sqlParameters)
+                        If spResult.OutputParams("@nuevoId") > 0 Then
+                            MessageBox.Show(spResult.OutputParams("@MSG"), "Actualización correcta", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        Else
+                            MessageBox.Show(spResult.OutputParams("@MSG"), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            Return
+                        End If
+
                         TextBox1.Clear()
-
-
-                        MessageBox.Show("La información del producto se actualizó de forma correcta", "Actualizado", MessageBoxButtons.OK, MessageBoxIcon.Information)
                     Catch ex As Exception
-                        MessageBox.Show("Algo salió mal" & vbCrLf & "Error: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                        MessageBox.Show("Algo salió mal. Comuniquese con el Administrador", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                        'Dejar Log
                     Finally
                         closeConnection()
                         cargarDGVProd()
@@ -292,18 +273,26 @@ Public Class frmCatalogoProducto
         If Trim(txtcod.Text) = "" Or Trim(txtdesc.Text) = "" Then
             MessageBox.Show("No se ha elegido ningún registro para eliminar", "Faltan datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         Else
+            Dim sqlParameters As New List(Of SqlParameter) From {
+                New SqlParameter("@Operacion", "DESACTIVAR"),
+                New SqlParameter("@idProducto", If(String.IsNullOrWhiteSpace(txtcod.Text), DBNull.Value, CInt(txtcod.Text))),
+                New SqlParameter("@MSG", SqlDbType.VarChar, 200) With {.Direction = ParameterDirection.Output},
+                New SqlParameter("@nuevoId", SqlDbType.Int) With {.Direction = ParameterDirection.Output}
+            }
+
+            If MessageBox.Show("¿Desea desactivar este producto?", "Desactivar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
 
 
-            If MessageBox.Show("¿Desea eliminar este registro?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
-                Dim sqldelete As String = "DELETE FROM PRODUCTO WHERE idProducto = @id"
-                Dim comand As SqlCommand
-
-                comand = New SqlCommand(sqldelete, conn)
-                comand.Parameters.AddWithValue("id", CInt(txtcod.Text))
                 Try
                     openConnection()
-                    comand.ExecuteNonQuery()
-                    MessageBox.Show("El registro se eliminó de forma correcta", "Eliminado", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    Dim spResult As SpResult = SqlHelper.ExecuteStoredProcedure("sp_mantProducto", sqlParameters)
+                    If spResult.OutputParams("@nuevoId") > 0 Then
+                        MessageBox.Show(spResult.OutputParams("@MSG"), "Desactivación correcta", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    Else
+                        MessageBox.Show(spResult.OutputParams("@MSG"), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        Return
+                    End If
+
                     TextBox1.Clear()
                     txtcod.Clear()
                     txtdesc.Clear()
@@ -404,4 +393,6 @@ Public Class frmCatalogoProducto
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
         txtbarcode.Text = "A" & txtcod.Text & "A"
     End Sub
+
+
 End Class
