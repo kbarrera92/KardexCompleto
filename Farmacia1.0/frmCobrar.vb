@@ -54,8 +54,8 @@ Public Class frmCobrar
                 .AddWithValue("cliente", Trim(txtnit.Text))
                 .AddWithValue("documento", If(Trim(txtFactura.Text) = "", DBNull.Value, CInt(txtFactura.Text)))
                 .AddWithValue("total", CDbl(txttotal.Text))
-                .AddWithValue("efectivo", (CDbl(txtpago.Text) + CDbl(txttarjeta.Text)) - CDbl(txtcambio.Text))
-                .AddWithValue("tarjeta", CDbl(txttarjeta.Text))
+                Call .AddWithValue("efectivo", (txtpago.Text + CDbl(txttarjeta.Text)) - CDbl(txtcambio.Text))
+                Call .AddWithValue("tarjeta", CDbl(txttarjeta.Text))
                 .AddWithValue("autoriza", txtautori.Text)
                 .AddWithValue("detalles", table)
 
@@ -108,7 +108,7 @@ Public Class frmCobrar
 
                 If pv = 1 Then
                     frmPuntoDeVentaMejorado.cleanAll()
-                    Me.Close()
+                    Close()
 
                 End If
 

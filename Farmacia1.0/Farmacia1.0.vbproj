@@ -407,6 +407,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IS_PRO2DataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Models\Producto.vb" />
+    <Compile Include="Models\SpResult.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -466,6 +468,8 @@
     </Compile>
     <Compile Include="Utils\clsFunciones.vb" />
     <Compile Include="Utils\ModuleUtils.vb" />
+    <Compile Include="Utils\ProductoService.vb" />
+    <Compile Include="Utils\SqlHelper.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Form1.resx">

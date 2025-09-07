@@ -52,7 +52,7 @@ Partial Class frmCatalogoProducto
         Me.txtcod = New System.Windows.Forms.TextBox()
         Me.txtdesc = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.txtcomp = New System.Windows.Forms.TextBox()
+        Me.txtcomposicion = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.txtat = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
@@ -318,6 +318,7 @@ Partial Class frmCatalogoProducto
         Me.txtcod.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtcod.Location = New System.Drawing.Point(26, 387)
         Me.txtcod.Name = "txtcod"
+        Me.txtcod.ReadOnly = True
         Me.txtcod.Size = New System.Drawing.Size(133, 26)
         Me.txtcod.TabIndex = 1
         '
@@ -339,13 +340,13 @@ Partial Class frmCatalogoProducto
         Me.Label4.TabIndex = 5
         Me.Label4.Text = "Descripción"
         '
-        'txtcomp
+        'txtcomposicion
         '
-        Me.txtcomp.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtcomp.Location = New System.Drawing.Point(26, 492)
-        Me.txtcomp.Name = "txtcomp"
-        Me.txtcomp.Size = New System.Drawing.Size(391, 26)
-        Me.txtcomp.TabIndex = 5
+        Me.txtcomposicion.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtcomposicion.Location = New System.Drawing.Point(26, 492)
+        Me.txtcomposicion.Name = "txtcomposicion"
+        Me.txtcomposicion.Size = New System.Drawing.Size(391, 26)
+        Me.txtcomposicion.TabIndex = 5
         '
         'Label5
         '
@@ -507,6 +508,7 @@ Partial Class frmCatalogoProducto
         'cmbpro
         '
         Me.cmbpro.DisplayMember = "idProveedor"
+        Me.cmbpro.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbpro.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbpro.FormattingEnabled = True
         Me.cmbpro.Location = New System.Drawing.Point(332, 597)
@@ -518,6 +520,7 @@ Partial Class frmCatalogoProducto
         'cmbcat
         '
         Me.cmbcat.DisplayMember = "idCategoria"
+        Me.cmbcat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbcat.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbcat.FormattingEnabled = True
         Me.cmbcat.Location = New System.Drawing.Point(645, 544)
@@ -619,6 +622,7 @@ Partial Class frmCatalogoProducto
         Me.txtEstanteria.Name = "txtEstanteria"
         Me.txtEstanteria.Size = New System.Drawing.Size(176, 113)
         Me.txtEstanteria.TabIndex = 0
+        Me.txtEstanteria.Text = "0"
         Me.txtEstanteria.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'txtutilidad
@@ -628,6 +632,7 @@ Partial Class frmCatalogoProducto
         Me.txtutilidad.ForeColor = System.Drawing.Color.Yellow
         Me.txtutilidad.Location = New System.Drawing.Point(430, 492)
         Me.txtutilidad.Name = "txtutilidad"
+        Me.txtutilidad.ReadOnly = True
         Me.txtutilidad.Size = New System.Drawing.Size(203, 26)
         Me.txtutilidad.TabIndex = 11
         '
@@ -782,7 +787,7 @@ Partial Class frmCatalogoProducto
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.txtat)
         Me.Controls.Add(Me.Label7)
-        Me.Controls.Add(Me.txtcomp)
+        Me.Controls.Add(Me.txtcomposicion)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.txtdesc)
         Me.Controls.Add(Me.Label4)
@@ -816,7 +821,7 @@ Partial Class frmCatalogoProducto
     Friend WithEvents txtcod As System.Windows.Forms.TextBox
     Friend WithEvents txtdesc As System.Windows.Forms.TextBox
     Friend WithEvents Label4 As System.Windows.Forms.Label
-    Friend WithEvents txtcomp As System.Windows.Forms.TextBox
+    Friend WithEvents txtcomposicion As System.Windows.Forms.TextBox
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents txtat As System.Windows.Forms.TextBox
     Friend WithEvents Label7 As System.Windows.Forms.Label
