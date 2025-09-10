@@ -143,7 +143,7 @@ Public Class frmProductos
             Dim intVal As Integer
             Dim decValue As Decimal
 
-            If Decimal.TryParse(txtprecio.Text, decValue) = False Then
+            If Not Decimal.TryParse(txtprecio.Text, decValue) OrElse Decimal.Parse(txtprecio.Text) = 0 Then
                 MessageBox.Show("Precio inválido", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 Return
             End If

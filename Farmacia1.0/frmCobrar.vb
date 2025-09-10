@@ -1,6 +1,4 @@
 ﻿Imports System.Data.SqlClient
-Imports System.IO
-Imports System.Text
 
 Public Class frmCobrar
 
