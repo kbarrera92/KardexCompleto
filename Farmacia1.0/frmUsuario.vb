@@ -108,17 +108,21 @@ Public Class frmUsuario
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
 
-
-        If Trim(TextBox1.Text) = "" Or Trim(TextBox2.Text) = "" Then
-            MsgBox("Nombre y nick son obligatorios.", MsgBoxStyle.Information, "Faltan datos")
+        If Trim(TextBox1.Text) = "" OrElse Trim(TextBox2.Text) = "" OrElse ComboBox1.SelectedIndex = -1 OrElse ComboBox2.SelectedIndex = -1 OrElse ComboBox3.SelectedIndex = -1 Then
+            MsgBox("Faltan datos que son obligatorios.", MsgBoxStyle.Information, "Faltan datos")
             Return
         End If
         ' Al registrar (RegOAct = 1), la contraseña también es obligatoria
-        If RegOAct = 1 AndAlso Trim(TextBox3.Text) = "" Then
+        If RegOAct = 1 AndAlso Trim(TextBoxPass2.Text) = "" AndAlso Trim(TextBoxPass3.Text) = "" Then
             MsgBox("La contraseña es obligatoria.", MsgBoxStyle.Information, "Faltan datos")
             Return
         End If
 
+        If TextBoxPass2.Text.Trim() <> TextBoxPass3.Text.Trim() Then
+            MsgBox("Las contraseñas no coinciden.", MsgBoxStyle.Information, "Faltan datos")
+            TextBoxPass2.Select()
+            Return
+        End If
 
         openConnection()
         If RegOAct = 1 Then
@@ -128,7 +132,7 @@ Public Class frmUsuario
 
                 ' Generamos salt y hash
                 Dim salt() = GenerateSalt()
-                Dim hash() = HashPassword(Trim(TextBox3.Text), salt)
+                Dim hash() = HashPassword(Trim(TextBoxPass2.Text), salt)
 
                 Using cmd As New SqlCommand(
                     "INSERT INTO USUARIO
@@ -167,7 +171,7 @@ Public Class frmUsuario
                 sqlUpdate.Append("nick          = @nick, ")
                 sqlUpdate.Append("tipoUsuario   = @tu, ")
                 sqlUpdate.Append("sucursal      = @sucu, ")
-                sqlUpdate.Append("estado        = @es ,")
+                sqlUpdate.Append("estado        = @es ")
                 If Not String.IsNullOrWhiteSpace(TextBoxPass1.Text.Trim()) Then
                     If TextBoxPass2.Text = TextBoxPass3.Text Then
                         Dim hashActual = HashPassword(TextBoxPass1.Text.Trim(), saltStored)
@@ -177,7 +181,7 @@ Public Class frmUsuario
                         '    TextBoxPass1.Focus()
                         '    Return
                         'End If
-                        sqlUpdate.Append("contraUsuario = @contra, ")
+                        sqlUpdate.Append(", contraUsuario = @contra, ")
 
 
                         If nuevaPass <> "" Then
@@ -217,7 +221,7 @@ Public Class frmUsuario
             .DataSource = updateList(sqlUsuarios)
             .ValueMember = updateList(sqlUsuarios).Columns(0).ToString()
         End With
-        TextBox1.Clear() : TextBox2.Clear() : TextBox3.Clear() : TextBox8.Clear()
+        TextBox1.Clear() : TextBox2.Clear() : TextBox3.Clear() : TextBox8.Clear() : TextBoxPass1.Clear() : TextBoxPass2.Clear() : TextBoxPass3.Clear()
         ComboBox1.SelectedIndex = -1
         ComboBox2.SelectedIndex = -1
         ComboBox3.SelectedIndex = -1

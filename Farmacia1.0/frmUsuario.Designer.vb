@@ -218,6 +218,7 @@ Partial Class frmUsuario
         'ComboBox1
         '
         Me.ComboBox1.DisplayMember = "idTipoUsuario"
+        Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBox1.FormattingEnabled = True
         Me.ComboBox1.Location = New System.Drawing.Point(362, 197)
         Me.ComboBox1.Name = "ComboBox1"
@@ -238,6 +239,7 @@ Partial Class frmUsuario
         'ComboBox2
         '
         Me.ComboBox2.DisplayMember = "idTipoUsuario"
+        Me.ComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBox2.FormattingEnabled = True
         Me.ComboBox2.Location = New System.Drawing.Point(362, 255)
         Me.ComboBox2.Name = "ComboBox2"
@@ -248,6 +250,7 @@ Partial Class frmUsuario
         'ComboBox3
         '
         Me.ComboBox3.DisplayMember = "idTipoUsuario"
+        Me.ComboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBox3.FormattingEnabled = True
         Me.ComboBox3.Location = New System.Drawing.Point(362, 313)
         Me.ComboBox3.Name = "ComboBox3"
@@ -331,6 +334,7 @@ Partial Class frmUsuario
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(145, 15)
         Me.Label11.TabIndex = 14
+        Me.Label11.Tag = "FO"
         Me.Label11.Text = "Confirmar contraseña"
         '
         'TextBoxPass2
@@ -349,6 +353,7 @@ Partial Class frmUsuario
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(128, 15)
         Me.Label10.TabIndex = 12
+        Me.Label10.Tag = "FO"
         Me.Label10.Text = "Nueva Contraseña:"
         '
         'TextBoxPass1
@@ -367,6 +372,7 @@ Partial Class frmUsuario
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(127, 15)
         Me.Label8.TabIndex = 10
+        Me.Label8.Tag = "FO"
         Me.Label8.Text = "Contraseña actual:"
         '
         'frmUsuario
