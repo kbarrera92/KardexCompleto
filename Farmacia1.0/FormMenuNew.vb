@@ -1,4 +1,5 @@
-﻿Imports Serilog
+﻿Imports System.IO
+Imports Serilog
 
 Public Class FormMenuNew
 
@@ -257,4 +258,15 @@ Public Class FormMenuNew
             Log.Error("Error: " + ex.Message)
         End Try
     End Sub
+
+    Private Sub GeneraCódigosDeBarraToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GeneraCódigosDeBarraToolStripMenuItem.Click
+        If nombreRol <> "ADMINISTRADOR" Then
+            MessageBox.Show("No tiene permisos para este módulo", "No tiene permisos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Return
+        End If
+
+        frmGenerarBarCode.Show()
+    End Sub
+
+
 End Class

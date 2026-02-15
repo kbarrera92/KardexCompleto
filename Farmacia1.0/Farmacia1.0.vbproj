@@ -507,6 +507,12 @@
     <Compile Include="frmVerVentasElim.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="RptBarcodeGenerator.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RptBarcodeGenerator.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="rptInventario2.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -775,6 +781,10 @@
     <EmbeddedResource Include="rptBarCode.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>rptBarCode.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RptBarcodeGenerator.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RptBarcodeGenerator.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="rptCorteCaja.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

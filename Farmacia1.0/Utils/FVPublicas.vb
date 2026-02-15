@@ -239,7 +239,30 @@ Module FVPublicas
         End Try
     End Function
 
+    Function updateCm(ByVal sql As String, ByVal parameters As List(Of SqlParameter)) As DataTable
+        Dim da As SqlDataAdapter
+        Dim dt As New DataTable
 
+        Try
+            openConnection()
+
+            Dim cmd As New SqlCommand(sql, conn)
+
+            cmd.CommandType = CommandType.Text
+            ' Añade los parámetros al comando
+            For Each p As SqlParameter In parameters
+                cmd.Parameters.Add(p)
+            Next
+
+            da = New SqlDataAdapter(cmd)
+            da.Fill(dt)
+
+            Return dt
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return Nothing
+        End Try
+    End Function
 
     Sub guardarVenta2()
         Dim query As String = "INSERT INTO VENTA VALUES(@fech, @usuario, @total, @doc, @suc, @cliente, @efec, @tarj, @aut)"

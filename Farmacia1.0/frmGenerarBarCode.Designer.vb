@@ -22,19 +22,8 @@ Partial Class frmGenerarBarCode
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.Panel5 = New System.Windows.Forms.Panel()
-        Me.DataGridView2 = New System.Windows.Forms.DataGridView()
-        Me.codigo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.descrip = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.laboratorio = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.present = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.medida = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.codbarra = New System.Windows.Forms.DataGridViewImageColumn()
-        Me.Label9 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.txtbarcode = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
@@ -54,17 +43,16 @@ Partial Class frmGenerarBarCode
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.cod = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.desc = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.lab = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.pres = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.med = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.barcode = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.txtcantidad = New System.Windows.Forms.TextBox()
         Me.Panel1.SuspendLayout()
-        Me.Panel3.SuspendLayout()
-        Me.Panel5.SuspendLayout()
-        CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel4.SuspendLayout()
@@ -73,105 +61,17 @@ Partial Class frmGenerarBarCode
         '
         'Panel1
         '
-        Me.Panel1.Controls.Add(Me.Panel3)
         Me.Panel1.Controls.Add(Me.Panel2)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(1283, 502)
+        Me.Panel1.Size = New System.Drawing.Size(632, 502)
         Me.Panel1.TabIndex = 0
-        '
-        'Panel3
-        '
-        Me.Panel3.Controls.Add(Me.Panel5)
-        Me.Panel3.Controls.Add(Me.Label9)
-        Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel3.Location = New System.Drawing.Point(630, 0)
-        Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(653, 502)
-        Me.Panel3.TabIndex = 1
-        '
-        'Panel5
-        '
-        Me.Panel5.Controls.Add(Me.DataGridView2)
-        Me.Panel5.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel5.Location = New System.Drawing.Point(0, 40)
-        Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(653, 462)
-        Me.Panel5.TabIndex = 1
-        '
-        'DataGridView2
-        '
-        Me.DataGridView2.AllowUserToAddRows = False
-        Me.DataGridView2.AllowUserToDeleteRows = False
-        Me.DataGridView2.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView2.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
-        Me.DataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.codigo, Me.descrip, Me.laboratorio, Me.present, Me.medida, Me.codbarra})
-        Me.DataGridView2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.DataGridView2.Location = New System.Drawing.Point(0, 0)
-        Me.DataGridView2.Name = "DataGridView2"
-        Me.DataGridView2.ReadOnly = True
-        Me.DataGridView2.Size = New System.Drawing.Size(653, 462)
-        Me.DataGridView2.TabIndex = 0
-        '
-        'codigo
-        '
-        Me.codigo.HeaderText = "Código"
-        Me.codigo.Name = "codigo"
-        Me.codigo.ReadOnly = True
-        '
-        'descrip
-        '
-        Me.descrip.HeaderText = "Descripción"
-        Me.descrip.Name = "descrip"
-        Me.descrip.ReadOnly = True
-        Me.descrip.Width = 200
-        '
-        'laboratorio
-        '
-        Me.laboratorio.HeaderText = "Laboratorio"
-        Me.laboratorio.Name = "laboratorio"
-        Me.laboratorio.ReadOnly = True
-        '
-        'present
-        '
-        Me.present.HeaderText = "Presentación"
-        Me.present.Name = "present"
-        Me.present.ReadOnly = True
-        '
-        'medida
-        '
-        Me.medida.HeaderText = "Medida"
-        Me.medida.Name = "medida"
-        Me.medida.ReadOnly = True
-        '
-        'codbarra
-        '
-        Me.codbarra.HeaderText = "Barcode"
-        Me.codbarra.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Stretch
-        Me.codbarra.Name = "codbarra"
-        Me.codbarra.ReadOnly = True
-        '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(16, 13)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(495, 24)
-        Me.Label9.TabIndex = 0
-        Me.Label9.Text = "Listado de productos para generar códigos de barra"
         '
         'Panel2
         '
+        Me.Panel2.Controls.Add(Me.txtcantidad)
+        Me.Panel2.Controls.Add(Me.Label9)
         Me.Panel2.Controls.Add(Me.txtbarcode)
         Me.Panel2.Controls.Add(Me.Label8)
         Me.Panel2.Controls.Add(Me.PictureBox1)
@@ -189,16 +89,16 @@ Partial Class frmGenerarBarCode
         Me.Panel2.Controls.Add(Me.txtbuscar)
         Me.Panel2.Controls.Add(Me.Label1)
         Me.Panel2.Controls.Add(Me.Panel4)
-        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Left
+        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel2.Location = New System.Drawing.Point(0, 0)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(630, 502)
+        Me.Panel2.Size = New System.Drawing.Size(632, 502)
         Me.Panel2.TabIndex = 0
         '
         'txtbarcode
         '
         Me.txtbarcode.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbarcode.Location = New System.Drawing.Point(475, 69)
+        Me.txtbarcode.Location = New System.Drawing.Point(477, 69)
         Me.txtbarcode.Name = "txtbarcode"
         Me.txtbarcode.Size = New System.Drawing.Size(139, 21)
         Me.txtbarcode.TabIndex = 16
@@ -345,7 +245,7 @@ Partial Class frmGenerarBarCode
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.Panel4.Location = New System.Drawing.Point(0, 195)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(630, 307)
+        Me.Panel4.Size = New System.Drawing.Size(632, 307)
         Me.Panel4.TabIndex = 0
         '
         'DataGridView1
@@ -366,18 +266,8 @@ Partial Class frmGenerarBarCode
         Me.DataGridView1.Location = New System.Drawing.Point(0, 0)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.ReadOnly = True
-        Me.DataGridView1.Size = New System.Drawing.Size(630, 307)
+        Me.DataGridView1.Size = New System.Drawing.Size(632, 307)
         Me.DataGridView1.TabIndex = 0
-        '
-        'Button1
-        '
-        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button1.Image = Global.Farmacia1._0.My.Resources.Resources.Zoom_icon
-        Me.Button1.Location = New System.Drawing.Point(1212, 509)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(49, 46)
-        Me.Button1.TabIndex = 1
-        Me.Button1.UseVisualStyleBackColor = True
         '
         'cod
         '
@@ -418,20 +308,46 @@ Partial Class frmGenerarBarCode
         Me.barcode.ReadOnly = True
         Me.barcode.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         '
+        'Button1
+        '
+        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button1.Image = Global.Farmacia1._0.My.Resources.Resources.Zoom_icon
+        Me.Button1.Location = New System.Drawing.Point(567, 508)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(49, 46)
+        Me.Button1.TabIndex = 1
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.Location = New System.Drawing.Point(425, 131)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(57, 13)
+        Me.Label9.TabIndex = 17
+        Me.Label9.Text = "Cantidad"
+        '
+        'txtcantidad
+        '
+        Me.txtcantidad.Font = New System.Drawing.Font("Microsoft Sans Serif", 22.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtcantidad.Location = New System.Drawing.Point(428, 148)
+        Me.txtcantidad.Name = "txtcantidad"
+        Me.txtcantidad.Size = New System.Drawing.Size(188, 41)
+        Me.txtcantidad.TabIndex = 18
+        Me.txtcantidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
         'frmGenerarBarCode
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1283, 564)
+        Me.ClientSize = New System.Drawing.Size(632, 558)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Panel1)
         Me.Name = "frmGenerarBarCode"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Imprimir códigos de barras"
         Me.Panel1.ResumeLayout(False)
-        Me.Panel3.ResumeLayout(False)
-        Me.Panel3.PerformLayout()
-        Me.Panel5.ResumeLayout(False)
-        CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -441,7 +357,6 @@ Partial Class frmGenerarBarCode
 
     End Sub
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
-    Friend WithEvents Panel3 As System.Windows.Forms.Panel
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
     Friend WithEvents txtbarcode As System.Windows.Forms.TextBox
     Friend WithEvents Label8 As System.Windows.Forms.Label
@@ -461,20 +376,13 @@ Partial Class frmGenerarBarCode
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Panel4 As System.Windows.Forms.Panel
     Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
-    Friend WithEvents Panel5 As System.Windows.Forms.Panel
-    Friend WithEvents DataGridView2 As System.Windows.Forms.DataGridView
-    Friend WithEvents Label9 As System.Windows.Forms.Label
     Friend WithEvents Button1 As System.Windows.Forms.Button
-    Friend WithEvents codigo As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents descrip As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents laboratorio As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents present As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents medida As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents codbarra As System.Windows.Forms.DataGridViewImageColumn
     Friend WithEvents cod As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents desc As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents lab As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents pres As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents med As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents barcode As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents txtcantidad As TextBox
+    Friend WithEvents Label9 As Label
 End Class

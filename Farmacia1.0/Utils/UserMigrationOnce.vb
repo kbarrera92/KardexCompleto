@@ -9,7 +9,7 @@ Module UserMigrationOnce
         Using fetchCmd As New SqlCommand(
         "SELECT idUsuario, contraUsuario 
            FROM USUARIO
-          WHERE contraUsuario IS NOT NULL AND TRIM(contraUsuario) <> ''", conn)
+          WHERE contraUsuario IS NOT NULL AND contraUsuario <> ''", conn)
             Using reader = fetchCmd.ExecuteReader()
                 While reader.Read()
                     toMigrate.Add((

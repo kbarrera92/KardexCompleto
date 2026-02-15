@@ -39,6 +39,9 @@ Public Class frmCobrar
             msg = cmd.Parameters("@MSG").Value.ToString()
             nventa = CInt(If(cmd.Parameters("@nVenta").Value, 0))
             MessageBox.Show(msg, If(rc = 0, "Éxito", "Error"), MessageBoxButtons.OK, If(rc = 0, MessageBoxIcon.Information, MessageBoxIcon.Error))
+            If rc <> 0 Then
+                Return False
+            End If
             closeConnection()
             ImprimeTicket(nventa)
             If nombreRol = "ADMINISTRADOR" Then

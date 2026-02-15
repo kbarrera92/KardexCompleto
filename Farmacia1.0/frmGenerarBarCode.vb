@@ -12,7 +12,7 @@ Public Class frmGenerarBarCode
 
     Dim sql As String = "SELECT P.idProducto, p.dProducto," _
                         & "ISNULL(PR.rzProveedor, ''), ISNULL(p.presentacion, ''), ISNULL(P.medida, ''), ISNULL(p.barcode, '') " _
-                        & "FROM PRODUCTO P " _
+                        & "FROM PRODUCTOS P " _
                         & "INNER JOIN PROVEEDOR PR " _
                         & "ON P.proveedor = PR.idProveedor"
 
@@ -84,6 +84,7 @@ Public Class frmGenerarBarCode
                 MsgBox(ex.Message)
             End Try
         End If
+        txtcantidad.Select()
     End Sub
 
     Private Sub frmGenerarBarCode_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -100,14 +101,18 @@ Public Class frmGenerarBarCode
         End Try
     End Sub
 
-    Private Sub DataGridView1_KeyDown(sender As Object, e As KeyEventArgs) Handles DataGridView1.KeyDown
-        If e.KeyCode = Keys.Enter Then
-            DataGridView2.Rows.Add(txtcodpro.Text, txtdesc.Text, txtlab.Text, txtpres.Text, txtmed.Text, PictureBox1.Image)
-        End If
-    End Sub
+    'Private Sub DataGridView1_KeyDown(sender As Object, e As KeyEventArgs) Handles DataGridView1.KeyDown
+    '    If e.KeyCode = Keys.Enter Then
+    '        DataGridView2.Rows.Add(txtcodpro.Text, txtdesc.Text, txtlab.Text, txtpres.Text, txtmed.Text, PictureBox1.Image)
+    '    End If
+    'End Sub
 
-    
+
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        If Not Integer.TryParse(txtcantidad.Text, 0) Then
+            MessageBox.Show("La cantidad ingresada es inválida", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End If
+
         Dim dt As New DataTable
         With dt
             .Columns.Add("idProducto")
@@ -118,14 +123,28 @@ Public Class frmGenerarBarCode
             .Columns.Add("barcode", GetType(Byte()))
         End With
 
-        For Each dr As DataGridViewRow In DataGridView2.Rows
+        Dim cantidadCopias As Integer = Integer.Parse(txtcantidad.Text.Trim())
 
-            dt.Rows.Add(dr.Cells(0).Value, dr.Cells(1).Value, dr.Cells(2).Value, dr.Cells(3).Value, dr.Cells(4).Value, ConvertToByteArray(dr.Cells(5).Value))
+        Dim idProducto As String = txtcodpro.Text.Trim()
+        Dim descripcionProducto As String = txtdesc.Text.ToString()
+        Dim laboratorio As String = txtcantidad.Text.ToString()
+        Dim presentacion As String = txtpres.Text.ToString()
+        Dim medida As String = txtbarcode.Text.ToString()
+        Dim barcode As Byte() = ConvertToByteArray(PictureBox1.Image)
 
+        For row As Integer = 1 To cantidadCopias
+            Dim fila As DataRow = dt.NewRow()
+            fila("idProducto") = idProducto
+            fila("dProducto") = descripcionProducto
+            fila("laboratorio") = laboratorio
+            fila("presentacion") = presentacion
+            fila("medida") = medida
+            fila("barcode") = barcode
+            dt.Rows.Add(fila)
         Next
 
         Dim rpt As CrystalDecisions.CrystalReports.Engine.ReportDocument
-        rpt = New rptBarCode
+        rpt = New RptBarcodeGenerator
         rpt.SetDataSource(dt)
         frmVerReportes.CrystalReportViewer1.ReportSource = rpt
         frmVerReportes.ShowDialog()
@@ -151,12 +170,12 @@ Public Class frmGenerarBarCode
     End Function
 
 
-    
-    Private Sub DataGridView2_KeyDown(sender As Object, e As KeyEventArgs) Handles DataGridView2.KeyDown
-        If e.KeyCode = Keys.Delete Then
-            DataGridView2.Rows.RemoveAt(DataGridView2.CurrentRow.Index)
-        End If
-    End Sub
+
+    'Private Sub DataGridView2_KeyDown(sender As Object, e As KeyEventArgs)
+    '    If e.KeyCode = Keys.Delete Then
+    '        DataGridView2.Rows.RemoveAt(DataGridView2.CurrentRow.Index)
+    '    End If
+    'End Sub
 
     Private Sub txtbuscar_TextChanged(sender As Object, e As EventArgs) Handles txtbuscar.TextChanged
         Dim filt As String

@@ -28,6 +28,25 @@ Partial Class frmCatalogoProducto
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.codigo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.desc = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.compo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.presentacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.atera = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.indi = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.contra = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.obser = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.prov = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.med = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cat = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.lab = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.precio = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cost = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.fechReg = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.est = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.barcode = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.stockmin = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.flag = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ShapeContainer1 = New Microsoft.VisualBasic.PowerPacks.ShapeContainer()
         Me.RectangleShape1 = New Microsoft.VisualBasic.PowerPacks.RectangleShape()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -78,25 +97,6 @@ Partial Class frmCatalogoProducto
         Me.btnEditarPrecios = New System.Windows.Forms.Button()
         Me.Label21 = New System.Windows.Forms.Label()
         Me.ComboBoxFlag = New System.Windows.Forms.ComboBox()
-        Me.codigo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.desc = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.compo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.presentacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.atera = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.indi = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.contra = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.obser = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.prov = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.med = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.cat = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.lab = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.precio = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.cost = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.fechReg = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.est = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.barcode = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.stockmin = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.flag = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
@@ -127,6 +127,7 @@ Partial Class frmCatalogoProducto
         '
         'ComboBox1
         '
+        Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ComboBox1.FormattingEnabled = True
         Me.ComboBox1.Items.AddRange(New Object() {"Código", "Descripción", "Composición", "Marca", "Proveedor", "Laboratorio", "Presentación", "Categoría", "Barras"})
@@ -169,6 +170,132 @@ Partial Class frmCatalogoProducto
         Me.DataGridView1.Size = New System.Drawing.Size(1255, 270)
         Me.DataGridView1.TabIndex = 5
         '
+        'codigo
+        '
+        Me.codigo.HeaderText = "Código"
+        Me.codigo.Name = "codigo"
+        Me.codigo.ReadOnly = True
+        '
+        'desc
+        '
+        Me.desc.HeaderText = "Descripción"
+        Me.desc.Name = "desc"
+        Me.desc.ReadOnly = True
+        Me.desc.Width = 200
+        '
+        'compo
+        '
+        Me.compo.HeaderText = "Composición"
+        Me.compo.Name = "compo"
+        Me.compo.ReadOnly = True
+        Me.compo.Width = 200
+        '
+        'presentacion
+        '
+        Me.presentacion.HeaderText = "Presentación"
+        Me.presentacion.Name = "presentacion"
+        Me.presentacion.ReadOnly = True
+        Me.presentacion.Width = 150
+        '
+        'atera
+        '
+        Me.atera.HeaderText = "Acción Terapeutica"
+        Me.atera.Name = "atera"
+        Me.atera.ReadOnly = True
+        Me.atera.Width = 250
+        '
+        'indi
+        '
+        Me.indi.HeaderText = "Indicaciones"
+        Me.indi.Name = "indi"
+        Me.indi.ReadOnly = True
+        Me.indi.Width = 300
+        '
+        'contra
+        '
+        Me.contra.HeaderText = "Contraindicaciones"
+        Me.contra.Name = "contra"
+        Me.contra.ReadOnly = True
+        Me.contra.Width = 300
+        '
+        'obser
+        '
+        Me.obser.HeaderText = "Observaciones"
+        Me.obser.Name = "obser"
+        Me.obser.ReadOnly = True
+        Me.obser.Width = 300
+        '
+        'prov
+        '
+        Me.prov.HeaderText = "Proveedor"
+        Me.prov.Name = "prov"
+        Me.prov.ReadOnly = True
+        Me.prov.Width = 150
+        '
+        'med
+        '
+        Me.med.HeaderText = "Medida"
+        Me.med.Name = "med"
+        Me.med.ReadOnly = True
+        Me.med.Width = 120
+        '
+        'cat
+        '
+        Me.cat.HeaderText = "Categoría"
+        Me.cat.Name = "cat"
+        Me.cat.ReadOnly = True
+        Me.cat.Width = 150
+        '
+        'lab
+        '
+        Me.lab.HeaderText = "Laboratorio"
+        Me.lab.Name = "lab"
+        Me.lab.ReadOnly = True
+        Me.lab.Width = 300
+        '
+        'precio
+        '
+        Me.precio.HeaderText = "Precio"
+        Me.precio.Name = "precio"
+        Me.precio.ReadOnly = True
+        '
+        'cost
+        '
+        Me.cost.HeaderText = "Costo"
+        Me.cost.Name = "cost"
+        Me.cost.ReadOnly = True
+        '
+        'fechReg
+        '
+        Me.fechReg.HeaderText = "Fecha de Registro"
+        Me.fechReg.Name = "fechReg"
+        Me.fechReg.ReadOnly = True
+        '
+        'est
+        '
+        Me.est.HeaderText = "Estantería"
+        Me.est.Name = "est"
+        Me.est.ReadOnly = True
+        '
+        'barcode
+        '
+        Me.barcode.HeaderText = "Código de barras"
+        Me.barcode.Name = "barcode"
+        Me.barcode.ReadOnly = True
+        '
+        'stockmin
+        '
+        Me.stockmin.HeaderText = "Stock Min"
+        Me.stockmin.Name = "stockmin"
+        Me.stockmin.ReadOnly = True
+        '
+        'flag
+        '
+        Me.flag.HeaderText = "Flag"
+        Me.flag.Name = "flag"
+        Me.flag.ReadOnly = True
+        Me.flag.Visible = False
+        '
         'ShapeContainer1
         '
         Me.ShapeContainer1.Location = New System.Drawing.Point(0, 0)
@@ -203,6 +330,7 @@ Partial Class frmCatalogoProducto
         Me.txtcod.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtcod.Location = New System.Drawing.Point(26, 387)
         Me.txtcod.Name = "txtcod"
+        Me.txtcod.ReadOnly = True
         Me.txtcod.Size = New System.Drawing.Size(129, 26)
         Me.txtcod.TabIndex = 7
         '
@@ -675,132 +803,6 @@ Partial Class frmCatalogoProducto
         Me.ComboBoxFlag.Size = New System.Drawing.Size(145, 28)
         Me.ComboBoxFlag.TabIndex = 51
         Me.ComboBoxFlag.ValueMember = "idCategoria"
-        '
-        'codigo
-        '
-        Me.codigo.HeaderText = "Código"
-        Me.codigo.Name = "codigo"
-        Me.codigo.ReadOnly = True
-        '
-        'desc
-        '
-        Me.desc.HeaderText = "Descripción"
-        Me.desc.Name = "desc"
-        Me.desc.ReadOnly = True
-        Me.desc.Width = 200
-        '
-        'compo
-        '
-        Me.compo.HeaderText = "Composición"
-        Me.compo.Name = "compo"
-        Me.compo.ReadOnly = True
-        Me.compo.Width = 200
-        '
-        'presentacion
-        '
-        Me.presentacion.HeaderText = "Presentación"
-        Me.presentacion.Name = "presentacion"
-        Me.presentacion.ReadOnly = True
-        Me.presentacion.Width = 150
-        '
-        'atera
-        '
-        Me.atera.HeaderText = "Acción Terapeutica"
-        Me.atera.Name = "atera"
-        Me.atera.ReadOnly = True
-        Me.atera.Width = 250
-        '
-        'indi
-        '
-        Me.indi.HeaderText = "Indicaciones"
-        Me.indi.Name = "indi"
-        Me.indi.ReadOnly = True
-        Me.indi.Width = 300
-        '
-        'contra
-        '
-        Me.contra.HeaderText = "Contraindicaciones"
-        Me.contra.Name = "contra"
-        Me.contra.ReadOnly = True
-        Me.contra.Width = 300
-        '
-        'obser
-        '
-        Me.obser.HeaderText = "Observaciones"
-        Me.obser.Name = "obser"
-        Me.obser.ReadOnly = True
-        Me.obser.Width = 300
-        '
-        'prov
-        '
-        Me.prov.HeaderText = "Proveedor"
-        Me.prov.Name = "prov"
-        Me.prov.ReadOnly = True
-        Me.prov.Width = 150
-        '
-        'med
-        '
-        Me.med.HeaderText = "Medida"
-        Me.med.Name = "med"
-        Me.med.ReadOnly = True
-        Me.med.Width = 120
-        '
-        'cat
-        '
-        Me.cat.HeaderText = "Categoría"
-        Me.cat.Name = "cat"
-        Me.cat.ReadOnly = True
-        Me.cat.Width = 150
-        '
-        'lab
-        '
-        Me.lab.HeaderText = "Laboratorio"
-        Me.lab.Name = "lab"
-        Me.lab.ReadOnly = True
-        Me.lab.Width = 300
-        '
-        'precio
-        '
-        Me.precio.HeaderText = "Precio"
-        Me.precio.Name = "precio"
-        Me.precio.ReadOnly = True
-        '
-        'cost
-        '
-        Me.cost.HeaderText = "Costo"
-        Me.cost.Name = "cost"
-        Me.cost.ReadOnly = True
-        '
-        'fechReg
-        '
-        Me.fechReg.HeaderText = "Fecha de Registro"
-        Me.fechReg.Name = "fechReg"
-        Me.fechReg.ReadOnly = True
-        '
-        'est
-        '
-        Me.est.HeaderText = "Estantería"
-        Me.est.Name = "est"
-        Me.est.ReadOnly = True
-        '
-        'barcode
-        '
-        Me.barcode.HeaderText = "Código de barras"
-        Me.barcode.Name = "barcode"
-        Me.barcode.ReadOnly = True
-        '
-        'stockmin
-        '
-        Me.stockmin.HeaderText = "Stock Min"
-        Me.stockmin.Name = "stockmin"
-        Me.stockmin.ReadOnly = True
-        '
-        'flag
-        '
-        Me.flag.HeaderText = "Flag"
-        Me.flag.Name = "flag"
-        Me.flag.ReadOnly = True
-        Me.flag.Visible = False
         '
         'frmCatalogoProducto
         '

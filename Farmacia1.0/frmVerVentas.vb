@@ -221,10 +221,13 @@ Public Class frmVerVentas
         If CheckBox1.Checked = True Then
             ComboBox2.Enabled = True
             'Combobox categoría
-            Dim sql2 As String = "SELECT idUsuario, nombreUsuario FROM USUARIO WHERE sucursal = " & CInt(ComboBox1.SelectedValue.ToString)
-            ComboBox2.DataSource = updateCm(sql2)
-            ComboBox2.DisplayMember = updateCm(sql2).Columns(1).ToString
-            ComboBox2.ValueMember = updateCm(sql2).Columns(0).ToString
+            Dim sql2 As String = "SELECT idUsuario, nombreUsuario FROM USUARIO WHERE sucursal = @sucursal and estado = 1"
+            Dim listaParametros As New List(Of SqlParameter)()
+            listaParametros.Add(New SqlParameter("@sucursal", Convert.ToInt32(ComboBox1.SelectedValue)))
+            Dim table As DataTable = updateCm(sql2, listaParametros)
+            ComboBox2.DataSource = table
+            ComboBox2.DisplayMember = table.Columns(1).ToString
+            ComboBox2.ValueMember = table.Columns(0).ToString
             ComboBox2.SelectedIndex = -1
         Else
             ComboBox2.Enabled = False
@@ -357,4 +360,6 @@ Public Class frmVerVentas
         End Try
 
     End Sub
+
+
 End Class
