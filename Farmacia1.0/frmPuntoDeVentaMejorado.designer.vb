@@ -22,8 +22,8 @@ Partial Class frmPuntoDeVentaMejorado
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.txtcorrelativo = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -71,6 +71,7 @@ Partial Class frmPuntoDeVentaMejorado
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(1085, 54)
         Me.Panel1.TabIndex = 0
+        Me.Panel1.Tag = "G"
         '
         'txtcorrelativo
         '
@@ -90,6 +91,7 @@ Partial Class frmPuntoDeVentaMejorado
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(95, 20)
         Me.Label2.TabIndex = 2
+        Me.Label2.Tag = "PS"
         Me.Label2.Text = "Correlativo"
         Me.Label2.Visible = False
         '
@@ -111,6 +113,7 @@ Partial Class frmPuntoDeVentaMejorado
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(59, 20)
         Me.Label1.TabIndex = 0
+        Me.Label1.Tag = "PS"
         Me.Label1.Text = "Fecha"
         '
         'Panel2
@@ -134,14 +137,14 @@ Partial Class frmPuntoDeVentaMejorado
         Me.DataGridView1.AllowUserToDeleteRows = False
         Me.DataGridView1.BackgroundColor = System.Drawing.Color.White
         Me.DataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ActiveCaption
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.ActiveCaption
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle3
         Me.DataGridView1.ColumnHeadersHeight = 35
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.codpro, Me.descpro, Me.cantpro, Me.prepro, Me.subtotal})
@@ -149,8 +152,8 @@ Partial Class frmPuntoDeVentaMejorado
         Me.DataGridView1.Location = New System.Drawing.Point(16, 114)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.ReadOnly = True
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DataGridView1.RowsDefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DataGridView1.RowsDefaultCellStyle = DataGridViewCellStyle4
         Me.DataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DataGridView1.Size = New System.Drawing.Size(764, 330)
         Me.DataGridView1.TabIndex = 7
@@ -193,6 +196,7 @@ Partial Class frmPuntoDeVentaMejorado
         Me.btbuscar.Name = "btbuscar"
         Me.btbuscar.Size = New System.Drawing.Size(53, 55)
         Me.btbuscar.TabIndex = 5
+        Me.btbuscar.Tag = "WB"
         Me.btbuscar.UseVisualStyleBackColor = True
         '
         'txtbarcode
@@ -211,6 +215,7 @@ Partial Class frmPuntoDeVentaMejorado
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(106, 31)
         Me.Label3.TabIndex = 3
+        Me.Label3.Tag = "PS"
         Me.Label3.Text = "Código"
         '
         'lblNota
@@ -221,6 +226,7 @@ Partial Class frmPuntoDeVentaMejorado
         Me.lblNota.Name = "lblNota"
         Me.lblNota.Size = New System.Drawing.Size(241, 74)
         Me.lblNota.TabIndex = 1
+        Me.lblNota.Tag = "NS"
         Me.lblNota.Text = "Label3"
         '
         'GroupBox1
@@ -249,6 +255,7 @@ Partial Class frmPuntoDeVentaMejorado
         Me.Button6.Name = "Button6"
         Me.Button6.Size = New System.Drawing.Size(238, 37)
         Me.Button6.TabIndex = 3
+        Me.Button6.Tag = "SE"
         Me.Button6.Text = "Ver ventas"
         Me.Button6.UseVisualStyleBackColor = False
         Me.Button6.Visible = False
@@ -263,6 +270,7 @@ Partial Class frmPuntoDeVentaMejorado
         Me.Button5.Name = "Button5"
         Me.Button5.Size = New System.Drawing.Size(238, 37)
         Me.Button5.TabIndex = 2
+        Me.Button5.Tag = "SE"
         Me.Button5.Text = "Ver Cuenta"
         Me.Button5.UseVisualStyleBackColor = False
         Me.Button5.Visible = False
@@ -277,6 +285,7 @@ Partial Class frmPuntoDeVentaMejorado
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(238, 37)
         Me.Button4.TabIndex = 1
+        Me.Button4.Tag = "SE"
         Me.Button4.Text = "Nueva venta"
         Me.Button4.UseVisualStyleBackColor = False
         '
@@ -290,6 +299,7 @@ Partial Class frmPuntoDeVentaMejorado
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(238, 37)
         Me.Button1.TabIndex = 0
+        Me.Button1.Tag = "SE"
         Me.Button1.Text = "Borrar detalle"
         Me.Button1.UseVisualStyleBackColor = False
         '
@@ -304,6 +314,7 @@ Partial Class frmPuntoDeVentaMejorado
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(1085, 64)
         Me.Panel3.TabIndex = 2
+        Me.Panel3.Tag = "G"
         '
         'txttotal
         '
@@ -325,6 +336,7 @@ Partial Class frmPuntoDeVentaMejorado
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(80, 31)
         Me.Label5.TabIndex = 7
+        Me.Label5.Tag = "FO"
         Me.Label5.Text = "Total"
         '
         'txttotalarti
@@ -347,6 +359,7 @@ Partial Class frmPuntoDeVentaMejorado
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(128, 31)
         Me.Label4.TabIndex = 5
+        Me.Label4.Tag = "FO"
         Me.Label4.Text = "Artículos"
         '
         'Button2

@@ -24,9 +24,9 @@ Partial Class frmAjustes2
     Private Sub InitializeComponent()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
+        Me.ComboBoxSucursal = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.ComboBoxTipoAjuste = New System.Windows.Forms.ComboBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.mskfecha = New System.Windows.Forms.MaskedTextBox()
@@ -81,16 +81,17 @@ Partial Class frmAjustes2
         CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'ComboBox2
+        'ComboBoxSucursal
         '
-        Me.ComboBox2.DisplayMember = "nombreSuc"
-        Me.ComboBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ComboBox2.FormattingEnabled = True
-        Me.ComboBox2.Location = New System.Drawing.Point(19, 28)
-        Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(284, 28)
-        Me.ComboBox2.TabIndex = 108
-        Me.ComboBox2.ValueMember = "idSucursal"
+        Me.ComboBoxSucursal.DisplayMember = "nombreSuc"
+        Me.ComboBoxSucursal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBoxSucursal.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ComboBoxSucursal.FormattingEnabled = True
+        Me.ComboBoxSucursal.Location = New System.Drawing.Point(19, 28)
+        Me.ComboBoxSucursal.Name = "ComboBoxSucursal"
+        Me.ComboBoxSucursal.Size = New System.Drawing.Size(284, 28)
+        Me.ComboBoxSucursal.TabIndex = 108
+        Me.ComboBoxSucursal.ValueMember = "idSucursal"
         '
         'Label1
         '
@@ -102,16 +103,17 @@ Partial Class frmAjustes2
         Me.Label1.TabIndex = 107
         Me.Label1.Text = "Sucursal"
         '
-        'ComboBox1
+        'ComboBoxTipoAjuste
         '
-        Me.ComboBox1.DisplayMember = "tipoAjuste"
-        Me.ComboBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(309, 28)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(171, 28)
-        Me.ComboBox1.TabIndex = 106
-        Me.ComboBox1.ValueMember = "idTipoAjuste"
+        Me.ComboBoxTipoAjuste.DisplayMember = "tipoAjuste"
+        Me.ComboBoxTipoAjuste.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBoxTipoAjuste.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ComboBoxTipoAjuste.FormattingEnabled = True
+        Me.ComboBoxTipoAjuste.Location = New System.Drawing.Point(309, 28)
+        Me.ComboBoxTipoAjuste.Name = "ComboBoxTipoAjuste"
+        Me.ComboBoxTipoAjuste.Size = New System.Drawing.Size(171, 28)
+        Me.ComboBoxTipoAjuste.TabIndex = 106
+        Me.ComboBoxTipoAjuste.ValueMember = "idTipoAjuste"
         '
         'Label7
         '
@@ -192,6 +194,7 @@ Partial Class frmAjustes2
         Me.txtconcep.Name = "txtconcep"
         Me.txtconcep.Size = New System.Drawing.Size(595, 26)
         Me.txtconcep.TabIndex = 111
+        Me.txtconcep.Tag = "ES"
         '
         'Label8
         '
@@ -214,6 +217,7 @@ Partial Class frmAjustes2
         Me.btnsalir.Name = "btnsalir"
         Me.btnsalir.Size = New System.Drawing.Size(90, 34)
         Me.btnsalir.TabIndex = 116
+        Me.btnsalir.Tag = "WB"
         Me.btnsalir.Text = "Salir"
         Me.btnsalir.UseVisualStyleBackColor = True
         '
@@ -227,6 +231,7 @@ Partial Class frmAjustes2
         Me.btnnuevaventa.Name = "btnnuevaventa"
         Me.btnnuevaventa.Size = New System.Drawing.Size(90, 34)
         Me.btnnuevaventa.TabIndex = 112
+        Me.btnnuevaventa.Tag = "WB"
         Me.btnnuevaventa.Text = "Nuevo"
         Me.btnnuevaventa.UseVisualStyleBackColor = True
         '
@@ -240,6 +245,7 @@ Partial Class frmAjustes2
         Me.btnagregard.Name = "btnagregard"
         Me.btnagregard.Size = New System.Drawing.Size(90, 34)
         Me.btnagregard.TabIndex = 112
+        Me.btnagregard.Tag = "WB"
         Me.btnagregard.Text = "Reg. Det"
         Me.btnagregard.UseVisualStyleBackColor = True
         '
@@ -253,6 +259,7 @@ Partial Class frmAjustes2
         Me.btneliminard.Name = "btneliminard"
         Me.btneliminard.Size = New System.Drawing.Size(90, 34)
         Me.btneliminard.TabIndex = 112
+        Me.btneliminard.Tag = "WB"
         Me.btneliminard.Text = "Elim. Det"
         Me.btneliminard.UseVisualStyleBackColor = True
         '
@@ -266,6 +273,7 @@ Partial Class frmAjustes2
         Me.btnregistrarc.Name = "btnregistrarc"
         Me.btnregistrarc.Size = New System.Drawing.Size(90, 34)
         Me.btnregistrarc.TabIndex = 112
+        Me.btnregistrarc.Tag = "WB"
         Me.btnregistrarc.Text = "Registrar"
         Me.btnregistrarc.UseVisualStyleBackColor = True
         '
@@ -297,6 +305,7 @@ Partial Class frmAjustes2
         Me.txtdescpro.Name = "txtdescpro"
         Me.txtdescpro.Size = New System.Drawing.Size(472, 26)
         Me.txtdescpro.TabIndex = 120
+        Me.txtdescpro.Tag = "ES"
         '
         'Label5
         '
@@ -315,6 +324,7 @@ Partial Class frmAjustes2
         Me.txtcodpro.Name = "txtcodpro"
         Me.txtcodpro.Size = New System.Drawing.Size(89, 26)
         Me.txtcodpro.TabIndex = 118
+        Me.txtcodpro.Tag = "ES"
         '
         'Label4
         '
@@ -335,6 +345,7 @@ Partial Class frmAjustes2
         Me.txtcantidad.Name = "txtcantidad"
         Me.txtcantidad.Size = New System.Drawing.Size(138, 60)
         Me.txtcantidad.TabIndex = 128
+        Me.txtcantidad.Tag = "E"
         Me.txtcantidad.Text = "0"
         Me.txtcantidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -357,6 +368,7 @@ Partial Class frmAjustes2
         Me.txtexistencia.Name = "txtexistencia"
         Me.txtexistencia.Size = New System.Drawing.Size(138, 60)
         Me.txtexistencia.TabIndex = 126
+        Me.txtexistencia.Tag = "E"
         Me.txtexistencia.Text = "0"
         Me.txtexistencia.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -379,6 +391,7 @@ Partial Class frmAjustes2
         Me.txtprecio.Name = "txtprecio"
         Me.txtprecio.Size = New System.Drawing.Size(291, 60)
         Me.txtprecio.TabIndex = 124
+        Me.txtprecio.Tag = "E"
         Me.txtprecio.Text = "0.00"
         Me.txtprecio.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -471,6 +484,7 @@ Partial Class frmAjustes2
         Me.txtbuscapro.Name = "txtbuscapro"
         Me.txtbuscapro.Size = New System.Drawing.Size(597, 26)
         Me.txtbuscapro.TabIndex = 130
+        Me.txtbuscapro.Tag = "ES"
         '
         'Label2
         '
@@ -491,6 +505,7 @@ Partial Class frmAjustes2
         Me.txttotal.Name = "txttotal"
         Me.txttotal.Size = New System.Drawing.Size(204, 53)
         Me.txttotal.TabIndex = 133
+        Me.txttotal.Tag = "E"
         Me.txttotal.Text = "0.00"
         Me.txttotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -565,6 +580,7 @@ Partial Class frmAjustes2
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(95, 34)
         Me.Button1.TabIndex = 112
+        Me.Button1.Tag = "WB"
         Me.Button1.Text = "Descartar"
         Me.Button1.UseVisualStyleBackColor = True
         '
@@ -586,6 +602,7 @@ Partial Class frmAjustes2
         Me.txtbarcode.Name = "txtbarcode"
         Me.txtbarcode.Size = New System.Drawing.Size(274, 26)
         Me.txtbarcode.TabIndex = 136
+        Me.txtbarcode.Tag = "ES"
         '
         'Label9
         '
@@ -604,6 +621,7 @@ Partial Class frmAjustes2
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(32, 28)
         Me.Button2.TabIndex = 137
+        Me.Button2.Tag = "WB"
         Me.Button2.UseVisualStyleBackColor = True
         '
         'frmAjustes2
@@ -640,9 +658,9 @@ Partial Class frmAjustes2
         Me.Controls.Add(Me.btnnuevaventa)
         Me.Controls.Add(Me.txtconcep)
         Me.Controls.Add(Me.Label8)
-        Me.Controls.Add(Me.ComboBox2)
+        Me.Controls.Add(Me.ComboBoxSucursal)
         Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.ComboBox1)
+        Me.Controls.Add(Me.ComboBoxTipoAjuste)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.mskfecha)
@@ -657,15 +675,13 @@ Partial Class frmAjustes2
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents ComboBox2 As System.Windows.Forms.ComboBox
+    Friend WithEvents ComboBoxSucursal As System.Windows.Forms.ComboBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents ComboBox1 As System.Windows.Forms.ComboBox
+    Friend WithEvents ComboBoxTipoAjuste As System.Windows.Forms.ComboBox
     Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents mskfecha As System.Windows.Forms.MaskedTextBox
     Friend WithEvents lblNoCompra As System.Windows.Forms.Label
-    Friend WithEvents LineShape1 As Microsoft.VisualBasic.PowerPacks.LineShape
-    Friend WithEvents ShapeContainer1 As Microsoft.VisualBasic.PowerPacks.ShapeContainer
     Friend WithEvents txtconcep As System.Windows.Forms.TextBox
     Friend WithEvents Label8 As System.Windows.Forms.Label
     Friend WithEvents btnsalir As System.Windows.Forms.Button
@@ -685,7 +701,6 @@ Partial Class frmAjustes2
     Friend WithEvents Label16 As System.Windows.Forms.Label
     Friend WithEvents txtprecio As System.Windows.Forms.TextBox
     Friend WithEvents Label15 As System.Windows.Forms.Label
-    Friend WithEvents LineShape2 As Microsoft.VisualBasic.PowerPacks.LineShape
     Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
     Friend WithEvents txtbuscapro As System.Windows.Forms.TextBox
     Friend WithEvents Label2 As System.Windows.Forms.Label
@@ -710,4 +725,7 @@ Partial Class frmAjustes2
     Friend WithEvents txtbarcode As TextBox
     Friend WithEvents Label9 As Label
     Friend WithEvents Button2 As Button
+    Private WithEvents LineShape1 As PowerPacks.LineShape
+    Private WithEvents ShapeContainer1 As PowerPacks.ShapeContainer
+    Private WithEvents LineShape2 As PowerPacks.LineShape
 End Class

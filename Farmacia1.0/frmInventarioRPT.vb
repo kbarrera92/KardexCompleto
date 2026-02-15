@@ -1,7 +1,8 @@
 ﻿Imports System.Data.SqlClient
 Public Class frmInventarioRPT
     Dim sql As String = "SELECT idSucursal, nombreSuc FROM SUCURSAL"
-    Dim sql2 As String = "SELECT idCategoria, categoria FROM CATEGORIA"
+    Dim condicion As String = " WHERE idSucursal = " + sucActual.ToString()
+    Dim sql2 As String = String.Format("EXEC spExistencias @OPCION = {0}", 1)
     Dim ds As dsReportes
 
     Sub llenarDTSMP()
@@ -56,12 +57,11 @@ Public Class frmInventarioRPT
                 .CommandType = CommandType.StoredProcedure
                 .Connection = conn
                 .Parameters.AddWithValue("suc", CInt(ComboBox1.SelectedValue.ToString))
-                .Parameters.AddWithValue("cat", CInt(ComboBox2.SelectedValue.ToString))
+                .Parameters.AddWithValue("cat", ComboBox2.SelectedValue.ToString)
             End With
             dt = ds.Tables("dtInventarioGeneral")
 
             da = New SqlDataAdapter(cmd)
-            da.FillSchema(ds.Tables("dtInventarioGeneral"), SchemaType.Source)
             da.Fill(ds.Tables("dtInventarioGeneral"))
 
             For i = 0 To dt.Columns.Count - 1
@@ -90,6 +90,9 @@ Public Class frmInventarioRPT
     End Sub
 
     Private Sub frmInventarioRPT_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If nombreRol <> "ADMINISTRADOR" Then
+            sql = sql + condicion
+        End If
         ComboBox1.DataSource = updateCm(sql)
         ComboBox1.DisplayMember = updateCm(sql).Columns(1).ToString
         ComboBox1.ValueMember = updateCm(sql).Columns(0).ToString
@@ -112,9 +115,11 @@ Public Class frmInventarioRPT
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         If DataGridView1.Rows.Count > 0 Then
-            Dim informe As New rptInventario
+            Dim informe As New rptInventario2
 
             informe.SetDataSource(ds.Tables("dtInventarioGeneral"))
+            informe.SetParameterValue("sucursal", If(nombreRol <> "Administrador", nameSucActual, ComboBox1.Text))
+            informe.SetParameterValue("laboratorio", ComboBox2.Text)
 
             frmVerReportes.CrystalReportViewer1.ReportSource = informe
             frmVerReportes.Show()
@@ -129,7 +134,7 @@ Public Class frmInventarioRPT
             ComboBox2.Enabled = True
             'Combobox categoría
             ComboBox2.DataSource = updateCm(sql2)
-            ComboBox2.DisplayMember = updateCm(sql2).Columns(1).ToString
+            ComboBox2.DisplayMember = updateCm(sql2).Columns(0).ToString
             ComboBox2.ValueMember = updateCm(sql2).Columns(0).ToString
             ComboBox2.SelectedIndex = -1
         Else

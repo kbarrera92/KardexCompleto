@@ -1,4 +1,6 @@
 ﻿Imports System.Data.SqlClient
+Imports Serilog
+
 Public Class frmTraslados
 
     Dim sqlSuc As String = "SELECT idSucursal, nombreSuc FROM SUCURSAL where idSucursal <> @idSuc"
@@ -50,10 +52,10 @@ Public Class frmTraslados
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        
+
         cmbSucEntranda.SelectedIndex = -1
         cmbSucSalida.SelectedIndex = -1
-        
+
         DataGridView2.Rows.Clear()
         DataGridView1.DataSource = Nothing
         DataGridView1.Rows.Clear()
@@ -92,14 +94,72 @@ Public Class frmTraslados
                 MsgBox("No ha agregado productos para trasladar", MsgBoxStyle.Exclamation, "Faltan datos")
             Else
                 If MessageBox.Show("¿Desea realizar el traslado de estos productos?", "Realizar traslado", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
-                    guardarSalidaxTraslado()
-                    
+                    'crear la datatable
+                    table = New DataTable()
+                    table.Columns.Add("nDetalleV", GetType(Short))
+                    'table.Columns.Add("nVenta", GetType(Integer))
+                    table.Columns.Add("producto", GetType(Integer))
+                    table.Columns.Add("cantidad", GetType(Integer))
+                    table.Columns.Add("precio", GetType(Decimal))
+                    table.Columns.Add("subtotal", GetType(Decimal))
+
+                    For index = 0 To DataGridView2.Rows.Count - 1
+                        table.Rows.Add(index + 1, DataGridView2.Rows(index).Cells(0).Value,
+                                       DataGridView2.Rows(index).Cells(2).Value, 0, 0)
+                    Next
+
+                    Log.Information("Inicia proceso de guardar traslado")
+                    ProcesarTraslado()
                     Button2.PerformClick()
                 End If
             End If
-            
+
         End If
-        
+
+    End Sub
+
+    Private Sub ProcesarTraslado()
+        Try
+            Dim parametros As New List(Of SqlParameter) From {
+                New SqlParameter("@fecha", SqlDbType.Date) With {.Value = Convert.ToDateTime(mskfecha.Text)},
+                New SqlParameter("@sucursalSalida", SqlDbType.Int) With {.Value = Convert.ToInt32(cmbSucSalida.SelectedValue)},
+                New SqlParameter("@sucursalEntrada", SqlDbType.Int) With {.Value = Convert.ToInt32(cmbSucEntranda.SelectedValue)},
+                New SqlParameter("@usuario", SqlDbType.Int) With {.Value = usuarioActual},
+                New SqlParameter("@recibido", SqlDbType.Char, 1) With {.Value = "N"},
+                New SqlParameter("@detalles", SqlDbType.Structured) With {.Value = table},
+                New SqlParameter("@message", SqlDbType.VarChar, 200) With {.Direction = ParameterDirection.Output},
+                New SqlParameter("@returnValue", SqlDbType.Int) With {.Direction = ParameterDirection.ReturnValue}
+            }
+
+            Dim paramtodb As String = String.Empty
+            For Each param As SqlParameter In parametros
+                If TypeOf param.Value Is DataTable Then
+                    ' Si el parámetro es un DataTable, convertirlo a string
+                    Dim dt As DataTable = DirectCast(param.Value, DataTable)
+                    paramtodb &= param.ParameterName & "= [DataTable] " & vbCrLf
+
+                    ' Convertir las filas y columnas del DataTable en texto
+                    For Each row As DataRow In dt.Rows
+                        paramtodb &= "  - "
+                        For Each col As DataColumn In dt.Columns
+                            paramtodb &= $"{col.ColumnName}: {row(col)} | "
+                        Next
+                        paramtodb &= vbCrLf
+                    Next
+                Else
+                    paramtodb &= param.ParameterName & "=" & If(param.Value, """") & vbCrLf
+                End If
+            Next
+            Log.Information($"Parametros enviados al sp: {vbCrLf}{paramtodb}")
+
+            Dim resultado = EjecutarStoredProcedureMultiple("sp_mantenimientoTraslados", parametros)
+
+            Dim codigoRetorno As Integer = Convert.ToInt32(parametros.Find(Function(p) p.ParameterName = "@returnValue").Value)
+            Dim mensajeSalida As String = parametros.Find(Function(p) p.ParameterName = "@message").Value.ToString()
+            MessageBox.Show(mensajeSalida, "Resultado", MessageBoxButtons.OK, IIf(codigoRetorno = 0, MessageBoxIcon.Information, MessageBoxIcon.Error))
+        Catch ex As Exception
+            Log.Error($"Ocurrio un error. Error: {ex.Message}, Trace: {ex.StackTrace}")
+        End Try
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
@@ -109,7 +169,7 @@ Public Class frmTraslados
             datosreq = 2
             frmProductos.Show()
         End If
-        
+
 
     End Sub
 
@@ -179,7 +239,7 @@ Public Class frmTraslados
         End If
     End Sub
 
-   
+
     Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
         frmVerTraslados.Show()
     End Sub
@@ -193,7 +253,7 @@ Public Class frmTraslados
 
     End Sub
 
-    
+
     Private Sub DataGridView1_SelectionChanged(sender As Object, e As EventArgs) Handles DataGridView1.SelectionChanged
         Try
             txtcodpro.Text = DataGridView1.CurrentRow.Cells(0).Value

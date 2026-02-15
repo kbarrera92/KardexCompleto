@@ -29,9 +29,6 @@ Partial Class frmCorteCaja
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.Button4 = New System.Windows.Forms.Button()
-        Me.Button5 = New System.Windows.Forms.Button()
-        Me.Button6 = New System.Windows.Forms.Button()
         Me.ndetventa = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.nventa = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.codpro = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -40,6 +37,9 @@ Partial Class frmCorteCaja
         Me.precio = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.subt = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.costo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Button4 = New System.Windows.Forms.Button()
+        Me.Button5 = New System.Windows.Forms.Button()
+        Me.Button6 = New System.Windows.Forms.Button()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -111,36 +111,6 @@ Partial Class frmCorteCaja
         Me.DataGridView1.Size = New System.Drawing.Size(996, 417)
         Me.DataGridView1.TabIndex = 21
         '
-        'Button4
-        '
-        Me.Button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button4.Image = Global.Farmacia1._0.My.Resources.Resources.Sales_report_icon
-        Me.Button4.Location = New System.Drawing.Point(889, 10)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(65, 50)
-        Me.Button4.TabIndex = 24
-        Me.Button4.UseVisualStyleBackColor = True
-        '
-        'Button5
-        '
-        Me.Button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button5.Image = Global.Farmacia1._0.My.Resources.Resources.Eraser_icon
-        Me.Button5.Location = New System.Drawing.Point(820, 10)
-        Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(65, 50)
-        Me.Button5.TabIndex = 23
-        Me.Button5.UseVisualStyleBackColor = True
-        '
-        'Button6
-        '
-        Me.Button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button6.Image = Global.Farmacia1._0.My.Resources.Resources._62850_magnifying_glass_tilted_left_icon
-        Me.Button6.Location = New System.Drawing.Point(751, 10)
-        Me.Button6.Name = "Button6"
-        Me.Button6.Size = New System.Drawing.Size(65, 50)
-        Me.Button6.TabIndex = 22
-        Me.Button6.UseVisualStyleBackColor = True
-        '
         'ndetventa
         '
         Me.ndetventa.HeaderText = "No. de detalle"
@@ -189,6 +159,36 @@ Partial Class frmCorteCaja
         Me.costo.Name = "costo"
         Me.costo.ReadOnly = True
         Me.costo.Visible = False
+        '
+        'Button4
+        '
+        Me.Button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button4.Image = Global.Farmacia1._0.My.Resources.Resources.Sales_report_icon
+        Me.Button4.Location = New System.Drawing.Point(889, 10)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(65, 50)
+        Me.Button4.TabIndex = 24
+        Me.Button4.UseVisualStyleBackColor = True
+        '
+        'Button5
+        '
+        Me.Button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button5.Image = Global.Farmacia1._0.My.Resources.Resources.Eraser_icon
+        Me.Button5.Location = New System.Drawing.Point(820, 10)
+        Me.Button5.Name = "Button5"
+        Me.Button5.Size = New System.Drawing.Size(65, 50)
+        Me.Button5.TabIndex = 23
+        Me.Button5.UseVisualStyleBackColor = True
+        '
+        'Button6
+        '
+        Me.Button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button6.Image = Global.Farmacia1._0.My.Resources.Resources._62850_magnifying_glass_tilted_left_icon
+        Me.Button6.Location = New System.Drawing.Point(751, 10)
+        Me.Button6.Name = "Button6"
+        Me.Button6.Size = New System.Drawing.Size(65, 50)
+        Me.Button6.TabIndex = 22
+        Me.Button6.UseVisualStyleBackColor = True
         '
         'frmCorteCaja
         '

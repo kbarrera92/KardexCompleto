@@ -49,6 +49,8 @@ Public Class frmCategoria
         ListBox1.DataSource = updateList(sqlCat)
         ListBox1.ValueMember = updateList(sqlCat).Columns(0).ToString
         ListBox1.DisplayMember = updateList(sqlCat).Columns(1).ToString
+
+        Estilos.AplicarEstilos(Me)
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click

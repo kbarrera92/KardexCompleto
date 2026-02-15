@@ -1,4 +1,5 @@
 ﻿Imports System.Data.SqlClient
+Imports Serilog
 
 Public Class frmAjustes2
 
@@ -39,32 +40,82 @@ Public Class frmAjustes2
     End Function
 
     Private Sub btnnuevaventa_Click(sender As Object, e As EventArgs) Handles btnnuevaventa.Click
-        najuste = getCorrelativoTrasiego(correlativo) + 1
-        lblNoCompra.Text = "Ajuste No. " & najuste
-        txtbuscapro.Clear()
-        txtcodpro.Clear()
-        txtdescpro.Clear()
-        cmbProveedor.SelectedIndex = -1
-        txtcantidad.Text = "0"
-        txtprecio.Text = "0.00"
-        txttotal.Text = "0.00"
-        DataGridView2.DataSource = Nothing
-        DataGridView2.Rows.Clear()
-        txtbuscapro.Select()
-
-
-        'Guardar ajuste
         Try
-            guardarAjuste()
+            If ComboBoxSucursal.SelectedIndex = -1 Or ComboBoxTipoAjuste.SelectedIndex = -1 Or String.IsNullOrWhiteSpace(txtconcep.Text) Then
+                MessageBox.Show("Faltan datos del encabezado", "Faltan datos", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return
+            End If
+
+            najuste = getCorrelativoTrasiego(correlativo) + 1
+            lblNoCompra.Text = "Ajuste No. " & najuste
+            txtbuscapro.Clear()
+            txtcodpro.Clear()
+            txtdescpro.Clear()
+            cmbProveedor.SelectedIndex = -1
+            txtcantidad.Text = "0"
+            txtprecio.Text = "0.00"
+            txttotal.Text = "0.00"
+            DataGridView2.DataSource = Nothing
+            DataGridView2.Rows.Clear()
+            txtbuscapro.Select()
+
+
+            'Guardar ajuste
+            'guardarAjuste()
         Catch ex As NullReferenceException
             lblNoCompra.Text = "Ajuste No."
             MsgBox("Faltan datos obligatorios", MsgBoxStyle.Critical, "Faltan datos")
-
+            Log.Error($"Ocurrió un error. Error: {ex.Message}")
         Catch ex As Exception
             MsgBox("No se pudo realizar esta acción" & vbCrLf & "Error: " & ex.Message, MsgBoxStyle.Critical, "Error")
-        Finally
-
+            Log.Error($"Ocurrió un error. Error: {ex.Message}")
         End Try
+    End Sub
+
+    Private Sub GrabaAjuste(ByVal accion As String)
+        Try
+            Dim parametros As New List(Of SqlParameter) From {
+                New SqlParameter("@tipoAjuste", SqlDbType.VarChar, 10) With {.Value = accion},
+                New SqlParameter("@fecha", SqlDbType.Date) With {.Value = Convert.ToDateTime(mskfecha.Text)},
+                New SqlParameter("@sucursal", SqlDbType.Int) With {.Value = Convert.ToInt32(ComboBoxSucursal.SelectedValue)},
+                New SqlParameter("@usuario", SqlDbType.Int) With {.Value = usuarioActual},
+                New SqlParameter("@concepto", SqlDbType.VarChar, 75) With {.Value = txtconcep.Text},
+                New SqlParameter("@total", SqlDbType.Decimal) With {.Value = Convert.ToDecimal(txttotal.Text)},
+                New SqlParameter("@detalles", SqlDbType.Structured) With {.Value = table},
+                New SqlParameter("@message", SqlDbType.VarChar, 200) With {.Direction = ParameterDirection.Output},
+                New SqlParameter("@returnValue", SqlDbType.Int) With {.Direction = ParameterDirection.ReturnValue}
+            }
+
+            Dim paramtodb As String = String.Empty
+            For Each param As SqlParameter In parametros
+                If TypeOf param.Value Is DataTable Then
+                    ' Si el parámetro es un DataTable, convertirlo a string
+                    Dim dt As DataTable = DirectCast(param.Value, DataTable)
+                    paramtodb &= param.ParameterName & "= [DataTable] " & vbCrLf
+
+                    ' Convertir las filas y columnas del DataTable en texto
+                    For Each row As DataRow In dt.Rows
+                        paramtodb &= "  - "
+                        For Each col As DataColumn In dt.Columns
+                            paramtodb &= $"{col.ColumnName}: {row(col)} | "
+                        Next
+                        paramtodb &= vbCrLf
+                    Next
+                Else
+                    paramtodb &= param.ParameterName & "=" & If(param.Value, """") & vbCrLf
+                End If
+            Next
+            Log.Information($"Parametros enviados al sp: {vbCrLf}{paramtodb}")
+
+            Dim resultado = EjecutarStoredProcedureMultiple("sp_grabaAjuste", parametros)
+
+            Dim codigoRetorno As Integer = Convert.ToInt32(parametros.Find(Function(p) p.ParameterName = "@returnValue").Value)
+            Dim mensajeSalida As String = parametros.Find(Function(p) p.ParameterName = "@message").Value.ToString()
+            MessageBox.Show(mensajeSalida, "Resultado", MessageBoxButtons.OK, IIf(codigoRetorno = 0, MessageBoxIcon.Information, MessageBoxIcon.Error))
+        Catch ex As Exception
+            Log.Error($"Ocurrio un error. Error: {ex.Message}, Trace: {ex.StackTrace}")
+        End Try
+
     End Sub
 
     Private Sub frmAjustes2_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -77,31 +128,36 @@ Public Class frmAjustes2
         End If
 
         mskfecha.Text = Format(DateTime.Now, "dd/MM/yyyy")
-        ComboBox2.DataSource = updateCm(sqlSuc)
-        ComboBox2.DisplayMember = updateCm(sqlSuc).Columns(1).ToString
-        ComboBox2.ValueMember = updateCm(sqlSuc).Columns(0).ToString
+        ComboBoxSucursal.DataSource = updateCm(sqlSuc)
+        ComboBoxSucursal.DisplayMember = updateCm(sqlSuc).Columns(1).ToString
+        ComboBoxSucursal.ValueMember = updateCm(sqlSuc).Columns(0).ToString
 
-        ComboBox1.DataSource = updateCm(tipoAjuste)
-        ComboBox1.DisplayMember = updateCm(tipoAjuste).Columns(1).ToString
-        ComboBox1.ValueMember = updateCm(tipoAjuste).Columns(0).ToString
+        ComboBoxTipoAjuste.DataSource = updateCm(tipoAjuste)
+        ComboBoxTipoAjuste.DisplayMember = updateCm(tipoAjuste).Columns(1).ToString
+        ComboBoxTipoAjuste.ValueMember = updateCm(tipoAjuste).Columns(0).ToString
 
         cmbProveedor.DataSource = updateCm(sqlprov)
         cmbProveedor.DisplayMember = updateCm(sqlprov).Columns(1).ToString
         cmbProveedor.ValueMember = updateCm(sqlprov).Columns(0).ToString
 
-        ComboBox1.SelectedIndex = -1
-        ComboBox2.SelectedIndex = -1
+        ComboBoxTipoAjuste.SelectedIndex = -1
+        ComboBoxSucursal.SelectedIndex = -1
+
+        Estilos.AplicarEstilos(Me)
     End Sub
 
 
 
-    
 
-    Private Sub ComboBox2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox2.SelectedIndexChanged
+
+    Private Sub ComboBox2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBoxSucursal.SelectedIndexChanged
         Try
-            fillDGVSP("sp_infoProdCompras", DataGridView1, Me, CInt(ComboBox2.SelectedValue.ToString))
+            If ComboBoxSucursal.SelectedValue Is Nothing Then
+                Return
+            End If
+            fillDGVSP("sp_infoProdCompras", DataGridView1, Me, CInt(ComboBoxSucursal.SelectedValue.ToString))
         Catch ex As Exception
-
+            Log.Error($"Ocurrió un error. Error: {ex.Message}")
         End Try
     End Sub
 
@@ -110,10 +166,10 @@ Public Class frmAjustes2
             MsgBox("Cantidad no válida", MsgBoxStyle.Critical, "Error")
         Else
             Try
-                Dim queryID As String = "INSERT INTO DETAJUSTE VALUES(@no, @trans, @prod, @cant, @precio, @subt);"
-                Dim comand As SqlCommand
+                'Dim queryID As String = "INSERT INTO DETAJUSTE VALUES(@no, @trans, @prod, @cant, @precio, @subt);"
+                'Dim comand As SqlCommand
 
-                comand = New SqlCommand(queryID, conn)
+                'comand = New SqlCommand(queryID, conn)
 
                 Dim det As Integer
                 If DataGridView2.Rows.Count = 0 Then
@@ -122,24 +178,26 @@ Public Class frmAjustes2
                     det = Me.DataGridView2.Rows(Me.DataGridView2.Rows.Count - 1).Cells(0).Value + 1
                 End If
 
-                comand.Parameters.AddWithValue("no", det)
-                comand.Parameters.AddWithValue("trans", najuste)
-                comand.Parameters.AddWithValue("prod", CInt(txtcodpro.Text))
-                comand.Parameters.AddWithValue("cant", CInt(txtcantidad.Text))
-                comand.Parameters.AddWithValue("subt", (CDbl(txtcantidad.Text) * CDbl(txtprecio.Text)))
-                comand.Parameters.AddWithValue("precio", CDbl(txtprecio.Text))
+                'comand.Parameters.AddWithValue("no", det)
+                'comand.Parameters.AddWithValue("trans", najuste)
+                'comand.Parameters.AddWithValue("prod", CInt(txtcodpro.Text))
+                'comand.Parameters.AddWithValue("cant", CInt(txtcantidad.Text))
+                'comand.Parameters.AddWithValue("subt", (CDbl(txtcantidad.Text) * CDbl(txtprecio.Text)))
+                'comand.Parameters.AddWithValue("precio", CDbl(txtprecio.Text))
 
 
-                openConnection()
-                comand.ExecuteNonQuery()
-                closeConnection()
+                'openConnection()
+                'comand.ExecuteNonQuery()
+                'closeConnection()
+
+                DataGridView2.Rows.Add(det, CInt(txtcodpro.Text), txtdescpro.Text.Trim(), CInt(txtcantidad.Text), CDbl(txtprecio.Text), (CDbl(txtcantidad.Text) * CDbl(txtprecio.Text)))
 
             Catch ex As Exception
                 MsgBox("Algo salió mal" & vbCrLf & "Error: " & ex.Message, MsgBoxStyle.Critical, "Error")
             Finally
 
-                fillDGVSP("detAjustes", DataGridView2, Me, najuste)
-                fillDGVSP("sp_infoProdCompras", DataGridView1, Me, CInt(ComboBox2.SelectedValue.ToString))
+                'fillDGVSP("detAjustes", DataGridView2, Me, najuste)
+                'fillDGVSP("sp_infoProdCompras", DataGridView1, Me, CInt(ComboBox2.SelectedValue.ToString))
                 txttotal.Text = FormatNumber(calcularTotal(), 2)
                 txtbuscapro.Clear()
                 txtcodpro.Clear()
@@ -151,7 +209,7 @@ Public Class frmAjustes2
                 txtbuscapro.Select()
             End Try
 
-            
+
         End If
     End Sub
 
@@ -163,14 +221,19 @@ Public Class frmAjustes2
 
     Private Sub DataGridView1_KeyDown(sender As Object, e As KeyEventArgs) Handles DataGridView1.KeyDown
         If e.KeyData = Keys.Enter Then
-            txtcodpro.Text = DataGridView1.CurrentRow.Cells(0).Value
-            txtdescpro.Text = DataGridView1.CurrentRow.Cells(1).Value & " " & DataGridView1.CurrentRow.Cells(4).Value & " " & DataGridView1.CurrentRow.Cells(4).Value
-            txtexistencia.Text = DataGridView1.CurrentRow.Cells(2).Value
-            ind1 = cmbProveedor.FindStringExact(DataGridView1.CurrentRow.Cells(6).Value)
-            cmbProveedor.SelectedIndex = ind1
-            txtcantidad.Select()
-            txtprecio.Text = DataGridView1.CurrentRow.Cells(5).Value
-            e.SuppressKeyPress = True
+            Try
+                txtcodpro.Text = DataGridView1.CurrentRow.Cells(0).Value
+                txtdescpro.Text = DataGridView1.CurrentRow.Cells(1).Value & " " & DataGridView1.CurrentRow.Cells(4).Value & " " & DataGridView1.CurrentRow.Cells(4).Value
+                txtexistencia.Text = DataGridView1.CurrentRow.Cells(2).Value
+                ind1 = cmbProveedor.FindStringExact(DataGridView1.CurrentRow.Cells(6).Value)
+                cmbProveedor.SelectedIndex = ind1
+                txtcantidad.Select()
+                txtprecio.Text = DataGridView1.CurrentRow.Cells(5).Value
+                e.SuppressKeyPress = True
+            Catch ex As Exception
+                Log.Error($"Ocurrió un error. Error: {ex.Message}")
+            End Try
+
         End If
     End Sub
 
@@ -189,7 +252,7 @@ Public Class frmAjustes2
                 Try
                     openConnection()
                     Dim query As String = "SELECT dProducto, PRO.rzProveedor, costo " _
-                                          & "FROM PRODUCTO " _
+                                          & "FROM PRODUCTOS " _
                                           & "INNER JOIN PROVEEDOR PRO " _
                                           & "ON proveedor = PRO.idProveedor " _
                                           & "WHERE idProducto = @id"
@@ -206,7 +269,7 @@ Public Class frmAjustes2
                         cmbProveedor.SelectedIndex = ind1
                         txtprecio.Text = reader(2)
                         reader.Close()
-                        txtexistencia.Text = getStock(CInt(ComboBox2.SelectedValue.ToString), CInt(txtcodpro.Text), "sp_getStoc")
+                        txtexistencia.Text = getStock(CInt(ComboBoxSucursal.SelectedValue.ToString), CInt(txtcodpro.Text), "sp_getStoc")
                     Else
                         MsgBox("No se encontró el producto", MsgBoxStyle.Critical, ConsultaParametro("nombreEmpresa"))
                         txtcodpro.Select()
@@ -215,7 +278,8 @@ Public Class frmAjustes2
 
 
                 Catch ex As Exception
-                    MsgBox("Error en la conexión a la Base de datos" & vbCrLf & ex.ToString)
+                    MsgBox("Error en la conexión a la Base de datos")
+                    Log.Error($"Ocurrió un error. Error: {ex.Message}")
                 Finally
                     closeConnection()
                 End Try
@@ -228,31 +292,16 @@ Public Class frmAjustes2
             MsgBox("Debe seleccionar un registro para eliminarlo", MsgBoxStyle.Critical, "¡No hay nada para eliminar!")
         Else
             Try
-                Dim ndet As Integer = DataGridView2.CurrentRow.Cells(0).Value
-                Dim ntrans As Integer = getCorrelativoTrasiego("SELECT IDENT_CURRENT ('AJUSTE') AS Current_Identity")
-
-                Dim cmd As SqlCommand
-                Dim sqlDeleteDet As String = "DELETE FROM DETAJUSTE WHERE ndetajuste = @ndet AND najuste = @najuste"
-
-                cmd = New SqlCommand(sqlDeleteDet, conn)
-
-                With cmd.Parameters
-                    .AddWithValue("ndet", ndet)
-                    .AddWithValue("najuste", ntrans)
-                End With
-
-                openConnection()
-                cmd.ExecuteNonQuery()
-                closeConnection()
+                DataGridView2.Rows.RemoveAt(DataGridView2.CurrentRow.Index)
                 MsgBox("Eliminado correctamente", MsgBoxStyle.Information, "Borrado")
             Catch ex As Exception
-                MsgBox("No se puede borrar este detalle" & vbCrLf & "Error: " & ex.Message, MsgBoxStyle.Critical, "Error")
+                Log.Error($"Ocurrió un error. Error: {ex.Message}")
+                MsgBox("No se puede borrar este detalle.", MsgBoxStyle.Critical, "Error")
             Finally
-                fillDGVSP("detAjustes", DataGridView2, Me, getCorrelativoTrasiego("SELECT IDENT_CURRENT ('AJUSTE') AS Current_Identity"))
                 txttotal.Text = FormatNumber(calcularTotal(), 2)
             End Try
 
-            
+
         End If
     End Sub
 
@@ -262,27 +311,6 @@ Public Class frmAjustes2
         Else
             If MessageBox.Show("¿Desea descartar este ajuste", "Descartar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) Then
                 Try
-
-                    Dim ntrans As Integer = najuste
-
-                    Dim cmd As SqlCommand
-                    Dim sqlDeleteDet As String = "DELETE FROM AJUSTE WHERE nAjuste = @najuste"
-
-                    cmd = New SqlCommand(sqlDeleteDet, conn)
-
-                    With cmd.Parameters
-
-                        .AddWithValue("najuste", ntrans)
-                    End With
-
-                    openConnection()
-                    cmd.ExecuteNonQuery()
-                    closeConnection()
-                    MsgBox("Eliminado correctamente", MsgBoxStyle.Information, "Borrado")
-                Catch ex As Exception
-                    MsgBox("No se puede borrar este ajuste?" & vbCrLf & "Error: " & ex.Message, MsgBoxStyle.Critical, "Error")
-                Finally
-                    DataGridView2.DataSource = Nothing
                     DataGridView2.Rows.Clear()
                     txttotal.Text = FormatNumber(calcularTotal(), 2)
 
@@ -294,52 +322,61 @@ Public Class frmAjustes2
                     txtcantidad.Text = "0"
                     txtprecio.Text = "0.00"
                     txttotal.Text = "0.00"
-                    ComboBox2.SelectedIndex = -1
-                    ComboBox1.SelectedIndex = -1
+                    ComboBoxSucursal.SelectedIndex = -1
+                    ComboBoxTipoAjuste.SelectedIndex = -1
                     txtconcep.Clear()
-                    mskfecha.Text = Format(DateTime.Now, "dd/MM/yyyy")
-                    DataGridView2.DataSource = Nothing
+                    mskfecha.Text = Format(Date.Now, "dd/MM/yyyy")
                     DataGridView2.Rows.Clear()
                     txtbuscapro.Select()
                     najuste = Nothing
+                    MsgBox("Eliminado correctamente", MsgBoxStyle.Information, "Borrado")
+                Catch ex As Exception
+                    MsgBox("No se puede borrar este ajuste?" & vbCrLf & "Error: " & ex.Message, MsgBoxStyle.Critical, "Error")
+                    Log.Error($"Ocurrió un error. Error: {ex.Message}")
                 End Try
             End If
         End If
-        
+
     End Sub
 
     Private Sub txtbuscapro_Click(sender As Object, e As EventArgs) Handles txtbuscapro.Click
         Try
-            fillDGVSP("sp_infoProdCompras", DataGridView1, Me, CInt(ComboBox2.SelectedValue.ToString))
+            fillDGVSP("sp_infoProdCompras", DataGridView1, Me, CInt(ComboBoxSucursal.SelectedValue.ToString))
         Catch ex As Exception
-
+            Log.Error($"Ocurrió un error. Error: {ex.Message}")
         End Try
     End Sub
 
     Private Sub btnregistrarc_Click(sender As Object, e As EventArgs) Handles btnregistrarc.Click
 
         If lblNoCompra.Text = "Ajuste No." Then
-
+            MessageBox.Show("Faltan datos del encabezado", "Faltan datos", MessageBoxButtons.OK, MessageBoxIcon.Warning)
         Else
             Try
-                Dim na As Integer = najuste
-                Dim sqlRegis As String = "UPDATE AJUSTE SET total = @total WHERE nAjuste = @na"
-                Dim cmd As SqlCommand
+                If DataGridView2.Rows.Count = 0 Then
+                    MsgBox("No se ha agregado ningún producto", MsgBoxStyle.Exclamation, "Faltan datos")
+                    Return
+                Else
+                    'crear la datatable
+                    table = New DataTable()
+                    table.Columns.Add("nDetalleV", GetType(Short))
+                    'table.Columns.Add("nVenta", GetType(Integer))
+                    table.Columns.Add("producto", GetType(Integer))
+                    table.Columns.Add("cantidad", GetType(Integer))
+                    table.Columns.Add("precio", GetType(Decimal))
+                    table.Columns.Add("subtotal", GetType(Decimal))
 
-                cmd = New SqlCommand(sqlRegis, conn)
+                    For index = 0 To DataGridView2.Rows.Count - 1
+                        table.Rows.Add(index + 1, DataGridView2.Rows(index).Cells(1).Value,
+                                       DataGridView2.Rows(index).Cells(3).Value,
+                                       DataGridView2.Rows(index).Cells(4).Value,
+                                       DataGridView2.Rows(index).Cells(5).Value)
+                    Next
+                End If
 
-                cmd.Parameters.AddWithValue("na", na)
-                cmd.Parameters.AddWithValue("total", CDbl(txttotal.Text))
+                GrabaAjuste(ComboBoxTipoAjuste.Text.ToUpper())
 
-                openConnection()
-                cmd.ExecuteNonQuery()
-                closeConnection()
-                MsgBox("Ajuste registrado correctamente", MsgBoxStyle.Information, "Guardado")
-
-            Catch ex As Exception
-                MsgBox("No se actualizó el total del ajuste", MsgBoxStyle.Exclamation, "Error")
-            Finally
-                fillDGVSP("sp_infoProdCompras", DataGridView1, Me, CInt(ComboBox2.SelectedValue.ToString))
+                fillDGVSP("sp_infoProdCompras", DataGridView1, Me, ComboBoxSucursal.SelectedValue.ToString)
                 lblNoCompra.Text = "Ajuste No."
                 txtbuscapro.Clear()
                 txtcodpro.Clear()
@@ -348,14 +385,17 @@ Public Class frmAjustes2
                 txtcantidad.Text = "0"
                 txtprecio.Text = "0.00"
                 txttotal.Text = "0.00"
-                ComboBox2.SelectedIndex = -1
-                ComboBox1.SelectedIndex = -1
+                ComboBoxSucursal.SelectedIndex = -1
+                ComboBoxTipoAjuste.SelectedIndex = -1
                 txtconcep.Clear()
-                mskfecha.Text = Format(DateTime.Now, "dd/MM/yyyy")
+                mskfecha.Text = Format(Date.Now, "dd/MM/yyyy")
                 DataGridView2.DataSource = Nothing
                 DataGridView2.Rows.Clear()
                 txtbuscapro.Select()
                 najuste = Nothing
+            Catch ex As Exception
+                Log.Error($"Ocurrió un error. Error: {ex.Message}")
+                MsgBox($"Ocurrió un error.", MsgBoxStyle.Exclamation, "Error")
             End Try
         End If
     End Sub
@@ -368,20 +408,21 @@ Public Class frmAjustes2
         frmVerAjustes.Show()
     End Sub
 
-    
+
     Private Sub txtbuscapro_TextChanged(sender As Object, e As EventArgs) Handles txtbuscapro.TextChanged
         Dim filt As String
         Try
             filt = String.Format("dProducto like '%{0}%' Or Convert(idProducto,'System.String') like '{0}%'", txtbuscapro.Text)
             dv.RowFilter = filt
         Catch ex As Exception
-            MsgBox(ex.Message)
+            Log.Error($"Ocurrió un error. Error: {ex.Message}")
+            MsgBox($"Ocurrió un error. Revise el log del sistema")
         End Try
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         Try
-            Dim sqlRegis As String = "UPDATE PRODUCTO SET barcode = @bar WHERE idProducto = @id"
+            Dim sqlRegis As String = "UPDATE PRODUCTOS SET barcode = @bar WHERE idProducto = @id"
             Dim cmd As SqlCommand
 
             cmd = New SqlCommand(sqlRegis, conn)
@@ -395,6 +436,7 @@ Public Class frmAjustes2
             MsgBox("Código de barra registrado correctamente", MsgBoxStyle.Information, "Guardado")
             txtbarcode.Clear()
         Catch ex As Exception
+            Log.Error($"Ocurrió un error. Error: {ex.Message}")
             MsgBox("Hubo un error al registrar el código de barra", MsgBoxStyle.Information, "Error")
         End Try
     End Sub

@@ -42,6 +42,7 @@ Partial Class Form1
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.Size = New System.Drawing.Size(319, 38)
         Me.TextBox1.TabIndex = 1
+        Me.TextBox1.Tag = "PS"
         '
         'TextBox2
         '
@@ -52,6 +53,7 @@ Partial Class Form1
         Me.TextBox2.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.TextBox2.Size = New System.Drawing.Size(319, 38)
         Me.TextBox2.TabIndex = 2
+        Me.TextBox2.Tag = "PS"
         '
         'Button1
         '
@@ -63,6 +65,7 @@ Partial Class Form1
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(322, 41)
         Me.Button1.TabIndex = 3
+        Me.Button1.Tag = "DB,WB"
         Me.Button1.Text = "LOGIN"
         Me.Button1.UseVisualStyleBackColor = False
         '
@@ -74,6 +77,7 @@ Partial Class Form1
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(124, 22)
         Me.Label1.TabIndex = 6
+        Me.Label1.Tag = "PS"
         Me.Label1.Text = "Iniciar Sesión"
         '
         'PictureBox3

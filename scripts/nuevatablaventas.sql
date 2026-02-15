@@ -1,0 +1,52 @@
+USE db_ab10ba_kbarreradev
+GO
+
+/****** Object:  Table [dbo].[VENTAS]    Script Date: 28/02/2025 11:16:46 a. m. ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[VENTAS](
+	[nVenta] [int] NOT NULL,
+	[fechaVenta] [datetime] NULL,
+	[usuario] [int] NULL,
+	[total] [decimal](18, 2) NULL,
+	[documento] [bigint] NULL,
+	[idSucursal] [int] NULL,
+	[cliente] [varchar](20) NULL,
+	[efectivo] [decimal](18, 2) NULL,
+	[tarjeta] [decimal](18, 2) NULL,
+	[autorizacion] [varchar](50) NULL,
+	[codempleado] [int] NULL,
+	[turno] [int] NULL,
+ CONSTRAINT [PK_VENTAS] PRIMARY KEY CLUSTERED 
+(
+	[nVenta] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[VENTAS]  WITH CHECK ADD  CONSTRAINT [FK_VENTAS_CLIENTE] FOREIGN KEY([cliente])
+REFERENCES [dbo].[CLIENTE] ([nitCliente])
+GO
+
+ALTER TABLE [dbo].[VENTAS] CHECK CONSTRAINT [FK_VENTAS_CLIENTE]
+GO
+
+ALTER TABLE [dbo].[VENTAS]  WITH CHECK ADD  CONSTRAINT [FK_VENTAS_SUCURSAL] FOREIGN KEY([idSucursal])
+REFERENCES [dbo].[SUCURSAL] ([idSucursal])
+GO
+
+ALTER TABLE [dbo].[VENTAS] CHECK CONSTRAINT [FK_VENTAS_SUCURSAL]
+GO
+
+ALTER TABLE [dbo].[VENTAS]  WITH CHECK ADD  CONSTRAINT [FK_VENTAS_USUARIO] FOREIGN KEY([usuario])
+REFERENCES [dbo].[USUARIO] ([idUsuario])
+GO
+
+ALTER TABLE [dbo].[VENTAS] CHECK CONSTRAINT [FK_VENTAS_USUARIO]
+GO
+
+

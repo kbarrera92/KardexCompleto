@@ -1,4 +1,6 @@
 ﻿Imports System.Data.SqlClient
+Imports Serilog
+
 Public Class frmProductos
     Dim criterio As String
     Dim sqlSucursal As String = "SELECT idSucursal, nombreSuc FROM SUCURSAL"
@@ -100,7 +102,7 @@ Public Class frmProductos
         Try
             dv.RowFilter = String.Format("Convert(" & criterio & ", 'System.String') LIKE '%{0}%'", Trim(txtbuscar.Text))
         Catch ex As Exception
-            MsgBox(ex.Message)
+            Log.Error($"Ocurrió un error al buscar. Error {ex.Message}")
         End Try
 
     End Sub
@@ -139,93 +141,122 @@ Public Class frmProductos
     End Sub
 
     Private Sub txtprecio_KeyDown(sender As Object, e As KeyEventArgs) Handles txtprecio.KeyDown
-        If e.KeyCode = Keys.Enter Then
-            Dim intVal As Integer
-            Dim decValue As Decimal
+        Try
+            If e.KeyCode = Keys.Enter Then
+                Dim intVal As Integer
+                Dim decValue As Decimal
 
-            If Decimal.TryParse(txtprecio.Text, decValue) = False Then
-                MessageBox.Show("Precio inválido", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                Return
-            End If
-
-            If datosreq = 1 Then
-                If MessageBox.Show("¿Guardar los datos de este producto?", "Guardar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
-
-                    Dim myValue As String = InputBox("Ingresa la cantidad", "Datos", "0")
-
-                    If Integer.TryParse(myValue, intVal) = False Then
-                        Return
-                    ElseIf myValue <= 0 Then
-                        'MessageBox.Show("Se cancelo el Inputbox")
-                        Return
-                    End If
-
-                    frmPuntoDeVentaMejorado.DataGridView1.Rows.Add(DataGridView1.CurrentRow.Cells(0).Value, DataGridView1.CurrentRow.Cells(1).Value, myValue, Decimal.Parse(txtprecio.Text), String.Format("{0:N2}", Decimal.Parse(txtprecio.Text) * myValue))
-                    frmPuntoDeVentaMejorado.txttotal.Text = String.Format("{0:N2}", frmPuntoDeVentaMejorado.calculartotal())
-                    frmPuntoDeVentaMejorado.txttotalarti.Text = String.Format("{0:N2}", frmPuntoDeVentaMejorado.calculartotalarti())
-
-                    If Not Decimal.Parse(txtprecio.Text).Equals(Decimal.Parse(DataGridView1.CurrentRow.Cells(5).Value)) Then
-                        Dim params(3) As String
-                        params(0) = Trim(nameUsuarioActual)
-                        params(1) = Environment.MachineName & " - " & Environment.UserName
-                        params(2) = String.Format("{0} cambió el precio del producto: {1}", nameUsuarioActual, DataGridView1.CurrentRow.Cells(0).Value)
-                        GrabaBitacora(params, grabaBitacoraSp)
-                    End If
-
-                    Me.Close()
+                If Decimal.TryParse(txtprecio.Text, decValue) = False Then
+                    MessageBox.Show("Precio inválido", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                    Return
                 End If
-            Else
-                If datosreq = 2 Then
+
+                If datosreq = 1 Then
                     If MessageBox.Show("¿Guardar los datos de este producto?", "Guardar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
-                        frmTraslados.txtcodpro.Text = DataGridView1.CurrentRow.Cells(0).Value
-                        frmTraslados.txtdescpro.Text = DataGridView1.CurrentRow.Cells(1).Value & " " & DataGridView1.CurrentRow.Cells(4).Value & " " & DataGridView1.CurrentRow.Cells(7).Value
 
-                        frmTraslados.txtlabpro.Text = DataGridView1.CurrentRow.Cells(3).Value
+                        Dim myValue As String = InputBox("Ingresa la cantidad", "Datos", "0")
 
-                        frmTraslados.txtexistencia.Text = DataGridView1.CurrentRow.Cells(2).Value
-                        frmTraslados.txtcantidad.Select()
-                        frmTraslados.Select()
+                        If Integer.TryParse(myValue, intVal) = False Then
+                            Return
+                        ElseIf myValue <= 0 Then
+                            'MessageBox.Show("Se cancelo el Inputbox")
+                            Return
+                        End If
+
+                        frmPuntoDeVentaMejorado.DataGridView1.Rows.Add(DataGridView1.CurrentRow.Cells(0).Value, DataGridView1.CurrentRow.Cells(1).Value, myValue, Decimal.Parse(txtprecio.Text), String.Format("{0:N2}", Decimal.Parse(txtprecio.Text) * myValue))
+                        frmPuntoDeVentaMejorado.txttotal.Text = String.Format("{0:N2}", frmPuntoDeVentaMejorado.calculartotal())
+                        frmPuntoDeVentaMejorado.txttotalarti.Text = String.Format("{0:N2}", frmPuntoDeVentaMejorado.calculartotalarti())
+
+                        If Not Decimal.Parse(txtprecio.Text).Equals(Decimal.Parse(DataGridView1.CurrentRow.Cells(5).Value)) Then
+                            Dim params(3) As String
+                            params(0) = Trim(nameUsuarioActual)
+                            params(1) = Environment.MachineName & " - " & Environment.UserName
+                            params(2) = String.Format("{0} cambió el precio del producto: {1}", nameUsuarioActual, DataGridView1.CurrentRow.Cells(0).Value)
+                            GrabaBitacora(params, grabaBitacoraSp)
+                            Log.Warning(String.Format("{0} cambió el precio del producto: {1}. Fecha: {2}", nameUsuarioActual, DataGridView1.CurrentRow.Cells(0).Value, Date.Now))
+                        End If
+
                         Me.Close()
-
                     End If
                 Else
-                    If datosreq = 3 Then
-                        If enQueDGV = 1 Then
-                            If MessageBox.Show("¿Guardar los datos de este producto?", "Guardar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
-                                codDTS = DataGridView1.CurrentRow.Cells(0).Value
-                                descDTS = DataGridView1.CurrentRow.Cells(1).Value
-                                presDTS = DataGridView1.CurrentRow.Cells(4).Value
-                                medDTS = DataGridView1.CurrentRow.Cells(7).Value
-                                exisDTS = DataGridView1.CurrentRow.Cells(2).Value
-                                frmTrasiegos2.Show()
-                                frmTrasiegos2.txtCantProST.Select()
-                                Me.Close()
-                                'frmTrasiegos2.DataGridView1.Rows.Add(codDTS, cantDTS, descDTS, presDTS, medDTS)
-                            End If
-                        Else
-                            If MessageBox.Show("¿Guardar los datos de este producto?", "Guardar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
-                                codDTS = DataGridView1.CurrentRow.Cells(0).Value
-                                descDTS = DataGridView1.CurrentRow.Cells(1).Value
-                                presDTS = DataGridView1.CurrentRow.Cells(4).Value
-                                medDTS = DataGridView1.CurrentRow.Cells(7).Value
-                                frmTrasiegos2.Show()
-                                frmTrasiegos2.txtCantProdET.Select()
-                                Me.Close()
+                    If datosreq = 2 Then
+                        If MessageBox.Show("¿Guardar los datos de este producto?", "Guardar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
+                            frmTraslados.txtcodpro.Text = DataGridView1.CurrentRow.Cells(0).Value
+                            frmTraslados.txtdescpro.Text = DataGridView1.CurrentRow.Cells(1).Value & " " & DataGridView1.CurrentRow.Cells(4).Value & " " & DataGridView1.CurrentRow.Cells(7).Value
 
-                            End If
+                            frmTraslados.txtlabpro.Text = DataGridView1.CurrentRow.Cells(3).Value
+
+                            frmTraslados.txtexistencia.Text = DataGridView1.CurrentRow.Cells(2).Value
+                            frmTraslados.txtcantidad.Select()
+                            frmTraslados.Select()
+                            Me.Close()
+
                         End If
                     Else
-                        If datosreq = 4 Then
-                            frmKardexMov.TextBox1.Text = DataGridView1.CurrentRow.Cells(0).Value
-                            frmKardexMov.TextBox2.Text = DataGridView1.CurrentRow.Cells(1).Value
-                            'frmKardexMov.TextBox3.Text = getStock(CInt(frmKardexMov.ComboBox1.SelectedValue), CInt(frmKardexMov.TextBox1.Text), "sp_getStoc")
-                            Me.Close()
-                        End If
-                    End If
+                        If datosreq = 3 Then
+                            If enQueDGV = 1 Then
+                                If MessageBox.Show("¿Guardar los datos de este producto?", "Guardar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
+                                    codDTS = DataGridView1.CurrentRow.Cells(0).Value
+                                    descDTS = DataGridView1.CurrentRow.Cells(1).Value
+                                    presDTS = DataGridView1.CurrentRow.Cells(4).Value
+                                    medDTS = DataGridView1.CurrentRow.Cells(7).Value
+                                    exisDTS = DataGridView1.CurrentRow.Cells(2).Value
+                                    frmTrasiegos2.Show()
+                                    frmTrasiegos2.txtCantProST.Select()
+                                    Me.Close()
+                                    'frmTrasiegos2.DataGridView1.Rows.Add(codDTS, cantDTS, descDTS, presDTS, medDTS)
+                                End If
+                            Else
+                                If MessageBox.Show("¿Guardar los datos de este producto?", "Guardar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
+                                    codDTS = DataGridView1.CurrentRow.Cells(0).Value
+                                    descDTS = DataGridView1.CurrentRow.Cells(1).Value
+                                    presDTS = DataGridView1.CurrentRow.Cells(4).Value
+                                    medDTS = DataGridView1.CurrentRow.Cells(7).Value
+                                    frmTrasiegos2.Show()
+                                    frmTrasiegos2.txtCantProdET.Select()
+                                    Me.Close()
 
+                                End If
+                            End If
+                        Else
+                            If datosreq = 4 Then
+                                frmKardexMov.TextBox1.Text = DataGridView1.CurrentRow.Cells(0).Value
+                                frmKardexMov.TextBox2.Text = DataGridView1.CurrentRow.Cells(1).Value
+                                'frmKardexMov.TextBox3.Text = getStock(CInt(frmKardexMov.ComboBox1.SelectedValue), CInt(frmKardexMov.TextBox1.Text), "sp_getStoc")
+                                Me.Close()
+                            End If
+                        End If
+
+                    End If
                 End If
+                e.SuppressKeyPress = True
             End If
-            e.SuppressKeyPress = True
-        End If
+        Catch ex As Exception
+            Log.Error($"Ocurrió un error. Error. {ex.Message}")
+            MessageBox.Show("Ocurrió un error. Revise el log del programa.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+
+    End Sub
+
+    Private Sub DataGridView1_DataBindingComplete(sender As Object, e As DataGridViewBindingCompleteEventArgs) Handles DataGridView1.DataBindingComplete
+        For Each row As DataGridViewRow In DataGridView1.Rows
+            ' 1) Extraer valor de la celda, sin errores
+            Dim valor = row.Cells("flag").Value
+            Dim flagChar As Char = "N"c
+            If valor IsNot Nothing AndAlso Not Convert.IsDBNull(valor) Then
+                Dim s = valor.ToString()
+                If s.Length > 0 Then flagChar = s(0)
+            End If
+
+            ' 2) Pintar la fila según el valor
+            Select Case flagChar
+                Case "C"c
+                    row.DefaultCellStyle.BackColor = Color.LimeGreen
+                Case "I"c
+                    row.DefaultCellStyle.BackColor = Color.Yellow
+                Case Else
+                    row.DefaultCellStyle.BackColor = Color.White
+            End Select
+        Next
     End Sub
 End Class

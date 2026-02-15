@@ -1,8 +1,7 @@
 ﻿Imports System.Data.SqlClient
 Imports System.Configuration
-Imports System.ComponentModel
-Imports System.IO
 Imports System.Globalization
+Imports Serilog
 
 Module FVPublicas
 
@@ -41,19 +40,6 @@ Module FVPublicas
     Public nSalidaXTraslado As Integer
 
 
-    Function calcCant(ByVal pro As Integer) As Integer
-        Dim cant As Integer = 0
-
-        For i = 0 To frmPuntoDeVenta.DataGridView1.Rows.Count - 1
-            If CInt(frmPuntoDeVenta.DataGridView1.Rows(i).Cells(0).Value) = pro Then
-                cant = cant + CInt(frmPuntoDeVenta.DataGridView1.Rows(i).Cells(2).Value)
-
-            Else
-                cant = 0
-            End If
-        Next
-        Return cant
-    End Function
 
     Sub saveinfoclient()
         Dim query As String = "INSERT INTO CLIENTE VALUES(@nit, @rz, @dir, null, null)"
@@ -61,13 +47,12 @@ Module FVPublicas
         Try
             cmd = New SqlCommand(query, conn)
 
-            cmd.Parameters.AddWithValue("nit", Trim(frmPuntoDeVenta.txtnit.Text))
-            cmd.Parameters.AddWithValue("rz", Trim(frmPuntoDeVenta.txtnombrecliente.Text))
-            cmd.Parameters.AddWithValue("dir", Trim(frmPuntoDeVenta.txtdircliente.Text))
+            cmd.Parameters.AddWithValue("nit", Trim(frmCobrar.txtnit.Text))
+            cmd.Parameters.AddWithValue("rz", Trim(frmCobrar.txtnombrecliente.Text))
+            cmd.Parameters.AddWithValue("dir", Trim(frmCobrar.txtdircliente.Text))
 
             openConnection()
             cmd.ExecuteNonQuery()
-            'MsgBox("Yes")
         Catch ex As Exception
             MessageBox.Show("No se guardo el cliente" & vbCrLf & "Error: " & ex.Message, "Algo salio mal", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         Finally
@@ -156,9 +141,9 @@ Module FVPublicas
         'cmd.Parameters.AddWithValue("total", CDbl(frmAjuste.txttotal.Text))
         cmd.Parameters.AddWithValue("total", 0.0)
         cmd.Parameters.AddWithValue("concep", Trim(frmAjustes2.txtconcep.Text))
-        cmd.Parameters.AddWithValue("suc", CInt(frmAjustes2.ComboBox2.SelectedValue.ToString))
+        cmd.Parameters.AddWithValue("suc", CInt(frmAjustes2.ComboBoxSucursal.SelectedValue.ToString))
 
-        cmd.Parameters.AddWithValue("tipo", CInt(frmAjustes2.ComboBox1.SelectedValue.ToString))
+        cmd.Parameters.AddWithValue("tipo", CInt(frmAjustes2.ComboBoxTipoAjuste.SelectedValue.ToString))
 
 
         Try
@@ -254,32 +239,30 @@ Module FVPublicas
         End Try
     End Function
 
-    Sub guardarVenta()
-        Dim query As String = "INSERT INTO VENTA VALUES(@fech, @usuario, @total, @doc, @suc, @cliente, @efec, @tarj, @aut)"
-        Dim cmd As SqlCommand
+    Function updateCm(ByVal sql As String, ByVal parameters As List(Of SqlParameter)) As DataTable
+        Dim da As SqlDataAdapter
+        Dim dt As New DataTable
+
         Try
-            cmd = New SqlCommand(query, conn)
-
-            cmd.Parameters.AddWithValue("fech", Convert.ToDateTime(frmPuntoDeVenta.txtfecha.Text))
-            cmd.Parameters.AddWithValue("usuario", usuarioActual)
-            cmd.Parameters.AddWithValue("total", CDbl(frmPuntoDeVenta.txtTotal.Text))
-            cmd.Parameters.AddWithValue("doc", If(Trim(frmPuntoDeVenta.txtFactura.Text) = "", DBNull.Value, CInt(frmPuntoDeVenta.txtFactura.Text)))
-            cmd.Parameters.AddWithValue("suc", sucActual)
-            cmd.Parameters.AddWithValue("cliente", Trim(frmPuntoDeVenta.txtnit.Text))
-            cmd.Parameters.AddWithValue("efec", 0.0)
-            cmd.Parameters.AddWithValue("tarj", 0.0)
-            cmd.Parameters.AddWithValue("aut", "")
-
             openConnection()
-            cmd.ExecuteNonQuery()
 
+            Dim cmd As New SqlCommand(sql, conn)
+
+            cmd.CommandType = CommandType.Text
+            ' Añade los parámetros al comando
+            For Each p As SqlParameter In parameters
+                cmd.Parameters.Add(p)
+            Next
+
+            da = New SqlDataAdapter(cmd)
+            da.Fill(dt)
+
+            Return dt
         Catch ex As Exception
-            MessageBox.Show("Algo salio mal" & vbCrLf & "Error: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        Finally
-            closeConnection()
-            'guardarDetalleVenta()
+            MsgBox(ex.Message)
+            Return Nothing
         End Try
-    End Sub
+    End Function
 
     Sub guardarVenta2()
         Dim query As String = "INSERT INTO VENTA VALUES(@fech, @usuario, @total, @doc, @suc, @cliente, @efec, @tarj, @aut)"
@@ -426,38 +409,7 @@ Module FVPublicas
 
 
 
-    Sub guardarDetalleVenta()
-        Dim queryID As String = "INSERT INTO DETALLEVENTA VALUES(@no, @trans, @prod, @cant, @precio, @subt);"
-        Dim comand As SqlCommand
 
-        comand = New SqlCommand(queryID, conn)
-
-        Try
-            For i = 0 To frmPuntoDeVenta.DataGridView1.Rows.Count - 1
-                comand.Parameters.Clear()
-
-                comand.Parameters.AddWithValue("no", i + 1)
-                comand.Parameters.AddWithValue("trans", CInt(frmPuntoDeVenta.txtNVenta.Text))
-                comand.Parameters.AddWithValue("prod", frmPuntoDeVenta.DataGridView1.Rows(i).Cells(0).Value)
-                comand.Parameters.AddWithValue("cant", frmPuntoDeVenta.DataGridView1.Rows(i).Cells(2).Value)
-                comand.Parameters.AddWithValue("subt", Convert.ToDecimal(frmPuntoDeVenta.DataGridView1.Rows(i).Cells(4).Value))
-                comand.Parameters.AddWithValue("precio", Convert.ToDecimal(frmPuntoDeVenta.DataGridView1.Rows(i).Cells(3).Value))
-
-
-                openConnection()
-                comand.ExecuteNonQuery()
-                closeConnection()
-
-
-            Next
-            MessageBox.Show("Transacción realizada correctamente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information)
-        Catch ex As Exception
-            MsgBox("Error: " & ex.ToString)
-        Finally
-
-        End Try
-
-    End Sub
 
     Sub guardarFactura()
         Dim query As String = "INSERT INTO FACTURA VALUES(@fac, @fech, @nitc, @nombrec, @dirc, @serie, @venta, @estado)"
@@ -465,13 +417,13 @@ Module FVPublicas
         Try
             cmd = New SqlCommand(query, conn)
 
-            cmd.Parameters.AddWithValue("fech", Convert.ToDateTime(frmPuntoDeVenta.txtfecha.Text))
-            cmd.Parameters.AddWithValue("fac", CInt(frmPuntoDeVenta.txtFactura.Text))
-            cmd.Parameters.AddWithValue("nitc", frmPuntoDeVenta.txtnit.Text)
-            cmd.Parameters.AddWithValue("nombrec", frmPuntoDeVenta.txtnombrecliente.Text)
-            cmd.Parameters.AddWithValue("dirc", frmPuntoDeVenta.txtdircliente.Text)
-            cmd.Parameters.AddWithValue("serie", CInt(frmPuntoDeVenta.ComboBox1.SelectedValue))
-            cmd.Parameters.AddWithValue("venta", CInt(frmPuntoDeVenta.txtNVenta.Text))
+            cmd.Parameters.AddWithValue("fech", Convert.ToDateTime(frmCobrar.txtfecha.Text))
+            cmd.Parameters.AddWithValue("fac", CInt(frmCobrar.txtFactura.Text))
+            cmd.Parameters.AddWithValue("nitc", frmCobrar.txtnit.Text)
+            cmd.Parameters.AddWithValue("nombrec", frmCobrar.txtnombrecliente.Text)
+            cmd.Parameters.AddWithValue("dirc", frmCobrar.txtdircliente.Text)
+            cmd.Parameters.AddWithValue("serie", CInt(frmCobrar.ComboBox1.SelectedValue))
+            'cmd.Parameters.AddWithValue("venta", CInt(frmCobrar.txtNVenta.Text))
             cmd.Parameters.AddWithValue("estado", 1)
 
             openConnection()
@@ -575,7 +527,8 @@ Module FVPublicas
             dgv.DataSource = dv
 
         Catch ex As Exception
-            MsgBox("Error al cargar los datos" & vbCrLf & "Error: " & ex.ToString)
+            Log.Error($"Ocurrió un error. Error: {ex.Message}")
+            MsgBox("Error al cargar los datos.", MsgBoxStyle.Critical, "Error")
         Finally
             closeConnection()
         End Try

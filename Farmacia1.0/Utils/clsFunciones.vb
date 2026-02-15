@@ -210,6 +210,7 @@ Public Class clsFunciones
                     printFont = New Font("Lucida Sans Typewriter", 8)
                     Dim pd As PrintDocument = New PrintDocument()
                     pd.PrinterSettings.PrinterName = impresora
+                    pd.PrinterSettings.Copies = Short.Parse(ConsultaParametro("cantTickets"))
                     pd.DocumentName = "Ticket" & DateTime.Now.ToShortDateString()
 
                     AddHandler pd.PrintPage, AddressOf Me.pd_PrintPage
@@ -234,6 +235,22 @@ Public Class clsFunciones
             Dim topMargin As Single = 10
             Dim line As String = Nothing
 
+            Dim logoPath = ConsultaParametro("logoPath")
+            If File.Exists(logoPath) Then
+                Using logoImage As Image = Image.FromFile(logoPath)
+                    Dim logoWidth As Single = 275    ' p. ej. 200px de ancho
+                    Dim logoHeight As Single = 100    ' p. ej.  80px de alto
+
+                    ev.Graphics.DrawImage(logoImage,
+                                leftMargin,
+                                topMargin,
+                                logoWidth,
+                                logoHeight)
+
+                    topMargin += logoHeight + 5       ' +5px de espacio extra
+                End Using
+            End If
+
             linesperpage = ev.MarginBounds.Height / printFont.GetHeight(ev.Graphics)
 
             line = streamtoprint.ReadLine
@@ -244,11 +261,7 @@ Public Class clsFunciones
                 line = streamtoprint.ReadLine
             End While
 
-            If line <> Nothing Then
-                ev.HasMorePages = True
-            Else
-                ev.HasMorePages = False
-            End If
+            ev.HasMorePages = (line IsNot Nothing)
         End Sub
     End Class
 

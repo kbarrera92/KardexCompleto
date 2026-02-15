@@ -43,7 +43,18 @@ Partial Class frmUsuario
         Me.ComboBox2 = New System.Windows.Forms.ComboBox()
         Me.ComboBox3 = New System.Windows.Forms.ComboBox()
         Me.Label7 = New System.Windows.Forms.Label()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.btnPass3 = New System.Windows.Forms.Button()
+        Me.btnPass2 = New System.Windows.Forms.Button()
+        Me.btnPass1 = New System.Windows.Forms.Button()
+        Me.TextBoxPass3 = New System.Windows.Forms.TextBox()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.TextBoxPass2 = New System.Windows.Forms.TextBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.TextBoxPass1 = New System.Windows.Forms.TextBox()
+        Me.Label8 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
         '
         'TextBox8
@@ -51,7 +62,7 @@ Partial Class frmUsuario
         Me.TextBox8.Location = New System.Drawing.Point(362, 40)
         Me.TextBox8.Name = "TextBox8"
         Me.TextBox8.Size = New System.Drawing.Size(261, 20)
-        Me.TextBox8.TabIndex = 50
+        Me.TextBox8.TabIndex = 3
         '
         'Label9
         '
@@ -60,7 +71,7 @@ Partial Class frmUsuario
         Me.Label9.Location = New System.Drawing.Point(359, 19)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(63, 17)
-        Me.Label9.TabIndex = 49
+        Me.Label9.TabIndex = 2
         Me.Label9.Text = "Código:"
         '
         'GroupBox1
@@ -72,10 +83,10 @@ Partial Class frmUsuario
         Me.GroupBox1.Controls.Add(Me.Button1)
         Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox1.ForeColor = System.Drawing.Color.Black
-        Me.GroupBox1.Location = New System.Drawing.Point(362, 446)
+        Me.GroupBox1.Location = New System.Drawing.Point(21, 452)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(261, 66)
-        Me.GroupBox1.TabIndex = 44
+        Me.GroupBox1.Size = New System.Drawing.Size(312, 66)
+        Me.GroupBox1.TabIndex = 16
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Acciones"
         '
@@ -87,7 +98,7 @@ Partial Class frmUsuario
         Me.Button4.Location = New System.Drawing.Point(176, 22)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(37, 34)
-        Me.Button4.TabIndex = 16
+        Me.Button4.TabIndex = 3
         Me.Button4.UseVisualStyleBackColor = True
         '
         'Button3
@@ -98,7 +109,7 @@ Partial Class frmUsuario
         Me.Button3.Location = New System.Drawing.Point(133, 22)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(37, 34)
-        Me.Button3.TabIndex = 15
+        Me.Button3.TabIndex = 2
         Me.Button3.UseVisualStyleBackColor = True
         '
         'Button2
@@ -109,7 +120,7 @@ Partial Class frmUsuario
         Me.Button2.Location = New System.Drawing.Point(90, 22)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(37, 34)
-        Me.Button2.TabIndex = 14
+        Me.Button2.TabIndex = 1
         Me.Button2.UseVisualStyleBackColor = True
         '
         'Button1
@@ -120,25 +131,26 @@ Partial Class frmUsuario
         Me.Button1.Location = New System.Drawing.Point(47, 22)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(37, 34)
-        Me.Button1.TabIndex = 13
+        Me.Button1.TabIndex = 0
         Me.Button1.UseVisualStyleBackColor = True
         '
         'Label5
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(359, 228)
+        Me.Label5.Location = New System.Drawing.Point(359, 176)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(122, 17)
-        Me.Label5.TabIndex = 40
+        Me.Label5.TabIndex = 10
         Me.Label5.Text = "Tipo de usuario"
         '
         'TextBox3
         '
         Me.TextBox3.Location = New System.Drawing.Point(365, 197)
         Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(261, 20)
-        Me.TextBox3.TabIndex = 39
+        Me.TextBox3.Size = New System.Drawing.Size(258, 20)
+        Me.TextBox3.TabIndex = 9
+        Me.TextBox3.Visible = False
         '
         'Label4
         '
@@ -147,15 +159,16 @@ Partial Class frmUsuario
         Me.Label4.Location = New System.Drawing.Point(362, 177)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(96, 17)
-        Me.Label4.TabIndex = 38
+        Me.Label4.TabIndex = 8
         Me.Label4.Text = "Contraseña:"
+        Me.Label4.Visible = False
         '
         'TextBox2
         '
         Me.TextBox2.Location = New System.Drawing.Point(362, 143)
         Me.TextBox2.Name = "TextBox2"
         Me.TextBox2.Size = New System.Drawing.Size(261, 20)
-        Me.TextBox2.TabIndex = 37
+        Me.TextBox2.TabIndex = 7
         '
         'Label3
         '
@@ -164,7 +177,7 @@ Partial Class frmUsuario
         Me.Label3.Location = New System.Drawing.Point(359, 122)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(83, 17)
-        Me.Label3.TabIndex = 36
+        Me.Label3.TabIndex = 6
         Me.Label3.Text = "Nickname:"
         '
         'TextBox1
@@ -172,7 +185,7 @@ Partial Class frmUsuario
         Me.TextBox1.Location = New System.Drawing.Point(362, 91)
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.Size = New System.Drawing.Size(261, 20)
-        Me.TextBox1.TabIndex = 35
+        Me.TextBox1.TabIndex = 5
         '
         'Label2
         '
@@ -181,7 +194,7 @@ Partial Class frmUsuario
         Me.Label2.Location = New System.Drawing.Point(359, 70)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(69, 17)
-        Me.Label2.TabIndex = 34
+        Me.Label2.TabIndex = 4
         Me.Label2.Text = "Nombre:"
         '
         'ListBox1
@@ -189,8 +202,8 @@ Partial Class frmUsuario
         Me.ListBox1.FormattingEnabled = True
         Me.ListBox1.Location = New System.Drawing.Point(21, 40)
         Me.ListBox1.Name = "ListBox1"
-        Me.ListBox1.Size = New System.Drawing.Size(312, 472)
-        Me.ListBox1.TabIndex = 33
+        Me.ListBox1.Size = New System.Drawing.Size(312, 394)
+        Me.ListBox1.TabIndex = 1
         '
         'Label1
         '
@@ -199,64 +212,175 @@ Partial Class frmUsuario
         Me.Label1.Location = New System.Drawing.Point(18, 19)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(159, 17)
-        Me.Label1.TabIndex = 32
+        Me.Label1.TabIndex = 0
         Me.Label1.Text = "Usuarios registrados"
         '
         'ComboBox1
         '
         Me.ComboBox1.DisplayMember = "idTipoUsuario"
+        Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(362, 249)
+        Me.ComboBox1.Location = New System.Drawing.Point(362, 197)
         Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(264, 21)
-        Me.ComboBox1.TabIndex = 51
+        Me.ComboBox1.Size = New System.Drawing.Size(261, 21)
+        Me.ComboBox1.TabIndex = 11
         Me.ComboBox1.ValueMember = "idTipoUsuario"
         '
         'Label6
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(359, 286)
+        Me.Label6.Location = New System.Drawing.Point(359, 234)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(71, 17)
-        Me.Label6.TabIndex = 40
+        Me.Label6.TabIndex = 12
         Me.Label6.Text = "Sucursal"
         '
         'ComboBox2
         '
         Me.ComboBox2.DisplayMember = "idTipoUsuario"
+        Me.ComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBox2.FormattingEnabled = True
-        Me.ComboBox2.Location = New System.Drawing.Point(362, 307)
+        Me.ComboBox2.Location = New System.Drawing.Point(362, 255)
         Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(264, 21)
-        Me.ComboBox2.TabIndex = 51
+        Me.ComboBox2.Size = New System.Drawing.Size(261, 21)
+        Me.ComboBox2.TabIndex = 13
         Me.ComboBox2.ValueMember = "idTipoUsuario"
         '
         'ComboBox3
         '
         Me.ComboBox3.DisplayMember = "idTipoUsuario"
+        Me.ComboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBox3.FormattingEnabled = True
-        Me.ComboBox3.Location = New System.Drawing.Point(362, 365)
+        Me.ComboBox3.Location = New System.Drawing.Point(362, 313)
         Me.ComboBox3.Name = "ComboBox3"
-        Me.ComboBox3.Size = New System.Drawing.Size(264, 21)
-        Me.ComboBox3.TabIndex = 53
+        Me.ComboBox3.Size = New System.Drawing.Size(261, 21)
+        Me.ComboBox3.TabIndex = 15
         Me.ComboBox3.ValueMember = "idTipoUsuario"
         '
         'Label7
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(359, 344)
+        Me.Label7.Location = New System.Drawing.Point(359, 292)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(58, 17)
-        Me.Label7.TabIndex = 52
+        Me.Label7.TabIndex = 14
         Me.Label7.Text = "Estado"
+        '
+        'GroupBox2
+        '
+        Me.GroupBox2.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.GroupBox2.Controls.Add(Me.btnPass3)
+        Me.GroupBox2.Controls.Add(Me.btnPass2)
+        Me.GroupBox2.Controls.Add(Me.btnPass1)
+        Me.GroupBox2.Controls.Add(Me.TextBoxPass3)
+        Me.GroupBox2.Controls.Add(Me.Label11)
+        Me.GroupBox2.Controls.Add(Me.TextBoxPass2)
+        Me.GroupBox2.Controls.Add(Me.Label10)
+        Me.GroupBox2.Controls.Add(Me.TextBoxPass1)
+        Me.GroupBox2.Controls.Add(Me.Label8)
+        Me.GroupBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GroupBox2.Location = New System.Drawing.Point(358, 350)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(265, 168)
+        Me.GroupBox2.TabIndex = 17
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "Cambiar contraseña"
+        '
+        'btnPass3
+        '
+        Me.btnPass3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnPass3.Location = New System.Drawing.Point(229, 135)
+        Me.btnPass3.Name = "btnPass3"
+        Me.btnPass3.Size = New System.Drawing.Size(30, 23)
+        Me.btnPass3.TabIndex = 18
+        Me.btnPass3.Text = "M"
+        Me.btnPass3.UseVisualStyleBackColor = True
+        '
+        'btnPass2
+        '
+        Me.btnPass2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnPass2.Location = New System.Drawing.Point(229, 89)
+        Me.btnPass2.Name = "btnPass2"
+        Me.btnPass2.Size = New System.Drawing.Size(30, 23)
+        Me.btnPass2.TabIndex = 17
+        Me.btnPass2.Text = "M"
+        Me.btnPass2.UseVisualStyleBackColor = True
+        '
+        'btnPass1
+        '
+        Me.btnPass1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnPass1.Location = New System.Drawing.Point(229, 43)
+        Me.btnPass1.Name = "btnPass1"
+        Me.btnPass1.Size = New System.Drawing.Size(30, 23)
+        Me.btnPass1.TabIndex = 16
+        Me.btnPass1.Text = "M"
+        Me.btnPass1.UseVisualStyleBackColor = True
+        '
+        'TextBoxPass3
+        '
+        Me.TextBoxPass3.Location = New System.Drawing.Point(15, 135)
+        Me.TextBoxPass3.Name = "TextBoxPass3"
+        Me.TextBoxPass3.Size = New System.Drawing.Size(211, 23)
+        Me.TextBoxPass3.TabIndex = 15
+        Me.TextBoxPass3.UseSystemPasswordChar = True
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label11.Location = New System.Drawing.Point(12, 115)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(145, 15)
+        Me.Label11.TabIndex = 14
+        Me.Label11.Tag = "FO"
+        Me.Label11.Text = "Confirmar contraseña"
+        '
+        'TextBoxPass2
+        '
+        Me.TextBoxPass2.Location = New System.Drawing.Point(15, 89)
+        Me.TextBoxPass2.Name = "TextBoxPass2"
+        Me.TextBoxPass2.Size = New System.Drawing.Size(211, 23)
+        Me.TextBoxPass2.TabIndex = 13
+        Me.TextBoxPass2.UseSystemPasswordChar = True
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10.Location = New System.Drawing.Point(12, 69)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(128, 15)
+        Me.Label10.TabIndex = 12
+        Me.Label10.Tag = "FO"
+        Me.Label10.Text = "Nueva Contraseña:"
+        '
+        'TextBoxPass1
+        '
+        Me.TextBoxPass1.Location = New System.Drawing.Point(15, 43)
+        Me.TextBoxPass1.Name = "TextBoxPass1"
+        Me.TextBoxPass1.Size = New System.Drawing.Size(211, 23)
+        Me.TextBoxPass1.TabIndex = 11
+        Me.TextBoxPass1.UseSystemPasswordChar = True
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.Location = New System.Drawing.Point(12, 23)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(127, 15)
+        Me.Label8.TabIndex = 10
+        Me.Label8.Tag = "FO"
+        Me.Label8.Text = "Contraseña actual:"
         '
         'frmUsuario
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(645, 530)
+        Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.ComboBox3)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.ComboBox2)
@@ -278,6 +402,8 @@ Partial Class frmUsuario
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Listado de usuarios"
         Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox2.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -303,4 +429,14 @@ Partial Class frmUsuario
     Friend WithEvents ComboBox2 As System.Windows.Forms.ComboBox
     Friend WithEvents ComboBox3 As System.Windows.Forms.ComboBox
     Friend WithEvents Label7 As System.Windows.Forms.Label
+    Friend WithEvents GroupBox2 As GroupBox
+    Friend WithEvents TextBoxPass3 As TextBox
+    Friend WithEvents Label11 As Label
+    Friend WithEvents TextBoxPass2 As TextBox
+    Friend WithEvents Label10 As Label
+    Friend WithEvents TextBoxPass1 As TextBox
+    Friend WithEvents Label8 As Label
+    Friend WithEvents btnPass3 As Button
+    Friend WithEvents btnPass2 As Button
+    Friend WithEvents btnPass1 As Button
 End Class

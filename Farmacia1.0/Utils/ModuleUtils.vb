@@ -17,6 +17,81 @@ Module ModuleUtils
         Return retValue
     End Function
 
+    ''' <summary>
+    ''' Calcula la suma de una columna numérica del DataGridView
+    ''' </summary>
+    ''' <param name="dgv">DataGridView que contiene los datos</param>
+    ''' <param name="nombreColumna">Nombre de la columna a sumar</param>
+    ''' <returns>La suma total de los valores de la columna</returns>
+    Public Function SumarColumnaDataGridView(dgv As DataGridView, nombreColumna As String) As Decimal
+        Dim total As Decimal = 0
+
+        Try
+            ' Verificar que el DataGridView tenga filas
+            If dgv Is Nothing OrElse dgv.Rows.Count = 0 Then
+                Return 0
+            End If
+
+            ' Verificar que la columna existe
+            If Not dgv.Columns.Contains(nombreColumna) Then
+                Throw New ArgumentException($"La columna '{nombreColumna}' no existe en el DataGridView")
+            End If
+
+            ' Recorrer todas las filas y sumar la columna especificada
+            For Each fila As DataGridViewRow In dgv.Rows
+                ' Ignorar la fila nueva que se muestra al final (si está presente)
+                If Not fila.IsNewRow Then
+                    ' Obtener el valor de la celda
+                    Dim valor = fila.Cells(nombreColumna).Value
+
+                    ' Verificar que no sea nulo y sea numérico
+                    If valor IsNot Nothing AndAlso IsNumeric(valor) Then
+                        total += Convert.ToDecimal(valor)
+                    End If
+                End If
+            Next
+
+            Return total
+        Catch ex As Exception
+            ' Manejar cualquier error que pueda ocurrir
+            MessageBox.Show($"Error al sumar la columna: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return 0
+        End Try
+    End Function
+
+    Private Sub AbrirFormularioDetalles(formulario As Form)
+        If rolUsuarioActual = Nothing Then
+            MessageBox.Show("No tiene permisos para este módulo", "No tiene permisos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Return
+        Else
+            formulario.Show()
+        End If
+    End Sub
+
+    Public Sub DibujaTarjetasResumen()
+        Try
+            FormMenuNew.FlowLayoutPanelDashboard.Controls.Clear()
+
+            Dim tarjeta As New TarjetaVentasDia()
+            tarjeta.AccionAlHacerClick = Sub()
+                                             AbrirFormularioDetalles(frmCorteCaja)
+                                         End Sub
+            tarjeta.CargarVentas($"SELECT SUM(total) FROM VENTAS WHERE CONVERT(DATE, fechaVenta) = CONVERT(DATE, GETDATE()) AND idSucursal = {sucActual}", "Ventas Diarias")
+
+            Dim tarjetaEgresos As New TarjetaVentasDia()
+            tarjetaEgresos.AccionAlHacerClick = Sub()
+                                                    AbrirFormularioDetalles(FormEgresos)
+                                                End Sub
+            tarjetaEgresos.CargarVentas($"SELECT SUM(total) FROM EGRESOS WHERE CONVERT(DATE, fechaEgreso) = CONVERT(DATE, GETDATE()) AND sucursal = {sucActual} and estado = 1", "Egresos del día")
+
+            FormMenuNew.FlowLayoutPanelDashboard.Controls.Add(tarjeta)
+            FormMenuNew.FlowLayoutPanelDashboard.Controls.Add(tarjetaEgresos)
+        Catch ex As Exception
+            Serilog.Log.Error($"Ocurrió un error. Error: {ex.Message}")
+        End Try
+
+    End Sub
+
     Public Sub GrabaBitacora(ByVal params As String(), ByVal sp As String)
         Dim cmd As SqlCommand
         Try
@@ -43,6 +118,77 @@ Module ModuleUtils
     Function RegresaArray(ByVal cadena As String) As String()
         Return Split(cadena, ";")
     End Function
+
+    Public Function EjecutarStoredProcedureMultiple(ByVal nombreSP As String,
+                                               ByVal parametros As List(Of SqlParameter)) As (List(Of DataTable), String, List(Of SqlParameter))
+        Dim dataTables As New List(Of DataTable)()  ' Lista para almacenar los DataTables resultantes
+        Dim salida As String = String.Empty  ' Variable para el mensaje de salida
+        Dim parametrosSalida As New List(Of SqlParameter)()  ' Lista para los parámetros de salida
+
+        ' Definimos el comando para ejecutar el SP
+        Using cmd As New SqlCommand(nombreSP, conn)
+            cmd.CommandType = CommandType.StoredProcedure
+
+            ' Agregar los parámetros a la colección del comando
+            If parametros IsNot Nothing Then
+                For Each parametro As SqlParameter In parametros
+                    cmd.Parameters.Add(parametro)
+                Next
+            End If
+
+            ' Intentamos abrir la conexión y ejecutar el SP
+            Try
+                openConnection()
+
+                ' Ejecutar el stored procedure y leer los resultados
+                Using reader As SqlDataReader = cmd.ExecuteReader()
+                    ' Procesar el primer conjunto de datos
+                    While reader.HasRows
+                        Dim dt As New DataTable()
+                        dt.Load(reader)
+                        dataTables.Add(dt)
+
+                        ' Intentamos avanzar al siguiente conjunto de resultados SOLO si aún no está cerrado
+                        If Not reader.IsClosed Then
+                            reader.NextResult()
+                        Else
+                            Exit While
+                        End If
+                    End While
+                End Using
+
+
+                ' Extraer los parámetros de salida (si existen)
+                For Each param As SqlParameter In cmd.Parameters
+                    If param.Direction = ParameterDirection.Output OrElse param.Direction = ParameterDirection.InputOutput Then
+                        parametrosSalida.Add(param)  ' Guardamos los parámetros de salida
+                    End If
+                Next
+
+                ' Verificar si hay parámetros de salida y construir un mensaje
+                If parametrosSalida.Count > 0 Then
+                    salida = "Parámetros de salida: "
+                    For Each param As SqlParameter In parametrosSalida
+                        salida &= param.ParameterName & " = " & param.Value.ToString() & ", "
+                    Next
+                    salida = salida.TrimEnd(","c, " "c)
+                Else
+                    salida = "Sin parámetros de salida."
+                End If
+
+            Catch ex As Exception
+                ' Manejo de excepciones en caso de error al ejecutar el SP
+                salida = "Error: " & ex.Message
+            Finally
+                closeConnection()  ' Cerrar la conexión
+            End Try
+        End Using
+
+
+        ' Devolver la lista de DataTables, la respuesta (mensaje de salida), y los parámetros de salida
+        Return (dataTables, salida, parametrosSalida)
+    End Function
+
 
     Public Sub ImprimeTicket(ByVal nventa As Integer)
         If ConsultaParametro("imprimeTicket") = "S" Then
@@ -131,5 +277,29 @@ Module ModuleUtils
             ticket.imprimirTicket(ConsultaParametro("nombreImpresora"))
         End If
     End Sub
+
+    Public Function DataTableToString(dt As DataTable) As String
+        If dt Is Nothing OrElse dt.Rows.Count = 0 Then
+            Return "DataTable vacío o nulo."
+        End If
+
+        Dim sb As New System.Text.StringBuilder()
+
+        ' Encabezados
+        For Each col As DataColumn In dt.Columns
+            sb.Append(col.ColumnName & vbTab)
+        Next
+        sb.AppendLine()
+
+        ' Filas
+        For Each row As DataRow In dt.Rows
+            For Each col As DataColumn In dt.Columns
+                sb.Append(If(row(col) IsNot Nothing, row(col).ToString(), "NULL") & vbTab)
+            Next
+            sb.AppendLine()
+        Next
+
+        Return sb.ToString()
+    End Function
 
 End Module

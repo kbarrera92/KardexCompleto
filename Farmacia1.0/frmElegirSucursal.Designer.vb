@@ -36,6 +36,7 @@ Partial Class frmElegirSucursal
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(247, 26)
         Me.Label1.TabIndex = 0
+        Me.Label1.Tag = "PS"
         Me.Label1.Text = "Listado de Sucursales"
         '
         'ListBox1
@@ -57,6 +58,7 @@ Partial Class frmElegirSucursal
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(405, 54)
         Me.Button1.TabIndex = 2
+        Me.Button1.Tag = "DB,WB"
         Me.Button1.Text = "Elegir sucursal"
         Me.Button1.UseVisualStyleBackColor = False
         '
