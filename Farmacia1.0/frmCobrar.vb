@@ -1,6 +1,4 @@
 ﻿Imports System.Data.SqlClient
-Imports System.IO
-Imports System.Text
 
 Public Class frmCobrar
 
@@ -32,17 +30,23 @@ Public Class frmCobrar
                 .Add("@rc", SqlDbType.Int).Direction = ParameterDirection.Output
                 .Add("@nVenta", SqlDbType.Int).Direction = ParameterDirection.Output
                 .AddWithValue("detalles", table)
-
+                .AddWithValue("horasDiferencia", CInt(ConsultaParametro("horasDiferencia")))
             End With
 
             openConnection()
             cmd.ExecuteNonQuery()
             rc = CInt(cmd.Parameters("@rc").Value)
             msg = cmd.Parameters("@MSG").Value.ToString()
-            nventa = CInt(cmd.Parameters("@nVenta").Value)
+            nventa = CInt(If(cmd.Parameters("@nVenta").Value, 0))
             MessageBox.Show(msg, If(rc = 0, "Éxito", "Error"), MessageBoxButtons.OK, If(rc = 0, MessageBoxIcon.Information, MessageBoxIcon.Error))
+            If rc <> 0 Then
+                Return False
+            End If
             closeConnection()
             ImprimeTicket(nventa)
+            If nombreRol = "ADMINISTRADOR" Then
+                DibujaTarjetasResumen()
+            End If
         Catch ex As Exception
             MessageBox.Show($"Hubo un error al grabar la venta. {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             rc = -3
@@ -71,26 +75,15 @@ Public Class frmCobrar
         Dim res As Boolean
         If Val(txtcambio.Text) >= 0 Then
             If MessageBox.Show("¿Desea guardar esta venta?", "Guardando", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
-                'guardarVenta2()
                 If saveClient = True Then
                     saveinfoclient()
                     saveClient = False
                 End If
                 If Me.CheckBox1.Checked = True Then
-                    'Guardar detalles
-                    'guardarDetalleVenta2()
-                    'Actualizar la venta
-                    'actualizarVenta()
                     res = GrabaVenta(table)
                     guardarFactura()
-                    'aca deberia de mostrar la factura
                 Else
-                    'Guardar detalles
-                    'guardarDetalleVenta2()
-                    'Actualizar la venta
-                    'actualizarVenta()
                     res = GrabaVenta(table)
-
 
                 End If
 

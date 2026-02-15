@@ -1,4 +1,5 @@
 ﻿Imports System.Data.SqlClient
+Imports System.Text
 
 Public Class frmUsuario
 
@@ -8,10 +9,13 @@ Public Class frmUsuario
                                 & "WHERE TU.nombreTipo <> 'GERENTE' AND U.estado = 1"
     Dim sqlSuc As String = "SELECT idSucursal, nombreSuc FROM SUCURSAL"
     Dim sqlEstado As String = "SELECT idEstado, estadoUsuario FROM ESTADOUSUARIO"
+    Private saltStored As Byte()
+    Private hashStored As Byte()
 
     Sub getDatos()
         Dim ind, ind2, ind3 As Integer
-        Dim sql As String = "SELECT U.idUsuario, U.nombreUsuario, U.nick, U.contraUsuario, TU.nombreTipo, S.nombreSuc, EU.estadoUsuario FROM USUARIO U " _
+        Dim sql As String = "SELECT U.idUsuario, U.nombreUsuario, U.nick, U.contraUsuario, TU.nombreTipo, S.nombreSuc, EU.estadoUsuario, U.PasswordSalt, U.PasswordHash " _
+                            & "FROM USUARIO U " _
                             & "INNER JOIN TIPOUSUARIO TU " _
                             & "ON U.tipoUsuario = TU.idTipoUsuario " _
                             & "INNER JOIN SUCURSAL S " _
@@ -34,6 +38,8 @@ Public Class frmUsuario
                 TextBox1.Text = reader(1)
                 TextBox2.Text = reader(2)
                 TextBox3.Text = reader(3)
+                saltStored = reader(7)
+                hashStored = reader(8)
                 ind = ComboBox1.FindStringExact(reader(4).ToString)
                 ComboBox1.SelectedIndex = ind
                 ind2 = ComboBox2.FindStringExact(reader(5).ToString)
@@ -80,6 +86,8 @@ Public Class frmUsuario
         ListBox1.DataSource = updateList(sqlUsuarios)
         ListBox1.ValueMember = updateList(sqlUsuarios).Columns(0).ToString
         ListBox1.DisplayMember = updateList(sqlUsuarios).Columns(1).ToString
+
+        Estilos.AplicarEstilos(Me)
     End Sub
 
     Private Sub ListBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListBox1.SelectedIndexChanged
@@ -99,90 +107,127 @@ Public Class frmUsuario
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+
+        If Trim(TextBox1.Text) = "" OrElse Trim(TextBox2.Text) = "" OrElse ComboBox1.SelectedIndex = -1 OrElse ComboBox2.SelectedIndex = -1 OrElse ComboBox3.SelectedIndex = -1 Then
+            MsgBox("Faltan datos que son obligatorios.", MsgBoxStyle.Information, "Faltan datos")
+            Return
+        End If
+        ' Al registrar (RegOAct = 1), la contraseña también es obligatoria
+        If RegOAct = 1 AndAlso Trim(TextBoxPass2.Text) = "" AndAlso Trim(TextBoxPass3.Text) = "" Then
+            MsgBox("La contraseña es obligatoria.", MsgBoxStyle.Information, "Faltan datos")
+            Return
+        End If
+
+        If TextBoxPass2.Text.Trim() <> TextBoxPass3.Text.Trim() Then
+            MsgBox("Las contraseñas no coinciden.", MsgBoxStyle.Information, "Faltan datos")
+            TextBoxPass2.Select()
+            Return
+        End If
+
+        openConnection()
         If RegOAct = 1 Then
+            ' --- INSERT ---
+            If MessageBox.Show("¿Desea guardar este registro?", "Guardar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) _
+                    = DialogResult.Yes Then
 
-            If Trim(TextBox1.Text) = "" Or Trim(TextBox2.Text) = "" Then
-                MsgBox("Todos los campos son obligatorios", MsgBoxStyle.Information, "Faltan datos")
-            Else
-                If MessageBox.Show("¿Desea guardar este registro?", "Guardar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
+                ' Generamos salt y hash
+                Dim salt() = GenerateSalt()
+                Dim hash() = HashPassword(Trim(TextBoxPass2.Text), salt)
 
+                Using cmd As New SqlCommand(
+                    "INSERT INTO USUARIO
+                       (nombreUsuario,nick,contraUsuario,tipoUsuario,sucursal,estado,PasswordSalt,PasswordHash)
+                     VALUES
+                       (@n,@nick,@contra,@tu,@suc,@estado,@salt,@hash)", conn)
 
-                    Dim sql As String = "INSERT INTO USUARIO VALUES(@n, @nick, @c, @tu, @suc, @estado)"
-                    Dim cmd As SqlCommand
-                    cmd = New SqlCommand(sql, conn)
+                    cmd.Parameters.Add("@n", SqlDbType.VarChar, 100).Value = Trim(TextBox1.Text)
+                    cmd.Parameters.Add("@nick", SqlDbType.VarChar, 50).Value = Trim(TextBox2.Text)
+                    cmd.Parameters.Add("@tu", SqlDbType.Int).Value = CInt(ComboBox1.SelectedValue)
+                    cmd.Parameters.Add("@suc", SqlDbType.Int).Value = CInt(ComboBox2.SelectedValue)
+                    cmd.Parameters.Add("@estado", SqlDbType.Int).Value = CInt(ComboBox3.SelectedValue)
+                    cmd.Parameters.Add("@salt", SqlDbType.VarBinary, 128).Value = salt
+                    cmd.Parameters.Add("@hash", SqlDbType.VarBinary, 256).Value = hash
+                    cmd.Parameters.Add("@contra", SqlDbType.VarChar, 50).Value = String.Empty
 
-                    cmd.Parameters.AddWithValue("n", Trim(TextBox1.Text))
-                    cmd.Parameters.AddWithValue("nick", Trim(TextBox2.Text))
-                    cmd.Parameters.AddWithValue("c", Trim(TextBox3.Text))
-                    cmd.Parameters.AddWithValue("tu", CInt(ComboBox1.SelectedValue.ToString))
-                    cmd.Parameters.AddWithValue("suc", CInt(ComboBox2.SelectedValue.ToString))
-                    cmd.Parameters.AddWithValue("estado", CInt(ComboBox3.SelectedValue.ToString))
+                    cmd.ExecuteNonQuery()
+                End Using
 
-                    Try
-                        openConnection()
-                        cmd.ExecuteNonQuery()
-                        MessageBox.Show("El registro guardó correctamente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                        TextBox1.Clear()
-                        TextBox2.Clear()
-                        TextBox3.Clear()
-                        TextBox8.Clear()
-                        ComboBox1.SelectedIndex = -1
-                        ComboBox2.SelectedIndex = -1
-                        ComboBox3.SelectedIndex = -1
-                    Catch ex As Exception
-                        MessageBox.Show(ex.Message, "Algo salió mal", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    Finally
-                        closeConnection()
-                        With ListBox1
-                            .DataSource = updateList(sqlUsuarios)
-                            .ValueMember = updateList(sqlUsuarios).Columns(0).ToString
-                        End With
+                MessageBox.Show("Usuario registrado correctamente.", "Éxito",
+                                MessageBoxButtons.OK, MessageBoxIcon.Information)
 
-                    End Try
-                End If
             End If
 
-            RegOAct = 0
-            ListBox1.Select()
         Else
-            If MessageBox.Show("¿Desea guardar los cambios de este registro?", "Guardar cambios", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
-                Dim sqlupdate As String = "UPDATE USUARIO SET nombreUsuario = @n, nick = @nick, contraUsuario = @c, tipoUsuario = @tu, sucursal = @sucu, estado = @es WHERE idUsuario = @id"
-                Dim cmd As SqlCommand
-                cmd = New SqlCommand(sqlupdate, conn)
+            ' --- UPDATE ---
+            If MessageBox.Show("¿Desea guardar los cambios de este registro?", "Guardar cambios",
+                               MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+                Dim nuevaPass = Trim(TextBoxPass2.Text)
+                Dim salt() As Byte = Nothing
+                Dim hash() As Byte = Nothing
+                ' Armamos la instrucción UPDATE
+                Dim sqlUpdate = New StringBuilder()
+                sqlUpdate.Append("UPDATE USUARIO SET ")
+                sqlUpdate.Append("nombreUsuario = @n, ")
+                sqlUpdate.Append("nick          = @nick, ")
+                sqlUpdate.Append("tipoUsuario   = @tu, ")
+                sqlUpdate.Append("sucursal      = @sucu, ")
+                sqlUpdate.Append("estado        = @es ")
+                If Not String.IsNullOrWhiteSpace(TextBoxPass1.Text.Trim()) Then
+                    If TextBoxPass2.Text = TextBoxPass3.Text Then
+                        Dim hashActual = HashPassword(TextBoxPass1.Text.Trim(), saltStored)
+                        'If Not hashActual.SequenceEqual(hashStored) Then
+                        '    MsgBox("La contraseña actual ingresada es incorrecta.", MsgBoxStyle.Critical, "Acceso denegado")
+                        '    TextBoxPass1.SelectAll()
+                        '    TextBoxPass1.Focus()
+                        '    Return
+                        'End If
+                        sqlUpdate.Append(", contraUsuario = @contra, ")
 
-                cmd.Parameters.AddWithValue("n", Trim(TextBox1.Text))
-                cmd.Parameters.AddWithValue("nick", Trim(TextBox2.Text))
-                cmd.Parameters.AddWithValue("c", Trim(TextBox3.Text))
-                cmd.Parameters.AddWithValue("tu", CInt(ComboBox1.SelectedValue.ToString))
-                cmd.Parameters.AddWithValue("sucu", CInt(ComboBox2.SelectedValue.ToString))
-                cmd.Parameters.AddWithValue("es", CInt(ComboBox3.SelectedValue.ToString))
 
-                cmd.Parameters.AddWithValue("id", CInt(TextBox8.Text))
+                        If nuevaPass <> "" Then
+                            salt = GenerateSalt()
+                            hash = HashPassword(nuevaPass, salt)
+                            sqlUpdate.Append("PasswordSalt = @salt, PasswordHash = @hash")
+                        End If
+                    End If
+                End If
 
-                Try
-                    openConnection()
+                sqlUpdate.Append(" WHERE idUsuario = @id")
+
+                Using cmd As New SqlCommand(sqlUpdate.ToString(), conn)
+                    cmd.Parameters.Add("@n", SqlDbType.VarChar, 100).Value = Trim(TextBox1.Text)
+                    cmd.Parameters.Add("@nick", SqlDbType.VarChar, 50).Value = Trim(TextBox2.Text)
+                    cmd.Parameters.Add("@tu", SqlDbType.Int).Value = CInt(ComboBox1.SelectedValue)
+                    cmd.Parameters.Add("@sucu", SqlDbType.Int).Value = CInt(ComboBox2.SelectedValue)
+                    cmd.Parameters.Add("@es", SqlDbType.Int).Value = CInt(ComboBox3.SelectedValue)
+                    cmd.Parameters.Add("@id", SqlDbType.Int).Value = CInt(TextBox8.Text)
+                    cmd.Parameters.Add("@contra", SqlDbType.VarChar, 50).Value = String.Empty
+
+                    If nuevaPass <> "" Then
+                        cmd.Parameters.Add("@salt", SqlDbType.VarBinary, 128).Value = salt
+                        cmd.Parameters.Add("@hash", SqlDbType.VarBinary, 256).Value = hash
+                    End If
+
                     cmd.ExecuteNonQuery()
-                    TextBox1.Clear()
-                    TextBox2.Clear()
-                    TextBox3.Clear()
-                    TextBox8.Clear()
-                    ComboBox1.SelectedIndex = -1
-                    ComboBox2.SelectedIndex = -1
-                    ComboBox3.SelectedIndex = -1
+                End Using
 
-                    MessageBox.Show("La información del usuario se actualizó de forma correcta", "Actualizado", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                Catch ex As Exception
-                    MessageBox.Show("Algo salió mal" & vbCrLf & "Error: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                Finally
-                    closeConnection()
-                    With ListBox1
-                        .DataSource = updateList(sqlUsuarios)
-                        .ValueMember = updateList(sqlUsuarios).Columns(0).ToString
-                    End With
-                    ListBox1.Select()
-                End Try
+                MessageBox.Show("Usuario actualizado correctamente.", "Éxito",
+                                MessageBoxButtons.OK, MessageBoxIcon.Information)
             End If
         End If
+
+        closeConnection()
+        With ListBox1
+            .DataSource = updateList(sqlUsuarios)
+            .ValueMember = updateList(sqlUsuarios).Columns(0).ToString()
+        End With
+        TextBox1.Clear() : TextBox2.Clear() : TextBox3.Clear() : TextBox8.Clear() : TextBoxPass1.Clear() : TextBoxPass2.Clear() : TextBoxPass3.Clear()
+        ComboBox1.SelectedIndex = -1
+        ComboBox2.SelectedIndex = -1
+        ComboBox3.SelectedIndex = -1
+        RegOAct = 0
+        ListBox1.Select()
+
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
@@ -222,5 +267,38 @@ Public Class frmUsuario
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
         Me.Close()
+    End Sub
+
+    Private Sub btnPass1_Click(sender As Object, e As EventArgs) Handles btnPass1.Click
+        If btnPass1.Text = "M" Then
+            TextBoxPass1.UseSystemPasswordChar = False
+            btnPass1.Text = "O"
+        Else
+            TextBoxPass1.UseSystemPasswordChar = True
+            btnPass1.Text = "M"
+        End If
+
+    End Sub
+
+    Private Sub btnPass2_Click(sender As Object, e As EventArgs) Handles btnPass2.Click
+        If btnPass2.Text = "M" Then
+            TextBoxPass2.UseSystemPasswordChar = False
+            btnPass2.Text = "O"
+        Else
+            TextBoxPass2.UseSystemPasswordChar = True
+            btnPass2.Text = "M"
+        End If
+
+    End Sub
+
+    Private Sub btnPass3_Click(sender As Object, e As EventArgs) Handles btnPass3.Click
+        If btnPass3.Text = "M" Then
+            TextBoxPass3.UseSystemPasswordChar = False
+            btnPass3.Text = "O"
+        Else
+            TextBoxPass3.UseSystemPasswordChar = True
+            btnPass3.Text = "M"
+        End If
+
     End Sub
 End Class

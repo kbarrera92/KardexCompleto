@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -11,8 +11,10 @@
     <AssemblyName>Farmacia1.0</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <PublishUrl>publicar\</PublishUrl>
+    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
+    <PublishUrl>C:\Users\PC\OneDrive\FarmaVela\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -22,10 +24,11 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
+    <AutorunEnabled>true</AutorunEnabled>
+    <ApplicationRevision>1</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -63,6 +66,18 @@
   <PropertyGroup>
     <ApplicationIcon>Paomedia-Small-N-Flat-Shop %281%29.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>7E1D8EE8086212753127CD34B60C9316509ADB0E</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>Farmacia1.0_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
@@ -71,17 +86,44 @@
     <Reference Include="FlashControlV71, Version=1.0.3187.32366, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
     <Reference Include="itextsharp, Version=5.5.13.1, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
       <HintPath>..\packages\iTextSharp.5.5.13.1\lib\itextsharp.dll</HintPath>
-      <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.VisualBasic.PowerPacks, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\VisualBasic.PowerPacks.Vs.1.0.0\lib\Microsoft.VisualBasic.PowerPacks.Vs.dll</HintPath>
     </Reference>
+    <Reference Include="Serilog, Version=4.2.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.4.2.0\lib\net471\Serilog.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Sinks.File, Version=6.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.Sinks.File.6.0.0\lib\net471\Serilog.Sinks.File.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=8.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.8.0.1\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Channels, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Channels.8.0.0\lib\net462\System.Threading.Channels.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Windows.Forms" />
@@ -104,6 +146,13 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="Controles\TarjetaVentasDia.Designer.vb">
+      <DependentUpon>TarjetaVentasDia.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\TarjetaVentasDia.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="dsReportes.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -112,10 +161,19 @@
     <Compile Include="dsReportes.vb">
       <DependentUpon>dsReportes.xsd</DependentUpon>
     </Compile>
+    <Compile Include="EgresosTools\Egreso.vb" />
+    <Compile Include="EgresosTools\EgresoValidator.vb" />
+    <Compile Include="Estilos\Estilos.vb" />
     <Compile Include="Form1.designer.vb">
       <DependentUpon>Form1.vb</DependentUpon>
     </Compile>
     <Compile Include="Form1.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormCategoriaEgreso.Designer.vb">
+      <DependentUpon>FormCategoriaEgreso.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormCategoriaEgreso.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormCerrarCaja.Designer.vb">
@@ -130,10 +188,28 @@
     <Compile Include="FormAbrirCaja.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormEgresos.Designer.vb">
+      <DependentUpon>FormEgresos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormEgresos.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormInventarioPorLab.Designer.vb">
+      <DependentUpon>FormInventarioPorLab.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormInventarioPorLab.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormMenuNew.Designer.vb">
       <DependentUpon>FormMenuNew.vb</DependentUpon>
     </Compile>
     <Compile Include="FormMenuNew.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPreciosXSucursal.Designer.vb">
+      <DependentUpon>FormPreciosXSucursal.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormPreciosXSucursal.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormRecibirTraslado.Designer.vb">
@@ -293,12 +369,6 @@
     <Compile Include="frmProveedores.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmPuntoDeVenta.Designer.vb">
-      <DependentUpon>frmPuntoDeVenta.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmPuntoDeVenta.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="frmPuntoDeVentaMejorado.designer.vb">
       <DependentUpon>frmPuntoDeVentaMejorado.vb</DependentUpon>
     </Compile>
@@ -437,7 +507,19 @@
     <Compile Include="frmVerVentasElim.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FVPublicas.vb" />
+    <Compile Include="RptBarcodeGenerator.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RptBarcodeGenerator.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptInventario2.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptInventario2.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Utils\FVPublicas.vb" />
     <Compile Include="IS_PRO2DataSet.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -508,10 +590,18 @@
     </Compile>
     <Compile Include="Utils\clsFunciones.vb" />
     <Compile Include="Utils\ModuleUtils.vb" />
+    <Compile Include="Utils\PasswordHelper.vb" />
+    <Compile Include="Utils\UserMigrationOnce.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Controles\TarjetaVentasDia.resx">
+      <DependentUpon>TarjetaVentasDia.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormCategoriaEgreso.resx">
+      <DependentUpon>FormCategoriaEgreso.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormCerrarCaja.resx">
       <DependentUpon>FormCerrarCaja.vb</DependentUpon>
@@ -519,8 +609,17 @@
     <EmbeddedResource Include="FormAbrirCaja.resx">
       <DependentUpon>FormAbrirCaja.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormEgresos.resx">
+      <DependentUpon>FormEgresos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormInventarioPorLab.resx">
+      <DependentUpon>FormInventarioPorLab.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormMenuNew.resx">
       <DependentUpon>FormMenuNew.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPreciosXSucursal.resx">
+      <DependentUpon>FormPreciosXSucursal.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormRecibirTraslado.resx">
       <DependentUpon>FormRecibirTraslado.vb</DependentUpon>
@@ -599,9 +698,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmProveedores.resx">
       <DependentUpon>frmProveedores.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmPuntoDeVenta.resx">
-      <DependentUpon>frmPuntoDeVenta.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPuntoDeVentaMejorado.resx">
       <DependentUpon>frmPuntoDeVentaMejorado.vb</DependentUpon>
@@ -686,6 +782,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>rptBarCode.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="RptBarcodeGenerator.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RptBarcodeGenerator.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="rptCorteCaja.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>rptCorteCaja.vb</LastGenOutput>
@@ -693,6 +793,10 @@
     <EmbeddedResource Include="rptInventario.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>rptInventario.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptInventario2.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptInventario2.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="rptStockMin.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -723,6 +827,7 @@
     <None Include="dsReportes.xss">
       <DependentUpon>dsReportes.xsd</DependentUpon>
     </None>
+    <None Include="Farmacia1.0_TemporaryKey.pfx" />
     <None Include="IS_PRO2DataSet.xsc">
       <DependentUpon>IS_PRO2DataSet.xsd</DependentUpon>
     </None>
@@ -930,6 +1035,7 @@
   <ItemGroup>
     <Content Include="Aha-Soft-Large-Home-Drugstore.ico" />
     <Content Include="Paomedia-Small-N-Flat-Shop %281%29.ico" />
+    <None Include="Resources\paymenticon.png" />
     <None Include="Resources\Custom-Icon-Design-Flatastic-8-Schedule.32.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

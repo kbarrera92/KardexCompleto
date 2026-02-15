@@ -1,14 +1,28 @@
-﻿Public Class FormMenuNew
+﻿Imports System.IO
+Imports Serilog
+
+Public Class FormMenuNew
+
     Private Sub ToolStripButtonLogin_Click(sender As Object, e As EventArgs) Handles ToolStripButtonLogin.Click
         If ToolStripButtonLogin.Text.ToUpper() = "INICIAR SESIÓN" Then
             frmElegirSucursal.Show()
         Else
+            For Each frm As Form In Application.OpenForms.Cast(Of Form).ToList()
+                If frm IsNot Me Then
+                    frm.Close()
+                End If
+            Next
+
+            Me.FlowLayoutPanelDashboard.Controls.Clear()
+
             ToolStripButtonLogin.Text = "Iniciar sesión"
             rolUsuarioActual = Nothing
             nameUsuarioActual = ""
             nombreRol = ""
             usuarioActual = 0
             sucActual = 0
+            StatusStripPrincipal.BackColor = Color.Salmon
+            ToolStripStatusLabelConnectionStatus.Text = "Estado de la conexión: "
         End If
     End Sub
 
@@ -17,7 +31,7 @@
             MessageBox.Show("No tiene permisos para este módulo", "No tiene permisos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             Return
         End If
-
+        Log.Information("Ingresando al catálogo de productos")
         frmCatalogoProducto.Show()
     End Sub
 
@@ -74,6 +88,10 @@
     End Sub
 
     Private Sub NuevoTrasladoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NuevoTrasladoToolStripMenuItem.Click
+        If rolUsuarioActual = Nothing Then
+            MessageBox.Show("No tiene permisos para este módulo", "No tiene permisos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Return
+        End If
         frmTraslados.Show()
     End Sub
 
@@ -86,7 +104,7 @@
     End Sub
 
     Private Sub RecibirTrasladoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RecibirTrasladoToolStripMenuItem.Click
-        If nombreRol <> "ADMINISTRADOR" Then
+        If rolUsuarioActual = Nothing Then
             MessageBox.Show("No tiene permisos para este módulo", "No tiene permisos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             Return
         End If
@@ -188,8 +206,15 @@
     End Sub
 
     Private Sub FormMenuNew_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        Estilos.AplicarEstilos(Me)
+        Estilos.AplicarEstilosToolStrip(ToolStrip1)
+        ToolStripStatusLabelConnectionStatus.Text &= "desconectado"
+#If DEBUG Then
+        ActualizaUsuariosToolStripMenuItem.Visible = True
+#End If
     End Sub
+
+
 
     Private Sub ReporteDeUtilidadToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReporteDeUtilidadToolStripMenuItem.Click
         If nombreRol <> "ADMINISTRADOR" Then
@@ -198,4 +223,50 @@
         End If
         FormReporteUtilidad.Show()
     End Sub
+
+    Private Sub ToolStripButton2_Click(sender As Object, e As EventArgs) Handles ToolStripButton2.Click
+        If rolUsuarioActual = Nothing Then
+            MessageBox.Show("No tiene permisos para este módulo", "No tiene permisos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Return
+        Else
+            FormEgresos.Show()
+        End If
+    End Sub
+
+    Private Sub CategoríasEgresosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CategoríasEgresosToolStripMenuItem.Click
+        If rolUsuarioActual = Nothing Then
+            MessageBox.Show("No tiene permisos para este módulo", "No tiene permisos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Return
+        Else
+            FormCategoriaEgreso.Show()
+        End If
+    End Sub
+
+    Private Sub ImprimirInventarioToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImprimirInventarioToolStripMenuItem.Click
+        If rolUsuarioActual = Nothing Then
+            MessageBox.Show("No tiene permisos para este módulo", "No tiene permisos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Return
+        End If
+
+        frmInventarioRPT.Show()
+    End Sub
+
+    Private Sub ActualizaUsuariosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ActualizaUsuariosToolStripMenuItem.Click
+        Try
+            MigrarContrasenasAHash()
+        Catch ex As Exception
+            Log.Error("Error: " + ex.Message)
+        End Try
+    End Sub
+
+    Private Sub GeneraCódigosDeBarraToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GeneraCódigosDeBarraToolStripMenuItem.Click
+        If nombreRol <> "ADMINISTRADOR" Then
+            MessageBox.Show("No tiene permisos para este módulo", "No tiene permisos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Return
+        End If
+
+        frmGenerarBarCode.Show()
+    End Sub
+
+
 End Class

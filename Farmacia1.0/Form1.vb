@@ -1,92 +1,97 @@
 ﻿Imports System.Data.SqlClient
+Imports Serilog
+
 Public Class Form1
 
-    Sub login()
-        Dim reader As SqlDataReader
+    Sub Login()
+        Dim nickInput = Trim(TextBox1.Text)
+        Dim pwdInput = Trim(TextBox2.Text)
+
+        ' Validaciones
+        If nickInput = "" OrElse pwdInput = "" Then
+            MsgBox("Nick y contraseña son obligatorios.", MsgBoxStyle.Exclamation, "Faltan datos")
+            Return
+        End If
+
+        If sucActual = 0 Then
+            sucActual = Integer.Parse(ConsultaParametro("codigoSucursal"))
+        End If
+
 
         Try
             openConnection()
-            Dim cmd As New SqlCommand()
-            With cmd
-                .CommandText = "sp_validaUsuario"
-                .CommandType = CommandType.StoredProcedure
-                .Connection = conn
-            End With
-            cmd.Parameters.AddWithValue("NICK", Trim(TextBox1.Text))
-            cmd.Parameters.AddWithValue("PASSWORD", Trim(TextBox2.Text))
 
-            reader = cmd.ExecuteReader
-            reader.Read()
+            Using cmd As New SqlCommand("sp_validaUsuario", conn)
+                cmd.CommandType = CommandType.StoredProcedure
+                cmd.Parameters.AddWithValue("@NICK", nickInput)
+                cmd.Parameters.AddWithValue("@SUCURSAL", sucActual)
 
-            If reader.HasRows Then
-                rolUsuarioActual = Val(reader(2).ToString)
-                nameUsuarioActual = reader(1).ToString
-                usuarioActual = Val(reader(0).ToString)
-                nombreRol = reader(3).ToString
+                Using reader = cmd.ExecuteReader()
+                    If Not reader.Read() Then
+                        MsgBox("No se encontraron coincidencias", MsgBoxStyle.Critical, "Error en los datos")
+                        Return
+                    End If
 
-                Dim params(3) As String
-                params(0) = Trim(TextBox1.Text)
-                params(1) = Environment.MachineName & " - " & Environment.UserName
-                params(2) = "Inicio de sesión: " & nameUsuarioActual & ", desde: " & ConsultaParametro("sucursalFisica")
+                    ' Leemos salt y hash
+                    Dim saltStored = DirectCast(reader("PasswordSalt"), Byte())
+                    Dim hashStored = DirectCast(reader("PasswordHash"), Byte())
+                    Dim hashComputed = PasswordHelper.HashPassword(pwdInput, saltStored)
 
+                    If Not hashComputed.SequenceEqual(hashStored) Then
+                        MsgBox("Usuario o contraseña incorrectos", MsgBoxStyle.Critical, "Error en los datos")
+                        Return
+                    End If
 
-                If ((reader(3).ToString() = "ADMINISTRADOR" Or reader(3).ToString() = "GERENTE")) Then
-                    MsgBox("Bienvenido al sistema: " & nameUsuarioActual.ToString, MsgBoxStyle.Information, ConsultaParametro("nombreEmpresa"))
+                    ' Si coincide, cargamos resto de datos
+                    Dim idUsuario = CInt(reader("idUsuario"))
+                    Dim nombreUser = reader("nombreUsuario").ToString()
+                    Dim rolId = CInt(reader("tipoUsuario"))
+                    Dim rolNombre = reader("rolNombre").ToString()
+                    Dim sucursalId = CInt(reader("sucursal"))
+                    Dim sucursalName = reader("sucNombre").ToString()
+
+                    Dim bienvenido = $"Bienvenido al sistema: {nombreUser}"
+                    If rolNombre = "ADMINISTRADOR" OrElse rolNombre = "GERENTE" Then
+                        MsgBox(bienvenido, MsgBoxStyle.Information, ConsultaParametro("nombreEmpresa"))
+                    ElseIf sucActual = sucursalId AndAlso (rolNombre = "VENDEDOR" OrElse rolNombre = "BODEGUERO") Then
+                        MsgBox(bienvenido, MsgBoxStyle.Information, ConsultaParametro("nombreEmpresa"))
+                    Else
+                        MsgBox("No tiene permisos para esta sucursal", MsgBoxStyle.Critical, "Acceso denegado")
+                        Return
+                    End If
+
+                    ' Guardamos globals y cerramos
+                    usuarioActual = idUsuario
+                    nameUsuarioActual = nombreUser
+                    rolUsuarioActual = rolId
+                    nombreRol = rolNombre
+                    nameSucActual = sucursalName
+
                     reader.Close()
                     Me.Close()
-                    'frmMenu.Select()
-                    FormMenuNew.ToolStripButtonLogin.Text = "Cerrar sesión"
-                    'frmMenu.Button3.Enabled = True
-                    'frmMenu.Button2.Enabled = True
-                    'frmMenu.Button4.Enabled = True
-                    'frmMenu.btnTraslados.Enabled = True
-                    'frmMenu.Button6.Enabled = True
-                    'frmMenu.Button7.Enabled = True
-                    'frmMenu.Button8.Enabled = True
-                    'frmMenu.Button9.Enabled = True
-                    'frmMenu.btnRecibirTraslado.Enabled = True
-                    'frmMenu.Button11.Enabled = True
-                    GrabaBitacora(params, grabaBitacoraSp)
-                Else
-                    If (sucActual = reader(4) And (reader(3).ToString() = "VENDEDOR")) Then
-                        MsgBox("Bienvenido al sistema: " & nameUsuarioActual.ToString, MsgBoxStyle.Information, ConsultaParametro("nombreEmpresa"))
-                        reader.Close()
-                        Me.Close()
-                        'frmMenu.Select()
-                        FormMenuNew.ToolStripButtonLogin.Text = "Cerrar sesión"
-                        'frmMenu.Button2.Enabled = True
-                        'frmMenu.btnTraslados.Enabled = True
-                        'frmMenu.btnRecibirTraslado.Enabled = True
-                        GrabaBitacora(params, grabaBitacoraSp)
-                    Else
-                        If (sucActual = reader(4) And (reader(3).ToString = "BODEGUERO")) Then
-                            MsgBox("Bienvenido al sistema: " & nameUsuarioActual.ToString, MsgBoxStyle.Information, ConsultaParametro("nombreEmpresa"))
-                            reader.Close()
-                            Me.Close()
-                            'frmMenu.Select()
-                            FormMenuNew.ToolStripButtonLogin.Text = "Cerrar sesión"
-                            'frmMenu.Button8.Enabled = True
-                            'frmMenu.btnTraslados.Enabled = True
-                            'frmMenu.btnRecibirTraslado.Enabled = True
-                            GrabaBitacora(params, grabaBitacoraSp)
-                        Else
-                            params(2) = "Inicio de sesión no autorizado: " & nameUsuarioActual & ", desde: " & ConsultaParametro("sucursalFisica")
-                            MsgBox("No se encontraron coincidencias", MsgBoxStyle.Critical, "Error en los datos")
-                            reader.Close()
-                            GrabaBitacora(params, grabaBitacoraSp)
-                        End If
 
+                    With FormMenuNew
+                        .ToolStripButtonLogin.Text = "Cerrar sesión"
+                        .StatusStripPrincipal.BackColor = Color.LimeGreen
+                        .ToolStripStatusLabelConnectionStatus.Text =
+                        $"Estado de la conexión: conectado, Usuario: {nombreUser}, Sucursal: {sucursalName}"
+                        .FlowLayoutPanelDashboard.Visible = True
+                    End With
+
+                    If rolNombre = "ADMINISTRADOR" OrElse rolNombre = "GERENTE" Then
+                        DibujaTarjetasResumen()
                     End If
-                End If
-            Else
-                MsgBox("No se encontraron coincidencias", MsgBoxStyle.Critical, "Error en los datos")
-            End If
-
+                    Log.Information($"{Environment.MachineName} - {Environment.UserName}")
+                    Log.Information($"Inicio de sesión: {nombreUser}, desde: {ConsultaParametro("sucursalFisica")}")
+                End Using
+            End Using
 
         Catch ex As Exception
-            MsgBox("No se encontraron coincidencias", MsgBoxStyle.Critical, "Error en los datos")
+            Log.Information($"Ocurrió un error en Login: {ex.Message}")
+            MsgBox("Error al conectar con la base de datos.", MsgBoxStyle.Critical, "Error")
         Finally
             closeConnection()
+            Log.Information("Finaliza Login")
         End Try
     End Sub
 
@@ -99,7 +104,7 @@ Public Class Form1
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        Estilos.AplicarEstilos(Me)
     End Sub
 
     Private Sub TextBox1_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox1.KeyDown
@@ -128,6 +133,6 @@ Public Class Form1
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        login()
+        Login()
     End Sub
 End Class

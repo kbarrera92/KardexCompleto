@@ -68,6 +68,7 @@ Partial Class frmProductos
         Me.indi = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.estan = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.barcode = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.flag = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -75,7 +76,7 @@ Partial Class frmProductos
         '
         'Panel1
         '
-        Me.Panel1.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Panel1.BackColor = System.Drawing.Color.DarkBlue
         Me.Panel1.Controls.Add(Me.Button2)
         Me.Panel1.Controls.Add(Me.Button1)
         Me.Panel1.Controls.Add(Me.Label14)
@@ -446,7 +447,7 @@ Partial Class frmProductos
         DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.idCod, Me.descPro, Me.exis, Me.marca, Me.presen, Me.precioA, Me.cat, Me.medida, Me.proveedor, Me.indi, Me.estan, Me.barcode})
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.idCod, Me.descPro, Me.exis, Me.marca, Me.presen, Me.precioA, Me.cat, Me.medida, Me.proveedor, Me.indi, Me.estan, Me.barcode, Me.flag})
         Me.DataGridView1.Dock = System.Windows.Forms.DockStyle.Top
         Me.DataGridView1.EnableHeadersVisualStyles = False
         Me.DataGridView1.Location = New System.Drawing.Point(0, 0)
@@ -531,6 +532,13 @@ Partial Class frmProductos
         Me.barcode.Name = "barcode"
         Me.barcode.ReadOnly = True
         '
+        'flag
+        '
+        Me.flag.HeaderText = "Bandera"
+        Me.flag.Name = "flag"
+        Me.flag.ReadOnly = True
+        Me.flag.Visible = False
+        '
         'frmProductos
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -579,21 +587,22 @@ Partial Class frmProductos
     Friend WithEvents Label8 As System.Windows.Forms.Label
     Friend WithEvents txtexistencia As System.Windows.Forms.TextBox
     Friend WithEvents txtprecio As System.Windows.Forms.TextBox
-    Friend WithEvents idCod As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents descPro As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents exis As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents marca As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents presen As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents precioA As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents cat As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents medida As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents proveedor As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents indi As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents estan As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Label13 As System.Windows.Forms.Label
     Friend WithEvents Label14 As System.Windows.Forms.Label
     Friend WithEvents ComboBox2 As System.Windows.Forms.ComboBox
     Friend WithEvents Button2 As System.Windows.Forms.Button
     Friend WithEvents Button1 As System.Windows.Forms.Button
-    Friend WithEvents barcode As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents idCod As DataGridViewTextBoxColumn
+    Friend WithEvents descPro As DataGridViewTextBoxColumn
+    Friend WithEvents exis As DataGridViewTextBoxColumn
+    Friend WithEvents marca As DataGridViewTextBoxColumn
+    Friend WithEvents presen As DataGridViewTextBoxColumn
+    Friend WithEvents precioA As DataGridViewTextBoxColumn
+    Friend WithEvents cat As DataGridViewTextBoxColumn
+    Friend WithEvents medida As DataGridViewTextBoxColumn
+    Friend WithEvents proveedor As DataGridViewTextBoxColumn
+    Friend WithEvents indi As DataGridViewTextBoxColumn
+    Friend WithEvents estan As DataGridViewTextBoxColumn
+    Friend WithEvents barcode As DataGridViewTextBoxColumn
+    Friend WithEvents flag As DataGridViewTextBoxColumn
 End Class

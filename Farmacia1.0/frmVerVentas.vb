@@ -1,4 +1,6 @@
 ﻿Imports System.Data.SqlClient
+Imports Serilog
+
 Public Class frmVerVentas
 
     Dim sql As String = "SELECT idSucursal, nombreSuc FROM SUCURSAL"
@@ -219,10 +221,13 @@ Public Class frmVerVentas
         If CheckBox1.Checked = True Then
             ComboBox2.Enabled = True
             'Combobox categoría
-            Dim sql2 As String = "SELECT idUsuario, nombreUsuario FROM USUARIO WHERE sucursal = " & CInt(ComboBox1.SelectedValue.ToString)
-            ComboBox2.DataSource = updateCm(sql2)
-            ComboBox2.DisplayMember = updateCm(sql2).Columns(1).ToString
-            ComboBox2.ValueMember = updateCm(sql2).Columns(0).ToString
+            Dim sql2 As String = "SELECT idUsuario, nombreUsuario FROM USUARIO WHERE sucursal = @sucursal and estado = 1"
+            Dim listaParametros As New List(Of SqlParameter)()
+            listaParametros.Add(New SqlParameter("@sucursal", Convert.ToInt32(ComboBox1.SelectedValue)))
+            Dim table As DataTable = updateCm(sql2, listaParametros)
+            ComboBox2.DataSource = table
+            ComboBox2.DisplayMember = table.Columns(1).ToString
+            ComboBox2.ValueMember = table.Columns(0).ToString
             ComboBox2.SelectedIndex = -1
         Else
             ComboBox2.Enabled = False
@@ -260,7 +265,7 @@ Public Class frmVerVentas
 
             End If
         End If
-        
+
     End Sub
 
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
@@ -276,12 +281,17 @@ Public Class frmVerVentas
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
         If DataGridView1.Rows.Count > 0 Then
-            Dim informe As New rptVentas
+            Try
+                Dim informe As New rptVentas
 
-            informe.SetDataSource(ds.Tables("dtVentasXsuc"))
+                informe.SetDataSource(ds.Tables("dtVentasXsuc"))
+                informe.SetParameterValue(0, ConsultaParametro("nombreEmpresa"))
+                informe.SetParameterValue(1, ConsultaParametro("eslogan"))
+                frmVerReportes.CrystalReportViewer1.ReportSource = informe
+                frmVerReportes.Show()
+            Catch ex As Exception
 
-            frmVerReportes.CrystalReportViewer1.ReportSource = informe
-            frmVerReportes.Show()
+            End Try
         Else
             MessageBox.Show("No se eligió ninguna sucursal", "Faltan datos", MessageBoxButtons.OK, MessageBoxIcon.Warning)
 
@@ -296,23 +306,60 @@ Public Class frmVerVentas
         End If
     End Sub
 
-    
+
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         If MessageBox.Show("¿Desea eliminar este registro?" & vbCrLf & "Se eliminarán los datos asociados a él.", "Eliminando", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
-            Dim sqlDelete As String = "DELETE FROM VENTA WHERE nVenta = @nv"
-            Dim cmd As SqlCommand
             Try
-                cmd = New SqlCommand(sqlDelete, conn)
-
-                cmd.Parameters.AddWithValue("nv", CInt(DataGridView1.CurrentRow.Cells(0).Value))
-
-                openConnection()
-                cmd.ExecuteNonQuery()
-                closeConnection()
+                EliminaVenta()
                 MsgBox("Registro eliminado exitosamente", MsgBoxStyle.Information, "Eliminado")
             Catch ex As Exception
-                MsgBox(ex.Message)
+                Log.Error($"Ocurrió un error. Error: {ex.Message}")
+                MsgBox("Ocurrió un error. Revise el log del programa", MsgBoxStyle.Critical, "Error")
             End Try
         End If
     End Sub
+
+    Private Sub EliminaVenta()
+        Try
+            Dim parametros As New List(Of SqlParameter) From {
+                New SqlParameter("@idVenta", SqlDbType.Int) With {.Value = Convert.ToInt32(DataGridView1.CurrentRow.Cells(0).Value)},
+                New SqlParameter("@nameSucursal", SqlDbType.VarChar, 40) With {.Value = Convert.ToString(DataGridView1.CurrentRow.Cells(5).Value)},
+                New SqlParameter("@message", SqlDbType.VarChar, 200) With {.Direction = ParameterDirection.Output},
+                New SqlParameter("@returnValue", SqlDbType.Int) With {.Direction = ParameterDirection.ReturnValue}
+            }
+
+            Dim paramtodb As String = String.Empty
+            For Each param As SqlParameter In parametros
+                If TypeOf param.Value Is DataTable Then
+                    ' Si el parámetro es un DataTable, convertirlo a string
+                    Dim dt As DataTable = DirectCast(param.Value, DataTable)
+                    paramtodb &= param.ParameterName & "= [DataTable] " & vbCrLf
+
+                    ' Convertir las filas y columnas del DataTable en texto
+                    For Each row As DataRow In dt.Rows
+                        paramtodb &= "  - "
+                        For Each col As DataColumn In dt.Columns
+                            paramtodb &= $"{col.ColumnName}: {row(col)} | "
+                        Next
+                        paramtodb &= vbCrLf
+                    Next
+                Else
+                    paramtodb &= param.ParameterName & "=" & If(param.Value, """") & vbCrLf
+                End If
+            Next
+            Log.Information($"Parametros enviados al sp: {vbCrLf}{paramtodb}")
+
+            Dim resultado = EjecutarStoredProcedureMultiple("sp_eliminaVenta", parametros)
+
+            Dim codigoRetorno As Integer = Convert.ToInt32(parametros.Find(Function(p) p.ParameterName = "@returnValue").Value)
+            Dim mensajeSalida As String = parametros.Find(Function(p) p.ParameterName = "@message").Value.ToString()
+            MessageBox.Show(mensajeSalida, "Resultado", MessageBoxButtons.OK, IIf(codigoRetorno = 0, MessageBoxIcon.Information, MessageBoxIcon.Error))
+        Catch ex As Exception
+            Log.Error($"Ocurrio un error. Error: {ex.Message}, Trace: {ex.StackTrace}")
+            Throw
+        End Try
+
+    End Sub
+
+
 End Class

@@ -65,6 +65,8 @@ Public Class frmProveedores
         ListBox1.DataSource = updateList(sqlProveedores)
         ListBox1.ValueMember = updateList(sqlProveedores).Columns(0).ToString
         ListBox1.DisplayMember = updateList(sqlProveedores).Columns(1).ToString
+
+        Estilos.AplicarEstilos(Me)
     End Sub
 
     Private Sub ListBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListBox1.SelectedIndexChanged

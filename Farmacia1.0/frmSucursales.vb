@@ -57,6 +57,8 @@ Public Class frmSucursales
         ListBox1.DataSource = updateCm(sql)
         ListBox1.DisplayMember = updateCm(sql).Columns(1).ToString
         ListBox1.ValueMember = updateCm(sql).Columns(0).ToString
+
+        Estilos.AplicarEstilos(Me)
     End Sub
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click

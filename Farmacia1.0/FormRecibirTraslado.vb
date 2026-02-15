@@ -91,6 +91,7 @@ Public Class FormRecibirTraslado
                 cmd.Parameters("SUCENVIA").Direction = ParameterDirection.Output
                 cmd.Parameters.Add("MSG", SqlDbType.VarChar, 200)
                 cmd.Parameters("MSG").Direction = ParameterDirection.Output
+                cmd.Parameters.AddWithValue("horasDiferencia", CInt(ConsultaParametro("horasDiferencia")))
             End With
 
 
