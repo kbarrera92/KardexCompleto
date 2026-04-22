@@ -98,7 +98,11 @@ Public Class frmInventarioRPT
         ComboBox1.ValueMember = updateCm(sql).Columns(0).ToString
         ComboBox1.SelectedIndex = -1
 
-        
+        If nombreRol <> "ADMINISTRADOR" Then
+            DataGridView1.Columns(3).Visible = False
+            DataGridView1.Columns(6).Visible = False
+        End If
+
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
