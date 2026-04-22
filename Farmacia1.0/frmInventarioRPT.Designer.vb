@@ -153,6 +153,7 @@ Partial Class frmInventarioRPT
         '
         Me.DataGridView1.AllowUserToAddRows = False
         Me.DataGridView1.AllowUserToDeleteRows = False
+        Me.DataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DataGridView1.BackgroundColor = System.Drawing.Color.White
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
@@ -182,7 +183,6 @@ Partial Class frmInventarioRPT
         Me.dpro.HeaderText = "Descripción"
         Me.dpro.Name = "dpro"
         Me.dpro.ReadOnly = True
-        Me.dpro.Width = 300
         '
         'precio
         '
@@ -201,7 +201,6 @@ Partial Class frmInventarioRPT
         Me.presen.HeaderText = "Presentación"
         Me.presen.Name = "presen"
         Me.presen.ReadOnly = True
-        Me.presen.Width = 200
         '
         'medida
         '
@@ -214,7 +213,6 @@ Partial Class frmInventarioRPT
         Me.lab.HeaderText = "Laboratorio"
         Me.lab.Name = "lab"
         Me.lab.ReadOnly = True
-        Me.lab.Width = 200
         '
         'cat
         '
