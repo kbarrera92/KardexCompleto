@@ -106,13 +106,17 @@ Public Class FormRecibirTraslado
             params(2) = String.Format("{0} recibió traslado No. {1}, en la sucursal: {2}", nameUsuarioActual, TextBox1.Text, ConsultaParametro("sucursalFisica"))
 
             GrabaBitacora(params, grabaBitacoraSp)
+
+
+            Limpiar()
+
         Catch ex As Exception
             MessageBox.Show("Hubo un error al recibir el traslado", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
 
     Private Sub Limpiar()
-        For Each control As Control In Me.Controls
+        For Each control As Control In Me.Panel1.Controls
             If TypeOf control Is TextBox Then
                 control.Text = "" ' eliminar el texto  
             End If
@@ -120,5 +124,9 @@ Public Class FormRecibirTraslado
 
         DataGridView1.DataSource = Nothing
         TextBox1.Focus()
+    End Sub
+
+    Private Sub FormRecibirTraslado_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
     End Sub
 End Class
