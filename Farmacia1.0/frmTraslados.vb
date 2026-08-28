@@ -241,10 +241,7 @@ Public Class frmTraslados
 
 
     Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
-        If nombreRol <> "ADMINISTRADOR" Then
-            MessageBox.Show("No tiene permisos para este módulo", "No tiene permisos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-            Return
-        End If
+
         frmVerTraslados.Show()
     End Sub
 
