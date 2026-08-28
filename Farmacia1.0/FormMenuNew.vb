@@ -31,8 +31,13 @@ Public Class FormMenuNew
             MessageBox.Show("No tiene permisos para este módulo", "No tiene permisos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             Return
         End If
+
         Log.Information("Ingresando al catálogo de productos")
-        frmCatalogoProducto.Show()
+        If ConsultaParametro("cliente") = "LABENDICION" Then
+            frmCatalogoProductoLaBendicion.Show()
+        Else
+            frmCatalogoProducto.Show()
+        End If
     End Sub
 
     Private Sub ProveedoresToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ProveedoresToolStripMenuItem.Click
@@ -209,9 +214,6 @@ Public Class FormMenuNew
         Estilos.AplicarEstilos(Me)
         Estilos.AplicarEstilosToolStrip(ToolStrip1)
         ToolStripStatusLabelConnectionStatus.Text &= "desconectado"
-#If DEBUG Then
-        ActualizaUsuariosToolStripMenuItem.Visible = True
-#End If
     End Sub
 
 
@@ -251,7 +253,7 @@ Public Class FormMenuNew
         frmInventarioRPT.Show()
     End Sub
 
-    Private Sub ActualizaUsuariosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ActualizaUsuariosToolStripMenuItem.Click
+    Private Sub ActualizaUsuariosToolStripMenuItem_Click(sender As Object, e As EventArgs)
         Try
             MigrarContrasenasAHash()
         Catch ex As Exception
