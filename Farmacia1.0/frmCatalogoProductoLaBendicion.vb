@@ -436,4 +436,88 @@ Public Class frmCatalogoProductoLaBendicion
         End Try
 
     End Sub
+
+    Private Sub txtcod_KeyDown(sender As Object, e As KeyEventArgs) Handles txtcod.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            txtbarcode.Select()
+        End If
+    End Sub
+
+    Private Sub txtbarcode_KeyDown(sender As Object, e As KeyEventArgs) Handles txtbarcode.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            txtdesc.Select()
+        End If
+    End Sub
+
+    Private Sub txtdesc_KeyDown(sender As Object, e As KeyEventArgs) Handles txtdesc.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            txtmed.Select()
+        End If
+    End Sub
+
+    Private Sub txtmed_KeyDown(sender As Object, e As KeyEventArgs) Handles txtmed.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            cmbcat.Select()
+        End If
+    End Sub
+
+    Private Sub cmbcat_KeyDown(sender As Object, e As KeyEventArgs) Handles cmbcat.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            txtpres.Select()
+        End If
+    End Sub
+
+    Private Sub txtpres_KeyDown(sender As Object, e As KeyEventArgs) Handles txtpres.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            DateTimePicker1.Select()
+        End If
+    End Sub
+
+    Private Sub DateTimePicker1_KeyDown(sender As Object, e As KeyEventArgs) Handles DateTimePicker1.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            ComboBoxFlag.Select()
+        End If
+    End Sub
+
+    Private Sub ComboBoxFlag_KeyDown(sender As Object, e As KeyEventArgs) Handles ComboBoxFlag.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            txtprecio.Select()
+        End If
+    End Sub
+
+    Private Sub txtprecio_KeyDown(sender As Object, e As KeyEventArgs) Handles txtprecio.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            txtcosto.Select()
+        End If
+    End Sub
+
+    Private Sub txtcosto_KeyDown(sender As Object, e As KeyEventArgs) Handles txtcosto.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            txtutilidad.Select()
+        End If
+    End Sub
+
+    Private Sub txtutilidad_KeyDown(sender As Object, e As KeyEventArgs) Handles txtutilidad.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            cmbpro.Select()
+        End If
+    End Sub
+
+    Private Sub cmbpro_KeyDown(sender As Object, e As KeyEventArgs) Handles cmbpro.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            txtstockmin.Select()
+        End If
+    End Sub
+
+    Private Sub txtstockmin_KeyDown(sender As Object, e As KeyEventArgs) Handles txtstockmin.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            txtExistencia.Select()
+        End If
+    End Sub
+
+    Private Sub txtExistencia_KeyDown(sender As Object, e As KeyEventArgs) Handles txtExistencia.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            txtobs.Select()
+        End If
+    End Sub
 End Class
