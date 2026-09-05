@@ -225,6 +225,7 @@ Public Class frmCatalogoProductoLaBendicion
             txtobs.Clear()
             txtmed.Clear()
             cmbcat.SelectedIndex = -1
+            ComboBoxFlag.SelectedIndex = 0
             txtdesc.Select()
             txtprecio.Text = "0.0"
             txtcosto.Text = "0.0"
