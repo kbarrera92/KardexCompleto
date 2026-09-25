@@ -168,6 +168,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsBonificaciones.xsd</DependentUpon>
     </Compile>
+    <Compile Include="DTOs\SucursalItem.vb" />
     <Compile Include="EgresosTools\Egreso.vb" />
     <Compile Include="EgresosTools\EgresoValidator.vb" />
     <Compile Include="Estilos\Estilos.vb" />
