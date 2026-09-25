@@ -29,6 +29,7 @@ Public Class FormAbrirCaja
         Dim cmd As SqlCommand
         Dim msg As String
         Dim rc As Integer
+        Dim nombreEmpleado As String
         Try
             cmd = New SqlCommand()
             With cmd
@@ -37,12 +38,20 @@ Public Class FormAbrirCaja
                 .Connection = conn
             End With
 
+            Dim paramNombreEmpleado As New SqlParameter With {
+                .ParameterName = "@nombreEmpleado",
+                .SqlDbType = SqlDbType.VarChar,
+                .Size = 150,
+                .Direction = ParameterDirection.Output
+            }
+
             With cmd.Parameters
                 .AddWithValue("opt", "A")
                 .AddWithValue("usuario", usuarioActual)
                 .AddWithValue("sucursal", If(ConsultaParametro("codigoSucursal") = sucActual, sucActual, Convert.ToInt32(ConsultaParametro("codigoSucursal"))))
                 .AddWithValue("saldoinicial", CDbl(txtsaldoinicial.Text))
                 .AddWithValue("codempleado", CInt(txtcodempleado.Text))
+                .Add(paramNombreEmpleado)
                 .Add("@MSG", SqlDbType.VarChar, 200).Direction = ParameterDirection.Output
                 .Add("@rc", SqlDbType.Int).Direction = ParameterDirection.Output
             End With
@@ -51,7 +60,15 @@ Public Class FormAbrirCaja
             cmd.ExecuteNonQuery()
             rc = CInt(cmd.Parameters("@rc").Value)
             msg = CStr(cmd.Parameters("@MSG").Value.ToString())
-            MessageBox.Show(msg, If(rc = 0, "Éxito", "Error"), MessageBoxButtons.OK, If(rc = 0, MessageBoxIcon.Information, MessageBoxIcon.Error))
+            nombreEmpleado = CStr(cmd.Parameters("@nombreEmpleado").Value.ToString())
+
+            If rc <> 0 Then
+                MessageBox.Show(msg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Else
+                MessageBox.Show(msg, "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                FormMenuNew.ToolStripStatusLabelConnectionStatus.Text = $"Estado de la conexión: conectado, Usuario: {nombreEmpleado}, Sucursal: {nameSucActual}"
+            End If
+
             closeConnection()
         Catch ex As Exception
             MessageBox.Show($"Hubo un error al grabar el registro. {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)

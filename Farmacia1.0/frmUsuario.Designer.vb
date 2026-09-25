@@ -22,7 +22,7 @@ Partial Class frmUsuario
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.TextBox8 = New System.Windows.Forms.TextBox()
+        Me.TextBoxIdUsuario = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.Button4 = New System.Windows.Forms.Button()
@@ -32,16 +32,15 @@ Partial Class frmUsuario
         Me.Label5 = New System.Windows.Forms.Label()
         Me.TextBox3 = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.TextBoxNickname = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.TextBoxNombre = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.ListBox1 = New System.Windows.Forms.ListBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.ComboBoxTipoUsuario = New System.Windows.Forms.ComboBox()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
-        Me.ComboBox3 = New System.Windows.Forms.ComboBox()
+        Me.ComboBoxEstadoUsuario = New System.Windows.Forms.ComboBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.btnPass3 = New System.Windows.Forms.Button()
@@ -53,16 +52,17 @@ Partial Class frmUsuario
         Me.Label10 = New System.Windows.Forms.Label()
         Me.TextBoxPass1 = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
+        Me.CheckedListBoxSucursales = New System.Windows.Forms.CheckedListBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
         '
-        'TextBox8
+        'TextBoxIdUsuario
         '
-        Me.TextBox8.Location = New System.Drawing.Point(362, 40)
-        Me.TextBox8.Name = "TextBox8"
-        Me.TextBox8.Size = New System.Drawing.Size(261, 20)
-        Me.TextBox8.TabIndex = 3
+        Me.TextBoxIdUsuario.Location = New System.Drawing.Point(362, 40)
+        Me.TextBoxIdUsuario.Name = "TextBoxIdUsuario"
+        Me.TextBoxIdUsuario.Size = New System.Drawing.Size(261, 20)
+        Me.TextBoxIdUsuario.TabIndex = 3
         '
         'Label9
         '
@@ -83,7 +83,7 @@ Partial Class frmUsuario
         Me.GroupBox1.Controls.Add(Me.Button1)
         Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox1.ForeColor = System.Drawing.Color.Black
-        Me.GroupBox1.Location = New System.Drawing.Point(21, 452)
+        Me.GroupBox1.Location = New System.Drawing.Point(21, 402)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(312, 66)
         Me.GroupBox1.TabIndex = 16
@@ -163,12 +163,12 @@ Partial Class frmUsuario
         Me.Label4.Text = "Contraseña:"
         Me.Label4.Visible = False
         '
-        'TextBox2
+        'TextBoxNickname
         '
-        Me.TextBox2.Location = New System.Drawing.Point(362, 143)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(261, 20)
-        Me.TextBox2.TabIndex = 7
+        Me.TextBoxNickname.Location = New System.Drawing.Point(362, 143)
+        Me.TextBoxNickname.Name = "TextBoxNickname"
+        Me.TextBoxNickname.Size = New System.Drawing.Size(261, 20)
+        Me.TextBoxNickname.TabIndex = 7
         '
         'Label3
         '
@@ -180,12 +180,12 @@ Partial Class frmUsuario
         Me.Label3.TabIndex = 6
         Me.Label3.Text = "Nickname:"
         '
-        'TextBox1
+        'TextBoxNombre
         '
-        Me.TextBox1.Location = New System.Drawing.Point(362, 91)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(261, 20)
-        Me.TextBox1.TabIndex = 5
+        Me.TextBoxNombre.Location = New System.Drawing.Point(362, 91)
+        Me.TextBoxNombre.Name = "TextBoxNombre"
+        Me.TextBoxNombre.Size = New System.Drawing.Size(261, 20)
+        Me.TextBoxNombre.TabIndex = 5
         '
         'Label2
         '
@@ -202,7 +202,7 @@ Partial Class frmUsuario
         Me.ListBox1.FormattingEnabled = True
         Me.ListBox1.Location = New System.Drawing.Point(21, 40)
         Me.ListBox1.Name = "ListBox1"
-        Me.ListBox1.Size = New System.Drawing.Size(312, 394)
+        Me.ListBox1.Size = New System.Drawing.Size(312, 121)
         Me.ListBox1.TabIndex = 1
         '
         'Label1
@@ -215,54 +215,43 @@ Partial Class frmUsuario
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Usuarios registrados"
         '
-        'ComboBox1
+        'ComboBoxTipoUsuario
         '
-        Me.ComboBox1.DisplayMember = "idTipoUsuario"
-        Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(362, 197)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(261, 21)
-        Me.ComboBox1.TabIndex = 11
-        Me.ComboBox1.ValueMember = "idTipoUsuario"
+        Me.ComboBoxTipoUsuario.DisplayMember = "idTipoUsuario"
+        Me.ComboBoxTipoUsuario.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBoxTipoUsuario.FormattingEnabled = True
+        Me.ComboBoxTipoUsuario.Location = New System.Drawing.Point(362, 197)
+        Me.ComboBoxTipoUsuario.Name = "ComboBoxTipoUsuario"
+        Me.ComboBoxTipoUsuario.Size = New System.Drawing.Size(261, 21)
+        Me.ComboBoxTipoUsuario.TabIndex = 11
+        Me.ComboBoxTipoUsuario.ValueMember = "idTipoUsuario"
         '
         'Label6
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(359, 234)
+        Me.Label6.Location = New System.Drawing.Point(18, 177)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(71, 17)
         Me.Label6.TabIndex = 12
         Me.Label6.Text = "Sucursal"
         '
-        'ComboBox2
+        'ComboBoxEstadoUsuario
         '
-        Me.ComboBox2.DisplayMember = "idTipoUsuario"
-        Me.ComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox2.FormattingEnabled = True
-        Me.ComboBox2.Location = New System.Drawing.Point(362, 255)
-        Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(261, 21)
-        Me.ComboBox2.TabIndex = 13
-        Me.ComboBox2.ValueMember = "idTipoUsuario"
-        '
-        'ComboBox3
-        '
-        Me.ComboBox3.DisplayMember = "idTipoUsuario"
-        Me.ComboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox3.FormattingEnabled = True
-        Me.ComboBox3.Location = New System.Drawing.Point(362, 313)
-        Me.ComboBox3.Name = "ComboBox3"
-        Me.ComboBox3.Size = New System.Drawing.Size(261, 21)
-        Me.ComboBox3.TabIndex = 15
-        Me.ComboBox3.ValueMember = "idTipoUsuario"
+        Me.ComboBoxEstadoUsuario.DisplayMember = "idTipoUsuario"
+        Me.ComboBoxEstadoUsuario.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBoxEstadoUsuario.FormattingEnabled = True
+        Me.ComboBoxEstadoUsuario.Location = New System.Drawing.Point(362, 251)
+        Me.ComboBoxEstadoUsuario.Name = "ComboBoxEstadoUsuario"
+        Me.ComboBoxEstadoUsuario.Size = New System.Drawing.Size(261, 21)
+        Me.ComboBoxEstadoUsuario.TabIndex = 15
+        Me.ComboBoxEstadoUsuario.ValueMember = "idTipoUsuario"
         '
         'Label7
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(359, 292)
+        Me.Label7.Location = New System.Drawing.Point(359, 230)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(58, 17)
         Me.Label7.TabIndex = 14
@@ -281,9 +270,9 @@ Partial Class frmUsuario
         Me.GroupBox2.Controls.Add(Me.TextBoxPass1)
         Me.GroupBox2.Controls.Add(Me.Label8)
         Me.GroupBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox2.Location = New System.Drawing.Point(358, 350)
+        Me.GroupBox2.Location = New System.Drawing.Point(358, 288)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(265, 168)
+        Me.GroupBox2.Size = New System.Drawing.Size(265, 180)
         Me.GroupBox2.TabIndex = 17
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Cambiar contraseña"
@@ -375,26 +364,34 @@ Partial Class frmUsuario
         Me.Label8.Tag = "FO"
         Me.Label8.Text = "Contraseña actual:"
         '
+        'CheckedListBoxSucursales
+        '
+        Me.CheckedListBoxSucursales.FormattingEnabled = True
+        Me.CheckedListBoxSucursales.Location = New System.Drawing.Point(21, 197)
+        Me.CheckedListBoxSucursales.Name = "CheckedListBoxSucursales"
+        Me.CheckedListBoxSucursales.Size = New System.Drawing.Size(312, 184)
+        Me.CheckedListBoxSucursales.TabIndex = 18
+        '
         'frmUsuario
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(645, 530)
+        Me.ClientSize = New System.Drawing.Size(645, 480)
+        Me.Controls.Add(Me.CheckedListBoxSucursales)
         Me.Controls.Add(Me.GroupBox2)
-        Me.Controls.Add(Me.ComboBox3)
+        Me.Controls.Add(Me.ComboBoxEstadoUsuario)
         Me.Controls.Add(Me.Label7)
-        Me.Controls.Add(Me.ComboBox2)
-        Me.Controls.Add(Me.ComboBox1)
-        Me.Controls.Add(Me.TextBox8)
+        Me.Controls.Add(Me.ComboBoxTipoUsuario)
+        Me.Controls.Add(Me.TextBoxIdUsuario)
         Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.TextBox3)
         Me.Controls.Add(Me.Label4)
-        Me.Controls.Add(Me.TextBox2)
+        Me.Controls.Add(Me.TextBoxNickname)
         Me.Controls.Add(Me.Label3)
-        Me.Controls.Add(Me.TextBox1)
+        Me.Controls.Add(Me.TextBoxNombre)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.ListBox1)
         Me.Controls.Add(Me.Label1)
@@ -408,7 +405,7 @@ Partial Class frmUsuario
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents TextBox8 As System.Windows.Forms.TextBox
+    Friend WithEvents TextBoxIdUsuario As System.Windows.Forms.TextBox
     Friend WithEvents Label9 As System.Windows.Forms.Label
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents Button4 As System.Windows.Forms.Button
@@ -418,16 +415,15 @@ Partial Class frmUsuario
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents TextBox3 As System.Windows.Forms.TextBox
     Friend WithEvents Label4 As System.Windows.Forms.Label
-    Friend WithEvents TextBox2 As System.Windows.Forms.TextBox
+    Friend WithEvents TextBoxNickname As System.Windows.Forms.TextBox
     Friend WithEvents Label3 As System.Windows.Forms.Label
-    Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
+    Friend WithEvents TextBoxNombre As System.Windows.Forms.TextBox
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents ListBox1 As System.Windows.Forms.ListBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents ComboBox1 As System.Windows.Forms.ComboBox
+    Friend WithEvents ComboBoxTipoUsuario As System.Windows.Forms.ComboBox
     Friend WithEvents Label6 As System.Windows.Forms.Label
-    Friend WithEvents ComboBox2 As System.Windows.Forms.ComboBox
-    Friend WithEvents ComboBox3 As System.Windows.Forms.ComboBox
+    Friend WithEvents ComboBoxEstadoUsuario As System.Windows.Forms.ComboBox
     Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents TextBoxPass3 As TextBox
@@ -439,4 +435,5 @@ Partial Class frmUsuario
     Friend WithEvents btnPass3 As Button
     Friend WithEvents btnPass2 As Button
     Friend WithEvents btnPass1 As Button
+    Friend WithEvents CheckedListBoxSucursales As CheckedListBox
 End Class

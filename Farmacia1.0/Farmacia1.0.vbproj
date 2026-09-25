@@ -161,13 +161,14 @@
     <Compile Include="dsReportes.vb">
       <DependentUpon>dsReportes.xsd</DependentUpon>
     </Compile>
+    <Compile Include="DTOs\SucursalItem.vb" />
     <Compile Include="EgresosTools\Egreso.vb" />
     <Compile Include="EgresosTools\EgresoValidator.vb" />
     <Compile Include="Estilos\Estilos.vb" />
-    <Compile Include="Form1.designer.vb">
-      <DependentUpon>Form1.vb</DependentUpon>
+    <Compile Include="FormLogin.designer.vb">
+      <DependentUpon>FormLogin.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form1.vb">
+    <Compile Include="FormLogin.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormCategoriaEgreso.Designer.vb">
@@ -603,8 +604,8 @@
     <EmbeddedResource Include="Controles\TarjetaVentasDia.resx">
       <DependentUpon>TarjetaVentasDia.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.vb</DependentUpon>
+    <EmbeddedResource Include="FormLogin.resx">
+      <DependentUpon>FormLogin.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormCategoriaEgreso.resx">
       <DependentUpon>FormCategoriaEgreso.vb</DependentUpon>

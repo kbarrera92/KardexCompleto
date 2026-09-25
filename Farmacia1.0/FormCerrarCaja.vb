@@ -92,7 +92,13 @@ Public Class FormCerrarCaja
             totalfisico = CDec(If(IsDBNull(cmd.Parameters("@totalfisico").Value), 0, cmd.Parameters("@totalfisico").Value))
             totalsistema = CDec(If(IsDBNull(cmd.Parameters("@totalsistema").Value), 0, cmd.Parameters("@totalsistema").Value))
 
-            MessageBox.Show(msg, If(rc = 0, "Éxito", "Error"), MessageBoxButtons.OK, If(rc = 0, MessageBoxIcon.Information, MessageBoxIcon.Error))
+            If rc <> 0 Then
+                MessageBox.Show(msg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Else
+                MessageBox.Show(msg, "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                FormMenuNew.ToolStripStatusLabelConnectionStatus.Text = $"Estado de la conexión: conectado, Sucursal: {nameSucActual}"
+            End If
+
             closeConnection()
             ImprimeTicketCuadre(inicial, totalsistema, totalfisico, dif)
         Catch ex As Exception

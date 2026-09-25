@@ -1,7 +1,7 @@
 ﻿Imports System.Data.SqlClient
 Imports Serilog
 
-Public Class Form1
+Public Class FormLogin
 
     Sub Login()
         Dim nickInput = Trim(TextBox1.Text)
@@ -47,25 +47,16 @@ Public Class Form1
                     Dim nombreUser = reader("nombreUsuario").ToString()
                     Dim rolId = CInt(reader("tipoUsuario"))
                     Dim rolNombre = reader("rolNombre").ToString()
-                    Dim sucursalId = CInt(reader("sucursal"))
-                    Dim sucursalName = reader("sucNombre").ToString()
 
                     Dim bienvenido = $"Bienvenido al sistema: {nombreUser}"
-                    If rolNombre = "ADMINISTRADOR" OrElse rolNombre = "GERENTE" Then
-                        MsgBox(bienvenido, MsgBoxStyle.Information, ConsultaParametro("nombreEmpresa"))
-                    ElseIf sucActual = sucursalId AndAlso (rolNombre = "VENDEDOR" OrElse rolNombre = "BODEGUERO") Then
-                        MsgBox(bienvenido, MsgBoxStyle.Information, ConsultaParametro("nombreEmpresa"))
-                    Else
-                        MsgBox("No tiene permisos para esta sucursal", MsgBoxStyle.Critical, "Acceso denegado")
-                        Return
-                    End If
+                    MsgBox(bienvenido, MsgBoxStyle.Information, ConsultaParametro("nombreEmpresa"))
 
                     ' Guardamos globals y cerramos
                     usuarioActual = idUsuario
                     nameUsuarioActual = nombreUser
                     rolUsuarioActual = rolId
                     nombreRol = rolNombre
-                    nameSucActual = sucursalName
+                    nameSucActual = ConsultaParametro("sucursalFisica")
 
                     reader.Close()
                     Me.Close()
@@ -74,7 +65,7 @@ Public Class Form1
                         .ToolStripButtonLogin.Text = "Cerrar sesión"
                         .StatusStripPrincipal.BackColor = Color.LimeGreen
                         .ToolStripStatusLabelConnectionStatus.Text =
-                        $"Estado de la conexión: conectado, Usuario: {nombreUser}, Sucursal: {sucursalName}"
+                        $"Estado de la conexión: conectado, Sucursal: {nameSucActual}"
                         .FlowLayoutPanelDashboard.Visible = True
                     End With
 
@@ -82,7 +73,7 @@ Public Class Form1
                         DibujaTarjetasResumen()
                     End If
                     Log.Information($"{Environment.MachineName} - {Environment.UserName}")
-                    Log.Information($"Inicio de sesión: {nombreUser}, desde: {ConsultaParametro("sucursalFisica")}")
+                    Log.Information($"Inicio de sesión: {nombreUser}, desde: {nameSucActual}")
                 End Using
             End Using
 
