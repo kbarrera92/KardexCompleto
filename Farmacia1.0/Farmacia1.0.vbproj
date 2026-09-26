@@ -224,6 +224,12 @@
     <Compile Include="FormReporteUtilidad.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormVendedores.Designer.vb">
+      <DependentUpon>FormVendedores.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormVendedores.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormVerTurnos.Designer.vb">
       <DependentUpon>FormVerTurnos.vb</DependentUpon>
     </Compile>
@@ -632,6 +638,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormReporteUtilidad.resx">
       <DependentUpon>FormReporteUtilidad.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormVendedores.resx">
+      <DependentUpon>FormVendedores.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormVerTurnos.resx">
       <DependentUpon>FormVerTurnos.vb</DependentUpon>

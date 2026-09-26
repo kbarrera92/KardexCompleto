@@ -67,6 +67,7 @@ Partial Class FormMenuNew
         Me.StatusStripPrincipal = New System.Windows.Forms.StatusStrip()
         Me.ToolStripStatusLabelConnectionStatus = New System.Windows.Forms.ToolStripStatusLabel()
         Me.FlowLayoutPanelDashboard = New System.Windows.Forms.FlowLayoutPanel()
+        Me.VendedoresToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStrip1.SuspendLayout()
         Me.StatusStripPrincipal.SuspendLayout()
         Me.SuspendLayout()
@@ -100,7 +101,7 @@ Partial Class FormMenuNew
         '
         'ToolStripSplitButtonAdmin
         '
-        Me.ToolStripSplitButtonAdmin.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CatálogoDeProductosToolStripMenuItem, Me.ProveedoresToolStripMenuItem, Me.CategoríasToolStripMenuItem, Me.ToolStripSeparator2, Me.UsuariosToolStripMenuItem, Me.SucursalesToolStripMenuItem, Me.CategoríasEgresosToolStripMenuItem, Me.ToolStripSeparator9, Me.GeneraCódigosDeBarraToolStripMenuItem})
+        Me.ToolStripSplitButtonAdmin.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CatálogoDeProductosToolStripMenuItem, Me.ProveedoresToolStripMenuItem, Me.CategoríasToolStripMenuItem, Me.ToolStripSeparator2, Me.UsuariosToolStripMenuItem, Me.VendedoresToolStripMenuItem, Me.SucursalesToolStripMenuItem, Me.CategoríasEgresosToolStripMenuItem, Me.ToolStripSeparator9, Me.GeneraCódigosDeBarraToolStripMenuItem})
         Me.ToolStripSplitButtonAdmin.Image = Global.Farmacia1._0.My.Resources.Resources.Webalys_Kameleon_pics_Settings_2_32
         Me.ToolStripSplitButtonAdmin.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripSplitButtonAdmin.Name = "ToolStripSplitButtonAdmin"
@@ -375,6 +376,12 @@ Partial Class FormMenuNew
         Me.FlowLayoutPanelDashboard.TabIndex = 2
         Me.FlowLayoutPanelDashboard.Visible = False
         '
+        'VendedoresToolStripMenuItem
+        '
+        Me.VendedoresToolStripMenuItem.Name = "VendedoresToolStripMenuItem"
+        Me.VendedoresToolStripMenuItem.Size = New System.Drawing.Size(247, 24)
+        Me.VendedoresToolStripMenuItem.Text = "Vendedores"
+        '
         'FormMenuNew
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -441,4 +448,5 @@ Partial Class FormMenuNew
     Friend WithEvents ImprimirInventarioToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator9 As ToolStripSeparator
     Friend WithEvents GeneraCódigosDeBarraToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents VendedoresToolStripMenuItem As ToolStripMenuItem
 End Class
