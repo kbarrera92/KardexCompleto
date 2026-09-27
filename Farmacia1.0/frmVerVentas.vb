@@ -18,7 +18,7 @@ Public Class frmVerVentas
                 .CommandText = "sp_ventasSuc"
                 .CommandType = CommandType.StoredProcedure
                 .Connection = conn
-                .Parameters.AddWithValue("suc", CInt(ComboBox1.SelectedValue.ToString))
+                .Parameters.AddWithValue("suc", CInt(ComboBoxSucursal.SelectedValue.ToString))
 
             End With
             dt = ds.Tables("dtVentasXsuc")
@@ -56,8 +56,8 @@ Public Class frmVerVentas
                 .CommandText = "sp_ventasxuser"
                 .CommandType = CommandType.StoredProcedure
                 .Connection = conn
-                .Parameters.AddWithValue("suc", CInt(ComboBox1.SelectedValue.ToString))
-                .Parameters.AddWithValue("us", CInt(ComboBox2.SelectedValue.ToString))
+                .Parameters.AddWithValue("suc", CInt(ComboBoxSucursal.SelectedValue.ToString))
+                .Parameters.AddWithValue("us", CInt(ComboBoxVendedor.SelectedValue.ToString))
             End With
             dt = ds.Tables("dtVentasXsuc")
 
@@ -94,14 +94,14 @@ Public Class frmVerVentas
                 .CommandText = "sp_ventasxusuariofecha"
                 .CommandType = CommandType.StoredProcedure
                 .Connection = conn
-                .Parameters.AddWithValue("suc", CInt(ComboBox1.SelectedValue.ToString))
-                .Parameters.AddWithValue("us", CInt(ComboBox2.SelectedValue.ToString))
+                .Parameters.AddWithValue("suc", CInt(ComboBoxSucursal.SelectedValue.ToString))
+                .Parameters.AddWithValue("us", CInt(ComboBoxVendedor.SelectedValue.ToString))
                 .Parameters.AddWithValue("fecha", DateTimePicker1.Value)
             End With
             dt = ds.Tables("dtVentasXsuc")
 
             da = New SqlDataAdapter(cmd)
-            da.FillSchema(ds.Tables("dtVentasXsuc"), SchemaType.Source)
+            'da.FillSchema(ds.Tables("dtVentasXsuc"), SchemaType.Source)
             da.Fill(ds.Tables("dtVentasXsuc"))
 
             For i = 0 To dt.Columns.Count - 1
@@ -133,7 +133,7 @@ Public Class frmVerVentas
                 .CommandText = "ventasdiariassuc"
                 .CommandType = CommandType.StoredProcedure
                 .Connection = conn
-                .Parameters.AddWithValue("suc", CInt(ComboBox1.SelectedValue.ToString))
+                .Parameters.AddWithValue("suc", CInt(ComboBoxSucursal.SelectedValue.ToString))
 
                 .Parameters.AddWithValue("fecha", DateTimePicker1.Value)
             End With
@@ -173,7 +173,7 @@ Public Class frmVerVentas
                 .CommandType = CommandType.StoredProcedure
                 .Connection = conn
                 .Parameters.AddWithValue("suc", sucActual)
-                .Parameters.AddWithValue("us", usuarioActual)
+                .Parameters.AddWithValue("us", vendedorRegistrado)
                 .Parameters.AddWithValue("fecha", DateTimePicker1.Value)
             End With
             dt = ds.Tables("dtVentasXsuc")
@@ -201,36 +201,35 @@ Public Class frmVerVentas
     Private Sub frmVerVentas_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         If nombreRol = "VENDEDOR" Then
-            ComboBox1.Enabled = False
+            ComboBoxSucursal.Enabled = False
             CheckBox1.Enabled = False
             Button1.Enabled = False
         Else
-            ComboBox1.Enabled = True
+            ComboBoxSucursal.Enabled = True
             CheckBox1.Enabled = True
             Button1.Enabled = True
         End If
 
-        ComboBox1.DataSource = updateCm(sql)
-        ComboBox1.DisplayMember = updateCm(sql).Columns(1).ToString
-        ComboBox1.ValueMember = updateCm(sql).Columns(0).ToString
-        ComboBox1.SelectedIndex = -1
+        ComboBoxSucursal.DataSource = updateCm(sql)
+        ComboBoxSucursal.DisplayMember = updateCm(sql).Columns(1).ToString
+        ComboBoxSucursal.ValueMember = updateCm(sql).Columns(0).ToString
+        ComboBoxSucursal.SelectedIndex = -1
     End Sub
 
 
     Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
         If CheckBox1.Checked = True Then
-            ComboBox2.Enabled = True
-            'Combobox categoría
-            Dim sql2 As String = "SELECT idUsuario, nombreUsuario FROM USUARIO WHERE sucursal = @sucursal and estado = 1"
+            ComboBoxVendedor.Enabled = True
+            Dim sql2 As String = "SELECT idVendedor, nombre FROM VENDEDOR WHERE estado = 1"
             Dim listaParametros As New List(Of SqlParameter)()
-            listaParametros.Add(New SqlParameter("@sucursal", Convert.ToInt32(ComboBox1.SelectedValue)))
+            listaParametros.Add(New SqlParameter("@sucursal", Convert.ToInt32(ComboBoxSucursal.SelectedValue)))
             Dim table As DataTable = updateCm(sql2, listaParametros)
-            ComboBox2.DataSource = table
-            ComboBox2.DisplayMember = table.Columns(1).ToString
-            ComboBox2.ValueMember = table.Columns(0).ToString
-            ComboBox2.SelectedIndex = -1
+            ComboBoxVendedor.DataSource = table
+            ComboBoxVendedor.DisplayMember = table.Columns(1).ToString
+            ComboBoxVendedor.ValueMember = table.Columns(0).ToString
+            ComboBoxVendedor.SelectedIndex = -1
         Else
-            ComboBox2.Enabled = False
+            ComboBoxVendedor.Enabled = False
         End If
     End Sub
 
