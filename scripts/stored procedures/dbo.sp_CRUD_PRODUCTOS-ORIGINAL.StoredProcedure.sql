@@ -35,6 +35,7 @@ CREATE OR ALTER PROCEDURE [dbo].[sp_CRUD_PRODUCTOS]
     @stockmin INT = NULL,
     @estado BIT = NULL,
 	@flag char(2) = NULL,
+	@bonificacion DECIMAL(10,2) = 0.0,
 
 	@msg VARCHAR(200) OUTPUT,
 	@precios PRECIOSXSUCURSAL READONLY
@@ -68,7 +69,8 @@ BEGIN
 				ISNULL(P.estanteria, 0),
 				ISNULL(P.barcode, ''''),
 				ISNULL(P.stockmin, 0),
-				ISNULL(P.bandera, ''N'')
+				ISNULL(P.bandera, ''N''),
+				ISNULL(P.bonificacion, 0)
 			FROM PRODUCTOS P
 			INNER JOIN CATEGORIA C ON P.categoria = C.idCategoria
 			INNER JOIN PROVEEDOR PR ON P.proveedor = PR.idProveedor
@@ -100,12 +102,14 @@ BEGIN
         INSERT INTO PRODUCTOS (
             idProducto, dProducto, composicion, presentacion, aterapeutica, indicaciones, 
             contraindicaciones, observaciones, proveedor, medida, categoria, laboratorio, 
-            precio, costo, fechaRegistro, estanteria, barcode, stockmin, estado, bandera
+            precio, costo, fechaRegistro, estanteria, barcode, stockmin, estado, bandera,
+			bonificacion
         )
         VALUES (
             @idProducto, @dProducto, @composicion, @presentacion, @aterapeutica, @indicaciones, 
             @contraindicaciones, @observaciones, @proveedor, @medida, @categoria, @laboratorio, 
-            @precio, @costo, @fechaRegistro, @estanteria, @barcode, @stockmin, 1, @flag
+            @precio, @costo, @fechaRegistro, @estanteria, @barcode, @stockmin, 1, @flag,
+			@bonificacion
         );
 		IF @@ERROR != 0
 		BEGIN
@@ -158,7 +162,8 @@ BEGIN
             estanteria = @estanteria,
             barcode = @barcode,
             stockmin = @stockmin,
-			bandera = @flag
+			bandera = @flag,
+			bonificacion = @bonificacion
         WHERE idProducto = @idProducto;
 		IF @@ERROR != 0
 		BEGIN
