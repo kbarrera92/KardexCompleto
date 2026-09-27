@@ -96,6 +96,8 @@ Public Class FormCerrarCaja
                 MessageBox.Show(msg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Else
                 MessageBox.Show(msg, "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                nombreVendedorRegistrado = String.Empty
+                vendedorRegistrado = 0
                 FormMenuNew.ToolStripStatusLabelConnectionStatus.Text = $"Estado de la conexión: conectado, Sucursal: {nameSucActual}"
             End If
 

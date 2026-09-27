@@ -66,7 +66,9 @@ Public Class FormAbrirCaja
                 MessageBox.Show(msg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Else
                 MessageBox.Show(msg, "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                FormMenuNew.ToolStripStatusLabelConnectionStatus.Text = $"Estado de la conexión: conectado, Usuario: {nombreEmpleado}, Sucursal: {nameSucActual}"
+                vendedorRegistrado = CInt(txtcodempleado.Text)
+                nombreVendedorRegistrado = nombreEmpleado
+                FormMenuNew.ToolStripStatusLabelConnectionStatus.Text = $"Estado de la conexión: conectado, Usuario: {nombreVendedorRegistrado}, Sucursal: {nameSucActual}"
             End If
 
             closeConnection()
