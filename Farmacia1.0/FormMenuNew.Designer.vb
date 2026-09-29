@@ -56,6 +56,7 @@ Partial Class FormMenuNew
         Me.ToolStripMenuItem8 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator7 = New System.Windows.Forms.ToolStripSeparator()
         Me.ReporteDeUtilidadToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ReporteDeBonificacionesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripSplitButton1 = New System.Windows.Forms.ToolStripSplitButton()
         Me.ToolStripMenuItem9 = New System.Windows.Forms.ToolStripMenuItem()
@@ -238,7 +239,7 @@ Partial Class FormMenuNew
         '
         'ToolStripSplitButtonReportes
         '
-        Me.ToolStripSplitButtonReportes.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem3, Me.CorteDeCajaToolStripMenuItem, Me.ToolStripMenuItem6, Me.ToolStripSeparator4, Me.ToolStripMenuItem7, Me.ToolStripMenuItem8, Me.ToolStripSeparator7, Me.ReporteDeUtilidadToolStripMenuItem})
+        Me.ToolStripSplitButtonReportes.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem3, Me.CorteDeCajaToolStripMenuItem, Me.ToolStripMenuItem6, Me.ToolStripSeparator4, Me.ToolStripMenuItem7, Me.ToolStripMenuItem8, Me.ToolStripSeparator7, Me.ReporteDeUtilidadToolStripMenuItem, Me.ReporteDeBonificacionesToolStripMenuItem})
         Me.ToolStripSplitButtonReportes.Image = Global.Farmacia1._0.My.Resources.Resources.Gartoon_Team_Gartoon_Apps_Gnome_power_statistics_32
         Me.ToolStripSplitButtonReportes.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripSplitButtonReportes.Name = "ToolStripSplitButtonReportes"
@@ -291,6 +292,12 @@ Partial Class FormMenuNew
         Me.ReporteDeUtilidadToolStripMenuItem.Name = "ReporteDeUtilidadToolStripMenuItem"
         Me.ReporteDeUtilidadToolStripMenuItem.Size = New System.Drawing.Size(253, 24)
         Me.ReporteDeUtilidadToolStripMenuItem.Text = "Reporte de utilidad"
+        '
+        'ReporteDeBonificacionesToolStripMenuItem
+        '
+        Me.ReporteDeBonificacionesToolStripMenuItem.Name = "ReporteDeBonificacionesToolStripMenuItem"
+        Me.ReporteDeBonificacionesToolStripMenuItem.Size = New System.Drawing.Size(253, 24)
+        Me.ReporteDeBonificacionesToolStripMenuItem.Text = "Reporte de bonificaciones"
         '
         'ToolStripSeparator5
         '
@@ -439,6 +446,7 @@ Partial Class FormMenuNew
     Friend WithEvents VerTurnosToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator7 As ToolStripSeparator
     Friend WithEvents ReporteDeUtilidadToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ReporteDeBonificacionesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents StatusStripPrincipal As StatusStrip
     Friend WithEvents ToolStripStatusLabelConnectionStatus As ToolStripStatusLabel
     Friend WithEvents FlowLayoutPanelDashboard As FlowLayoutPanel
