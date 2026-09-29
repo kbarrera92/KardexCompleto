@@ -2,8 +2,6 @@
 
 Public Class frmCobrar
 
-    Dim sql As String = "SELECT idSerie, letra FROM SERIEFACTURA WHERE sucursal = " & sucActual
-
     Function GrabaVenta(ByVal table As DataTable) As Boolean
         Dim cmd As SqlCommand
         Dim msg As String
@@ -115,10 +113,6 @@ Public Class frmCobrar
         txtfecha.Text = DateTime.Now.ToShortDateString
         txtusuario.Text = nameUsuarioActual
         txtsucursal.Text = sucActual
-
-        ComboBox1.DataSource = updateCm(sql)
-        ComboBox1.DisplayMember = updateCm(sql).Columns(1).ToString
-        ComboBox1.ValueMember = updateCm(sql).Columns(0).ToString
 
         txtnit.Text = "C/F"
         txtnombrecliente.Text = "CONSUMIDOR FINAL"

@@ -161,6 +161,16 @@
     <Compile Include="dsReportes.vb">
       <DependentUpon>dsReportes.xsd</DependentUpon>
     </Compile>
+    <Compile Include="dsReportes.vb">
+      <DependentUpon>dsReportes.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsBonificaciones.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsBonificaciones.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DTOs\SucursalItem.vb" />
+    <Compile Include="EgresosTools\Egreso.vb">
     <Compile Include="EgresosTools\Egreso.vb" />
     <Compile Include="EgresosTools\EgresoValidator.vb" />
     <Compile Include="Estilos\Estilos.vb" />
@@ -222,6 +232,12 @@
       <DependentUpon>FormReporteUtilidad.vb</DependentUpon>
     </Compile>
     <Compile Include="FormReporteUtilidad.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormReporteBonificaciones.Designer.vb">
+      <DependentUpon>FormReporteBonificaciones.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormReporteBonificaciones.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormVendedores.Designer.vb">
@@ -525,6 +541,12 @@
       <DependentUpon>RptBarcodeGenerator.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="rptBonificaciones.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptBonificaciones.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="rptInventario2.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -638,6 +660,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormReporteUtilidad.resx">
       <DependentUpon>FormReporteUtilidad.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormReporteBonificaciones.resx">
+      <DependentUpon>FormReporteBonificaciones.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormVendedores.resx">
       <DependentUpon>FormVendedores.vb</DependentUpon>
@@ -804,6 +829,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RptBarcodeGenerator.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="rptBonificaciones.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptBonificaciones.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="rptCorteCaja.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>rptCorteCaja.vb</LastGenOutput>
@@ -845,6 +874,17 @@
     </None>
     <None Include="dsReportes.xss">
       <DependentUpon>dsReportes.xsd</DependentUpon>
+    </None>
+    <None Include="dsBonificaciones.xsc">
+      <DependentUpon>dsBonificaciones.xsd</DependentUpon>
+    </None>
+    <None Include="dsBonificaciones.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsBonificaciones.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="dsBonificaciones.xss">
+      <DependentUpon>dsBonificaciones.xsd</DependentUpon>
     </None>
     <None Include="IS_PRO2DataSet.xsc">
       <DependentUpon>IS_PRO2DataSet.xsd</DependentUpon>
