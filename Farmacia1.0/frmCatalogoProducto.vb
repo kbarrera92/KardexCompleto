@@ -71,6 +71,7 @@ Public Class frmCatalogoProducto
                 Case Else
                     ComboBoxFlag.SelectedIndex = 2
             End Select
+            TextBoxBonificacion.Text = DataGridView1.Rows(fila).Cells(19).Value
         Catch ex As Exception
             Log.Error($"Ocurrió un error. Error: {ex.Message}")
         End Try
@@ -121,6 +122,7 @@ Public Class frmCatalogoProducto
                 New SqlParameter("@stockmin", SqlDbType.Int) With {.Value = Convert.ToInt32(If(String.IsNullOrWhiteSpace(txtstockmin.Text), 0, txtstockmin.Text))},
                 New SqlParameter("@estado", SqlDbType.Bit) With {.Value = 1},
                 New SqlParameter("@flag", SqlDbType.Char, 2) With {.Value = ComboBoxFlag.Text.Substring(0, 1)},
+                New SqlParameter("@bonificacion", SqlDbType.Decimal) With {.Value = Convert.ToDecimal(TextBoxBonificacion.Text)},
                 New SqlParameter("@msg", SqlDbType.VarChar, 200) With {.Direction = ParameterDirection.Output},
                 New SqlParameter("@returnValue", SqlDbType.Int) With {.Direction = ParameterDirection.ReturnValue}
             }
@@ -279,6 +281,7 @@ Public Class frmCatalogoProducto
                             cmbcat.SelectedIndex = -1
                             txtbarcode.Clear()
                             txtstockmin.Clear()
+                            TextBoxBonificacion.Clear()
                         Catch ex As Exception
                             MessageBox.Show(ex.Message, "Algo salió mal", MessageBoxButtons.OK, MessageBoxIcon.Error)
                         Finally

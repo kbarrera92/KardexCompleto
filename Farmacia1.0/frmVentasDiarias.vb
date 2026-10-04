@@ -27,7 +27,7 @@ Public Class frmVentasDiarias
                 .Connection = conn
                 .Parameters.AddWithValue("suc", sucActual)
                 .Parameters.AddWithValue("fecha", DateTimePicker1.Value)
-                .Parameters.AddWithValue("user", If(CheckBox1.Checked, DBNull.Value, usuarioActual))
+                .Parameters.AddWithValue("user", If(CheckBox1.Checked, DBNull.Value, vendedorRegistrado))
             End With
 
             dt = ds.Tables("dtcortecaja")

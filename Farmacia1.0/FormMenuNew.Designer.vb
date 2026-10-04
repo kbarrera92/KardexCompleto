@@ -56,6 +56,7 @@ Partial Class FormMenuNew
         Me.ToolStripMenuItem8 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator7 = New System.Windows.Forms.ToolStripSeparator()
         Me.ReporteDeUtilidadToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ReporteDeBonificacionesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripSplitButton1 = New System.Windows.Forms.ToolStripSplitButton()
         Me.ToolStripMenuItem9 = New System.Windows.Forms.ToolStripMenuItem()
@@ -67,6 +68,7 @@ Partial Class FormMenuNew
         Me.StatusStripPrincipal = New System.Windows.Forms.StatusStrip()
         Me.ToolStripStatusLabelConnectionStatus = New System.Windows.Forms.ToolStripStatusLabel()
         Me.FlowLayoutPanelDashboard = New System.Windows.Forms.FlowLayoutPanel()
+        Me.VendedoresToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStrip1.SuspendLayout()
         Me.StatusStripPrincipal.SuspendLayout()
         Me.SuspendLayout()
@@ -100,7 +102,7 @@ Partial Class FormMenuNew
         '
         'ToolStripSplitButtonAdmin
         '
-        Me.ToolStripSplitButtonAdmin.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CatálogoDeProductosToolStripMenuItem, Me.ProveedoresToolStripMenuItem, Me.CategoríasToolStripMenuItem, Me.ToolStripSeparator2, Me.UsuariosToolStripMenuItem, Me.SucursalesToolStripMenuItem, Me.CategoríasEgresosToolStripMenuItem, Me.ToolStripSeparator9, Me.GeneraCódigosDeBarraToolStripMenuItem})
+        Me.ToolStripSplitButtonAdmin.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CatálogoDeProductosToolStripMenuItem, Me.ProveedoresToolStripMenuItem, Me.CategoríasToolStripMenuItem, Me.ToolStripSeparator2, Me.UsuariosToolStripMenuItem, Me.VendedoresToolStripMenuItem, Me.SucursalesToolStripMenuItem, Me.CategoríasEgresosToolStripMenuItem, Me.ToolStripSeparator9, Me.GeneraCódigosDeBarraToolStripMenuItem})
         Me.ToolStripSplitButtonAdmin.Image = Global.Farmacia1._0.My.Resources.Resources.Webalys_Kameleon_pics_Settings_2_32
         Me.ToolStripSplitButtonAdmin.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripSplitButtonAdmin.Name = "ToolStripSplitButtonAdmin"
@@ -237,7 +239,7 @@ Partial Class FormMenuNew
         '
         'ToolStripSplitButtonReportes
         '
-        Me.ToolStripSplitButtonReportes.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem3, Me.CorteDeCajaToolStripMenuItem, Me.ToolStripMenuItem6, Me.ToolStripSeparator4, Me.ToolStripMenuItem7, Me.ToolStripMenuItem8, Me.ToolStripSeparator7, Me.ReporteDeUtilidadToolStripMenuItem})
+        Me.ToolStripSplitButtonReportes.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem3, Me.CorteDeCajaToolStripMenuItem, Me.ToolStripMenuItem6, Me.ToolStripSeparator4, Me.ToolStripMenuItem7, Me.ToolStripMenuItem8, Me.ToolStripSeparator7, Me.ReporteDeUtilidadToolStripMenuItem, Me.ReporteDeBonificacionesToolStripMenuItem})
         Me.ToolStripSplitButtonReportes.Image = Global.Farmacia1._0.My.Resources.Resources.Gartoon_Team_Gartoon_Apps_Gnome_power_statistics_32
         Me.ToolStripSplitButtonReportes.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripSplitButtonReportes.Name = "ToolStripSplitButtonReportes"
@@ -290,6 +292,12 @@ Partial Class FormMenuNew
         Me.ReporteDeUtilidadToolStripMenuItem.Name = "ReporteDeUtilidadToolStripMenuItem"
         Me.ReporteDeUtilidadToolStripMenuItem.Size = New System.Drawing.Size(253, 24)
         Me.ReporteDeUtilidadToolStripMenuItem.Text = "Reporte de utilidad"
+        '
+        'ReporteDeBonificacionesToolStripMenuItem
+        '
+        Me.ReporteDeBonificacionesToolStripMenuItem.Name = "ReporteDeBonificacionesToolStripMenuItem"
+        Me.ReporteDeBonificacionesToolStripMenuItem.Size = New System.Drawing.Size(253, 24)
+        Me.ReporteDeBonificacionesToolStripMenuItem.Text = "Reporte de bonificaciones"
         '
         'ToolStripSeparator5
         '
@@ -375,6 +383,12 @@ Partial Class FormMenuNew
         Me.FlowLayoutPanelDashboard.TabIndex = 2
         Me.FlowLayoutPanelDashboard.Visible = False
         '
+        'VendedoresToolStripMenuItem
+        '
+        Me.VendedoresToolStripMenuItem.Name = "VendedoresToolStripMenuItem"
+        Me.VendedoresToolStripMenuItem.Size = New System.Drawing.Size(247, 24)
+        Me.VendedoresToolStripMenuItem.Text = "Vendedores"
+        '
         'FormMenuNew
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -432,6 +446,7 @@ Partial Class FormMenuNew
     Friend WithEvents VerTurnosToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator7 As ToolStripSeparator
     Friend WithEvents ReporteDeUtilidadToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ReporteDeBonificacionesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents StatusStripPrincipal As StatusStrip
     Friend WithEvents ToolStripStatusLabelConnectionStatus As ToolStripStatusLabel
     Friend WithEvents FlowLayoutPanelDashboard As FlowLayoutPanel
@@ -441,4 +456,5 @@ Partial Class FormMenuNew
     Friend WithEvents ImprimirInventarioToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator9 As ToolStripSeparator
     Friend WithEvents GeneraCódigosDeBarraToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents VendedoresToolStripMenuItem As ToolStripMenuItem
 End Class

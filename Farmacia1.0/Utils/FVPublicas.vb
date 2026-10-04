@@ -35,6 +35,9 @@ Module FVPublicas
     Public usuarioActual As Integer
     Public nombreRol As String
 
+    Public vendedorRegistrado As Integer
+    Public nombreVendedorRegistrado As String
+
     Public formaPago As Integer
 
     Public nSalidaXTraslado As Integer

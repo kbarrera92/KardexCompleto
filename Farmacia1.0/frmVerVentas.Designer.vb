@@ -24,8 +24,8 @@ Partial Class frmVerVentas
     Private Sub InitializeComponent()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
-        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
+        Me.ComboBoxSucursal = New System.Windows.Forms.ComboBox()
+        Me.ComboBoxVendedor = New System.Windows.Forms.ComboBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.ShapeContainer1 = New Microsoft.VisualBasic.PowerPacks.ShapeContainer()
         Me.LineShape1 = New Microsoft.VisualBasic.PowerPacks.LineShape()
@@ -60,26 +60,26 @@ Partial Class frmVerVentas
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Sucursal"
         '
-        'ComboBox1
+        'ComboBoxSucursal
         '
-        Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(23, 29)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(150, 28)
-        Me.ComboBox1.TabIndex = 1
+        Me.ComboBoxSucursal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBoxSucursal.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ComboBoxSucursal.FormattingEnabled = True
+        Me.ComboBoxSucursal.Location = New System.Drawing.Point(23, 29)
+        Me.ComboBoxSucursal.Name = "ComboBoxSucursal"
+        Me.ComboBoxSucursal.Size = New System.Drawing.Size(150, 28)
+        Me.ComboBoxSucursal.TabIndex = 1
         '
-        'ComboBox2
+        'ComboBoxVendedor
         '
-        Me.ComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox2.Enabled = False
-        Me.ComboBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ComboBox2.FormattingEnabled = True
-        Me.ComboBox2.Location = New System.Drawing.Point(179, 29)
-        Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(150, 28)
-        Me.ComboBox2.TabIndex = 3
+        Me.ComboBoxVendedor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBoxVendedor.Enabled = False
+        Me.ComboBoxVendedor.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ComboBoxVendedor.FormattingEnabled = True
+        Me.ComboBoxVendedor.Location = New System.Drawing.Point(179, 29)
+        Me.ComboBoxVendedor.Name = "ComboBoxVendedor"
+        Me.ComboBoxVendedor.Size = New System.Drawing.Size(150, 28)
+        Me.ComboBoxVendedor.TabIndex = 3
         '
         'Label2
         '
@@ -87,9 +87,9 @@ Partial Class frmVerVentas
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.Location = New System.Drawing.Point(176, 12)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(64, 17)
+        Me.Label2.Size = New System.Drawing.Size(78, 17)
         Me.Label2.TabIndex = 2
-        Me.Label2.Text = "Usuario"
+        Me.Label2.Text = "Vendedor"
         '
         'ShapeContainer1
         '
@@ -273,9 +273,9 @@ Partial Class frmVerVentas
         Me.Controls.Add(Me.DateTimePicker1)
         Me.Controls.Add(Me.CheckBox1)
         Me.Controls.Add(Me.DataGridView1)
-        Me.Controls.Add(Me.ComboBox2)
+        Me.Controls.Add(Me.ComboBoxVendedor)
         Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.ComboBox1)
+        Me.Controls.Add(Me.ComboBoxSucursal)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ShapeContainer1)
         Me.Name = "frmVerVentas"
@@ -287,8 +287,8 @@ Partial Class frmVerVentas
 
     End Sub
     Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents ComboBox1 As System.Windows.Forms.ComboBox
-    Friend WithEvents ComboBox2 As System.Windows.Forms.ComboBox
+    Friend WithEvents ComboBoxSucursal As System.Windows.Forms.ComboBox
+    Friend WithEvents ComboBoxVendedor As System.Windows.Forms.ComboBox
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
     Friend WithEvents nventa As System.Windows.Forms.DataGridViewTextBoxColumn

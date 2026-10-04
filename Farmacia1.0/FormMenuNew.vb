@@ -270,5 +270,20 @@ Public Class FormMenuNew
         frmGenerarBarCode.Show()
     End Sub
 
+    Private Sub VendedoresToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles VendedoresToolStripMenuItem.Click
+        If nombreRol <> "ADMINISTRADOR" Then
+            MessageBox.Show("No tiene permisos para este módulo", "No tiene permisos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Return
+        End If
 
+        FormVendedores.Show()
+    End Sub
+
+    Private Sub ReporteDeBonificacionesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReporteDeBonificacionesToolStripMenuItem.Click
+        If nombreRol <> "ADMINISTRADOR" Then
+            MessageBox.Show("No tiene permisos para este módulo", "No tiene permisos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Return
+        End If
+        FormReporteBonificaciones.Show()
+    End Sub
 End Class
