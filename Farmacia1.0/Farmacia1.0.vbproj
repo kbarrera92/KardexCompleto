@@ -161,16 +161,12 @@
     <Compile Include="dsReportes.vb">
       <DependentUpon>dsReportes.xsd</DependentUpon>
     </Compile>
-    <Compile Include="dsReportes.vb">
-      <DependentUpon>dsReportes.xsd</DependentUpon>
-    </Compile>
     <Compile Include="dsBonificaciones.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>dsBonificaciones.xsd</DependentUpon>
     </Compile>
     <Compile Include="DTOs\SucursalItem.vb" />
-    <Compile Include="EgresosTools\Egreso.vb">
     <Compile Include="EgresosTools\Egreso.vb" />
     <Compile Include="EgresosTools\EgresoValidator.vb" />
     <Compile Include="Estilos\Estilos.vb" />
