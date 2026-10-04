@@ -1,0 +1,129 @@
+﻿Imports System.Data.SqlClient
+Imports Serilog
+
+Public Class FormLogin
+
+    Sub Login()
+        Dim nickInput = Trim(TextBox1.Text)
+        Dim pwdInput = Trim(TextBox2.Text)
+
+        ' Validaciones
+        If nickInput = "" OrElse pwdInput = "" Then
+            MsgBox("Nick y contraseña son obligatorios.", MsgBoxStyle.Exclamation, "Faltan datos")
+            Return
+        End If
+
+        If sucActual = 0 Then
+            sucActual = Integer.Parse(ConsultaParametro("codigoSucursal"))
+        End If
+
+
+        Try
+            openConnection()
+
+            Using cmd As New SqlCommand("sp_validaUsuario", conn)
+                cmd.CommandType = CommandType.StoredProcedure
+                cmd.Parameters.AddWithValue("@NICK", nickInput)
+                cmd.Parameters.AddWithValue("@SUCURSAL", sucActual)
+
+                Using reader = cmd.ExecuteReader()
+                    If Not reader.Read() Then
+                        MsgBox("No se encontraron coincidencias", MsgBoxStyle.Critical, "Error en los datos")
+                        Return
+                    End If
+
+                    ' Leemos salt y hash
+                    Dim saltStored = DirectCast(reader("PasswordSalt"), Byte())
+                    Dim hashStored = DirectCast(reader("PasswordHash"), Byte())
+                    Dim hashComputed = PasswordHelper.HashPassword(pwdInput, saltStored)
+
+                    If Not hashComputed.SequenceEqual(hashStored) Then
+                        MsgBox("Usuario o contraseña incorrectos", MsgBoxStyle.Critical, "Error en los datos")
+                        Return
+                    End If
+
+                    ' Si coincide, cargamos resto de datos
+                    Dim idUsuario = CInt(reader("idUsuario"))
+                    Dim nombreUser = reader("nombreUsuario").ToString()
+                    Dim rolId = CInt(reader("tipoUsuario"))
+                    Dim rolNombre = reader("rolNombre").ToString()
+
+                    Dim bienvenido = $"Bienvenido al sistema: {nombreUser}"
+                    MsgBox(bienvenido, MsgBoxStyle.Information, ConsultaParametro("nombreEmpresa"))
+
+                    ' Guardamos globals y cerramos
+                    usuarioActual = idUsuario
+                    nameUsuarioActual = nombreUser
+                    rolUsuarioActual = rolId
+                    nombreRol = rolNombre
+                    nameSucActual = ConsultaParametro("sucursalFisica")
+
+                    reader.Close()
+                    Me.Close()
+
+                    With FormMenuNew
+                        .ToolStripButtonLogin.Text = "Cerrar sesión"
+                        .StatusStripPrincipal.BackColor = Color.LimeGreen
+                        .ToolStripStatusLabelConnectionStatus.Text =
+                        $"Estado de la conexión: conectado, Sucursal: {nameSucActual}"
+                        .FlowLayoutPanelDashboard.Visible = True
+                    End With
+
+                    If rolNombre = "ADMINISTRADOR" OrElse rolNombre = "GERENTE" Then
+                        DibujaTarjetasResumen()
+                    End If
+                    Log.Information($"{Environment.MachineName} - {Environment.UserName}")
+                    Log.Information($"Inicio de sesión: {nombreUser}, desde: {nameSucActual}")
+                End Using
+            End Using
+
+        Catch ex As Exception
+            Log.Information($"Ocurrió un error en Login: {ex.Message}")
+            MsgBox("Error al conectar con la base de datos.", MsgBoxStyle.Critical, "Error")
+        Finally
+            closeConnection()
+            Log.Information("Finaliza Login")
+        End Try
+    End Sub
+
+    Private Sub PictureBox3_Click(sender As Object, e As EventArgs) Handles PictureBox3.Click
+        If TextBox2.PasswordChar = "*" Then
+            TextBox2.PasswordChar = ""
+        Else
+            TextBox2.PasswordChar = "*"
+        End If
+    End Sub
+
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Estilos.AplicarEstilos(Me)
+    End Sub
+
+    Private Sub TextBox1_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox1.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            If Trim(TextBox1.Text) = "" Then
+                MsgBox("Debe escribirse un usuario", MsgBoxStyle.Exclamation, "Faltan datos")
+                TextBox1.Select()
+            Else
+                TextBox2.Select()
+            End If
+        End If
+    End Sub
+
+    Private Sub TextBox2_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox2.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            Button1.Select()
+        End If
+    End Sub
+
+    Private Sub Form1_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
+        If e.KeyCode = Keys.Escape Then
+            If MessageBox.Show("¿Desea salir de esta ventana?", "Saliendo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
+                Me.Close()
+            End If
+        End If
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Login()
+    End Sub
+End Class
