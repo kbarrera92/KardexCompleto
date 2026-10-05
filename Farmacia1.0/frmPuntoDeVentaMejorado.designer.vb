@@ -251,14 +251,13 @@ Partial Class frmPuntoDeVentaMejorado
         Me.Button6.FlatAppearance.BorderColor = System.Drawing.Color.Blue
         Me.Button6.FlatAppearance.BorderSize = 2
         Me.Button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button6.Location = New System.Drawing.Point(16, 190)
+        Me.Button6.Location = New System.Drawing.Point(16, 147)
         Me.Button6.Name = "Button6"
         Me.Button6.Size = New System.Drawing.Size(238, 37)
         Me.Button6.TabIndex = 3
         Me.Button6.Tag = "SE"
-        Me.Button6.Text = "Ver ventas"
+        Me.Button6.Text = "Mis ventas"
         Me.Button6.UseVisualStyleBackColor = False
-        Me.Button6.Visible = False
         '
         'Button5
         '
