@@ -235,6 +235,12 @@
     <Compile Include="FormReporteBonificaciones.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormMisVentas.Designer.vb">
+      <DependentUpon>FormMisVentas.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormMisVentas.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormVales.Designer.vb">
       <DependentUpon>FormVales.vb</DependentUpon>
     </Compile>
@@ -670,6 +676,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormReporteBonificaciones.resx">
       <DependentUpon>FormReporteBonificaciones.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMisVentas.resx">
+      <DependentUpon>FormMisVentas.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormVales.resx">
       <DependentUpon>FormVales.vb</DependentUpon>

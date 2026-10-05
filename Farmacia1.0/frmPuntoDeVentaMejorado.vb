@@ -156,6 +156,7 @@ Public Class frmPuntoDeVentaMejorado
     End Sub
 
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
-        frmVerVentas.Show()
+        FormMisVentas.Show()
+        FormMisVentas.Activate()
     End Sub
 End Class
