@@ -279,6 +279,24 @@ Public Class FormMenuNew
         FormVendedores.Show()
     End Sub
 
+    Private Sub NuevoValeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NuevoValeToolStripMenuItem.Click
+        If rolUsuarioActual = Nothing Then
+            MessageBox.Show("No tiene permisos para este módulo", "No tiene permisos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Return
+        End If
+
+        FormVales.Show()
+    End Sub
+
+    Private Sub VerValesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles VerValesToolStripMenuItem.Click
+        If rolUsuarioActual = Nothing Then
+            MessageBox.Show("No tiene permisos para este módulo", "No tiene permisos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Return
+        End If
+
+        FormVerVales.Show()
+    End Sub
+
     Private Sub ReporteDeBonificacionesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReporteDeBonificacionesToolStripMenuItem.Click
         If nombreRol <> "ADMINISTRADOR" Then
             MessageBox.Show("No tiene permisos para este módulo", "No tiene permisos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
