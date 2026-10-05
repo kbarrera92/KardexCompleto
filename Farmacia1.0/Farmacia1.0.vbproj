@@ -247,6 +247,12 @@
     <Compile Include="FormVales.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormPagosVales.Designer.vb">
+      <DependentUpon>FormPagosVales.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormPagosVales.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormVerVales.Designer.vb">
       <DependentUpon>FormVerVales.vb</DependentUpon>
     </Compile>
@@ -323,6 +329,12 @@
       <DependentUpon>frmCompra.vb</DependentUpon>
     </Compile>
     <Compile Include="frmCompra.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmConfiguracion.Designer.vb">
+      <DependentUpon>frmConfiguracion.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmConfiguracion.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmCorteCaja.Designer.vb">
@@ -683,6 +695,9 @@
     <EmbeddedResource Include="FormVales.resx">
       <DependentUpon>FormVales.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormPagosVales.resx">
+      <DependentUpon>FormPagosVales.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormVerVales.resx">
       <DependentUpon>FormVerVales.vb</DependentUpon>
     </EmbeddedResource>
@@ -721,6 +736,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmCompra.resx">
       <DependentUpon>frmCompra.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmConfiguracion.resx">
+      <DependentUpon>frmConfiguracion.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmCorteCaja.resx">
       <DependentUpon>frmCorteCaja.vb</DependentUpon>

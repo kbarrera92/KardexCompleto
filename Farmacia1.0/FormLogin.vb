@@ -17,6 +17,8 @@ Public Class FormLogin
             sucActual = Integer.Parse(ConsultaParametro("codigoSucursal"))
         End If
 
+        CargaParametros(sucActual)
+
 
         Try
             openConnection()

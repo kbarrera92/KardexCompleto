@@ -35,6 +35,7 @@ Partial Class FormMenuNew
         Me.CategoríasEgresosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator9 = New System.Windows.Forms.ToolStripSeparator()
         Me.GeneraCódigosDeBarraToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ConfiguracionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSplitButtonKardex = New System.Windows.Forms.ToolStripSplitButton()
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
@@ -106,7 +107,7 @@ Partial Class FormMenuNew
         '
         'ToolStripSplitButtonAdmin
         '
-        Me.ToolStripSplitButtonAdmin.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CatálogoDeProductosToolStripMenuItem, Me.ProveedoresToolStripMenuItem, Me.CategoríasToolStripMenuItem, Me.ToolStripSeparator2, Me.UsuariosToolStripMenuItem, Me.VendedoresToolStripMenuItem, Me.SucursalesToolStripMenuItem, Me.CategoríasEgresosToolStripMenuItem, Me.ToolStripSeparator9, Me.GeneraCódigosDeBarraToolStripMenuItem})
+        Me.ToolStripSplitButtonAdmin.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CatálogoDeProductosToolStripMenuItem, Me.ProveedoresToolStripMenuItem, Me.CategoríasToolStripMenuItem, Me.ToolStripSeparator2, Me.UsuariosToolStripMenuItem, Me.VendedoresToolStripMenuItem, Me.SucursalesToolStripMenuItem, Me.CategoríasEgresosToolStripMenuItem, Me.ToolStripSeparator9, Me.GeneraCódigosDeBarraToolStripMenuItem, Me.ConfiguracionToolStripMenuItem})
         Me.ToolStripSplitButtonAdmin.Image = Global.Farmacia1._0.My.Resources.Resources.Webalys_Kameleon_pics_Settings_2_32
         Me.ToolStripSplitButtonAdmin.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripSplitButtonAdmin.Name = "ToolStripSplitButtonAdmin"
@@ -165,6 +166,12 @@ Partial Class FormMenuNew
         Me.GeneraCódigosDeBarraToolStripMenuItem.Name = "GeneraCódigosDeBarraToolStripMenuItem"
         Me.GeneraCódigosDeBarraToolStripMenuItem.Size = New System.Drawing.Size(247, 24)
         Me.GeneraCódigosDeBarraToolStripMenuItem.Text = "Genera Códigos de Barra"
+        '
+        'ConfiguracionToolStripMenuItem
+        '
+        Me.ConfiguracionToolStripMenuItem.Name = "ConfiguracionToolStripMenuItem"
+        Me.ConfiguracionToolStripMenuItem.Size = New System.Drawing.Size(247, 24)
+        Me.ConfiguracionToolStripMenuItem.Text = "Configuración"
         '
         'ToolStripSplitButtonKardex
         '
@@ -487,6 +494,7 @@ Partial Class FormMenuNew
     Friend WithEvents ImprimirInventarioToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator9 As ToolStripSeparator
     Friend WithEvents GeneraCódigosDeBarraToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ConfiguracionToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents VendedoresToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripSplitButtonVales As ToolStripSplitButton
     Friend WithEvents NuevoValeToolStripMenuItem As ToolStripMenuItem

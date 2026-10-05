@@ -4,10 +4,25 @@ Imports System.Data.SqlClient
 Module ModuleUtils
 
     Public grabaBitacoraSp As String = "sp_grabaBitacora"
+    ' Parámetros de empresa/sucursal cargados desde la tabla PARAMETRO al iniciar sesión.
+    Private parametrosBD As New Dictionary(Of String, String)(StringComparer.OrdinalIgnoreCase)
+
+    ''' <summary>
+    ''' Orden de búsqueda: impresora local del equipo (My.Settings), parámetros de BD, y como
+    ''' respaldo appSettings de App.config.
+    ''' </summary>
     Function ConsultaParametro(ByVal param As String) As String
         Dim retValue As String = String.Empty
 
         Try
+            If param = "nombreImpresora" AndAlso Not String.IsNullOrWhiteSpace(My.Settings.nombreImpresora) Then
+                Return My.Settings.nombreImpresora
+            End If
+
+            If parametrosBD.TryGetValue(param, retValue) Then
+                Return retValue
+            End If
+
             Dim appSetting As NameValueCollection = Configuration.ConfigurationManager.AppSettings
             retValue = If(appSetting(param), String.Empty)
         Catch ex As Exception
@@ -16,6 +31,36 @@ Module ModuleUtils
 
         Return retValue
     End Function
+
+    ''' <summary>
+    ''' Carga los parámetros de BD de la sucursal (la sucursal pisa al valor global).
+    ''' Si falla (p. ej. migración sin correr), se conserva App.config como respaldo.
+    ''' </summary>
+    Public Sub CargaParametros(ByVal idSucursal As Integer)
+        Dim nuevos As New Dictionary(Of String, String)(StringComparer.OrdinalIgnoreCase)
+        Try
+            Using cmd As New SqlCommand("sp_consultaParametros", conn)
+                cmd.CommandType = CommandType.StoredProcedure
+                cmd.Parameters.AddWithValue("@idSucursal", idSucursal)
+
+                openConnection()
+                Using reader = cmd.ExecuteReader()
+                    While reader.Read()
+                        nuevos(reader("clave").ToString()) = reader("valor").ToString()
+                    End While
+                End Using
+            End Using
+            parametrosBD = nuevos
+        Catch ex As Exception
+            Serilog.Log.Warning(ex, "No se pudieron cargar los parámetros desde BD; se usa App.config")
+        Finally
+            closeConnection()
+        End Try
+    End Sub
+
+    Public Sub LimpiaParametros()
+        parametrosBD = New Dictionary(Of String, String)(StringComparer.OrdinalIgnoreCase)
+    End Sub
 
     ''' <summary>
     ''' Calcula la suma de una columna numérica del DataGridView
@@ -84,8 +129,15 @@ Module ModuleUtils
                                                 End Sub
             tarjetaEgresos.CargarVentas($"SELECT SUM(total) FROM EGRESOS WHERE CONVERT(DATE, fechaEgreso) = CONVERT(DATE, GETDATE()) AND sucursal = {sucActual} and estado = 1", "Egresos del día")
 
+            Dim tarjetaPagosVales As New TarjetaVentasDia()
+            tarjetaPagosVales.AccionAlHacerClick = Sub()
+                                                       AbrirFormularioDetalles(FormPagosVales)
+                                                   End Sub
+            tarjetaPagosVales.CargarVentas($"SELECT SUM(P.monto) FROM PAGOVALE P INNER JOIN VALE V ON P.idVale = V.idVale WHERE CONVERT(DATE, P.fecha) = CONVERT(DATE, GETDATE()) AND V.sucursal = {sucActual} AND P.estado = 'A'", "Pagos de vales")
+
             FormMenuNew.FlowLayoutPanelDashboard.Controls.Add(tarjeta)
             FormMenuNew.FlowLayoutPanelDashboard.Controls.Add(tarjetaEgresos)
+            FormMenuNew.FlowLayoutPanelDashboard.Controls.Add(tarjetaPagosVales)
         Catch ex As Exception
             Serilog.Log.Error($"Ocurrió un error. Error: {ex.Message}")
         End Try
