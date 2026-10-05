@@ -84,8 +84,15 @@ Module ModuleUtils
                                                 End Sub
             tarjetaEgresos.CargarVentas($"SELECT SUM(total) FROM EGRESOS WHERE CONVERT(DATE, fechaEgreso) = CONVERT(DATE, GETDATE()) AND sucursal = {sucActual} and estado = 1", "Egresos del día")
 
+            Dim tarjetaPagosVales As New TarjetaVentasDia()
+            tarjetaPagosVales.AccionAlHacerClick = Sub()
+                                                       AbrirFormularioDetalles(FormPagosVales)
+                                                   End Sub
+            tarjetaPagosVales.CargarVentas($"SELECT SUM(P.monto) FROM PAGOVALE P INNER JOIN VALE V ON P.idVale = V.idVale WHERE CONVERT(DATE, P.fecha) = CONVERT(DATE, GETDATE()) AND V.sucursal = {sucActual} AND P.estado = 'A'", "Pagos de vales")
+
             FormMenuNew.FlowLayoutPanelDashboard.Controls.Add(tarjeta)
             FormMenuNew.FlowLayoutPanelDashboard.Controls.Add(tarjetaEgresos)
+            FormMenuNew.FlowLayoutPanelDashboard.Controls.Add(tarjetaPagosVales)
         Catch ex As Exception
             Serilog.Log.Error($"Ocurrió un error. Error: {ex.Message}")
         End Try

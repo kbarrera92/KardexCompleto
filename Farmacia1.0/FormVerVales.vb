@@ -346,6 +346,10 @@ Public Class FormVerVales
                 Log.Information($"Pago del vale {idVale} registrado. {mensaje}")
                 MessageBox.Show(mensaje, "Resultado", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 CargarVales(idVale)
+                If nombreRol = "ADMINISTRADOR" Then
+                    DibujaTarjetasResumen()
+                End If
+                BringToFront()
             Else
                 Log.Warning($"El pago del vale {idVale} no se registró. {mensaje}")
                 MessageBox.Show(mensaje, "No se pudo registrar el pago", MessageBoxButtons.OK, MessageBoxIcon.Error)
