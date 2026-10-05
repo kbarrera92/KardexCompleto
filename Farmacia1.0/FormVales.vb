@@ -8,6 +8,7 @@ Public Class FormVales
 
     Private Sub FormVales_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
+            ConfigurarColumnas()
             lblSucursal.Text = "Sucursal: " & nameSucActual
             lblFecha.Text = "Fecha: " & Format(DateTime.Now, "dd/MM/yyyy")
             CargarVendedores()
@@ -16,6 +17,42 @@ Public Class FormVales
         Catch ex As Exception
             Log.Error($"Ocurrió un error. Error: {ex.Message}")
         End Try
+    End Sub
+
+    'Las columnas se crean aquí y no en el .Designer.vb: el diseñador de Visual Studio
+    'las borraba al regenerar el archivo.
+    Private Sub ConfigurarColumnas()
+        DataGridView1.AutoGenerateColumns = False
+        DataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
+        DataGridView1.Columns.Clear()
+        AgregarColumna(DataGridView1, "codpro", "Código", "idProducto", 10)
+        AgregarColumna(DataGridView1, "dpro", "Descripción", "dProducto", 36)
+        AgregarColumna(DataGridView1, "exist", "Existencia", "Existencia", 12, "N0")
+        AgregarColumna(DataGridView1, "marca", "Marca", "laboratorio", 16)
+        AgregarColumna(DataGridView1, "pres", "Presentación", "presentacion", 16)
+        AgregarColumna(DataGridView1, "preciopro", "Precio", "precio", 10, "N2")
+
+        DataGridView2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
+        DataGridView2.Columns.Clear()
+        AgregarColumna(DataGridView2, "clNo", "No", Nothing, 6)
+        AgregarColumna(DataGridView2, "clCodigo", "Código", Nothing, 11)
+        AgregarColumna(DataGridView2, "clDescripcion", "Descripción", Nothing, 41)
+        AgregarColumna(DataGridView2, "clCant", "Cant.", Nothing, 9)
+        AgregarColumna(DataGridView2, "clPrecio", "Precio", Nothing, 14)
+        AgregarColumna(DataGridView2, "clSubt", "Importe", Nothing, 16)
+    End Sub
+
+    Private Sub AgregarColumna(ByVal dgv As DataGridView, ByVal nombre As String, ByVal titulo As String,
+                               ByVal propiedad As String, ByVal peso As Single, Optional ByVal formato As String = "")
+        Dim columna As New DataGridViewTextBoxColumn With {
+            .Name = nombre,
+            .HeaderText = titulo,
+            .ReadOnly = True,
+            .FillWeight = peso
+        }
+        If propiedad IsNot Nothing Then columna.DataPropertyName = propiedad
+        If formato <> "" Then columna.DefaultCellStyle.Format = formato
+        dgv.Columns.Add(columna)
     End Sub
 
     Private Sub CargarVendedores()

@@ -31,24 +31,9 @@ Partial Class FormVerVales
         Me.btnBuscar = New System.Windows.Forms.Button()
         Me.btnSalir = New System.Windows.Forms.Button()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.colIdVale = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colFecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colVence = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colSucursal = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colVendedor = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colTotal = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colSaldo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colEstadoVale = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.lblDetalle = New System.Windows.Forms.Label()
         Me.DataGridView2 = New System.Windows.Forms.DataGridView()
         Me.colPagar = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.colNDetalle = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colProducto = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colDProducto = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colCantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colPrecio = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colSubtotal = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colPagado = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.lblSeleccionado = New System.Windows.Forms.Label()
         Me.lblSaldoVale = New System.Windows.Forms.Label()
         Me.btnPagarSeleccionados = New System.Windows.Forms.Button()
@@ -63,7 +48,7 @@ Partial Class FormVerVales
         Me.lblSucursal.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblSucursal.Location = New System.Drawing.Point(14, 9)
         Me.lblSucursal.Name = "lblSucursal"
-        Me.lblSucursal.Size = New System.Drawing.Size(65, 17)
+        Me.lblSucursal.Size = New System.Drawing.Size(71, 17)
         Me.lblSucursal.TabIndex = 0
         Me.lblSucursal.Text = "Sucursal"
         '
@@ -82,7 +67,7 @@ Partial Class FormVerVales
         Me.lblVendedor.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblVendedor.Location = New System.Drawing.Point(250, 9)
         Me.lblVendedor.Name = "lblVendedor"
-        Me.lblVendedor.Size = New System.Drawing.Size(71, 17)
+        Me.lblVendedor.Size = New System.Drawing.Size(78, 17)
         Me.lblVendedor.TabIndex = 2
         Me.lblVendedor.Text = "Vendedor"
         '
@@ -101,7 +86,7 @@ Partial Class FormVerVales
         Me.lblEstado.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblEstado.Location = New System.Drawing.Point(516, 9)
         Me.lblEstado.Name = "lblEstado"
-        Me.lblEstado.Size = New System.Drawing.Size(51, 17)
+        Me.lblEstado.Size = New System.Drawing.Size(58, 17)
         Me.lblEstado.TabIndex = 4
         Me.lblEstado.Text = "Estado"
         '
@@ -141,9 +126,8 @@ Partial Class FormVerVales
         '
         Me.DataGridView1.AllowUserToAddRows = False
         Me.DataGridView1.AllowUserToDeleteRows = False
-        Me.DataGridView1.AutoGenerateColumns = False
+        Me.DataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colIdVale, Me.colFecha, Me.colVence, Me.colSucursal, Me.colVendedor, Me.colTotal, Me.colSaldo, Me.colEstadoVale})
         Me.DataGridView1.Location = New System.Drawing.Point(15, 70)
         Me.DataGridView1.MultiSelect = False
         Me.DataGridView1.Name = "DataGridView1"
@@ -153,77 +137,13 @@ Partial Class FormVerVales
         Me.DataGridView1.Size = New System.Drawing.Size(1070, 215)
         Me.DataGridView1.TabIndex = 5
         '
-        'colIdVale
-        '
-        Me.colIdVale.DataPropertyName = "idVale"
-        Me.colIdVale.HeaderText = "No. Vale"
-        Me.colIdVale.Name = "colIdVale"
-        Me.colIdVale.ReadOnly = True
-        Me.colIdVale.Width = 70
-        '
-        'colFecha
-        '
-        Me.colFecha.DataPropertyName = "fecha"
-        Me.colFecha.HeaderText = "Fecha"
-        Me.colFecha.Name = "colFecha"
-        Me.colFecha.ReadOnly = True
-        Me.colFecha.Width = 130
-        '
-        'colVence
-        '
-        Me.colVence.DataPropertyName = "fechaVencimiento"
-        Me.colVence.HeaderText = "Vence"
-        Me.colVence.Name = "colVence"
-        Me.colVence.ReadOnly = True
-        Me.colVence.Width = 130
-        '
-        'colSucursal
-        '
-        Me.colSucursal.DataPropertyName = "nombreSuc"
-        Me.colSucursal.HeaderText = "Sucursal"
-        Me.colSucursal.Name = "colSucursal"
-        Me.colSucursal.ReadOnly = True
-        Me.colSucursal.Width = 160
-        '
-        'colVendedor
-        '
-        Me.colVendedor.DataPropertyName = "nombreVendedor"
-        Me.colVendedor.HeaderText = "Vendedor"
-        Me.colVendedor.Name = "colVendedor"
-        Me.colVendedor.ReadOnly = True
-        Me.colVendedor.Width = 230
-        '
-        'colTotal
-        '
-        Me.colTotal.DataPropertyName = "total"
-        Me.colTotal.HeaderText = "Total"
-        Me.colTotal.Name = "colTotal"
-        Me.colTotal.ReadOnly = True
-        Me.colTotal.Width = 90
-        '
-        'colSaldo
-        '
-        Me.colSaldo.DataPropertyName = "saldo"
-        Me.colSaldo.HeaderText = "Saldo"
-        Me.colSaldo.Name = "colSaldo"
-        Me.colSaldo.ReadOnly = True
-        Me.colSaldo.Width = 90
-        '
-        'colEstadoVale
-        '
-        Me.colEstadoVale.DataPropertyName = "estadoVale"
-        Me.colEstadoVale.HeaderText = "Estado"
-        Me.colEstadoVale.Name = "colEstadoVale"
-        Me.colEstadoVale.ReadOnly = True
-        Me.colEstadoVale.Width = 110
-        '
         'lblDetalle
         '
         Me.lblDetalle.AutoSize = True
         Me.lblDetalle.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblDetalle.Location = New System.Drawing.Point(14, 296)
         Me.lblDetalle.Name = "lblDetalle"
-        Me.lblDetalle.Size = New System.Drawing.Size(231, 17)
+        Me.lblDetalle.Size = New System.Drawing.Size(299, 17)
         Me.lblDetalle.TabIndex = 6
         Me.lblDetalle.Text = "Productos del vale (marque para pagar)"
         '
@@ -231,9 +151,9 @@ Partial Class FormVerVales
         '
         Me.DataGridView2.AllowUserToAddRows = False
         Me.DataGridView2.AllowUserToDeleteRows = False
-        Me.DataGridView2.AutoGenerateColumns = False
+        Me.DataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colPagar, Me.colNDetalle, Me.colProducto, Me.colDProducto, Me.colCantidad, Me.colPrecio, Me.colSubtotal, Me.colPagado})
+        Me.DataGridView2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colPagar})
         Me.DataGridView2.Location = New System.Drawing.Point(15, 318)
         Me.DataGridView2.MultiSelect = False
         Me.DataGridView2.Name = "DataGridView2"
@@ -246,63 +166,6 @@ Partial Class FormVerVales
         '
         Me.colPagar.HeaderText = "Pagar"
         Me.colPagar.Name = "colPagar"
-        Me.colPagar.Width = 55
-        '
-        'colNDetalle
-        '
-        Me.colNDetalle.DataPropertyName = "nDetalle"
-        Me.colNDetalle.HeaderText = "No"
-        Me.colNDetalle.Name = "colNDetalle"
-        Me.colNDetalle.ReadOnly = True
-        Me.colNDetalle.Width = 40
-        '
-        'colProducto
-        '
-        Me.colProducto.DataPropertyName = "producto"
-        Me.colProducto.HeaderText = "Código"
-        Me.colProducto.Name = "colProducto"
-        Me.colProducto.ReadOnly = True
-        Me.colProducto.Width = 70
-        '
-        'colDProducto
-        '
-        Me.colDProducto.DataPropertyName = "dProducto"
-        Me.colDProducto.HeaderText = "Descripción"
-        Me.colDProducto.Name = "colDProducto"
-        Me.colDProducto.ReadOnly = True
-        Me.colDProducto.Width = 480
-        '
-        'colCantidad
-        '
-        Me.colCantidad.DataPropertyName = "cantidad"
-        Me.colCantidad.HeaderText = "Cant."
-        Me.colCantidad.Name = "colCantidad"
-        Me.colCantidad.ReadOnly = True
-        Me.colCantidad.Width = 60
-        '
-        'colPrecio
-        '
-        Me.colPrecio.DataPropertyName = "precio"
-        Me.colPrecio.HeaderText = "Precio"
-        Me.colPrecio.Name = "colPrecio"
-        Me.colPrecio.ReadOnly = True
-        Me.colPrecio.Width = 90
-        '
-        'colSubtotal
-        '
-        Me.colSubtotal.DataPropertyName = "subtotal"
-        Me.colSubtotal.HeaderText = "Importe"
-        Me.colSubtotal.Name = "colSubtotal"
-        Me.colSubtotal.ReadOnly = True
-        Me.colSubtotal.Width = 100
-        '
-        'colPagado
-        '
-        Me.colPagado.DataPropertyName = "pagado"
-        Me.colPagado.HeaderText = "Pagado"
-        Me.colPagado.Name = "colPagado"
-        Me.colPagado.ReadOnly = True
-        Me.colPagado.Width = 60
         '
         'lblSeleccionado
         '
@@ -310,7 +173,7 @@ Partial Class FormVerVales
         Me.lblSeleccionado.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblSeleccionado.Location = New System.Drawing.Point(14, 536)
         Me.lblSeleccionado.Name = "lblSeleccionado"
-        Me.lblSeleccionado.Size = New System.Drawing.Size(212, 20)
+        Me.lblSeleccionado.Size = New System.Drawing.Size(232, 20)
         Me.lblSeleccionado.TabIndex = 8
         Me.lblSeleccionado.Text = "Monto seleccionado: Q 0.00"
         '
@@ -320,7 +183,7 @@ Partial Class FormVerVales
         Me.lblSaldoVale.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblSaldoVale.Location = New System.Drawing.Point(14, 566)
         Me.lblSaldoVale.Name = "lblSaldoVale"
-        Me.lblSaldoVale.Size = New System.Drawing.Size(155, 20)
+        Me.lblSaldoVale.Size = New System.Drawing.Size(184, 20)
         Me.lblSaldoVale.TabIndex = 9
         Me.lblSaldoVale.Text = "Saldo del vale: Q 0.00"
         '

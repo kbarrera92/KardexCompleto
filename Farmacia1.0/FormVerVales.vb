@@ -6,13 +6,7 @@ Public Class FormVerVales
 
     Private Sub FormVerVales_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
-            colFecha.DefaultCellStyle.Format = "dd/MM/yyyy"
-            colVence.DefaultCellStyle.Format = "dd/MM/yyyy"
-            colTotal.DefaultCellStyle.Format = "N2"
-            colSaldo.DefaultCellStyle.Format = "N2"
-            colPrecio.DefaultCellStyle.Format = "N2"
-            colSubtotal.DefaultCellStyle.Format = "N2"
-
+            ConfigurarColumnas()
             CargarSucursales()
             CargarVendedores()
             ComboBoxEstado.SelectedIndex = 0
@@ -21,6 +15,47 @@ Public Class FormVerVales
         Catch ex As Exception
             Log.Error($"Ocurrió un error. Error: {ex.Message}")
         End Try
+    End Sub
+
+    'Las columnas se crean aquí y no en el .Designer.vb: el diseñador de Visual Studio
+    'las borraba al regenerar el archivo.
+    Private Sub ConfigurarColumnas()
+        DataGridView1.AutoGenerateColumns = False
+        DataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
+        DataGridView1.Columns.Clear()
+        AgregarColumna(DataGridView1, "colIdVale", "No. Vale", "idVale", 7)
+        AgregarColumna(DataGridView1, "colFecha", "Fecha", "fecha", 11, "dd/MM/yyyy")
+        AgregarColumna(DataGridView1, "colVence", "Vence", "fechaVencimiento", 11, "dd/MM/yyyy")
+        AgregarColumna(DataGridView1, "colSucursal", "Sucursal", "nombreSuc", 16)
+        AgregarColumna(DataGridView1, "colVendedor", "Vendedor", "nombreVendedor", 22)
+        AgregarColumna(DataGridView1, "colTotal", "Total", "total", 9, "N2")
+        AgregarColumna(DataGridView1, "colSaldo", "Saldo", "saldo", 9, "N2")
+        AgregarColumna(DataGridView1, "colEstadoVale", "Estado", "estadoVale", 12)
+
+        DataGridView2.AutoGenerateColumns = False
+        DataGridView2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
+        DataGridView2.Columns.Clear()
+        DataGridView2.Columns.Add(New DataGridViewCheckBoxColumn With {.Name = "colPagar", .HeaderText = "Pagar", .FillWeight = 6})
+        AgregarColumna(DataGridView2, "colNDetalle", "No", "nDetalle", 5)
+        AgregarColumna(DataGridView2, "colProducto", "Código", "producto", 8)
+        AgregarColumna(DataGridView2, "colDProducto", "Descripción", "dProducto", 45)
+        AgregarColumna(DataGridView2, "colCantidad", "Cant.", "cantidad", 7)
+        AgregarColumna(DataGridView2, "colPrecio", "Precio", "precio", 10, "N2")
+        AgregarColumna(DataGridView2, "colSubtotal", "Importe", "subtotal", 11, "N2")
+        DataGridView2.Columns.Add(New DataGridViewCheckBoxColumn With {.Name = "colPagado", .HeaderText = "Pagado", .DataPropertyName = "pagado", .ReadOnly = True, .FillWeight = 7})
+    End Sub
+
+    Private Sub AgregarColumna(ByVal dgv As DataGridView, ByVal nombre As String, ByVal titulo As String,
+                               ByVal propiedad As String, ByVal peso As Single, Optional ByVal formato As String = "")
+        Dim columna As New DataGridViewTextBoxColumn With {
+            .Name = nombre,
+            .HeaderText = titulo,
+            .DataPropertyName = propiedad,
+            .ReadOnly = True,
+            .FillWeight = peso
+        }
+        If formato <> "" Then columna.DefaultCellStyle.Format = formato
+        dgv.Columns.Add(columna)
     End Sub
 
     Private Sub CargarSucursales()

@@ -166,16 +166,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsBonificaciones.xsd</DependentUpon>
     </Compile>
-    <Compile Include="DTOs\SucursalItem.vb" />
     <Compile Include="EgresosTools\Egreso.vb" />
     <Compile Include="EgresosTools\EgresoValidator.vb" />
     <Compile Include="Estilos\Estilos.vb" />
-    <Compile Include="Form1.designer.vb">
-      <DependentUpon>Form1.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Form1.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="FormCategoriaEgreso.Designer.vb">
       <DependentUpon>FormCategoriaEgreso.vb</DependentUpon>
     </Compile>
@@ -204,6 +197,12 @@
       <DependentUpon>FormInventarioPorLab.vb</DependentUpon>
     </Compile>
     <Compile Include="FormInventarioPorLab.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormLogin.designer.vb">
+      <DependentUpon>FormLogin.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormLogin.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormMenuNew.Designer.vb">
@@ -639,9 +638,6 @@
     <EmbeddedResource Include="Controles\TarjetaVentasDia.resx">
       <DependentUpon>TarjetaVentasDia.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="FormCategoriaEgreso.resx">
       <DependentUpon>FormCategoriaEgreso.vb</DependentUpon>
     </EmbeddedResource>
@@ -656,6 +652,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormInventarioPorLab.resx">
       <DependentUpon>FormInventarioPorLab.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormLogin.resx">
+      <DependentUpon>FormLogin.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormMenuNew.resx">
       <DependentUpon>FormMenuNew.vb</DependentUpon>
@@ -1106,6 +1105,9 @@
     <Content Include="Paomedia-Small-N-Flat-Shop %281%29.ico" />
     <None Include="Resources\paymenticon.png" />
     <None Include="Resources\Custom-Icon-Design-Flatastic-8-Schedule.32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DTOs\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

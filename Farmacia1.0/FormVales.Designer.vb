@@ -30,12 +30,6 @@ Partial Class FormVales
         Me.lblBuscar = New System.Windows.Forms.Label()
         Me.txtbuscapro = New System.Windows.Forms.TextBox()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.codpro = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.dpro = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.exist = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.marca = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.pres = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.preciopro = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridView2 = New System.Windows.Forms.DataGridView()
         Me.clNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.clCodigo = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -70,7 +64,7 @@ Partial Class FormVales
         Me.lblTitulo.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTitulo.Location = New System.Drawing.Point(12, 9)
         Me.lblTitulo.Name = "lblTitulo"
-        Me.lblTitulo.Size = New System.Drawing.Size(231, 26)
+        Me.lblTitulo.Size = New System.Drawing.Size(219, 26)
         Me.lblTitulo.TabIndex = 0
         Me.lblTitulo.Text = "Vale de mercadería"
         '
@@ -80,7 +74,7 @@ Partial Class FormVales
         Me.lblSucursal.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblSucursal.Location = New System.Drawing.Point(14, 45)
         Me.lblSucursal.Name = "lblSucursal"
-        Me.lblSucursal.Size = New System.Drawing.Size(74, 18)
+        Me.lblSucursal.Size = New System.Drawing.Size(79, 18)
         Me.lblSucursal.TabIndex = 1
         Me.lblSucursal.Text = "Sucursal:"
         '
@@ -90,7 +84,7 @@ Partial Class FormVales
         Me.lblVendedor.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblVendedor.Location = New System.Drawing.Point(14, 76)
         Me.lblVendedor.Name = "lblVendedor"
-        Me.lblVendedor.Size = New System.Drawing.Size(77, 18)
+        Me.lblVendedor.Size = New System.Drawing.Size(79, 18)
         Me.lblVendedor.TabIndex = 2
         Me.lblVendedor.Text = "Vendedor"
         '
@@ -109,7 +103,7 @@ Partial Class FormVales
         Me.lblFecha.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblFecha.Location = New System.Drawing.Point(360, 100)
         Me.lblFecha.Name = "lblFecha"
-        Me.lblFecha.Size = New System.Drawing.Size(55, 18)
+        Me.lblFecha.Size = New System.Drawing.Size(59, 18)
         Me.lblFecha.TabIndex = 4
         Me.lblFecha.Text = "Fecha:"
         '
@@ -119,7 +113,7 @@ Partial Class FormVales
         Me.lblBuscar.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblBuscar.Location = New System.Drawing.Point(14, 136)
         Me.lblBuscar.Name = "lblBuscar"
-        Me.lblBuscar.Size = New System.Drawing.Size(128, 18)
+        Me.lblBuscar.Size = New System.Drawing.Size(138, 18)
         Me.lblBuscar.TabIndex = 5
         Me.lblBuscar.Text = "Buscar producto:"
         '
@@ -136,9 +130,7 @@ Partial Class FormVales
         '
         Me.DataGridView1.AllowUserToAddRows = False
         Me.DataGridView1.AllowUserToDeleteRows = False
-        Me.DataGridView1.AutoGenerateColumns = False
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.codpro, Me.dpro, Me.exist, Me.marca, Me.pres, Me.preciopro})
         Me.DataGridView1.Location = New System.Drawing.Point(15, 187)
         Me.DataGridView1.MultiSelect = False
         Me.DataGridView1.Name = "DataGridView1"
@@ -148,58 +140,11 @@ Partial Class FormVales
         Me.DataGridView1.Size = New System.Drawing.Size(560, 280)
         Me.DataGridView1.TabIndex = 2
         '
-        'codpro
-        '
-        Me.codpro.DataPropertyName = "idProducto"
-        Me.codpro.HeaderText = "Código"
-        Me.codpro.Name = "codpro"
-        Me.codpro.ReadOnly = True
-        Me.codpro.Width = 60
-        '
-        'dpro
-        '
-        Me.dpro.DataPropertyName = "dProducto"
-        Me.dpro.HeaderText = "Descripción"
-        Me.dpro.Name = "dpro"
-        Me.dpro.ReadOnly = True
-        Me.dpro.Width = 200
-        '
-        'exist
-        '
-        Me.exist.DataPropertyName = "Existencia"
-        Me.exist.HeaderText = "Existencia"
-        Me.exist.Name = "exist"
-        Me.exist.ReadOnly = True
-        Me.exist.Width = 70
-        '
-        'marca
-        '
-        Me.marca.DataPropertyName = "laboratorio"
-        Me.marca.HeaderText = "Marca"
-        Me.marca.Name = "marca"
-        Me.marca.ReadOnly = True
-        Me.marca.Width = 90
-        '
-        'pres
-        '
-        Me.pres.DataPropertyName = "presentacion"
-        Me.pres.HeaderText = "Presentación"
-        Me.pres.Name = "pres"
-        Me.pres.ReadOnly = True
-        Me.pres.Width = 90
-        '
-        'preciopro
-        '
-        Me.preciopro.DataPropertyName = "precio"
-        Me.preciopro.HeaderText = "Precio"
-        Me.preciopro.Name = "preciopro"
-        Me.preciopro.ReadOnly = True
-        Me.preciopro.Width = 60
-        '
         'DataGridView2
         '
         Me.DataGridView2.AllowUserToAddRows = False
         Me.DataGridView2.AllowUserToDeleteRows = False
+        Me.DataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clNo, Me.clCodigo, Me.clDescripcion, Me.clCant, Me.clPrecio, Me.clSubt})
         Me.DataGridView2.Location = New System.Drawing.Point(590, 157)
@@ -216,42 +161,36 @@ Partial Class FormVales
         Me.clNo.HeaderText = "No"
         Me.clNo.Name = "clNo"
         Me.clNo.ReadOnly = True
-        Me.clNo.Width = 35
         '
         'clCodigo
         '
         Me.clCodigo.HeaderText = "Código"
         Me.clCodigo.Name = "clCodigo"
         Me.clCodigo.ReadOnly = True
-        Me.clCodigo.Width = 60
         '
         'clDescripcion
         '
         Me.clDescripcion.HeaderText = "Descripción"
         Me.clDescripcion.Name = "clDescripcion"
         Me.clDescripcion.ReadOnly = True
-        Me.clDescripcion.Width = 200
         '
         'clCant
         '
         Me.clCant.HeaderText = "Cant."
         Me.clCant.Name = "clCant"
         Me.clCant.ReadOnly = True
-        Me.clCant.Width = 50
         '
         'clPrecio
         '
         Me.clPrecio.HeaderText = "Precio"
         Me.clPrecio.Name = "clPrecio"
         Me.clPrecio.ReadOnly = True
-        Me.clPrecio.Width = 65
         '
         'clSubt
         '
         Me.clSubt.HeaderText = "Importe"
         Me.clSubt.Name = "clSubt"
         Me.clSubt.ReadOnly = True
-        Me.clSubt.Width = 70
         '
         'lblCodigo
         '
@@ -259,7 +198,7 @@ Partial Class FormVales
         Me.lblCodigo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblCodigo.Location = New System.Drawing.Point(14, 478)
         Me.lblCodigo.Name = "lblCodigo"
-        Me.lblCodigo.Size = New System.Drawing.Size(54, 17)
+        Me.lblCodigo.Size = New System.Drawing.Size(58, 17)
         Me.lblCodigo.TabIndex = 20
         Me.lblCodigo.Text = "Código"
         '
@@ -279,7 +218,7 @@ Partial Class FormVales
         Me.lblDescripcion.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblDescripcion.Location = New System.Drawing.Point(105, 478)
         Me.lblDescripcion.Name = "lblDescripcion"
-        Me.lblDescripcion.Size = New System.Drawing.Size(84, 17)
+        Me.lblDescripcion.Size = New System.Drawing.Size(93, 17)
         Me.lblDescripcion.TabIndex = 22
         Me.lblDescripcion.Text = "Descripción"
         '
@@ -299,7 +238,7 @@ Partial Class FormVales
         Me.lblPrecio.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblPrecio.Location = New System.Drawing.Point(435, 478)
         Me.lblPrecio.Name = "lblPrecio"
-        Me.lblPrecio.Size = New System.Drawing.Size(48, 17)
+        Me.lblPrecio.Size = New System.Drawing.Size(54, 17)
         Me.lblPrecio.TabIndex = 24
         Me.lblPrecio.Text = "Precio"
         '
@@ -320,7 +259,7 @@ Partial Class FormVales
         Me.lblExistencia.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblExistencia.Location = New System.Drawing.Point(525, 478)
         Me.lblExistencia.Name = "lblExistencia"
-        Me.lblExistencia.Size = New System.Drawing.Size(70, 17)
+        Me.lblExistencia.Size = New System.Drawing.Size(81, 17)
         Me.lblExistencia.TabIndex = 26
         Me.lblExistencia.Text = "Existencia"
         '
@@ -341,7 +280,7 @@ Partial Class FormVales
         Me.lblCantidad.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblCantidad.Location = New System.Drawing.Point(605, 478)
         Me.lblCantidad.Name = "lblCantidad"
-        Me.lblCantidad.Size = New System.Drawing.Size(64, 17)
+        Me.lblCantidad.Size = New System.Drawing.Size(72, 17)
         Me.lblCantidad.TabIndex = 28
         Me.lblCantidad.Text = "Cantidad"
         '
@@ -361,7 +300,7 @@ Partial Class FormVales
         Me.lblTotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTotal.Location = New System.Drawing.Point(885, 478)
         Me.lblTotal.Name = "lblTotal"
-        Me.lblTotal.Size = New System.Drawing.Size(60, 17)
+        Me.lblTotal.Size = New System.Drawing.Size(67, 17)
         Me.lblTotal.TabIndex = 30
         Me.lblTotal.Text = "Total Q."
         '

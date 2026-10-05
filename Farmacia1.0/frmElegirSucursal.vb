@@ -46,7 +46,7 @@ Public Class frmElegirSucursal
 
         sucActual = CInt(ListBox1.SelectedValue.ToString)
         nameSucActual = ListBox1.SelectedItem(1).ToString()
-        Form1.Show()
+        FormLogin.Show()
         Me.Close()
     End Sub
 End Class
