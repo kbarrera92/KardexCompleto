@@ -2,9 +2,10 @@
 <configuration>
   <configSections>
   </configSections>
-  <connectionStrings>
-    <add name="IS_PRO2CS" connectionString="Data Source=SERVER;Initial Catalog=DB;User ID=USR;Password=XXX" />
-  </connectionStrings>
+  <!--La cadena IS_PRO2CS no va aquí: al primer arranque la aplicación pide la conexión y la guarda cifrada
+      (DPAPI). Para cambiarla después, ejecutar Farmacia1.0.exe /conexion.-->
+  <connectionStrings />
+
 
   <startup>
     <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.8.1" />
@@ -13,16 +14,6 @@
     <!--codigoSucursal identifica este equipo. El resto son valores de respaldo: la fuente es la tabla PARAMETRO
         (Administración > Configuración). nombreImpresora se guarda por equipo en la configuración de usuario.-->
     <add key="codigoSucursal" value="10001" />
-    <add key="sucursalFisica" value="SUCURSAL" />
-    <add key="imprimeTicket" value="N" />
-    <add key="imprimeTicketCuadre" value="N" />
-    <add key="nombreImpresora" value="Microsoft Print to PDF" />
-    <add key="nombreEmpresa" value="NOMBRE EMPRESA" />
-    <add key="eslogan" value="ESLOGAN" />
-    <add key="horasDiferencia" value="0" />
-    <add key="logoPath" value="C:\Images\logo.jpeg" />
-    <add key="cantTickets" value="2" />
-    <add key="cliente" value="XXXX" />
   </appSettings>
   <runtime>
     <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">

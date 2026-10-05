@@ -647,6 +647,13 @@
       <DependentUpon>rptVentas.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="frmConexion.Designer.vb">
+      <DependentUpon>frmConexion.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmConexion.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Utils\ConfigSegura.vb" />
     <Compile Include="Utils\clsFunciones.vb" />
     <Compile Include="Utils\ModuleUtils.vb" />
     <Compile Include="Utils\PasswordHelper.vb" />
@@ -903,7 +910,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="dsReportes.xsc">
       <DependentUpon>dsReportes.xsd</DependentUpon>
     </None>

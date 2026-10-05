@@ -14,6 +14,22 @@ Namespace My
                 .CreateLogger()
 
             Serilog.Log.Information("Iniciando aplicación")
+
+            ' Tras escribir el config cifrado, este proceso ya no puede releerlo: se reinicia y se cierra.
+            If ConfigSegura.ProtegerSiEstaEnClaro() Then
+                ConfigSegura.Reiniciar(e.CommandLine)
+                e.Cancel = True
+                Return
+            End If
+
+            If Not ConfigSegura.HayCadena() OrElse e.CommandLine.Contains("/conexion") Then
+                Using f As New frmConexion()
+                    If f.ShowDialog() = DialogResult.OK Then
+                        ConfigSegura.Reiniciar(e.CommandLine)
+                    End If
+                End Using
+                e.Cancel = True
+            End If
         End Sub
 
         Private Sub MyApplication_Shutdown(sender As Object, e As EventArgs) Handles Me.Shutdown
