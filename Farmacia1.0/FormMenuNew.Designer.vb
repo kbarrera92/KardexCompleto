@@ -69,6 +69,10 @@ Partial Class FormMenuNew
         Me.ToolStripStatusLabelConnectionStatus = New System.Windows.Forms.ToolStripStatusLabel()
         Me.FlowLayoutPanelDashboard = New System.Windows.Forms.FlowLayoutPanel()
         Me.VendedoresToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSplitButtonVales = New System.Windows.Forms.ToolStripSplitButton()
+        Me.NuevoValeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.VerValesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparatorVales = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStrip1.SuspendLayout()
         Me.StatusStripPrincipal.SuspendLayout()
         Me.SuspendLayout()
@@ -78,7 +82,7 @@ Partial Class FormMenuNew
         Me.ToolStrip1.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.ToolStrip1.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Bold)
         Me.ToolStrip1.ImageScalingSize = New System.Drawing.Size(32, 32)
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButtonLogin, Me.ToolStripSeparator1, Me.ToolStripSplitButtonAdmin, Me.ToolStripSplitButtonKardex, Me.ToolStripSplitButtonReportes, Me.ToolStripSeparator5, Me.ToolStripSplitButton1, Me.ToolStripSeparator6, Me.ToolStripButton1, Me.ToolStripButton2})
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButtonLogin, Me.ToolStripSeparator1, Me.ToolStripSplitButtonAdmin, Me.ToolStripSplitButtonKardex, Me.ToolStripSplitButtonReportes, Me.ToolStripSeparator5, Me.ToolStripSplitButton1, Me.ToolStripSeparator6, Me.ToolStripSplitButtonVales, Me.ToolStripSeparatorVales, Me.ToolStripButton1, Me.ToolStripButton2})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.Size = New System.Drawing.Size(1168, 58)
@@ -314,6 +318,33 @@ Partial Class FormMenuNew
         Me.ToolStripSplitButton1.Text = "Turnos"
         Me.ToolStripSplitButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         '
+        'ToolStripSplitButtonVales
+        '
+        Me.ToolStripSplitButtonVales.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NuevoValeToolStripMenuItem, Me.VerValesToolStripMenuItem})
+        Me.ToolStripSplitButtonVales.Image = Global.Farmacia1._0.My.Resources.Resources.Custom_Icon_Design_Pretty_Office_3_Sales_report_32
+        Me.ToolStripSplitButtonVales.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripSplitButtonVales.Name = "ToolStripSplitButtonVales"
+        Me.ToolStripSplitButtonVales.Size = New System.Drawing.Size(64, 55)
+        Me.ToolStripSplitButtonVales.Text = "Vales"
+        Me.ToolStripSplitButtonVales.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        '
+        'NuevoValeToolStripMenuItem
+        '
+        Me.NuevoValeToolStripMenuItem.Name = "NuevoValeToolStripMenuItem"
+        Me.NuevoValeToolStripMenuItem.Size = New System.Drawing.Size(215, 24)
+        Me.NuevoValeToolStripMenuItem.Text = "Nuevo vale"
+        '
+        'VerValesToolStripMenuItem
+        '
+        Me.VerValesToolStripMenuItem.Name = "VerValesToolStripMenuItem"
+        Me.VerValesToolStripMenuItem.Size = New System.Drawing.Size(215, 24)
+        Me.VerValesToolStripMenuItem.Text = "Consultar / pagar vales"
+        '
+        'ToolStripSeparatorVales
+        '
+        Me.ToolStripSeparatorVales.Name = "ToolStripSeparatorVales"
+        Me.ToolStripSeparatorVales.Size = New System.Drawing.Size(6, 58)
+        '
         'ToolStripMenuItem9
         '
         Me.ToolStripMenuItem9.Name = "ToolStripMenuItem9"
@@ -457,4 +488,8 @@ Partial Class FormMenuNew
     Friend WithEvents ToolStripSeparator9 As ToolStripSeparator
     Friend WithEvents GeneraCódigosDeBarraToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents VendedoresToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ToolStripSplitButtonVales As ToolStripSplitButton
+    Friend WithEvents NuevoValeToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents VerValesToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparatorVales As ToolStripSeparator
 End Class
