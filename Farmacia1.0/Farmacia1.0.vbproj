@@ -331,6 +331,12 @@
     <Compile Include="frmCompra.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmConfiguracion.Designer.vb">
+      <DependentUpon>frmConfiguracion.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmConfiguracion.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmCorteCaja.Designer.vb">
       <DependentUpon>frmCorteCaja.vb</DependentUpon>
     </Compile>
@@ -730,6 +736,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmCompra.resx">
       <DependentUpon>frmCompra.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmConfiguracion.resx">
+      <DependentUpon>frmConfiguracion.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmCorteCaja.resx">
       <DependentUpon>frmCorteCaja.vb</DependentUpon>

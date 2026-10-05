@@ -64,6 +64,18 @@ Namespace My
                 Return CType(Me("IS_PRO2CS"),String)
             End Get
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property nombreImpresora() As String
+            Get
+                Return CType(Me("nombreImpresora"),String)
+            End Get
+            Set
+                Me("nombreImpresora") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

@@ -10,5 +10,8 @@
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
       <Value Profile="(Default)">Data Source=DESKTOP-NHLU74R\SQLEXPRESS;Initial Catalog=IS_PRO2;Integrated Security=True</Value>
     </Setting>
+    <Setting Name="nombreImpresora" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

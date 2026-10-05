@@ -21,6 +21,7 @@ Public Class FormMenuNew
             nombreRol = ""
             usuarioActual = 0
             sucActual = 0
+            LimpiaParametros()
             StatusStripPrincipal.BackColor = Color.Salmon
             ToolStripStatusLabelConnectionStatus.Text = "Estado de la conexión: "
         End If
@@ -268,6 +269,15 @@ Public Class FormMenuNew
         End If
 
         frmGenerarBarCode.Show()
+    End Sub
+
+    Private Sub ConfiguracionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ConfiguracionToolStripMenuItem.Click
+        If nombreRol <> "ADMINISTRADOR" Then
+            MessageBox.Show("No tiene permisos para este módulo", "No tiene permisos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Return
+        End If
+
+        frmConfiguracion.Show()
     End Sub
 
     Private Sub VendedoresToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles VendedoresToolStripMenuItem.Click
