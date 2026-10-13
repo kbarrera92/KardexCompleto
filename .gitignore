@@ -402,3 +402,5 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+# Salida de scripts/publicar.ps1
+publicacion/

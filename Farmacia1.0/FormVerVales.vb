@@ -325,6 +325,7 @@ Public Class FormVerVales
                 New SqlParameter("@idVale", SqlDbType.Int) With {.Value = idVale},
                 New SqlParameter("@usuario", SqlDbType.Int) With {.Value = usuarioActual},
                 New SqlParameter("@lineas", SqlDbType.Structured) With {.TypeName = "dbo.LINEASVALE", .Value = dtLineas},
+                New SqlParameter("@horasDiferencia", SqlDbType.Int) With {.Value = CInt(ConsultaParametro("horasDiferencia"))},
                 pMensaje,
                 pRetorno
             }
