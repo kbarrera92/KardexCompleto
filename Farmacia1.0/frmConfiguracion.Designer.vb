@@ -25,6 +25,10 @@ Partial Class frmConfiguracion
         Me.lblSucursal = New System.Windows.Forms.Label()
         Me.cmbSucursal = New System.Windows.Forms.ComboBox()
         Me.gbEmpresa = New System.Windows.Forms.GroupBox()
+        Me.numValePagoMinimo = New System.Windows.Forms.NumericUpDown()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.numValeMaximo = New System.Windows.Forms.NumericUpDown()
+        Me.Label9 = New System.Windows.Forms.Label()
         Me.txtCliente = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.txtEslogan = New System.Windows.Forms.TextBox()
@@ -49,6 +53,8 @@ Partial Class frmConfiguracion
         Me.btnGuardar = New System.Windows.Forms.Button()
         Me.btnCerrar = New System.Windows.Forms.Button()
         Me.gbEmpresa.SuspendLayout()
+        CType(Me.numValePagoMinimo, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.numValeMaximo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.gbSucursal.SuspendLayout()
         CType(Me.numHorasDiferencia, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.numCantTickets, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -75,6 +81,10 @@ Partial Class frmConfiguracion
         '
         'gbEmpresa
         '
+        Me.gbEmpresa.Controls.Add(Me.numValePagoMinimo)
+        Me.gbEmpresa.Controls.Add(Me.Label10)
+        Me.gbEmpresa.Controls.Add(Me.numValeMaximo)
+        Me.gbEmpresa.Controls.Add(Me.Label9)
         Me.gbEmpresa.Controls.Add(Me.txtCliente)
         Me.gbEmpresa.Controls.Add(Me.Label3)
         Me.gbEmpresa.Controls.Add(Me.txtEslogan)
@@ -83,10 +93,52 @@ Partial Class frmConfiguracion
         Me.gbEmpresa.Controls.Add(Me.Label1)
         Me.gbEmpresa.Location = New System.Drawing.Point(12, 45)
         Me.gbEmpresa.Name = "gbEmpresa"
-        Me.gbEmpresa.Size = New System.Drawing.Size(436, 112)
+        Me.gbEmpresa.Size = New System.Drawing.Size(436, 166)
         Me.gbEmpresa.TabIndex = 2
         Me.gbEmpresa.TabStop = False
         Me.gbEmpresa.Text = "Empresa (aplica a todas las sucursales)"
+        '
+        'numValePagoMinimo
+        '
+        Me.numValePagoMinimo.DecimalPlaces = 2
+        Me.numValePagoMinimo.Location = New System.Drawing.Point(141, 130)
+        Me.numValePagoMinimo.Maximum = New Decimal(New Integer() {100000, 0, 0, 0})
+        Me.numValePagoMinimo.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.numValePagoMinimo.Name = "numValePagoMinimo"
+        Me.numValePagoMinimo.Size = New System.Drawing.Size(90, 20)
+        Me.numValePagoMinimo.TabIndex = 9
+        Me.numValePagoMinimo.Value = New Decimal(New Integer() {150, 0, 0, 0})
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(12, 133)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(120, 13)
+        Me.Label10.TabIndex = 8
+        Me.Label10.Tag = "FO"
+        Me.Label10.Text = "Pago mínimo de vale (Q)"
+        '
+        'numValeMaximo
+        '
+        Me.numValeMaximo.DecimalPlaces = 2
+        Me.numValeMaximo.Location = New System.Drawing.Point(141, 103)
+        Me.numValeMaximo.Maximum = New Decimal(New Integer() {100000, 0, 0, 0})
+        Me.numValeMaximo.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.numValeMaximo.Name = "numValeMaximo"
+        Me.numValeMaximo.Size = New System.Drawing.Size(90, 20)
+        Me.numValeMaximo.TabIndex = 7
+        Me.numValeMaximo.Value = New Decimal(New Integer() {300, 0, 0, 0})
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(12, 106)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(120, 13)
+        Me.Label9.TabIndex = 6
+        Me.Label9.Tag = "FO"
+        Me.Label9.Text = "Monto máximo de vale (Q)"
         '
         'txtCliente
         '
@@ -155,7 +207,7 @@ Partial Class frmConfiguracion
         Me.gbSucursal.Controls.Add(Me.chkImprimeTicket)
         Me.gbSucursal.Controls.Add(Me.txtSucursalFisica)
         Me.gbSucursal.Controls.Add(Me.Label4)
-        Me.gbSucursal.Location = New System.Drawing.Point(12, 163)
+        Me.gbSucursal.Location = New System.Drawing.Point(12, 217)
         Me.gbSucursal.Name = "gbSucursal"
         Me.gbSucursal.Size = New System.Drawing.Size(436, 188)
         Me.gbSucursal.TabIndex = 3
@@ -270,7 +322,7 @@ Partial Class frmConfiguracion
         '
         Me.gbEquipo.Controls.Add(Me.cmbImpresora)
         Me.gbEquipo.Controls.Add(Me.Label8)
-        Me.gbEquipo.Location = New System.Drawing.Point(12, 357)
+        Me.gbEquipo.Location = New System.Drawing.Point(12, 411)
         Me.gbEquipo.Name = "gbEquipo"
         Me.gbEquipo.Size = New System.Drawing.Size(436, 56)
         Me.gbEquipo.TabIndex = 4
@@ -297,7 +349,7 @@ Partial Class frmConfiguracion
         '
         'btnGuardar
         '
-        Me.btnGuardar.Location = New System.Drawing.Point(272, 425)
+        Me.btnGuardar.Location = New System.Drawing.Point(272, 479)
         Me.btnGuardar.Name = "btnGuardar"
         Me.btnGuardar.Size = New System.Drawing.Size(85, 30)
         Me.btnGuardar.TabIndex = 5
@@ -307,7 +359,7 @@ Partial Class frmConfiguracion
         'btnCerrar
         '
         Me.btnCerrar.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnCerrar.Location = New System.Drawing.Point(363, 425)
+        Me.btnCerrar.Location = New System.Drawing.Point(363, 479)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(85, 30)
         Me.btnCerrar.TabIndex = 6
@@ -319,7 +371,7 @@ Partial Class frmConfiguracion
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCerrar
-        Me.ClientSize = New System.Drawing.Size(460, 467)
+        Me.ClientSize = New System.Drawing.Size(460, 521)
         Me.Controls.Add(Me.btnCerrar)
         Me.Controls.Add(Me.btnGuardar)
         Me.Controls.Add(Me.gbEquipo)
@@ -335,6 +387,8 @@ Partial Class frmConfiguracion
         Me.Text = "Configuración"
         Me.gbEmpresa.ResumeLayout(False)
         Me.gbEmpresa.PerformLayout()
+        CType(Me.numValePagoMinimo, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.numValeMaximo, System.ComponentModel.ISupportInitialize).EndInit()
         Me.gbSucursal.ResumeLayout(False)
         Me.gbSucursal.PerformLayout()
         CType(Me.numHorasDiferencia, System.ComponentModel.ISupportInitialize).EndInit()
@@ -348,6 +402,10 @@ Partial Class frmConfiguracion
     Friend WithEvents lblSucursal As Label
     Friend WithEvents cmbSucursal As ComboBox
     Friend WithEvents gbEmpresa As GroupBox
+    Friend WithEvents numValePagoMinimo As NumericUpDown
+    Friend WithEvents Label10 As Label
+    Friend WithEvents numValeMaximo As NumericUpDown
+    Friend WithEvents Label9 As Label
     Friend WithEvents txtCliente As TextBox
     Friend WithEvents Label3 As Label
     Friend WithEvents txtEslogan As TextBox

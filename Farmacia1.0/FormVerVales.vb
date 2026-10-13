@@ -72,6 +72,7 @@ Public Class FormVerVales
         ComboBoxSucursal.DisplayMember = "nombreSuc"
         ComboBoxSucursal.SelectedValue = sucActual
         If ComboBoxSucursal.SelectedIndex = -1 Then ComboBoxSucursal.SelectedIndex = 0
+        ComboBoxSucursal.Enabled = (nombreRol = "ADMINISTRADOR")
     End Sub
 
     Private Sub CargarVendedores()
@@ -116,7 +117,8 @@ Public Class FormVerVales
 
             Using cmd As New SqlCommand("sp_consultaVales", conn)
                 cmd.CommandType = CommandType.StoredProcedure
-                cmd.Parameters.Add("@sucursal", SqlDbType.Int).Value = Convert.ToInt32(ComboBoxSucursal.SelectedValue)
+                Dim sucursal As Integer = If(nombreRol = "ADMINISTRADOR", Convert.ToInt32(ComboBoxSucursal.SelectedValue), sucActual)
+                cmd.Parameters.Add("@sucursal", SqlDbType.Int).Value = sucursal
                 cmd.Parameters.Add("@vendedor", SqlDbType.Int).Value = Convert.ToInt32(ComboBoxVendedor.SelectedValue)
                 cmd.Parameters.Add("@estado", SqlDbType.VarChar, 10).Value =
                     If(ComboBoxEstado.SelectedIndex <= 0, CObj(DBNull.Value), ComboBoxEstado.Text)
@@ -304,6 +306,21 @@ Public Class FormVerVales
         If vale Is Nothing Then Return
 
         Dim idVale As Integer = Convert.ToInt32(vale("idVale"))
+
+        'Si el saldo supera el mínimo, cada pago debe ser al menos ese mínimo; si no, se paga el saldo completo
+        Dim minimo As Decimal = ValePagoMinimo()
+        Dim saldo As Decimal = Convert.ToDecimal(vale("saldo"))
+        If saldo > minimo Then
+            If monto < minimo Then
+                MessageBox.Show($"El saldo del vale es Q {saldo:N2}. El pago mínimo es de Q {minimo:N2} (seleccionado: Q {monto:N2}).",
+                                "Pago mínimo", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return
+            End If
+        ElseIf monto < saldo Then
+            MessageBox.Show($"El saldo del vale es Q {saldo:N2}, igual o menor al pago mínimo de Q {minimo:N2}. Debe pagarse completo (seleccionado: Q {monto:N2}).",
+                            "Pago total requerido", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
 
         If MessageBox.Show($"¿Registrar el pago de Q {monto:N2} del vale No. {idVale} de {vale("nombreVendedor")}?" & vbCrLf &
                            $"Productos incluidos: {lineas.Count}", "Confirmar pago",

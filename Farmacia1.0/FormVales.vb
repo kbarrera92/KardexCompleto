@@ -259,6 +259,20 @@ Public Class FormVales
         Dim total As Decimal = CalcularTotal()
         Dim valeAbierto As DataRow = ConsultarValeAbierto(Convert.ToInt32(ComboBoxVendedor.SelectedValue))
 
+        'El límite aplica al saldo pendiente: lo que ya debe el vendedor más lo nuevo
+        Dim maximo As Decimal = ValeMaximo()
+        Dim saldoActual As Decimal = If(valeAbierto Is Nothing, 0D, Convert.ToDecimal(valeAbierto("saldo")))
+        If saldoActual + total > maximo Then
+            Dim mensajeMax As String = $"El monto máximo de un vale es Q {maximo:N2}."
+            If saldoActual > 0 Then
+                mensajeMax &= vbCrLf & $"El vale pendiente tiene saldo de Q {saldoActual:N2} y se agregarían Q {total:N2}."
+            Else
+                mensajeMax &= vbCrLf & $"El vale es por Q {total:N2}."
+            End If
+            MessageBox.Show(mensajeMax, "Monto máximo excedido", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
         Dim pregunta As String
         If valeAbierto Is Nothing Then
             pregunta = $"¿Registrar el vale de {ComboBoxVendedor.Text} por Q {total:N2}?"
