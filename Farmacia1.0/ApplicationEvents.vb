@@ -15,6 +15,14 @@ Namespace My
 
             Serilog.Log.Information("Iniciando aplicación")
 
+            ' Actualización automática: si hay versión nueva se aplica y se reinicia (/actualizado evita bucles).
+            Actualizador.LimpiarArchivosViejos()
+            If Not e.CommandLine.Contains("/actualizado") AndAlso Actualizador.BuscarYAplicar() Then
+                ConfigSegura.Reiniciar(e.CommandLine.Concat({"/actualizado"}))
+                e.Cancel = True
+                Return
+            End If
+
             ' Tras escribir el config cifrado, este proceso ya no puede releerlo: se reinicia y se cierra.
             If ConfigSegura.ProtegerSiEstaEnClaro() Then
                 ConfigSegura.Reiniciar(e.CommandLine)
