@@ -158,8 +158,8 @@ Public Class FormEgresos
                 New SqlParameter("@fechaEgreso", SqlDbType.DateTime, 150) With {.Value = DateTimePickerFechaEgreso.Value},
                 New SqlParameter("@concepto", SqlDbType.VarChar, 100) With {.Value = TextBoxDescripcion.Text},
                 New SqlParameter("@usuarioRegistra", SqlDbType.VarChar, 20) With {.Value = TextBoxUsuarioRegistra.Text},
-                New SqlParameter("@total", SqlDbType.VarChar, 150) With {.Value = TextBoxTotalEgreso.Text},
-                New SqlParameter("@sucursal", SqlDbType.Int) With {.Value = ComboBoxSucursal.SelectedValue},
+                New SqlParameter("@total", SqlDbType.Decimal) With {.Precision = 10, .Scale = 2, .Value = gasto.Total},
+                New SqlParameter("@sucursal", SqlDbType.Int) With {.Value = gasto.IdSucursal},
                 New SqlParameter("@categoria", SqlDbType.Int) With {.Value = ComboBoxCategoria.SelectedValue},
                 New SqlParameter("@msg", SqlDbType.VarChar, 200) With {.Direction = ParameterDirection.Output},
                 New SqlParameter("@returnValue", SqlDbType.Int) With {.Direction = ParameterDirection.ReturnValue}

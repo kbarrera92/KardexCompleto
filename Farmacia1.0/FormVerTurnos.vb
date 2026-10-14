@@ -52,10 +52,14 @@ Public Class FormVerTurnos
         End If
 
         Dim diferencia As Decimal, totalfisico As Decimal, totalsistema As Decimal, inicial As Decimal
+        Dim tarjeta As Decimal, egresos As Decimal
         diferencia = If(IsDBNull(DataGridView1.CurrentRow.Cells(7).Value), 0D, Convert.ToDecimal(DataGridView1.CurrentRow.Cells(7).Value))
         totalfisico = If(IsDBNull(DataGridView1.CurrentRow.Cells(6).Value), 0D, Convert.ToDecimal(DataGridView1.CurrentRow.Cells(6).Value))
         totalsistema = If(IsDBNull(DataGridView1.CurrentRow.Cells(5).Value), 0D, Convert.ToDecimal(DataGridView1.CurrentRow.Cells(5).Value))
         inicial = If(IsDBNull(DataGridView1.CurrentRow.Cells(4).Value), 0D, Convert.ToDecimal(DataGridView1.CurrentRow.Cells(4).Value))
-        ImprimeTicketCuadre(inicial, totalsistema, totalfisico, diferencia)
+        'Columnas 9 y 10 (Tarjeta, Egresos); los turnos anteriores a la migración quedan en 0
+        tarjeta = If(IsDBNull(DataGridView1.CurrentRow.Cells(9).Value), 0D, Convert.ToDecimal(DataGridView1.CurrentRow.Cells(9).Value))
+        egresos = If(IsDBNull(DataGridView1.CurrentRow.Cells(10).Value), 0D, Convert.ToDecimal(DataGridView1.CurrentRow.Cells(10).Value))
+        ImprimeTicketCuadre(inicial, totalsistema, tarjeta, egresos, totalfisico, diferencia)
     End Sub
 End Class

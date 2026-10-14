@@ -2,12 +2,21 @@
 Public Class frmVentasDiarias
 
     Dim ds As DataSet
+    Private lblResumen As Label
+
     Sub calculartotal()
         Dim tot As Double = 0.0
         For i = 0 To DataGridView1.Rows.Count - 1
             tot = tot + DataGridView1.Rows(i).Cells(6).Value
         Next
         TextBox1.Text = FormatNumber(tot, 2)
+
+        'Egresos del turno (vista del vendedor) o de toda la sucursal (Reporte General)
+        If lblResumen IsNot Nothing Then
+            Dim sucursal As Integer = Convert.ToInt32(ConsultaParametro("codigoSucursal"))
+            Dim egresos = ObtenerEgresosReporte(sucursal, DateTimePicker1.Value, Not CheckBox1.Checked)
+            lblResumen.Text = TextoResumenEgresos(CDec(tot), egresos)
+        End If
     End Sub
 
 
@@ -62,6 +71,7 @@ Public Class frmVentasDiarias
 
     Private Sub frmVentasDiarias_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         DateTimePicker1.Value = Now
+        lblResumen = CrearLabelResumenEgresos(Me, 13, 425, 580)
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click

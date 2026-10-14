@@ -5,6 +5,25 @@ Public Class frmVerVentas
 
     Dim sql As String = "SELECT idSucursal, nombreSuc FROM SUCURSAL"
     Dim ds As DataSet
+    Private lblResumen As Label
+
+    ''' <summary>
+    ''' Ventas, egresos y neto bajo el grid. Sin fecha el reporte trae todo el histórico, así que
+    ''' no se restan egresos de un solo día: solo se muestra el total de ventas.
+    ''' </summary>
+    Private Sub ActualizaResumen(ByVal dt As DataTable, ByVal sucursal As Integer, ByVal fecha As Date?, ByVal soloTurno As Boolean)
+        Dim ventas As Decimal = 0D
+        For Each fila As DataRow In dt.Rows
+            If Not IsDBNull(fila("total")) Then ventas += Convert.ToDecimal(fila("total"))
+        Next
+
+        If fecha.HasValue Then
+            lblResumen.Text = TextoResumenEgresos(ventas, ObtenerEgresosReporte(sucursal, fecha.Value, soloTurno))
+        Else
+            lblResumen.Text = $"Ventas: {ventas:N2}   (marque fecha para ver egresos y neto)"
+        End If
+    End Sub
+
     Sub llenarDTSMP()
         Dim cmd As SqlCommand
         Dim da As SqlDataAdapter
@@ -33,6 +52,8 @@ Public Class frmVerVentas
 
             dv = dt.DefaultView
             DataGridView1.DataSource = dv
+
+            ActualizaResumen(dt, CInt(ComboBoxSucursal.SelectedValue.ToString), Nothing, False)
         Catch ex As NullReferenceException
             MessageBox.Show("No se ha elegido ninguna sucursal", "Faltan datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         Catch ex As Exception
@@ -71,6 +92,8 @@ Public Class frmVerVentas
 
             dv = dt.DefaultView
             DataGridView1.DataSource = dv
+
+            ActualizaResumen(dt, CInt(ComboBoxSucursal.SelectedValue.ToString), Nothing, False)
         Catch ex As NullReferenceException
             MessageBox.Show("No se ha elegido ninguna sucursal", "Faltan datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         Catch ex As Exception
@@ -110,6 +133,9 @@ Public Class frmVerVentas
 
             dv = dt.DefaultView
             DataGridView1.DataSource = dv
+
+            CargaVendedorTurnoActivo()
+            ActualizaResumen(dt, CInt(ComboBoxSucursal.SelectedValue.ToString), DateTimePicker1.Value, CInt(ComboBoxVendedor.SelectedValue.ToString) = vendedorRegistrado)
         Catch ex As NullReferenceException
             MessageBox.Show("No se ha elegido ninguna sucursal", "Faltan datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         Catch ex As Exception
@@ -149,6 +175,8 @@ Public Class frmVerVentas
 
             dv = dt.DefaultView
             DataGridView1.DataSource = dv
+
+            ActualizaResumen(dt, CInt(ComboBoxSucursal.SelectedValue.ToString), DateTimePicker1.Value, False)
         Catch ex As NullReferenceException
             MessageBox.Show("No se ha elegido ninguna sucursal", "Faltan datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         Catch ex As Exception
@@ -195,6 +223,8 @@ Public Class frmVerVentas
 
             dv = dt.DefaultView
             DataGridView1.DataSource = dv
+
+            ActualizaResumen(dt, Convert.ToInt32(ConsultaParametro("codigoSucursal")), DateTimePicker1.Value, True)
         Catch ex As NullReferenceException
             MessageBox.Show("No se ha elegido ninguna sucursal", "Faltan datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         Catch ex As Exception
@@ -221,6 +251,8 @@ Public Class frmVerVentas
         ComboBoxSucursal.DisplayMember = updateCm(sql).Columns(1).ToString
         ComboBoxSucursal.ValueMember = updateCm(sql).Columns(0).ToString
         ComboBoxSucursal.SelectedIndex = -1
+
+        lblResumen = CrearLabelResumenEgresos(Me, 22, DataGridView1.Bottom + 7, 1050)
     End Sub
 
 
@@ -280,6 +312,7 @@ Public Class frmVerVentas
             dt = ds.Tables("dtVentasXsuc")
             dt.Clear()
             DataGridView1.DataSource = dt
+            lblResumen.Text = String.Empty
         Catch ex As NullReferenceException
             MessageBox.Show("No se ha elegido ninguna sucursal", "Faltan datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         End Try

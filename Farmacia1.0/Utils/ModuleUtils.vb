@@ -90,6 +90,7 @@ Module ModuleUtils
     Public Sub CargaVendedorTurnoActivo()
         vendedorRegistrado = 0
         nombreVendedorRegistrado = String.Empty
+        turnoActivo = 0
         Try
             Dim sucursal As Integer
             If Not Integer.TryParse(ConsultaParametro("codigoSucursal"), sucursal) Then sucursal = sucActual
@@ -104,6 +105,7 @@ Module ModuleUtils
                 openConnection()
                 cmd.ExecuteNonQuery()
 
+                turnoActivo = If(IsDBNull(cmd.Parameters("@idTurno").Value), 0, CInt(cmd.Parameters("@idTurno").Value))
                 vendedorRegistrado = If(IsDBNull(cmd.Parameters("@codempleado").Value), 0, CInt(cmd.Parameters("@codempleado").Value))
                 nombreVendedorRegistrado = If(IsDBNull(cmd.Parameters("@nombreEmpleado").Value), String.Empty, cmd.Parameters("@nombreEmpleado").Value.ToString())
             End Using
@@ -354,7 +356,69 @@ Module ModuleUtils
         End If
     End Sub
 
-    Public Sub ImprimeTicketCuadre(ByVal inicial As Decimal, ByVal sistema As Decimal, ByVal fisico As Decimal, ByVal diferencia As Decimal)
+    ''' <summary>
+    ''' Total de egresos activos. Con idTurno suma los del turno; sin él (0), los de la sucursal en la fecha.
+    ''' Si falla la consulta devuelve 0 para no bloquear la pantalla que lo muestra.
+    ''' </summary>
+    Public Function ObtenerTotalEgresos(ByVal sucursal As Integer, ByVal fecha As DateTime, Optional ByVal idTurno As Integer = 0) As Decimal
+        Try
+            Using cmd As New SqlCommand("sp_totalEgresos", conn)
+                cmd.CommandType = CommandType.StoredProcedure
+                cmd.Parameters.Add("@sucursal", SqlDbType.Int).Value = sucursal
+                cmd.Parameters.Add("@fecha", SqlDbType.DateTime).Value = fecha
+                cmd.Parameters.Add("@idTurno", SqlDbType.Int).Value = If(idTurno > 0, CObj(idTurno), CObj(DBNull.Value))
+
+                openConnection()
+                Dim resultado As Object = cmd.ExecuteScalar()
+                Return If(resultado Is Nothing OrElse IsDBNull(resultado), 0D, Convert.ToDecimal(resultado))
+            End Using
+        Catch ex As Exception
+            Serilog.Log.Error($"No se pudo consultar el total de egresos. Error: {ex.Message}")
+            Return 0D
+        Finally
+            closeConnection()
+        End Try
+    End Function
+
+    ''' <summary>
+    ''' Egresos a mostrar junto a un reporte de ventas. Con soloTurnoActivo (vista del vendedor del turno abierto,
+    ''' fecha de hoy y sucursal local) se muestran los egresos de ese turno, que son los que descuentan en su cierre;
+    ''' en cualquier otro caso los egresos de toda la sucursal en la fecha, porque EGRESOS no guarda vendedor.
+    ''' </summary>
+    Public Function ObtenerEgresosReporte(ByVal sucursal As Integer, ByVal fecha As DateTime, ByVal soloTurnoActivo As Boolean) As (Monto As Decimal, Alcance As String)
+        Dim sucursalLocal As Integer
+        If Not Integer.TryParse(ConsultaParametro("codigoSucursal"), sucursalLocal) Then sucursalLocal = sucActual
+
+        If soloTurnoActivo AndAlso sucursal = sucursalLocal AndAlso fecha.Date = DateTime.Now.Date Then
+            CargaVendedorTurnoActivo()
+            If turnoActivo > 0 Then
+                Return (ObtenerTotalEgresos(sucursal, fecha, turnoActivo), "turno")
+            End If
+        End If
+        Return (ObtenerTotalEgresos(sucursal, fecha), "sucursal")
+    End Function
+
+    ''' <summary>Texto "Ventas / Egresos / Neto" que se muestra bajo los reportes de ventas.</summary>
+    Public Function TextoResumenEgresos(ByVal ventas As Decimal, ByVal egresos As (Monto As Decimal, Alcance As String)) As String
+        Return $"Ventas: {ventas:N2}   Egresos ({egresos.Alcance}): {egresos.Monto:N2}   Neto: {(ventas - egresos.Monto):N2}"
+    End Function
+
+    ''' <summary>Crea (en código, para no tocar el .Designer) el label que muestra el resumen de egresos.</summary>
+    Public Function CrearLabelResumenEgresos(ByVal frm As Form, ByVal x As Integer, ByVal y As Integer, ByVal ancho As Integer) As Label
+        Dim lbl As New Label With {
+            .Name = "lblResumenEgresos",
+            .AutoSize = False,
+            .Location = New Point(x, y),
+            .Size = New Size(ancho, 24),
+            .Font = New Font("Microsoft Sans Serif", 10.0!, FontStyle.Bold),
+            .TextAlign = ContentAlignment.MiddleLeft
+        }
+        frm.Controls.Add(lbl)
+        lbl.BringToFront()
+        Return lbl
+    End Function
+
+    Public Sub ImprimeTicketCuadre(ByVal inicial As Decimal, ByVal sistema As Decimal, ByVal tarjeta As Decimal, ByVal egresos As Decimal, ByVal fisico As Decimal, ByVal diferencia As Decimal)
         If ConsultaParametro("imprimeTicketCuadre") = "S" Then
             Dim fechaActual As Date = Date.Now
             Dim formato As String = "yyyy-MM-dd HH:mm:ss"
@@ -374,7 +438,13 @@ Module ModuleUtils
 
             ticket.agregaTotales("Inicial: ", inicial)
             ticket.textoIzquierda(" ")
-            ticket.agregaTotales("Sistema: ", sistema)
+            ticket.agregaTotales("Ventas: ", sistema)
+            ticket.textoIzquierda(" ")
+            ticket.agregaTotales("(-) Tarjeta: ", tarjeta)
+            ticket.textoIzquierda(" ")
+            ticket.agregaTotales("(-) Egresos: ", egresos)
+            ticket.textoIzquierda(" ")
+            ticket.agregaTotales("Efectivo esperado: ", inicial + sistema - tarjeta - egresos)
             ticket.textoIzquierda(" ")
             ticket.agregaTotales("Físico: ", fisico)
             ticket.textoIzquierda(" ")

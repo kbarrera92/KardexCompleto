@@ -31,6 +31,7 @@ Partial Class FormMenuNew
         Me.CategoríasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.UsuariosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.VendedoresToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SucursalesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CategoríasEgresosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator9 = New System.Windows.Forms.ToolStripSeparator()
@@ -64,16 +65,15 @@ Partial Class FormMenuNew
         Me.ToolStripMenuItem10 = New System.Windows.Forms.ToolStripMenuItem()
         Me.VerTurnosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripSplitButtonVales = New System.Windows.Forms.ToolStripSplitButton()
+        Me.NuevoValeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.VerValesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparatorVales = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
         Me.StatusStripPrincipal = New System.Windows.Forms.StatusStrip()
         Me.ToolStripStatusLabelConnectionStatus = New System.Windows.Forms.ToolStripStatusLabel()
         Me.FlowLayoutPanelDashboard = New System.Windows.Forms.FlowLayoutPanel()
-        Me.VendedoresToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSplitButtonVales = New System.Windows.Forms.ToolStripSplitButton()
-        Me.NuevoValeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.VerValesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparatorVales = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStrip1.SuspendLayout()
         Me.StatusStripPrincipal.SuspendLayout()
         Me.SuspendLayout()
@@ -143,6 +143,12 @@ Partial Class FormMenuNew
         Me.UsuariosToolStripMenuItem.Name = "UsuariosToolStripMenuItem"
         Me.UsuariosToolStripMenuItem.Size = New System.Drawing.Size(247, 24)
         Me.UsuariosToolStripMenuItem.Text = "Usuarios"
+        '
+        'VendedoresToolStripMenuItem
+        '
+        Me.VendedoresToolStripMenuItem.Name = "VendedoresToolStripMenuItem"
+        Me.VendedoresToolStripMenuItem.Size = New System.Drawing.Size(247, 24)
+        Me.VendedoresToolStripMenuItem.Text = "Vendedores"
         '
         'SucursalesToolStripMenuItem
         '
@@ -325,33 +331,6 @@ Partial Class FormMenuNew
         Me.ToolStripSplitButton1.Text = "Turnos"
         Me.ToolStripSplitButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         '
-        'ToolStripSplitButtonVales
-        '
-        Me.ToolStripSplitButtonVales.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NuevoValeToolStripMenuItem, Me.VerValesToolStripMenuItem})
-        Me.ToolStripSplitButtonVales.Image = Global.Farmacia1._0.My.Resources.Resources.Custom_Icon_Design_Pretty_Office_3_Sales_report_32
-        Me.ToolStripSplitButtonVales.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripSplitButtonVales.Name = "ToolStripSplitButtonVales"
-        Me.ToolStripSplitButtonVales.Size = New System.Drawing.Size(64, 55)
-        Me.ToolStripSplitButtonVales.Text = "Vales"
-        Me.ToolStripSplitButtonVales.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        '
-        'NuevoValeToolStripMenuItem
-        '
-        Me.NuevoValeToolStripMenuItem.Name = "NuevoValeToolStripMenuItem"
-        Me.NuevoValeToolStripMenuItem.Size = New System.Drawing.Size(215, 24)
-        Me.NuevoValeToolStripMenuItem.Text = "Nuevo vale"
-        '
-        'VerValesToolStripMenuItem
-        '
-        Me.VerValesToolStripMenuItem.Name = "VerValesToolStripMenuItem"
-        Me.VerValesToolStripMenuItem.Size = New System.Drawing.Size(215, 24)
-        Me.VerValesToolStripMenuItem.Text = "Consultar / pagar vales"
-        '
-        'ToolStripSeparatorVales
-        '
-        Me.ToolStripSeparatorVales.Name = "ToolStripSeparatorVales"
-        Me.ToolStripSeparatorVales.Size = New System.Drawing.Size(6, 58)
-        '
         'ToolStripMenuItem9
         '
         Me.ToolStripMenuItem9.Name = "ToolStripMenuItem9"
@@ -374,6 +353,33 @@ Partial Class FormMenuNew
         '
         Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
         Me.ToolStripSeparator6.Size = New System.Drawing.Size(6, 58)
+        '
+        'ToolStripSplitButtonVales
+        '
+        Me.ToolStripSplitButtonVales.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NuevoValeToolStripMenuItem, Me.VerValesToolStripMenuItem})
+        Me.ToolStripSplitButtonVales.Image = Global.Farmacia1._0.My.Resources.Resources.Custom_Icon_Design_Pretty_Office_3_Sales_report_32
+        Me.ToolStripSplitButtonVales.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripSplitButtonVales.Name = "ToolStripSplitButtonVales"
+        Me.ToolStripSplitButtonVales.Size = New System.Drawing.Size(59, 55)
+        Me.ToolStripSplitButtonVales.Text = "Vales"
+        Me.ToolStripSplitButtonVales.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        '
+        'NuevoValeToolStripMenuItem
+        '
+        Me.NuevoValeToolStripMenuItem.Name = "NuevoValeToolStripMenuItem"
+        Me.NuevoValeToolStripMenuItem.Size = New System.Drawing.Size(233, 24)
+        Me.NuevoValeToolStripMenuItem.Text = "Nuevo vale"
+        '
+        'VerValesToolStripMenuItem
+        '
+        Me.VerValesToolStripMenuItem.Name = "VerValesToolStripMenuItem"
+        Me.VerValesToolStripMenuItem.Size = New System.Drawing.Size(233, 24)
+        Me.VerValesToolStripMenuItem.Text = "Consultar / pagar vales"
+        '
+        'ToolStripSeparatorVales
+        '
+        Me.ToolStripSeparatorVales.Name = "ToolStripSeparatorVales"
+        Me.ToolStripSeparatorVales.Size = New System.Drawing.Size(6, 58)
         '
         'ToolStripButton1
         '
@@ -420,12 +426,6 @@ Partial Class FormMenuNew
         Me.FlowLayoutPanelDashboard.Size = New System.Drawing.Size(1168, 408)
         Me.FlowLayoutPanelDashboard.TabIndex = 2
         Me.FlowLayoutPanelDashboard.Visible = False
-        '
-        'VendedoresToolStripMenuItem
-        '
-        Me.VendedoresToolStripMenuItem.Name = "VendedoresToolStripMenuItem"
-        Me.VendedoresToolStripMenuItem.Size = New System.Drawing.Size(247, 24)
-        Me.VendedoresToolStripMenuItem.Text = "Vendedores"
         '
         'FormMenuNew
         '

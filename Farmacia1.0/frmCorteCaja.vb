@@ -5,6 +5,7 @@ Public Class frmCorteCaja
 
     Dim sql As String = "SELECT idSucursal, nombreSuc FROM SUCURSAL"
     Dim ds As DataSet
+    Private lblResumen As Label
 
     Sub llenarDTSMP()
         Dim cmd As SqlCommand
@@ -35,6 +36,8 @@ Public Class frmCorteCaja
 
             dv = dt.DefaultView
             DataGridView1.DataSource = dv
+
+            ActualizaResumenEgresos(dt, CInt(ComboBox1.SelectedValue.ToString), CInt(ComboBox2.SelectedValue.ToString))
         Catch ex As NullReferenceException
             MessageBox.Show("No se ha elegido un valor obligatorio", "Faltan datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         Catch ex As Exception
@@ -45,7 +48,22 @@ Public Class frmCorteCaja
         End Try
     End Sub
 
+    ''' <summary>Ventas, egresos y neto bajo el detalle. Con un vendedor distinto del turno abierto se muestran los egresos de la sucursal.</summary>
+    Private Sub ActualizaResumenEgresos(ByVal dt As DataTable, ByVal sucursal As Integer, ByVal idVendedor As Integer)
+        Dim ventas As Decimal = 0D
+        For Each fila As DataRow In dt.Rows
+            If Not IsDBNull(fila("subtotal")) Then ventas += Convert.ToDecimal(fila("subtotal"))
+        Next
+
+        CargaVendedorTurnoActivo()
+        Dim soloTurno As Boolean = idVendedor <> 0 AndAlso idVendedor = vendedorRegistrado
+        Dim egresos = ObtenerEgresosReporte(sucursal, DateTimePicker1.Value, soloTurno)
+        lblResumen.Text = TextoResumenEgresos(ventas, egresos)
+    End Sub
+
     Private Sub frmCorteCaja_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ClientSize = New Size(ClientSize.Width, ClientSize.Height + 36)
+        lblResumen = CrearLabelResumenEgresos(Me, 160, DataGridView1.Bottom + 6, 800)
         ComboBox1.DataSource = updateCm(sql)
         ComboBox1.DisplayMember = updateCm(sql).Columns(1).ToString
         ComboBox1.ValueMember = updateCm(sql).Columns(0).ToString
@@ -115,6 +133,7 @@ Public Class frmCorteCaja
                 informe.SetDataSource(ds.Tables("dtcortecaja"))
                 informe.SetParameterValue(0, ConsultaParametro("nombreEmpresa"))
                 informe.SetParameterValue(1, ConsultaParametro("eslogan"))
+                informe.SetParameterValue(2, ObtenerTotalEgresos(sucActual, DateTimePicker1.Value.Date, turnoActivo))
 
                 frmVerReportes.CrystalReportViewer1.ReportSource = informe
                 frmVerReportes.Show()

@@ -3,8 +3,11 @@ Imports Serilog
 
 Public Class FormMisVentas
 
+    Private lblResumen As Label
+
     Private Sub FormMisVentas_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
+            lblResumen = CrearLabelResumenEgresos(Me, 140, 463, 500)
             ConfigurarColumnas()
             Estilos.AplicarEstilos(Me)
             CargarVentas()
@@ -54,6 +57,7 @@ Public Class FormMisVentas
         If Not verTodas AndAlso vendedorRegistrado = 0 Then
             lblVendedor.Text = "No hay un turno abierto"
             DataGridView1.DataSource = Nothing
+            lblResumen.Text = String.Empty
             Return
         End If
 
@@ -79,6 +83,13 @@ Public Class FormMisVentas
             End Using
 
             DataGridView1.DataSource = dt
+
+            Dim ventas As Decimal = 0D
+            For Each fila As DataRow In dt.Rows
+                If Not IsDBNull(fila("subtotal")) Then ventas += Convert.ToDecimal(fila("subtotal"))
+            Next
+            Dim sucursal As Integer = Convert.ToInt32(ConsultaParametro("codigoSucursal"))
+            lblResumen.Text = TextoResumenEgresos(ventas, ObtenerEgresosReporte(sucursal, DateTime.Now, Not verTodas))
         Catch ex As Exception
             Log.Error($"Error al consultar mis ventas. Error: {ex.Message}")
             MessageBox.Show("No fue posible consultar las ventas.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
