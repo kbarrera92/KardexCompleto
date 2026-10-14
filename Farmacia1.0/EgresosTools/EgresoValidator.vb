@@ -29,17 +29,15 @@
         If Not ValidarDescripcion(gasto.Descripcion, controles("Descripcion")) Then esValido = False
         If Not ValidarTotal(gasto.Total, controles("Total")) Then esValido = False
         If Not ValidarSucursal(gasto.IdSucursal, controles("Sucursal")) Then esValido = False
-        If Not ValidarUsuarioRegistra(gasto.IdUsuario, controles("UsuarioRegistra")) Then esValido = False
+        If Not ValidarVendedor(gasto.IdVendedor, controles("Vendedor")) Then esValido = False
 
         Return esValido
     End Function
 
-    Private Function ValidarUsuarioRegistra(usuarioRegistra As String, control As Control) As Boolean
-        If String.IsNullOrWhiteSpace(usuarioRegistra) Then
-            _errorProvider.SetError(control, "El campo usuario no puede estar vacío")
-            Return False
-        ElseIf usuarioRegistra.Length > 50 Then
-            _errorProvider.SetError(control, "El campo usuario excede el límite permitido")
+    ' IdVendedor = -1: la sucursal no es la del equipo, el sp valida el turno abierto
+    Private Function ValidarVendedor(idVendedor As Integer, control As Control) As Boolean
+        If idVendedor = 0 Then
+            _errorProvider.SetError(control, "No hay un turno abierto con vendedor en esta sucursal")
             Return False
         End If
 

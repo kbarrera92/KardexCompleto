@@ -5,5 +5,6 @@
     Public Property Descripcion As String
     Public Property Total As Decimal
     Public Property IdUsuario As String
+    Public Property IdVendedor As Integer
     Public Property IdSucursal As Integer
 End Class

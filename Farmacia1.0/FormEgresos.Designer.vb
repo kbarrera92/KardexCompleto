@@ -26,7 +26,7 @@ Partial Class FormEgresos
         Me.Button1 = New System.Windows.Forms.Button()
         Me.ButtonLimpiar = New System.Windows.Forms.Button()
         Me.ButtonGuardar = New System.Windows.Forms.Button()
-        Me.TextBoxUsuarioRegistra = New System.Windows.Forms.TextBox()
+        Me.TextBoxVendedor = New System.Windows.Forms.TextBox()
         Me.TextBoxTotalEgreso = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.ComboBoxSucursal = New System.Windows.Forms.ComboBox()
@@ -62,7 +62,7 @@ Partial Class FormEgresos
         '
         Me.Panel1.Controls.Add(Me.ButtonLimpiar)
         Me.Panel1.Controls.Add(Me.ButtonGuardar)
-        Me.Panel1.Controls.Add(Me.TextBoxUsuarioRegistra)
+        Me.Panel1.Controls.Add(Me.TextBoxVendedor)
         Me.Panel1.Controls.Add(Me.TextBoxTotalEgreso)
         Me.Panel1.Controls.Add(Me.Label6)
         Me.Panel1.Controls.Add(Me.ComboBoxSucursal)
@@ -107,13 +107,13 @@ Partial Class FormEgresos
         Me.ButtonGuardar.Text = "Guardar"
         Me.ButtonGuardar.UseVisualStyleBackColor = True
         '
-        'TextBoxUsuarioRegistra
+        'TextBoxVendedor
         '
-        Me.TextBoxUsuarioRegistra.Location = New System.Drawing.Point(501, 71)
-        Me.TextBoxUsuarioRegistra.Name = "TextBoxUsuarioRegistra"
-        Me.TextBoxUsuarioRegistra.ReadOnly = True
-        Me.TextBoxUsuarioRegistra.Size = New System.Drawing.Size(373, 20)
-        Me.TextBoxUsuarioRegistra.TabIndex = 13
+        Me.TextBoxVendedor.Location = New System.Drawing.Point(501, 71)
+        Me.TextBoxVendedor.Name = "TextBoxVendedor"
+        Me.TextBoxVendedor.ReadOnly = True
+        Me.TextBoxVendedor.Size = New System.Drawing.Size(373, 20)
+        Me.TextBoxVendedor.TabIndex = 13
         '
         'TextBoxTotalEgreso
         '
@@ -157,7 +157,7 @@ Partial Class FormEgresos
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(83, 13)
         Me.Label4.TabIndex = 7
-        Me.Label4.Text = "Usuario registra:"
+        Me.Label4.Text = "Vendedor:"
         '
         'ComboBoxCategoria
         '
@@ -303,7 +303,7 @@ Partial Class FormEgresos
         '
         'usuarioRegistraEgreso
         '
-        Me.usuarioRegistraEgreso.HeaderText = "Usuario registra"
+        Me.usuarioRegistraEgreso.HeaderText = "Vendedor"
         Me.usuarioRegistraEgreso.Name = "usuarioRegistraEgreso"
         Me.usuarioRegistraEgreso.ReadOnly = True
         '
@@ -366,7 +366,7 @@ Partial Class FormEgresos
     Friend WithEvents DataGridViewEgresos As DataGridView
     Friend WithEvents Label7 As Label
     Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents TextBoxUsuarioRegistra As TextBox
+    Friend WithEvents TextBoxVendedor As TextBox
     Friend WithEvents ButtonGuardar As Button
     Friend WithEvents idEgreso As DataGridViewTextBoxColumn
     Friend WithEvents fechaEgreso As DataGridViewTextBoxColumn
