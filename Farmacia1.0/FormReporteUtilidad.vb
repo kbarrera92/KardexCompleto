@@ -21,13 +21,24 @@ Public Class FormReporteUtilidad
     Private Sub FormReporteUtilidad_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Log.Information("Cargando sucursales en formulario de Reporte de utilidades")
         Try
-            ComboBox1.DataSource = updateList(sqlSucursal)
-            ComboBox1.ValueMember = updateList(sqlSucursal).Columns(0).ToString
-            ComboBox1.DisplayMember = updateList(sqlSucursal).Columns(1).ToString
-
+            CargarSucursales()
         Catch ex As Exception
             Log.Error($"Ocurrio un error. Error: {ex.Message}")
         End Try
+    End Sub
+
+    Private Sub CargarSucursales()
+        Dim dtSuc As DataTable = updateList(sqlSucursal)
+
+        Dim filaTodas As DataRow = dtSuc.NewRow()
+        filaTodas("idSucursal") = 0
+        filaTodas("nombreSuc") = "-- Todas las sucursales --"
+        dtSuc.Rows.InsertAt(filaTodas, 0)
+
+        ComboBox1.DataSource = dtSuc
+        ComboBox1.ValueMember = "idSucursal"
+        ComboBox1.DisplayMember = "nombreSuc"
+        ComboBox1.SelectedIndex = 0
     End Sub
 
     Sub llenarDTSMP2()
@@ -45,7 +56,12 @@ Public Class FormReporteUtilidad
                 .Connection = conn
                 .Parameters.AddWithValue("fechainicial", DateTimePicker1.Value)
                 .Parameters.AddWithValue("fechafinal", DateTimePicker2.Value)
-                .Parameters.AddWithValue("sucursal", Integer.Parse(ComboBox1.SelectedValue.ToString()))
+
+                If Convert.ToInt32(ComboBox1.SelectedValue) = 0 Then
+                    .Parameters.AddWithValue("sucursal", DBNull.Value)
+                Else
+                    .Parameters.AddWithValue("sucursal", Convert.ToInt32(ComboBox1.SelectedValue))
+                End If
             End With
             dt = ds.Tables("dtutilidad")
 
