@@ -257,8 +257,17 @@ Public Class FormVales
         End If
 
         Dim total As Decimal = CalcularTotal()
-        If MessageBox.Show($"¿Registrar el vale de {ComboBoxVendedor.Text} por Q {total:N2}?" & vbCrLf &
-                           "Los productos se descontarán del inventario.", "Confirmar vale",
+        Dim valeAbierto As DataRow = ConsultarValeAbierto(Convert.ToInt32(ComboBoxVendedor.SelectedValue))
+
+        Dim pregunta As String
+        If valeAbierto Is Nothing Then
+            pregunta = $"¿Registrar el vale de {ComboBoxVendedor.Text} por Q {total:N2}?"
+        Else
+            pregunta = $"{ComboBoxVendedor.Text} tiene el vale No. {valeAbierto("idVale")} pendiente (saldo Q {Convert.ToDecimal(valeAbierto("saldo")):N2})." & vbCrLf &
+                       $"¿Agregar los productos por Q {total:N2} a ese vale?"
+        End If
+
+        If MessageBox.Show(pregunta & vbCrLf & "Los productos se descontarán del inventario.", "Confirmar vale",
                            MessageBoxButtons.YesNo, MessageBoxIcon.Question) <> DialogResult.Yes Then
             Return
         End If
@@ -307,7 +316,7 @@ Public Class FormVales
             Dim mensaje As String = Convert.ToString(pMensaje.Value)
 
             If codigoRetorno = 0 Then
-                Log.Information($"Vale registrado. idVale: {pIdVale.Value}")
+                Log.Information($"Vale registrado{If(valeAbierto Is Nothing, "", " (productos agregados a vale abierto)")}. idVale: {pIdVale.Value}")
                 MessageBox.Show(mensaje, "Resultado", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 LimpiarFormulario()
                 CargarProductos()
@@ -320,6 +329,31 @@ Public Class FormVales
             MessageBox.Show("Hubo un error en el procesamiento", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
+
+    'Vale pendiente del vendedor en la sucursal actual (Nothing si no tiene). El sp decide al grabar;
+    'esta consulta solo sirve para avisar al usuario.
+    Private Function ConsultarValeAbierto(ByVal vendedor As Integer) As DataRow
+        Try
+            openConnection()
+
+            Using cmd As New SqlCommand("sp_valeAbiertoVendedor", conn)
+                cmd.CommandType = CommandType.StoredProcedure
+                cmd.Parameters.Add("@sucursal", SqlDbType.Int).Value = sucActual
+                cmd.Parameters.Add("@vendedor", SqlDbType.Int).Value = vendedor
+
+                Using da As New SqlDataAdapter(cmd)
+                    Dim dt As New DataTable
+                    da.Fill(dt)
+                    Return If(dt.Rows.Count > 0, dt.Rows(0), Nothing)
+                End Using
+            End Using
+        Catch ex As Exception
+            Log.Error($"Error al consultar el vale abierto del vendedor. Error: {ex.Message}")
+            Return Nothing
+        Finally
+            closeConnection()
+        End Try
+    End Function
 
     Private Function CalcularTotal() As Decimal
         Dim total As Decimal = 0
