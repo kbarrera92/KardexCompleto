@@ -44,6 +44,7 @@ Partial Class frmConfiguracion
         Me.numCantTickets = New System.Windows.Forms.NumericUpDown()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.chkImprimeTicketCuadre = New System.Windows.Forms.CheckBox()
+        Me.chkVerMisVentas = New System.Windows.Forms.CheckBox()
         Me.chkImprimeTicket = New System.Windows.Forms.CheckBox()
         Me.txtSucursalFisica = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -101,11 +102,11 @@ Partial Class frmConfiguracion
         'numValePagoMinimo
         '
         Me.numValePagoMinimo.DecimalPlaces = 2
-        Me.numValePagoMinimo.Location = New System.Drawing.Point(141, 130)
+        Me.numValePagoMinimo.Location = New System.Drawing.Point(197, 128)
         Me.numValePagoMinimo.Maximum = New Decimal(New Integer() {100000, 0, 0, 0})
         Me.numValePagoMinimo.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.numValePagoMinimo.Name = "numValePagoMinimo"
-        Me.numValePagoMinimo.Size = New System.Drawing.Size(90, 20)
+        Me.numValePagoMinimo.Size = New System.Drawing.Size(111, 20)
         Me.numValePagoMinimo.TabIndex = 9
         Me.numValePagoMinimo.Value = New Decimal(New Integer() {150, 0, 0, 0})
         '
@@ -114,7 +115,7 @@ Partial Class frmConfiguracion
         Me.Label10.AutoSize = True
         Me.Label10.Location = New System.Drawing.Point(12, 133)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(120, 13)
+        Me.Label10.Size = New System.Drawing.Size(124, 13)
         Me.Label10.TabIndex = 8
         Me.Label10.Tag = "FO"
         Me.Label10.Text = "Pago mínimo de vale (Q)"
@@ -122,11 +123,11 @@ Partial Class frmConfiguracion
         'numValeMaximo
         '
         Me.numValeMaximo.DecimalPlaces = 2
-        Me.numValeMaximo.Location = New System.Drawing.Point(141, 103)
+        Me.numValeMaximo.Location = New System.Drawing.Point(197, 102)
         Me.numValeMaximo.Maximum = New Decimal(New Integer() {100000, 0, 0, 0})
         Me.numValeMaximo.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.numValeMaximo.Name = "numValeMaximo"
-        Me.numValeMaximo.Size = New System.Drawing.Size(90, 20)
+        Me.numValeMaximo.Size = New System.Drawing.Size(111, 20)
         Me.numValeMaximo.TabIndex = 7
         Me.numValeMaximo.Value = New Decimal(New Integer() {300, 0, 0, 0})
         '
@@ -135,17 +136,17 @@ Partial Class frmConfiguracion
         Me.Label9.AutoSize = True
         Me.Label9.Location = New System.Drawing.Point(12, 106)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(120, 13)
+        Me.Label9.Size = New System.Drawing.Size(130, 13)
         Me.Label9.TabIndex = 6
         Me.Label9.Tag = "FO"
         Me.Label9.Text = "Monto máximo de vale (Q)"
         '
         'txtCliente
         '
-        Me.txtCliente.Location = New System.Drawing.Point(141, 76)
+        Me.txtCliente.Location = New System.Drawing.Point(197, 76)
         Me.txtCliente.MaxLength = 100
         Me.txtCliente.Name = "txtCliente"
-        Me.txtCliente.Size = New System.Drawing.Size(283, 20)
+        Me.txtCliente.Size = New System.Drawing.Size(227, 20)
         Me.txtCliente.TabIndex = 5
         '
         'Label3
@@ -160,10 +161,10 @@ Partial Class frmConfiguracion
         '
         'txtEslogan
         '
-        Me.txtEslogan.Location = New System.Drawing.Point(141, 49)
+        Me.txtEslogan.Location = New System.Drawing.Point(197, 49)
         Me.txtEslogan.MaxLength = 200
         Me.txtEslogan.Name = "txtEslogan"
-        Me.txtEslogan.Size = New System.Drawing.Size(283, 20)
+        Me.txtEslogan.Size = New System.Drawing.Size(227, 20)
         Me.txtEslogan.TabIndex = 3
         '
         'Label2
@@ -178,10 +179,10 @@ Partial Class frmConfiguracion
         '
         'txtNombreEmpresa
         '
-        Me.txtNombreEmpresa.Location = New System.Drawing.Point(141, 22)
+        Me.txtNombreEmpresa.Location = New System.Drawing.Point(197, 22)
         Me.txtNombreEmpresa.MaxLength = 200
         Me.txtNombreEmpresa.Name = "txtNombreEmpresa"
-        Me.txtNombreEmpresa.Size = New System.Drawing.Size(283, 20)
+        Me.txtNombreEmpresa.Size = New System.Drawing.Size(227, 20)
         Me.txtNombreEmpresa.TabIndex = 1
         '
         'Label1
@@ -204,6 +205,7 @@ Partial Class frmConfiguracion
         Me.gbSucursal.Controls.Add(Me.numCantTickets)
         Me.gbSucursal.Controls.Add(Me.Label5)
         Me.gbSucursal.Controls.Add(Me.chkImprimeTicketCuadre)
+        Me.gbSucursal.Controls.Add(Me.chkVerMisVentas)
         Me.gbSucursal.Controls.Add(Me.chkImprimeTicket)
         Me.gbSucursal.Controls.Add(Me.txtSucursalFisica)
         Me.gbSucursal.Controls.Add(Me.Label4)
@@ -289,6 +291,16 @@ Partial Class frmConfiguracion
         Me.chkImprimeTicketCuadre.TabIndex = 3
         Me.chkImprimeTicketCuadre.Text = "Imprimir ticket de cuadre"
         Me.chkImprimeTicketCuadre.UseVisualStyleBackColor = True
+        '
+        'chkVerMisVentas
+        '
+        Me.chkVerMisVentas.AutoSize = True
+        Me.chkVerMisVentas.Location = New System.Drawing.Point(240, 61)
+        Me.chkVerMisVentas.Name = "chkVerMisVentas"
+        Me.chkVerMisVentas.Size = New System.Drawing.Size(155, 17)
+        Me.chkVerMisVentas.TabIndex = 11
+        Me.chkVerMisVentas.Text = "Mostrar botón ""Mis ventas"""
+        Me.chkVerMisVentas.UseVisualStyleBackColor = True
         '
         'chkImprimeTicket
         '
@@ -421,6 +433,7 @@ Partial Class frmConfiguracion
     Friend WithEvents numCantTickets As NumericUpDown
     Friend WithEvents Label5 As Label
     Friend WithEvents chkImprimeTicketCuadre As CheckBox
+    Friend WithEvents chkVerMisVentas As CheckBox
     Friend WithEvents chkImprimeTicket As CheckBox
     Friend WithEvents txtSucursalFisica As TextBox
     Friend WithEvents Label4 As Label

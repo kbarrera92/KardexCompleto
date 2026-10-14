@@ -14,6 +14,7 @@ Public Class frmPuntoDeVentaMejorado
         End With
 
         Estilos.AplicarEstilos(Me)
+        Button6.Visible = ConsultaParametro("verMisVentas") <> "N"
         lblNota.Text = "Nota" & vbCrLf _
             & "Puede identificar el artículo " & vbCrLf _
             & "con el código de barra o" & vbCrLf _
@@ -156,6 +157,7 @@ Public Class frmPuntoDeVentaMejorado
     End Sub
 
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+        If ConsultaParametro("verMisVentas") = "N" Then Return
         FormMisVentas.Show()
         FormMisVentas.Activate()
     End Sub

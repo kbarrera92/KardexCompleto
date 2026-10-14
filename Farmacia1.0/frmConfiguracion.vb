@@ -87,6 +87,7 @@ Public Class frmConfiguracion
         txtSucursalFisica.Text = valor("sucursalFisica")
         chkImprimeTicket.Checked = valor("imprimeTicket") = "S"
         chkImprimeTicketCuadre.Checked = valor("imprimeTicketCuadre") = "S"
+        chkVerMisVentas.Checked = valor("verMisVentas") <> "N"
         numCantTickets.Value = LimitaValor(valor("cantTickets"), numCantTickets)
         numHorasDiferencia.Value = LimitaValor(valor("horasDiferencia"), numHorasDiferencia)
         txtLogoPath.Text = valor("logoPath")
@@ -135,6 +136,7 @@ Public Class frmConfiguracion
             {"sucursalFisica", txtSucursalFisica.Text.Trim()},
             {"imprimeTicket", If(chkImprimeTicket.Checked, "S", "N")},
             {"imprimeTicketCuadre", If(chkImprimeTicketCuadre.Checked, "S", "N")},
+            {"verMisVentas", If(chkVerMisVentas.Checked, "S", "N")},
             {"cantTickets", CInt(numCantTickets.Value).ToString()},
             {"horasDiferencia", CInt(numHorasDiferencia.Value).ToString()},
             {"logoPath", txtLogoPath.Text.Trim()}
