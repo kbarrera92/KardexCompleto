@@ -32,6 +32,27 @@ Module ModuleUtils
         Return retValue
     End Function
 
+    Public Const ValeMaximoPorDefecto As Decimal = 300D
+    Public Const ValePagoMinimoPorDefecto As Decimal = 150D
+
+    ''' <summary>Monto máximo que puede tener un vale (parámetro valeMaximo).</summary>
+    Public Function ValeMaximo() As Decimal
+        Return LeeParametroMonto("valeMaximo", ValeMaximoPorDefecto)
+    End Function
+
+    ''' <summary>Pago mínimo cuando el saldo del vale lo supera (parámetro valePagoMinimo).</summary>
+    Public Function ValePagoMinimo() As Decimal
+        Return LeeParametroMonto("valePagoMinimo", ValePagoMinimoPorDefecto)
+    End Function
+
+    Private Function LeeParametroMonto(ByVal clave As String, ByVal porDefecto As Decimal) As Decimal
+        Dim monto As Decimal
+        If Decimal.TryParse(ConsultaParametro(clave), Globalization.NumberStyles.Number, Globalization.CultureInfo.InvariantCulture, monto) AndAlso monto > 0 Then
+            Return monto
+        End If
+        Return porDefecto
+    End Function
+
     ''' <summary>
     ''' Carga los parámetros de BD de la sucursal (la sucursal pisa al valor global).
     ''' Si falla (p. ej. migración sin correr), se conserva App.config como respaldo.

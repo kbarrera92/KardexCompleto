@@ -90,7 +90,7 @@ BEGIN
 		IF @idExistente IS NULL
 		BEGIN
 			INSERT INTO VALE (fecha, fechaVencimiento, sucursal, vendedor, usuario, total, saldo, estado)
-			VALUES (@fecha, DATEADD(MONTH, 1, @fecha), @sucursal, @vendedor, @usuario, @total, @total, 'P')
+			VALUES (@fecha, EOMONTH(@fecha), @sucursal, @vendedor, @usuario, @total, @total, 'P')
 
 			SET @idVale = SCOPE_IDENTITY()
 		END

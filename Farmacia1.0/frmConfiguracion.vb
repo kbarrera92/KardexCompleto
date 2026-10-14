@@ -82,6 +82,8 @@ Public Class frmConfiguracion
         txtNombreEmpresa.Text = valor("nombreEmpresa")
         txtEslogan.Text = valor("eslogan")
         txtCliente.Text = valor("cliente")
+        numValeMaximo.Value = LimitaMonto(valor("valeMaximo"), numValeMaximo, ValeMaximoPorDefecto)
+        numValePagoMinimo.Value = LimitaMonto(valor("valePagoMinimo"), numValePagoMinimo, ValePagoMinimoPorDefecto)
         txtSucursalFisica.Text = valor("sucursalFisica")
         chkImprimeTicket.Checked = valor("imprimeTicket") = "S"
         chkImprimeTicketCuadre.Checked = valor("imprimeTicketCuadre") = "S"
@@ -93,6 +95,12 @@ Public Class frmConfiguracion
     Private Shared Function LimitaValor(texto As String, num As NumericUpDown) As Decimal
         Dim n As Integer
         Integer.TryParse(texto, n)
+        Return Math.Min(num.Maximum, Math.Max(num.Minimum, n))
+    End Function
+
+    Private Shared Function LimitaMonto(texto As String, num As NumericUpDown, porDefecto As Decimal) As Decimal
+        Dim n As Decimal
+        If Not Decimal.TryParse(texto, Globalization.NumberStyles.Number, Globalization.CultureInfo.InvariantCulture, n) Then n = porDefecto
         Return Math.Min(num.Maximum, Math.Max(num.Minimum, n))
     End Function
 
@@ -117,6 +125,11 @@ Public Class frmConfiguracion
             Return
         End If
 
+        If numValePagoMinimo.Value > numValeMaximo.Value Then
+            MessageBox.Show("El pago mínimo de vale no puede ser mayor al monto máximo", "Datos no válidos", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
         Dim idSuc = IdSucursalElegida()
         Dim sucursal As New Dictionary(Of String, String) From {
             {"sucursalFisica", txtSucursalFisica.Text.Trim()},
@@ -129,7 +142,9 @@ Public Class frmConfiguracion
         Dim empresa As New Dictionary(Of String, String) From {
             {"nombreEmpresa", txtNombreEmpresa.Text.Trim()},
             {"eslogan", txtEslogan.Text.Trim()},
-            {"cliente", txtCliente.Text.Trim()}
+            {"cliente", txtCliente.Text.Trim()},
+            {"valeMaximo", numValeMaximo.Value.ToString(Globalization.CultureInfo.InvariantCulture)},
+            {"valePagoMinimo", numValePagoMinimo.Value.ToString(Globalization.CultureInfo.InvariantCulture)}
         }
 
         Try
