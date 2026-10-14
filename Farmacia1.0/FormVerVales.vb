@@ -9,6 +9,7 @@ Public Class FormVerVales
             ConfigurarColumnas()
             CargarSucursales()
             CargarVendedores()
+            If nombreRol <> "ADMINISTRADOR" Then ComboBoxEstado.Items.Remove("PAGADO")
             ComboBoxEstado.SelectedIndex = 0
             Estilos.AplicarEstilos(Me)
             CargarVales()
@@ -127,6 +128,9 @@ Public Class FormVerVales
                     da.Fill(dt)
                 End Using
             End Using
+
+            'Solo el administrador puede ver los vales pagados
+            If nombreRol <> "ADMINISTRADOR" Then dt.DefaultView.RowFilter = "estadoVale <> 'PAGADO'"
 
             cargando = True
             DataGridView1.DataSource = dt
