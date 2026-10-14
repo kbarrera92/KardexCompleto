@@ -21,7 +21,8 @@ Public Class frmCorteCaja
                 .Connection = conn
                 .Parameters.AddWithValue("suc", CInt(ComboBox1.SelectedValue.ToString))
                 .Parameters.AddWithValue("fecha", DateTimePicker1.Value)
-                .Parameters.AddWithValue("user", CInt(ComboBox2.SelectedValue.ToString))
+                Dim idVendedor As Integer = CInt(ComboBox2.SelectedValue.ToString)
+                .Parameters.AddWithValue("user", If(idVendedor = 0, CObj(DBNull.Value), idVendedor))
             End With
             dt = ds.Tables("dtcortecaja")
 
@@ -49,14 +50,17 @@ Public Class frmCorteCaja
         ComboBox1.DisplayMember = updateCm(sql).Columns(1).ToString
         ComboBox1.ValueMember = updateCm(sql).Columns(0).ToString
         ComboBox1.SelectedIndex = -1
-    End Sub
 
-    Private Sub ComboBox2_Click(sender As Object, e As EventArgs) Handles ComboBox2.Click
-        Dim sql2 As String = "SELECT idVendedor, nombre FROM VENDEDOR WHERE estado = 1;" ' WHERE sucursal = " & CInt(ComboBox1.SelectedValue.ToString)
-        ComboBox2.DataSource = updateCm(sql2)
-        ComboBox2.DisplayMember = updateCm(sql2).Columns(1).ToString
-        ComboBox2.ValueMember = updateCm(sql2).Columns(0).ToString
-        ComboBox2.SelectedIndex = -1
+        Dim esAdmin As Boolean = (nombreRol = "ADMINISTRADOR")
+        Dim sql2 As String = "SELECT idVendedor, nombre FROM VENDEDOR WHERE estado = 1"
+        If esAdmin Then
+            sql2 = "SELECT 0 AS idVendedor, '(TODOS)' AS nombre UNION ALL " & sql2 & " ORDER BY idVendedor"
+        End If
+        Dim dtVendedores As DataTable = updateCm(sql2)
+        ComboBox2.DataSource = dtVendedores
+        ComboBox2.DisplayMember = dtVendedores.Columns(1).ToString
+        ComboBox2.ValueMember = dtVendedores.Columns(0).ToString
+        ComboBox2.SelectedIndex = If(esAdmin, 0, -1)
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs)
