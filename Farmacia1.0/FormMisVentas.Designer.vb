@@ -27,6 +27,7 @@ Partial Class FormMisVentas
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.btnActualizar = New System.Windows.Forms.Button()
         Me.btnSalir = New System.Windows.Forms.Button()
+        Me.chkVerTodas = New System.Windows.Forms.CheckBox()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -49,6 +50,17 @@ Partial Class FormMisVentas
         Me.lblVendedor.Size = New System.Drawing.Size(77, 18)
         Me.lblVendedor.TabIndex = 1
         Me.lblVendedor.Text = "Vendedor"
+        '
+        'chkVerTodas
+        '
+        Me.chkVerTodas.AutoSize = True
+        Me.chkVerTodas.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chkVerTodas.Location = New System.Drawing.Point(520, 46)
+        Me.chkVerTodas.Name = "chkVerTodas"
+        Me.chkVerTodas.Size = New System.Drawing.Size(265, 19)
+        Me.chkVerTodas.TabIndex = 3
+        Me.chkVerTodas.Text = "Ver todas las ventas de la sucursal"
+        Me.chkVerTodas.UseVisualStyleBackColor = True
         '
         'DataGridView1
         '
@@ -92,6 +104,7 @@ Partial Class FormMisVentas
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 510)
+        Me.Controls.Add(Me.chkVerTodas)
         Me.Controls.Add(Me.btnSalir)
         Me.Controls.Add(Me.btnActualizar)
         Me.Controls.Add(Me.DataGridView1)
@@ -113,4 +126,5 @@ Partial Class FormMisVentas
     Friend WithEvents DataGridView1 As DataGridView
     Friend WithEvents btnActualizar As Button
     Friend WithEvents btnSalir As Button
+    Friend WithEvents chkVerTodas As CheckBox
 End Class
