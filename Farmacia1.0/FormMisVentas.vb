@@ -24,7 +24,8 @@ Public Class FormMisVentas
         DataGridView1.Columns.Clear()
         AgregarColumna("colVenta", "No. Venta", "nVenta", 10)
         AgregarColumna("colHora", "Hora", "fechaVenta", 10, "HH:mm")
-        AgregarColumna("colProducto", "Producto", "dProducto", 44)
+        AgregarColumna("colVendedor", "Vendedor", "vendedor", 16)
+        AgregarColumna("colProducto", "Producto", "dProducto", 30)
         AgregarColumna("colCantidad", "Cant.", "cantidad", 10)
         AgregarColumna("colPrecio", "Precio", "precio", 12, "N2")
         AgregarColumna("colImporte", "Importe", "subtotal", 14, "N2")
@@ -44,14 +45,22 @@ Public Class FormMisVentas
     End Sub
 
     Private Sub CargarVentas()
-        'El vendedor es el que abrió el turno (código capturado en FormAbrirCaja)
-        If vendedorRegistrado = 0 Then
+        'Por defecto solo el vendedor que abrió el turno (se relee de BD por si otra PC de la sucursal
+        'abrió o cerró el turno); con "Ver todas" se muestran las ventas del día de toda la sucursal.
+        CargaVendedorTurnoActivo()
+        Dim verTodas As Boolean = chkVerTodas.Checked
+        DataGridView1.Columns("colVendedor").Visible = verTodas
+
+        If Not verTodas AndAlso vendedorRegistrado = 0 Then
             lblVendedor.Text = "No hay un turno abierto"
             DataGridView1.DataSource = Nothing
             Return
         End If
 
-        lblVendedor.Text = $"Vendedor: {nombreVendedorRegistrado}    Fecha: {Format(DateTime.Now, "dd/MM/yyyy")}"
+        Dim fecha As String = Format(DateTime.Now, "dd/MM/yyyy")
+        lblVendedor.Text = If(verTodas,
+            $"Sucursal: {nameSucActual}    Todas las ventas    Fecha: {fecha}",
+            $"Vendedor: {nombreVendedorRegistrado}    Fecha: {fecha}")
 
         Try
             Dim dt As New DataTable
@@ -61,7 +70,7 @@ Public Class FormMisVentas
             Using cmd As New SqlCommand("sp_misVentas", conn)
                 cmd.CommandType = CommandType.StoredProcedure
                 cmd.Parameters.Add("@sucursal", SqlDbType.Int).Value = Convert.ToInt32(ConsultaParametro("codigoSucursal"))
-                cmd.Parameters.Add("@vendedor", SqlDbType.Int).Value = vendedorRegistrado
+                cmd.Parameters.Add("@vendedor", SqlDbType.Int).Value = If(verTodas, CObj(DBNull.Value), vendedorRegistrado)
                 cmd.Parameters.Add("@horasDiferencia", SqlDbType.Int).Value = Convert.ToInt32(ConsultaParametro("horasDiferencia"))
 
                 Using da As New SqlDataAdapter(cmd)
@@ -79,6 +88,10 @@ Public Class FormMisVentas
     End Sub
 
     Private Sub btnActualizar_Click(sender As Object, e As EventArgs) Handles btnActualizar.Click
+        CargarVentas()
+    End Sub
+
+    Private Sub chkVerTodas_CheckedChanged(sender As Object, e As EventArgs) Handles chkVerTodas.CheckedChanged
         CargarVentas()
     End Sub
 

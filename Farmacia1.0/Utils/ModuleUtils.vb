@@ -84,6 +84,45 @@ Module ModuleUtils
     End Sub
 
     ''' <summary>
+    ''' Recupera desde BD el vendedor que abrió el turno actual de la sucursal.
+    ''' Así no se pierde al cerrar sesión o reiniciar el programa. Sin turno abierto queda en 0 / vacío.
+    ''' </summary>
+    Public Sub CargaVendedorTurnoActivo()
+        vendedorRegistrado = 0
+        nombreVendedorRegistrado = String.Empty
+        Try
+            Dim sucursal As Integer
+            If Not Integer.TryParse(ConsultaParametro("codigoSucursal"), sucursal) Then sucursal = sucActual
+
+            Using cmd As New SqlCommand("sp_consultaTurnoAbierto", conn)
+                cmd.CommandType = CommandType.StoredProcedure
+                cmd.Parameters.AddWithValue("@sucursal", sucursal)
+                cmd.Parameters.Add("@idTurno", SqlDbType.Int).Direction = ParameterDirection.Output
+                cmd.Parameters.Add("@codempleado", SqlDbType.Int).Direction = ParameterDirection.Output
+                cmd.Parameters.Add("@nombreEmpleado", SqlDbType.VarChar, 150).Direction = ParameterDirection.Output
+
+                openConnection()
+                cmd.ExecuteNonQuery()
+
+                vendedorRegistrado = If(IsDBNull(cmd.Parameters("@codempleado").Value), 0, CInt(cmd.Parameters("@codempleado").Value))
+                nombreVendedorRegistrado = If(IsDBNull(cmd.Parameters("@nombreEmpleado").Value), String.Empty, cmd.Parameters("@nombreEmpleado").Value.ToString())
+            End Using
+        Catch ex As Exception
+            Serilog.Log.Warning(ex, "No se pudo recuperar el vendedor del turno abierto")
+        Finally
+            closeConnection()
+        End Try
+    End Sub
+
+    ''' <summary>Texto de la barra de estado; incluye al vendedor solo si hay turno abierto.</summary>
+    Public Function TextoEstadoConexion() As String
+        If vendedorRegistrado <> 0 AndAlso nombreVendedorRegistrado <> String.Empty Then
+            Return $"Estado de la conexión: conectado, Usuario: {nombreVendedorRegistrado}, Sucursal: {nameSucActual}"
+        End If
+        Return $"Estado de la conexión: conectado, Sucursal: {nameSucActual}"
+    End Function
+
+    ''' <summary>
     ''' Calcula la suma de una columna numérica del DataGridView
     ''' </summary>
     ''' <param name="dgv">DataGridView que contiene los datos</param>

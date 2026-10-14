@@ -165,6 +165,13 @@ Public Class frmVerVentas
         Dim dt As DataTable
         ds = New dsReportes
 
+        'Rol VENDEDOR: solo las ventas del vendedor que abrió el turno (se relee de BD por si cambió en otra PC)
+        CargaVendedorTurnoActivo()
+        If vendedorRegistrado = 0 Then
+            MessageBox.Show("No hay un turno abierto.", "Sin turno", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Return
+        End If
+
         Try
             openConnection()
             cmd = New SqlCommand()
@@ -172,7 +179,7 @@ Public Class frmVerVentas
                 .CommandText = "sp_ventasxusuariofecha"
                 .CommandType = CommandType.StoredProcedure
                 .Connection = conn
-                .Parameters.AddWithValue("suc", sucActual)
+                .Parameters.AddWithValue("suc", Convert.ToInt32(ConsultaParametro("codigoSucursal")))
                 .Parameters.AddWithValue("us", vendedorRegistrado)
                 .Parameters.AddWithValue("fecha", DateTimePicker1.Value)
             End With

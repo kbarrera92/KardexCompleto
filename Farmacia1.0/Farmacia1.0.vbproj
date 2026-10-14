@@ -279,12 +279,6 @@
     <Compile Include="frmAbono.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmAdmin.Designer.vb">
-      <DependentUpon>frmAdmin.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmAdmin.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="frmAjuste.Designer.vb">
       <DependentUpon>frmAjuste.vb</DependentUpon>
     </Compile>
@@ -399,13 +393,6 @@
     <Compile Include="frmMedidas.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmMenu.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmMenu.Designer.vb">
-      <DependentUpon>frmMenu.vb</DependentUpon>
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="frmPresentacion.Designer.vb">
       <DependentUpon>frmPresentacion.vb</DependentUpon>
     </Compile>
@@ -428,12 +415,6 @@
       <DependentUpon>frmPuntoDeVentaMejorado.vb</DependentUpon>
     </Compile>
     <Compile Include="frmPuntoDeVentaMejorado.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmReportes.Designer.vb">
-      <DependentUpon>frmReportes.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmReportes.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmSerieFactura.Designer.vb">
@@ -723,9 +704,6 @@
     <EmbeddedResource Include="frmAbono.resx">
       <DependentUpon>frmAbono.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmAdmin.resx">
-      <DependentUpon>frmAdmin.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmAjuste.resx">
       <DependentUpon>frmAjuste.vb</DependentUpon>
     </EmbeddedResource>
@@ -783,9 +761,6 @@
     <EmbeddedResource Include="frmMedidas.resx">
       <DependentUpon>frmMedidas.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmMenu.resx">
-      <DependentUpon>frmMenu.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmPresentacion.resx">
       <DependentUpon>frmPresentacion.vb</DependentUpon>
     </EmbeddedResource>
@@ -797,9 +772,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmPuntoDeVentaMejorado.resx">
       <DependentUpon>frmPuntoDeVentaMejorado.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmReportes.resx">
-      <DependentUpon>frmReportes.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSerieFactura.resx">
       <DependentUpon>frmSerieFactura.vb</DependentUpon>
