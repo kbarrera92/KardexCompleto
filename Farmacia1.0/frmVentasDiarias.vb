@@ -17,6 +17,15 @@ Public Class frmVentasDiarias
         Dim dt As DataTable
         ds = New dsReportes
 
+        'Por defecto solo el vendedor que abrió el turno (se relee de BD por si cambió en otra PC)
+        CargaVendedorTurnoActivo()
+        If Not CheckBox1.Checked AndAlso vendedorRegistrado = 0 Then
+            Me.Text = "Ventas diarias"
+            MessageBox.Show("No hay un turno abierto. Marque 'Reporte General' para ver todas las ventas de la sucursal.", "Sin turno", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Return
+        End If
+        Me.Text = If(CheckBox1.Checked, "Ventas diarias - Todas", $"Ventas diarias - {nombreVendedorRegistrado}")
+
         Try
             openConnection()
             cmd = New SqlCommand()
@@ -25,7 +34,7 @@ Public Class frmVentasDiarias
                 .CommandText = "sp_cortecaja"
                 .CommandType = CommandType.StoredProcedure
                 .Connection = conn
-                .Parameters.AddWithValue("suc", sucActual)
+                .Parameters.AddWithValue("suc", Convert.ToInt32(ConsultaParametro("codigoSucursal")))
                 .Parameters.AddWithValue("fecha", DateTimePicker1.Value)
                 .Parameters.AddWithValue("user", If(CheckBox1.Checked, DBNull.Value, vendedorRegistrado))
             End With
