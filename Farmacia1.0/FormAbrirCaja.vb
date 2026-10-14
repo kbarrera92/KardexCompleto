@@ -68,7 +68,7 @@ Public Class FormAbrirCaja
                 MessageBox.Show(msg, "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 vendedorRegistrado = CInt(txtcodempleado.Text)
                 nombreVendedorRegistrado = nombreEmpleado
-                FormMenuNew.ToolStripStatusLabelConnectionStatus.Text = $"Estado de la conexión: conectado, Usuario: {nombreVendedorRegistrado}, Sucursal: {nameSucActual}"
+                FormMenuNew.ToolStripStatusLabelConnectionStatus.Text = TextoEstadoConexion()
             End If
 
             closeConnection()

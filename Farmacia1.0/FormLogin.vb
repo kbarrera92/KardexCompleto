@@ -63,11 +63,12 @@ Public Class FormLogin
                     reader.Close()
                     Me.Close()
 
+                    CargaVendedorTurnoActivo()
+
                     With FormMenuNew
                         .ToolStripButtonLogin.Text = "Cerrar sesión"
                         .StatusStripPrincipal.BackColor = Color.LimeGreen
-                        .ToolStripStatusLabelConnectionStatus.Text =
-                        $"Estado de la conexión: conectado, Sucursal: {nameSucActual}"
+                        .ToolStripStatusLabelConnectionStatus.Text = TextoEstadoConexion()
                         .FlowLayoutPanelDashboard.Visible = True
                     End With
 

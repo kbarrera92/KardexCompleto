@@ -44,7 +44,8 @@ Public Class FormMisVentas
     End Sub
 
     Private Sub CargarVentas()
-        'El vendedor es el que abrió el turno (código capturado en FormAbrirCaja)
+        'El vendedor es el que abrió el turno; se relee de BD por si otra PC de la sucursal abrió o cerró el turno
+        CargaVendedorTurnoActivo()
         If vendedorRegistrado = 0 Then
             lblVendedor.Text = "No hay un turno abierto"
             DataGridView1.DataSource = Nothing

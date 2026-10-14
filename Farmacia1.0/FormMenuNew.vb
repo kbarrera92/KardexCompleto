@@ -21,6 +21,8 @@ Public Class FormMenuNew
             nombreRol = ""
             usuarioActual = 0
             sucActual = 0
+            vendedorRegistrado = 0
+            nombreVendedorRegistrado = String.Empty
             LimpiaParametros()
             StatusStripPrincipal.BackColor = Color.Salmon
             ToolStripStatusLabelConnectionStatus.Text = "Estado de la conexión: "
