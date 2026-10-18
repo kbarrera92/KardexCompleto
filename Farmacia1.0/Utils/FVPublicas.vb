@@ -37,6 +37,7 @@ Module FVPublicas
 
     Public vendedorRegistrado As Integer
     Public nombreVendedorRegistrado As String
+    Public turnoActivo As Integer
 
     Public formaPago As Integer
 

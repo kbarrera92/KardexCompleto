@@ -24,7 +24,6 @@ Public Class FormEgresos
         AddHandler ComboBoxCategoria.Validating, AddressOf ComboBoxCategoria_Validating
         AddHandler ComboBoxSucursal.Validating, AddressOf ComboBoxSucursal_Validating
         AddHandler DateTimePickerFechaEgreso.Validating, AddressOf DateTimePickerFechaEgreso_Validating
-        AddHandler TextBoxUsuarioRegistra.Validating, AddressOf TextBoxUsuarioRegistra_Validating
 
         ' Otras configuraciones...
         CargarCategorias()
@@ -117,7 +116,8 @@ Public Class FormEgresos
             .IdCategoria = If(ComboBoxCategoria.SelectedValue IsNot Nothing, Convert.ToInt32(ComboBoxCategoria.SelectedValue), 0),
             .Descripcion = TextBoxDescripcion.Text,
             .Total = If(Decimal.TryParse(TextBoxTotalEgreso.Text, Nothing), Decimal.Parse(TextBoxTotalEgreso.Text), 0),
-            .IdUsuario = TextBoxUsuarioRegistra.Text,
+            .IdUsuario = nameUsuarioActual,
+            .IdVendedor = If(sucursal = sucActual, vendedorRegistrado, -1),
             .IdSucursal = sucursal
             }
 
@@ -127,7 +127,7 @@ Public Class FormEgresos
                 {"Descripcion", TextBoxDescripcion},
                 {"Total", TextBoxTotalEgreso},
                 {"Sucursal", ComboBoxSucursal},
-                {"UsuarioRegistra", TextBoxUsuarioRegistra}
+                {"Vendedor", TextBoxVendedor}
             }
 
             If _validator.ValidarGasto(gasto, controles) Then
@@ -157,9 +157,9 @@ Public Class FormEgresos
                 New SqlParameter("@idEgreso", SqlDbType.Int) With {.Value = idEgreso},
                 New SqlParameter("@fechaEgreso", SqlDbType.DateTime, 150) With {.Value = DateTimePickerFechaEgreso.Value},
                 New SqlParameter("@concepto", SqlDbType.VarChar, 100) With {.Value = TextBoxDescripcion.Text},
-                New SqlParameter("@usuarioRegistra", SqlDbType.VarChar, 20) With {.Value = TextBoxUsuarioRegistra.Text},
-                New SqlParameter("@total", SqlDbType.VarChar, 150) With {.Value = TextBoxTotalEgreso.Text},
-                New SqlParameter("@sucursal", SqlDbType.Int) With {.Value = ComboBoxSucursal.SelectedValue},
+                New SqlParameter("@usuarioRegistra", SqlDbType.VarChar, 20) With {.Value = nameUsuarioActual},
+                New SqlParameter("@total", SqlDbType.Decimal) With {.Precision = 10, .Scale = 2, .Value = gasto.Total},
+                New SqlParameter("@sucursal", SqlDbType.Int) With {.Value = gasto.IdSucursal},
                 New SqlParameter("@categoria", SqlDbType.Int) With {.Value = ComboBoxCategoria.SelectedValue},
                 New SqlParameter("@msg", SqlDbType.VarChar, 200) With {.Direction = ParameterDirection.Output},
                 New SqlParameter("@returnValue", SqlDbType.Int) With {.Direction = ParameterDirection.ReturnValue}
@@ -221,7 +221,8 @@ Public Class FormEgresos
             ComboBoxSucursal.SelectedValue = -1
             TextBoxDescripcion.Clear()
             TextBoxTotalEgreso.Clear()
-            TextBoxUsuarioRegistra.Text = nameUsuarioActual
+            CargaVendedorTurnoActivo()
+            TextBoxVendedor.Text = If(vendedorRegistrado = 0, "Sin turno abierto", nombreVendedorRegistrado)
 
         Catch ex As Exception
             Log.Error($"Ocurrió un error. Error: {ex.Message}")
@@ -276,10 +277,6 @@ Public Class FormEgresos
     End Sub
 
     Private Sub TextBoxTotalEgreso_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles TextBoxTotalEgreso.Validating
-
-    End Sub
-
-    Private Sub TextBoxUsuarioRegistra_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles TextBoxUsuarioRegistra.Validating
 
     End Sub
 

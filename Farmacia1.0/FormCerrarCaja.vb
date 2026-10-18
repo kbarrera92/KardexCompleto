@@ -29,6 +29,7 @@ Public Class FormCerrarCaja
         Dim cmd As SqlCommand
         Dim msg As String
         Dim rc As Integer, inicial As Decimal, totalfisico As Decimal, totalsistema As Decimal, dif As Decimal
+        Dim totalegresos As Decimal, totaltarjeta As Decimal
 
         Try
             cmd = New SqlCommand()
@@ -71,8 +72,26 @@ Public Class FormCerrarCaja
                 .Direction = ParameterDirection.Output
             }
 
+            Dim paramtotalegresos As New SqlParameter With {
+                .ParameterName = "@totalegresos",
+                .SqlDbType = SqlDbType.Decimal,
+                .Precision = 10,
+                .Scale = 2,
+                .Direction = ParameterDirection.Output
+            }
+
+            Dim paramtotaltarjeta As New SqlParameter With {
+                .ParameterName = "@totaltarjeta",
+                .SqlDbType = SqlDbType.Decimal,
+                .Precision = 10,
+                .Scale = 2,
+                .Direction = ParameterDirection.Output
+            }
+
             With cmd.Parameters
                 .AddWithValue("opt", "C")
+                .Add(paramtotalegresos)
+                .Add(paramtotaltarjeta)
                 .AddWithValue("sucursal", If(ConsultaParametro("codigoSucursal") = sucActual, sucActual, Convert.ToInt32(ConsultaParametro("codigoSucursal"))))
                 .Add(diferencia)
                 .Add(paramsaldoinicial)
@@ -91,6 +110,8 @@ Public Class FormCerrarCaja
             dif = CDec(If(IsDBNull(cmd.Parameters("@diferencia").Value), 0, cmd.Parameters("@diferencia").Value.ToString()))
             totalfisico = CDec(If(IsDBNull(cmd.Parameters("@totalfisico").Value), 0, cmd.Parameters("@totalfisico").Value))
             totalsistema = CDec(If(IsDBNull(cmd.Parameters("@totalsistema").Value), 0, cmd.Parameters("@totalsistema").Value))
+            totalegresos = CDec(If(IsDBNull(paramtotalegresos.Value), 0, paramtotalegresos.Value))
+            totaltarjeta = CDec(If(IsDBNull(paramtotaltarjeta.Value), 0, paramtotaltarjeta.Value))
 
             If rc <> 0 Then
                 MessageBox.Show(msg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -102,7 +123,7 @@ Public Class FormCerrarCaja
             End If
 
             closeConnection()
-            ImprimeTicketCuadre(inicial, totalsistema, totalfisico, dif)
+            ImprimeTicketCuadre(inicial, totalsistema, totaltarjeta, totalegresos, totalfisico, dif)
         Catch ex As Exception
             MessageBox.Show($"Hubo un error al grabar el registro. {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             rc = -3
