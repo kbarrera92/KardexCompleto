@@ -177,6 +177,12 @@
     <Compile Include="FormCategoriaEgreso.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormArqueoCaja.Designer.vb">
+      <DependentUpon>FormArqueoCaja.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormArqueoCaja.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormCerrarCaja.Designer.vb">
       <DependentUpon>FormCerrarCaja.vb</DependentUpon>
     </Compile>
@@ -652,6 +658,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormCategoriaEgreso.resx">
       <DependentUpon>FormCategoriaEgreso.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormArqueoCaja.resx">
+      <DependentUpon>FormArqueoCaja.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormCerrarCaja.resx">
       <DependentUpon>FormCerrarCaja.vb</DependentUpon>

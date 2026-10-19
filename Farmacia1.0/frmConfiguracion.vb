@@ -32,6 +32,16 @@ Public Class frmConfiguracion
             cmbSucursal.DisplayMember = "nombreSuc"
             cmbSucursal.ValueMember = "idSucursal"
             cmbSucursal.DataSource = dt
+
+            Dim dtCategorias As New DataTable()
+            Using da As New SqlDataAdapter("SELECT idCategoria, categoria FROM CATEGORIA ORDER BY categoria", conn)
+                da.Fill(dtCategorias)
+            End Using
+            For Each lista As CheckedListBox In {clbHelados, clbBebidas}
+                For Each fila As DataRow In dtCategorias.Rows
+                    lista.Items.Add(New ItemCategoria(CInt(fila("idCategoria")), fila("categoria").ToString()))
+                Next
+            Next
         Catch ex As Exception
             MessageBox.Show(ex.Message, "Algo salió mal", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Close()
@@ -91,7 +101,40 @@ Public Class frmConfiguracion
         numCantTickets.Value = LimitaValor(valor("cantTickets"), numCantTickets)
         numHorasDiferencia.Value = LimitaValor(valor("horasDiferencia"), numHorasDiferencia)
         txtLogoPath.Text = valor("logoPath")
+        MarcaCategorias(clbHelados, valor("categoriasHelados"))
+        MarcaCategorias(clbBebidas, valor("categoriasBebidas"))
     End Sub
+
+    ''' <summary>Categoría de un CheckedListBox; ToString es el texto que se muestra.</summary>
+    Private Class ItemCategoria
+        Public ReadOnly Property Id As Integer
+        Public ReadOnly Property Nombre As String
+
+        Public Sub New(id As Integer, nombre As String)
+            Me.Id = id
+            Me.Nombre = nombre
+        End Sub
+
+        Public Overrides Function ToString() As String
+            Return Nombre
+        End Function
+    End Class
+
+    ''' <summary>Marca las categorías cuyo ID está en la lista separada por comas.</summary>
+    Private Shared Sub MarcaCategorias(lista As CheckedListBox, ids As String)
+        Dim marcados As New HashSet(Of Integer)
+        For Each texto In If(ids, "").Split(","c)
+            Dim id As Integer
+            If Integer.TryParse(texto.Trim(), id) Then marcados.Add(id)
+        Next
+        For i = 0 To lista.Items.Count - 1
+            lista.SetItemChecked(i, marcados.Contains(DirectCast(lista.Items(i), ItemCategoria).Id))
+        Next
+    End Sub
+
+    Private Shared Function IdsMarcados(lista As CheckedListBox) As String
+        Return String.Join(",", lista.CheckedItems.Cast(Of ItemCategoria)().Select(Function(c) c.Id.ToString()))
+    End Function
 
     Private Shared Function LimitaValor(texto As String, num As NumericUpDown) As Decimal
         Dim n As Integer
@@ -131,6 +174,13 @@ Public Class frmConfiguracion
             Return
         End If
 
+        For Each id In IdsMarcados(clbHelados).Split(","c)
+            If id <> "" AndAlso IdsMarcados(clbBebidas).Split(","c).Contains(id) Then
+                MessageBox.Show("Una categoría no puede ser de helados y de bebidas a la vez", "Datos no válidos", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return
+            End If
+        Next
+
         Dim idSuc = IdSucursalElegida()
         Dim sucursal As New Dictionary(Of String, String) From {
             {"sucursalFisica", txtSucursalFisica.Text.Trim()},
@@ -146,7 +196,9 @@ Public Class frmConfiguracion
             {"eslogan", txtEslogan.Text.Trim()},
             {"cliente", txtCliente.Text.Trim()},
             {"valeMaximo", numValeMaximo.Value.ToString(Globalization.CultureInfo.InvariantCulture)},
-            {"valePagoMinimo", numValePagoMinimo.Value.ToString(Globalization.CultureInfo.InvariantCulture)}
+            {"valePagoMinimo", numValePagoMinimo.Value.ToString(Globalization.CultureInfo.InvariantCulture)},
+            {"categoriasHelados", IdsMarcados(clbHelados)},
+            {"categoriasBebidas", IdsMarcados(clbBebidas)}
         }
 
         Try
