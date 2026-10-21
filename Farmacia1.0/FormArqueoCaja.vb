@@ -43,6 +43,10 @@ Public Class FormArqueoCaja
 
         cargando = False
         Recalcula()
+
+        'El cajero empieza a contar de inmediato, sin tener que hacer clic en la columna Cantidad
+        ActiveControl = dgvConteo
+        dgvConteo.CurrentCell = dgvConteo.Rows(0).Cells(colCantidad.Index)
     End Sub
 
     Private Shared Function SucursalLocal() As Integer
@@ -82,7 +86,7 @@ Public Class FormArqueoCaja
                 helados = Convert.ToDecimal(fila("totalHelados"))
                 bebidas = Convert.ToDecimal(fila("totalBebidas"))
                 egresos = Convert.ToDecimal(fila("totalEgresos"))
-                lblTurno.Text = $"Turno {idTurno} - {vendedor} - cierre {Convert.ToDateTime(fila("fechaCierre")):yyyy-MM-dd HH:mm}"
+                lblTurno.Text = $"Turno {idTurno} · {vendedor} · Cierre {Convert.ToDateTime(fila("fechaCierre")):yyyy-MM-dd HH:mm}"
 
                 If ds.Tables.Count > 1 Then
                     For Each guardado As DataRow In ds.Tables(1).Rows
@@ -138,9 +142,13 @@ Public Class FormArqueoCaja
         lblBebidas.Text = bebidas.ToString("N2")
         lblEgresos.Text = egresos.ToString("N2")
         lblTotalEfectivo.Text = TotalEfectivo.ToString("N2")
-        lblEfectivoCaja.Text = EfectivoEnCaja.ToString("N2")
-        lblDiferencia.Text = dif.ToString("N2")
+        lblEfectivoCaja.Text = (helados + bebidas).ToString("N2")
+        lblEsperado.Text = EfectivoEnCaja.ToString("N2")
+        lblDiferencia.Text = dif.ToString("+#,##0.00;-#,##0.00;0.00")
         lblDiferencia.ForeColor = If(dif < 0, Color.Red, If(dif > 0, Color.DarkOrange, Color.Green))
+        'El texto acompaña al color para que el estado no dependa solo de distinguirlo
+        lblEstado.Text = If(dif < 0, "Falta efectivo", If(dif > 0, "Sobra efectivo", "Caja cuadrada"))
+        lblEstado.ForeColor = lblDiferencia.ForeColor
     End Sub
 
     Private Sub dgvConteo_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles dgvConteo.CellEndEdit
