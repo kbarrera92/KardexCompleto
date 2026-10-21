@@ -79,7 +79,7 @@ Partial Class FormArqueoCaja
         Me.dgvConteo.Name = "dgvConteo"
         Me.dgvConteo.RowHeadersVisible = False
         Me.dgvConteo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
-        Me.dgvConteo.Size = New System.Drawing.Size(340, 262)
+        Me.dgvConteo.Size = New System.Drawing.Size(340, 298)
         Me.dgvConteo.TabIndex = 1
         '
         'colDenominacion
@@ -91,7 +91,6 @@ Partial Class FormArqueoCaja
         Me.colDenominacion.Name = "colDenominacion"
         Me.colDenominacion.ReadOnly = True
         Me.colDenominacion.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.colDenominacion.Width = 100
         '
         'colCantidad
         '
@@ -100,7 +99,6 @@ Partial Class FormArqueoCaja
         Me.colCantidad.HeaderText = "Cantidad"
         Me.colCantidad.Name = "colCantidad"
         Me.colCantidad.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.colCantidad.Width = 100
         '
         'colSubtotal
         '
@@ -115,16 +113,16 @@ Partial Class FormArqueoCaja
         '
         Me.lblTotalArqueoTitulo.AutoSize = True
         Me.lblTotalArqueoTitulo.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTotalArqueoTitulo.Location = New System.Drawing.Point(16, 322)
+        Me.lblTotalArqueoTitulo.Location = New System.Drawing.Point(16, 360)
         Me.lblTotalArqueoTitulo.Name = "lblTotalArqueoTitulo"
-        Me.lblTotalArqueoTitulo.Size = New System.Drawing.Size(62, 20)
+        Me.lblTotalArqueoTitulo.Size = New System.Drawing.Size(64, 20)
         Me.lblTotalArqueoTitulo.TabIndex = 2
         Me.lblTotalArqueoTitulo.Text = "TOTAL"
         '
         'lblTotalArqueo
         '
         Me.lblTotalArqueo.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTotalArqueo.Location = New System.Drawing.Point(196, 322)
+        Me.lblTotalArqueo.Location = New System.Drawing.Point(196, 360)
         Me.lblTotalArqueo.Name = "lblTotalArqueo"
         Me.lblTotalArqueo.Size = New System.Drawing.Size(160, 20)
         Me.lblTotalArqueo.TabIndex = 3
@@ -136,25 +134,16 @@ Partial Class FormArqueoCaja
         Me.lblSobranteTitulo.AutoSize = True
         Me.lblSobranteTitulo.Location = New System.Drawing.Point(390, 45)
         Me.lblSobranteTitulo.Name = "lblSobranteTitulo"
-        Me.lblSobranteTitulo.Size = New System.Drawing.Size(55, 13)
+        Me.lblSobranteTitulo.Size = New System.Drawing.Size(59, 13)
         Me.lblSobranteTitulo.TabIndex = 4
         Me.lblSobranteTitulo.Text = "Sobrante +"
-        '
-        'lblSobrante
-        '
-        Me.lblSobrante.Location = New System.Drawing.Point(530, 45)
-        Me.lblSobrante.Name = "lblSobrante"
-        Me.lblSobrante.Size = New System.Drawing.Size(130, 13)
-        Me.lblSobrante.TabIndex = 5
-        Me.lblSobrante.Text = "0.00"
-        Me.lblSobrante.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'lblInicialTitulo
         '
         Me.lblInicialTitulo.AutoSize = True
         Me.lblInicialTitulo.Location = New System.Drawing.Point(390, 75)
         Me.lblInicialTitulo.Name = "lblInicialTitulo"
-        Me.lblInicialTitulo.Size = New System.Drawing.Size(83, 13)
+        Me.lblInicialTitulo.Size = New System.Drawing.Size(84, 13)
         Me.lblInicialTitulo.TabIndex = 22
         Me.lblInicialTitulo.Text = "Efectivo inicial +"
         '
@@ -172,7 +161,7 @@ Partial Class FormArqueoCaja
         Me.lblEfectivoCajaTitulo.AutoSize = True
         Me.lblEfectivoCajaTitulo.Location = New System.Drawing.Point(390, 295)
         Me.lblEfectivoCajaTitulo.Name = "lblEfectivoCajaTitulo"
-        Me.lblEfectivoCajaTitulo.Size = New System.Drawing.Size(130, 13)
+        Me.lblEfectivoCajaTitulo.Size = New System.Drawing.Size(141, 13)
         Me.lblEfectivoCajaTitulo.TabIndex = 24
         Me.lblEfectivoCajaTitulo.Text = "Efectivo en caja (con fondo)"
         '
@@ -185,12 +174,21 @@ Partial Class FormArqueoCaja
         Me.lblEfectivoCaja.Text = "0.00"
         Me.lblEfectivoCaja.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
+        'lblSobrante
+        '
+        Me.lblSobrante.Location = New System.Drawing.Point(530, 45)
+        Me.lblSobrante.Name = "lblSobrante"
+        Me.lblSobrante.Size = New System.Drawing.Size(130, 13)
+        Me.lblSobrante.TabIndex = 5
+        Me.lblSobrante.Text = "0.00"
+        Me.lblSobrante.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
         'lblVentaTitulo
         '
         Me.lblVentaTitulo.AutoSize = True
         Me.lblVentaTitulo.Location = New System.Drawing.Point(390, 105)
         Me.lblVentaTitulo.Name = "lblVentaTitulo"
-        Me.lblVentaTitulo.Size = New System.Drawing.Size(66, 13)
+        Me.lblVentaTitulo.Size = New System.Drawing.Size(70, 13)
         Me.lblVentaTitulo.TabIndex = 6
         Me.lblVentaTitulo.Text = "Total venta +"
         '
@@ -208,7 +206,7 @@ Partial Class FormArqueoCaja
         Me.lblTarjetaTitulo.AutoSize = True
         Me.lblTarjetaTitulo.Location = New System.Drawing.Point(390, 135)
         Me.lblTarjetaTitulo.Name = "lblTarjetaTitulo"
-        Me.lblTarjetaTitulo.Size = New System.Drawing.Size(61, 13)
+        Me.lblTarjetaTitulo.Size = New System.Drawing.Size(66, 13)
         Me.lblTarjetaTitulo.TabIndex = 8
         Me.lblTarjetaTitulo.Text = "Venta POS -"
         '
@@ -226,7 +224,7 @@ Partial Class FormArqueoCaja
         Me.lblHeladosTitulo.AutoSize = True
         Me.lblHeladosTitulo.Location = New System.Drawing.Point(390, 165)
         Me.lblHeladosTitulo.Name = "lblHeladosTitulo"
-        Me.lblHeladosTitulo.Size = New System.Drawing.Size(50, 13)
+        Me.lblHeladosTitulo.Size = New System.Drawing.Size(52, 13)
         Me.lblHeladosTitulo.TabIndex = 10
         Me.lblHeladosTitulo.Text = "Helados -"
         '
@@ -244,7 +242,7 @@ Partial Class FormArqueoCaja
         Me.lblBebidasTitulo.AutoSize = True
         Me.lblBebidasTitulo.Location = New System.Drawing.Point(390, 195)
         Me.lblBebidasTitulo.Name = "lblBebidasTitulo"
-        Me.lblBebidasTitulo.Size = New System.Drawing.Size(49, 13)
+        Me.lblBebidasTitulo.Size = New System.Drawing.Size(51, 13)
         Me.lblBebidasTitulo.TabIndex = 12
         Me.lblBebidasTitulo.Text = "Bebidas -"
         '
@@ -281,7 +279,7 @@ Partial Class FormArqueoCaja
         Me.lblTotalEfectivoTitulo.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTotalEfectivoTitulo.Location = New System.Drawing.Point(390, 262)
         Me.lblTotalEfectivoTitulo.Name = "lblTotalEfectivoTitulo"
-        Me.lblTotalEfectivoTitulo.Size = New System.Drawing.Size(113, 20)
+        Me.lblTotalEfectivoTitulo.Size = New System.Drawing.Size(117, 20)
         Me.lblTotalEfectivoTitulo.TabIndex = 16
         Me.lblTotalEfectivoTitulo.Text = "Total efectivo"
         '
@@ -299,16 +297,16 @@ Partial Class FormArqueoCaja
         '
         Me.lblDiferenciaTitulo.AutoSize = True
         Me.lblDiferenciaTitulo.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDiferenciaTitulo.Location = New System.Drawing.Point(390, 327)
+        Me.lblDiferenciaTitulo.Location = New System.Drawing.Point(390, 365)
         Me.lblDiferenciaTitulo.Name = "lblDiferenciaTitulo"
-        Me.lblDiferenciaTitulo.Size = New System.Drawing.Size(88, 20)
+        Me.lblDiferenciaTitulo.Size = New System.Drawing.Size(91, 20)
         Me.lblDiferenciaTitulo.TabIndex = 18
         Me.lblDiferenciaTitulo.Text = "Diferencia"
         '
         'lblDiferencia
         '
         Me.lblDiferencia.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDiferencia.Location = New System.Drawing.Point(520, 327)
+        Me.lblDiferencia.Location = New System.Drawing.Point(520, 365)
         Me.lblDiferencia.Name = "lblDiferencia"
         Me.lblDiferencia.Size = New System.Drawing.Size(140, 20)
         Me.lblDiferencia.TabIndex = 19
@@ -318,7 +316,7 @@ Partial Class FormArqueoCaja
         'btnGuardar
         '
         Me.btnGuardar.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnGuardar.Location = New System.Drawing.Point(390, 370)
+        Me.btnGuardar.Location = New System.Drawing.Point(390, 408)
         Me.btnGuardar.Name = "btnGuardar"
         Me.btnGuardar.Size = New System.Drawing.Size(180, 42)
         Me.btnGuardar.TabIndex = 20
@@ -328,7 +326,7 @@ Partial Class FormArqueoCaja
         'btnCerrar
         '
         Me.btnCerrar.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnCerrar.Location = New System.Drawing.Point(580, 370)
+        Me.btnCerrar.Location = New System.Drawing.Point(580, 408)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(80, 42)
         Me.btnCerrar.TabIndex = 21
@@ -340,7 +338,7 @@ Partial Class FormArqueoCaja
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCerrar
-        Me.ClientSize = New System.Drawing.Size(680, 425)
+        Me.ClientSize = New System.Drawing.Size(680, 465)
         Me.Controls.Add(Me.btnCerrar)
         Me.Controls.Add(Me.btnGuardar)
         Me.Controls.Add(Me.lblEfectivoCaja)

@@ -7,7 +7,7 @@ Imports System.Globalization
 ''' </summary>
 Public Class FormArqueoCaja
 
-    Private Shared ReadOnly Denominaciones As Decimal() = {0.25D, 0.5D, 1D, 5D, 10D, 20D, 50D, 100D, 200D}
+    Private Shared ReadOnly Denominaciones As Decimal() = {0.05D, 0.1D, 0.25D, 0.5D, 1D, 5D, 10D, 20D, 50D, 100D, 200D}
 
     Private idTurno As Integer
     Private vendedor As String = ""
