@@ -213,6 +213,15 @@ Public Class FormMenuNew
         End If
     End Sub
 
+    Private Sub ArqueoDeCajaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ArqueoDeCajaToolStripMenuItem.Click
+        If rolUsuarioActual = Nothing Then
+            MessageBox.Show("No tiene permisos para este módulo", "No tiene permisos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Return
+        Else
+            FormArqueoCaja.Show()
+        End If
+    End Sub
+
     Private Sub FormMenuNew_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Estilos.AplicarEstilos(Me)
         Estilos.AplicarEstilosToolStrip(ToolStrip1)

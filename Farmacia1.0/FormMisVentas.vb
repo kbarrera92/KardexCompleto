@@ -7,7 +7,7 @@ Public Class FormMisVentas
 
     Private Sub FormMisVentas_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
-            lblResumen = CrearLabelResumenEgresos(Me, 140, 463, 500)
+            lblResumen = CrearLabelResumenEgresos(Me, 160, 463, 480)
             ConfigurarColumnas()
             Estilos.AplicarEstilos(Me)
             CargarVentas()

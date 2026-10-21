@@ -64,6 +64,7 @@ Partial Class FormMenuNew
         Me.ToolStripMenuItem9 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem10 = New System.Windows.Forms.ToolStripMenuItem()
         Me.VerTurnosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ArqueoDeCajaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripSplitButtonVales = New System.Windows.Forms.ToolStripSplitButton()
         Me.NuevoValeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -323,7 +324,7 @@ Partial Class FormMenuNew
         '
         'ToolStripSplitButton1
         '
-        Me.ToolStripSplitButton1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem9, Me.ToolStripMenuItem10, Me.VerTurnosToolStripMenuItem})
+        Me.ToolStripSplitButton1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem9, Me.ToolStripMenuItem10, Me.VerTurnosToolStripMenuItem, Me.ArqueoDeCajaToolStripMenuItem})
         Me.ToolStripSplitButton1.Image = Global.Farmacia1._0.My.Resources.Resources.Custom_Icon_Design_Flatastic_8_Schedule_32
         Me.ToolStripSplitButton1.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripSplitButton1.Name = "ToolStripSplitButton1"
@@ -348,6 +349,12 @@ Partial Class FormMenuNew
         Me.VerTurnosToolStripMenuItem.Name = "VerTurnosToolStripMenuItem"
         Me.VerTurnosToolStripMenuItem.Size = New System.Drawing.Size(163, 24)
         Me.VerTurnosToolStripMenuItem.Text = "Ver Turnos"
+        '
+        'ArqueoDeCajaToolStripMenuItem
+        '
+        Me.ArqueoDeCajaToolStripMenuItem.Name = "ArqueoDeCajaToolStripMenuItem"
+        Me.ArqueoDeCajaToolStripMenuItem.Size = New System.Drawing.Size(163, 24)
+        Me.ArqueoDeCajaToolStripMenuItem.Text = "Arqueo de Caja"
         '
         'ToolStripSeparator6
         '
@@ -482,6 +489,7 @@ Partial Class FormMenuNew
     Friend WithEvents ToolStripMenuItem9 As ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem10 As ToolStripMenuItem
     Friend WithEvents VerTurnosToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ArqueoDeCajaToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator7 As ToolStripSeparator
     Friend WithEvents ReporteDeUtilidadToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ReporteDeBonificacionesToolStripMenuItem As ToolStripMenuItem

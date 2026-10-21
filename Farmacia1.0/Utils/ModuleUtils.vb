@@ -460,6 +460,48 @@ Module ModuleUtils
         End If
     End Sub
 
+    ''' <summary>Ticket del arqueo de caja: conteo por denominación (solo las que tienen cantidad) y resumen del cierre.</summary>
+    Public Sub ImprimeTicketArqueo(ByVal idTurno As Integer, ByVal vendedor As String, ByVal conteo As IEnumerable(Of KeyValuePair(Of Decimal, Integer)),
+                                   ByVal totalArqueo As Decimal, ByVal sobrante As Decimal, ByVal inicial As Decimal, ByVal venta As Decimal, ByVal tarjeta As Decimal,
+                                   ByVal helados As Decimal, ByVal bebidas As Decimal, ByVal egresos As Decimal,
+                                   ByVal totalEfectivo As Decimal, ByVal diferencia As Decimal)
+        If ConsultaParametro("imprimeTicketCuadre") = "S" Then
+            Dim ticket As clsFunciones.crearTicket = New clsFunciones.crearTicket()
+
+            ticket.textoCentro(ConsultaParametro("nombreEmpresa"))
+            ticket.textoCentro("****************************************")
+            ticket.textoCentro("ARQUEO DE CAJA")
+            ticket.textoIzquierda("Fecha: " & Date.Now.ToString("yyyy-MM-dd HH:mm:ss"))
+            ticket.textoIzquierda("Turno: " & idTurno & "  Vendedor: " & vendedor)
+            ticket.textoIzquierda("Usuario: " & nameUsuarioActual)
+            ticket.lineasGuion()
+
+            For Each par In conteo.Where(Function(p) p.Value > 0)
+                ticket.agregaTotales(par.Key.ToString("0.##") & " x " & par.Value & ": ", par.Key * par.Value)
+            Next
+            ticket.agregaTotales("TOTAL arqueo: ", totalArqueo)
+            ticket.lineasGuion()
+
+            ticket.agregaTotales("(+) Sobrante: ", sobrante)
+            ticket.agregaTotales("(+) Efectivo inicial: ", inicial)
+            ticket.agregaTotales("(+) Total venta: ", venta)
+            ticket.agregaTotales("(-) Venta POS: ", tarjeta)
+            ticket.agregaTotales("(-) Helados: ", helados)
+            ticket.agregaTotales("(-) Bebidas: ", bebidas)
+            ticket.agregaTotales("(-) Egresos: ", egresos)
+            ticket.agregaTotales("Total efectivo: ", totalEfectivo)
+            ticket.agregaTotales("Efectivo en caja: ", totalEfectivo + helados + bebidas)
+            ticket.textoIzquierda(" ")
+            ticket.agregaTotales("Diferencia: ", diferencia)
+
+            ticket.textoIzquierda(" ")
+            ticket.textoCentro("**********************************")
+            ticket.textoIzquierda(" ")
+
+            ticket.imprimirTicket(ConsultaParametro("nombreImpresora"))
+        End If
+    End Sub
+
     Public Function DataTableToString(dt As DataTable) As String
         If dt Is Nothing OrElse dt.Rows.Count = 0 Then
             Return "DataTable vacío o nulo."

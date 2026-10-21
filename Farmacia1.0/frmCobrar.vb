@@ -19,9 +19,9 @@ Public Class frmCobrar
                 .AddWithValue("sucursal", If(ConsultaParametro("codigoSucursal") = sucActual, sucActual, Convert.ToInt32(ConsultaParametro("codigoSucursal"))))
                 .AddWithValue("cliente", Trim(txtnit.Text))
                 .AddWithValue("documento", If(Trim(txtFactura.Text) = "", DBNull.Value, CInt(txtFactura.Text)))
-                .AddWithValue("total", CDbl(txttotal.Text))
-                .AddWithValue("efectivo", (CDbl(txtpago.Text) + CDbl(txttarjeta.Text)) - CDbl(txtcambio.Text))
-                .AddWithValue("tarjeta", CDbl(txttarjeta.Text))
+                .AddWithValue("total", LeerMonto(txttotal))
+                .AddWithValue("efectivo", LeerMonto(txttotal) - LeerMonto(txttarjeta))
+                .AddWithValue("tarjeta", LeerMonto(txttarjeta))
                 .AddWithValue("autoriza", txtautori.Text)
                 .AddWithValue("codempleado", CInt(TextBoxCodigoEmpleado.Text))
                 .Add("@MSG", SqlDbType.VarChar, 200).Direction = ParameterDirection.Output
@@ -38,6 +38,7 @@ Public Class frmCobrar
             nventa = CInt(If(cmd.Parameters("@nVenta").Value, 0))
             MessageBox.Show(msg, If(rc = 0, "Éxito", "Error"), MessageBoxButtons.OK, If(rc = 0, MessageBoxIcon.Information, MessageBoxIcon.Error))
             If rc <> 0 Then
+                closeConnection()
                 Return False
             End If
             closeConnection()
@@ -55,6 +56,26 @@ Public Class frmCobrar
 
 
 
+    Private Function LeerMonto(tb As TextBox) As Decimal
+        Dim valor As Decimal
+        If Decimal.TryParse(tb.Text, Globalization.NumberStyles.Number, Globalization.CultureInfo.CurrentCulture, valor) Then
+            Return valor
+        End If
+        Return 0D
+    End Function
+
+    Private Sub RecalcularCambio()
+        Dim total As Decimal = LeerMonto(txttotal)
+        Dim pago As Decimal = LeerMonto(txtpago)
+        Dim tarjeta As Decimal = LeerMonto(txttarjeta)
+        txtcambio.Text = (pago + tarjeta - total).ToString("N2")
+        If pago + tarjeta >= total AndAlso tarjeta <= total Then
+            txtcambio.BackColor = Color.Blue
+        Else
+            txtcambio.BackColor = Color.Red
+        End If
+    End Sub
+
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         If MessageBox.Show("¿Desea cancelar esta acción?", "Cancelar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
             Me.Close()
@@ -70,45 +91,54 @@ Public Class frmCobrar
             Return
         End If
 
+        Dim total As Decimal = LeerMonto(txttotal)
+        Dim pago As Decimal = LeerMonto(txtpago)
+        Dim tarjeta As Decimal = LeerMonto(txttarjeta)
+
+        If pago < 0 OrElse tarjeta < 0 Then
+            MessageBox.Show("Los montos no pueden ser negativos", "Datos no válidos", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return
+        End If
+        If tarjeta > total Then
+            MessageBox.Show("El monto con tarjeta no puede ser mayor al total de la venta", "Datos no válidos", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            txttarjeta.Select()
+            Return
+        End If
+        If pago + tarjeta < total Then
+            MessageBox.Show("El monto recibido es insuficiente", "Datos no válidos", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return
+        End If
+        If tarjeta > 0 AndAlso Trim(txtautori.Text) = "" Then
+            MessageBox.Show("Ingrese el número de autorización del pago con tarjeta", "Datos no válidos", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            txtautori.Select()
+            Return
+        End If
+
         Dim res As Boolean
-        If Val(txtcambio.Text) >= 0 Then
-            If MessageBox.Show("¿Desea guardar esta venta?", "Guardando", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
-                If saveClient = True Then
-                    saveinfoclient()
-                    saveClient = False
-                End If
-                If Me.CheckBox1.Checked = True Then
-                    res = GrabaVenta(table)
-                    guardarFactura()
-                Else
-                    res = GrabaVenta(table)
-
-                End If
-
-                If pv = 1 And res = True Then
-                    frmPuntoDeVentaMejorado.cleanAll()
-                    Me.Close()
-
-                End If
-
+        If MessageBox.Show("¿Desea guardar esta venta?", "Guardando", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
+            If saveClient = True Then
+                saveinfoclient()
+                saveClient = False
             End If
-        Else
-            MessageBox.Show("Datos invalidos", "Datos no válidos", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            res = GrabaVenta(table)
+            If res AndAlso Me.CheckBox1.Checked = True Then
+                guardarFactura()
+            End If
+
+            If pv = 1 And res = True Then
+                frmPuntoDeVentaMejorado.cleanAll()
+                Me.Close()
+            End If
         End If
     End Sub
 
     Private Sub txtpago_TextChanged(sender As Object, e As EventArgs) Handles txtpago.TextChanged
-        txtcambio.Text = String.Format("{0:N2}", (Val(txtpago.Text) + Val(txttarjeta.Text)) - Val(txttotal.Text))
-        If (Val(txtpago.Text) + Val(txttarjeta.Text)) >= Val(txttotal.Text) Then
-            txtcambio.BackColor = Color.Blue
-        Else
-            txtcambio.BackColor = Color.Red
-        End If
+        RecalcularCambio()
     End Sub
 
     Private Sub frmCobrar_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        txtpago.Text = 0.0
-        txttarjeta.Text = 0.0
+        txtpago.Text = "0.00"
+        txttarjeta.Text = "0.00"
 
         txtfecha.Text = DateTime.Now.ToShortDateString
         txtusuario.Text = nameUsuarioActual
@@ -120,24 +150,11 @@ Public Class frmCobrar
     End Sub
 
     Private Sub txttotal_TextChanged(sender As Object, e As EventArgs) Handles txttotal.TextChanged
-        txtcambio.Text = String.Format("{0:N2}", (Val(txtpago.Text) - Val(txttotal.Text)))
-    End Sub
-
-    Private Sub txtcambio_TextChanged(sender As Object, e As EventArgs) Handles txtcambio.TextChanged
-        If Val(txtpago.Text) >= Val(txttotal.Text) Then
-            txtcambio.BackColor = Color.Blue
-        Else
-            txtcambio.BackColor = Color.Red
-        End If
+        RecalcularCambio()
     End Sub
 
     Private Sub txttarjeta_TextChanged(sender As Object, e As EventArgs) Handles txttarjeta.TextChanged
-        txtcambio.Text = (Val(txtpago.Text) + Val(txttarjeta.Text)) - Val(txttotal.Text)
-        If (Val(txtpago.Text) + Val(txttarjeta.Text)) >= Val(txttotal.Text) Then
-            txtcambio.BackColor = Color.Blue
-        Else
-            txtcambio.BackColor = Color.Red
-        End If
+        RecalcularCambio()
     End Sub
 
     Private Sub txtnit_KeyDown(sender As Object, e As KeyEventArgs) Handles txtnit.KeyDown
@@ -149,24 +166,21 @@ Public Class frmCobrar
                     txtnit.Text = "C/F"
                     txtnombrecliente.Select()
                 Else
-                    Dim reader As SqlDataReader
                     Try
                         openConnection()
                         Dim query As String = "SELECT rzCliente, direccionCliente FROM CLIENTE WHERE nitCliente = @nit;"
                         Dim cmd As New SqlCommand(query, conn)
                         cmd.Parameters.AddWithValue("nit", Trim(txtnit.Text))
 
-                        reader = cmd.ExecuteReader
-                        reader.Read()
-
-                        If reader.HasRows Then
-                            txtnombrecliente.Text = reader(0)
-                            txtdircliente.Text = reader(1)
-                        Else
-                            saveClient = True
-                            txtnombrecliente.Select()
-                            reader.Close()
-                        End If
+                        Using reader As SqlDataReader = cmd.ExecuteReader
+                            If reader.Read() Then
+                                txtnombrecliente.Text = If(reader.IsDBNull(0), "", reader.GetString(0))
+                                txtdircliente.Text = If(reader.IsDBNull(1), "", reader.GetString(1))
+                            Else
+                                saveClient = True
+                                txtnombrecliente.Select()
+                            End If
+                        End Using
 
 
                     Catch ex As Exception

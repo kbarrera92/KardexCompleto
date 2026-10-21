@@ -51,8 +51,14 @@ Partial Class frmConfiguracion
         Me.gbEquipo = New System.Windows.Forms.GroupBox()
         Me.cmbImpresora = New System.Windows.Forms.ComboBox()
         Me.Label8 = New System.Windows.Forms.Label()
+        Me.gbArqueo = New System.Windows.Forms.GroupBox()
+        Me.clbBebidas = New System.Windows.Forms.CheckedListBox()
+        Me.lblBebidas = New System.Windows.Forms.Label()
+        Me.clbHelados = New System.Windows.Forms.CheckedListBox()
+        Me.lblHelados = New System.Windows.Forms.Label()
         Me.btnGuardar = New System.Windows.Forms.Button()
         Me.btnCerrar = New System.Windows.Forms.Button()
+        Me.gbArqueo.SuspendLayout()
         Me.gbEmpresa.SuspendLayout()
         CType(Me.numValePagoMinimo, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.numValeMaximo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -359,9 +365,60 @@ Partial Class frmConfiguracion
         Me.Label8.Tag = "FO"
         Me.Label8.Text = "Impresora"
         '
+        'gbArqueo
+        '
+        Me.gbArqueo.Controls.Add(Me.clbBebidas)
+        Me.gbArqueo.Controls.Add(Me.lblBebidas)
+        Me.gbArqueo.Controls.Add(Me.clbHelados)
+        Me.gbArqueo.Controls.Add(Me.lblHelados)
+        Me.gbArqueo.Location = New System.Drawing.Point(12, 473)
+        Me.gbArqueo.Name = "gbArqueo"
+        Me.gbArqueo.Size = New System.Drawing.Size(436, 150)
+        Me.gbArqueo.TabIndex = 7
+        Me.gbArqueo.TabStop = False
+        Me.gbArqueo.Text = "Arqueo de caja: categorías (aplica a todas las sucursales)"
+        '
+        'lblHelados
+        '
+        Me.lblHelados.AutoSize = True
+        Me.lblHelados.Location = New System.Drawing.Point(12, 22)
+        Me.lblHelados.Name = "lblHelados"
+        Me.lblHelados.Size = New System.Drawing.Size(46, 13)
+        Me.lblHelados.TabIndex = 0
+        Me.lblHelados.Tag = "FO"
+        Me.lblHelados.Text = "Helados"
+        '
+        'clbHelados
+        '
+        Me.clbHelados.CheckOnClick = True
+        Me.clbHelados.FormattingEnabled = True
+        Me.clbHelados.Location = New System.Drawing.Point(15, 40)
+        Me.clbHelados.Name = "clbHelados"
+        Me.clbHelados.Size = New System.Drawing.Size(200, 94)
+        Me.clbHelados.TabIndex = 1
+        '
+        'lblBebidas
+        '
+        Me.lblBebidas.AutoSize = True
+        Me.lblBebidas.Location = New System.Drawing.Point(225, 22)
+        Me.lblBebidas.Name = "lblBebidas"
+        Me.lblBebidas.Size = New System.Drawing.Size(45, 13)
+        Me.lblBebidas.TabIndex = 2
+        Me.lblBebidas.Tag = "FO"
+        Me.lblBebidas.Text = "Bebidas"
+        '
+        'clbBebidas
+        '
+        Me.clbBebidas.CheckOnClick = True
+        Me.clbBebidas.FormattingEnabled = True
+        Me.clbBebidas.Location = New System.Drawing.Point(228, 40)
+        Me.clbBebidas.Name = "clbBebidas"
+        Me.clbBebidas.Size = New System.Drawing.Size(200, 94)
+        Me.clbBebidas.TabIndex = 3
+        '
         'btnGuardar
         '
-        Me.btnGuardar.Location = New System.Drawing.Point(272, 479)
+        Me.btnGuardar.Location = New System.Drawing.Point(272, 635)
         Me.btnGuardar.Name = "btnGuardar"
         Me.btnGuardar.Size = New System.Drawing.Size(85, 30)
         Me.btnGuardar.TabIndex = 5
@@ -371,7 +428,7 @@ Partial Class frmConfiguracion
         'btnCerrar
         '
         Me.btnCerrar.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnCerrar.Location = New System.Drawing.Point(363, 479)
+        Me.btnCerrar.Location = New System.Drawing.Point(363, 635)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(85, 30)
         Me.btnCerrar.TabIndex = 6
@@ -383,9 +440,10 @@ Partial Class frmConfiguracion
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCerrar
-        Me.ClientSize = New System.Drawing.Size(460, 521)
+        Me.ClientSize = New System.Drawing.Size(460, 677)
         Me.Controls.Add(Me.btnCerrar)
         Me.Controls.Add(Me.btnGuardar)
+        Me.Controls.Add(Me.gbArqueo)
         Me.Controls.Add(Me.gbEquipo)
         Me.Controls.Add(Me.gbSucursal)
         Me.Controls.Add(Me.gbEmpresa)
@@ -407,6 +465,8 @@ Partial Class frmConfiguracion
         CType(Me.numCantTickets, System.ComponentModel.ISupportInitialize).EndInit()
         Me.gbEquipo.ResumeLayout(False)
         Me.gbEquipo.PerformLayout()
+        Me.gbArqueo.ResumeLayout(False)
+        Me.gbArqueo.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -440,6 +500,11 @@ Partial Class frmConfiguracion
     Friend WithEvents gbEquipo As GroupBox
     Friend WithEvents cmbImpresora As ComboBox
     Friend WithEvents Label8 As Label
+    Friend WithEvents gbArqueo As GroupBox
+    Friend WithEvents clbBebidas As CheckedListBox
+    Friend WithEvents lblBebidas As Label
+    Friend WithEvents clbHelados As CheckedListBox
+    Friend WithEvents lblHelados As Label
     Friend WithEvents btnGuardar As Button
     Friend WithEvents btnCerrar As Button
 End Class
