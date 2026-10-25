@@ -8,6 +8,7 @@ Public Class FormMisVentas
     Private Sub FormMisVentas_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
             lblResumen = CrearLabelResumenEgresos(Me, 160, 463, 480)
+            lblResumen.Visible = (nombreRol = "ADMINISTRADOR")
             ConfigurarColumnas()
             Estilos.AplicarEstilos(Me)
             CargarVentas()
@@ -84,12 +85,14 @@ Public Class FormMisVentas
 
             DataGridView1.DataSource = dt
 
-            Dim ventas As Decimal = 0D
-            For Each fila As DataRow In dt.Rows
-                If Not IsDBNull(fila("subtotal")) Then ventas += Convert.ToDecimal(fila("subtotal"))
-            Next
-            Dim sucursal As Integer = Convert.ToInt32(ConsultaParametro("codigoSucursal"))
-            lblResumen.Text = TextoResumenEgresos(ventas, ObtenerEgresosReporte(sucursal, DateTime.Now, Not verTodas))
+            If lblResumen.Visible Then
+                Dim ventas As Decimal = 0D
+                For Each fila As DataRow In dt.Rows
+                    If Not IsDBNull(fila("subtotal")) Then ventas += Convert.ToDecimal(fila("subtotal"))
+                Next
+                Dim sucursal As Integer = Convert.ToInt32(ConsultaParametro("codigoSucursal"))
+                lblResumen.Text = TextoResumenEgresos(ventas, ObtenerEgresosReporte(sucursal, DateTime.Now, Not verTodas))
+            End If
         Catch ex As Exception
             Log.Error($"Error al consultar mis ventas. Error: {ex.Message}")
             MessageBox.Show("No fue posible consultar las ventas.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
