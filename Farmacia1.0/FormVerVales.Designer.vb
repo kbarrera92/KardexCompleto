@@ -36,8 +36,6 @@ Partial Class FormVerVales
         Me.colPagar = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.lblSeleccionado = New System.Windows.Forms.Label()
         Me.lblSaldoVale = New System.Windows.Forms.Label()
-        Me.btnPagarSeleccionados = New System.Windows.Forms.Button()
-        Me.btnPagarTodo = New System.Windows.Forms.Button()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -145,7 +143,7 @@ Partial Class FormVerVales
         Me.lblDetalle.Name = "lblDetalle"
         Me.lblDetalle.Size = New System.Drawing.Size(299, 17)
         Me.lblDetalle.TabIndex = 6
-        Me.lblDetalle.Text = "Productos del vale (marque para pagar)"
+        Me.lblDetalle.Text = "Productos del vale (doble clic en el vale para cobrarlo; marque los productos a pagar, o se cobra todo lo pendiente)"
         '
         'DataGridView2
         '
@@ -187,35 +185,11 @@ Partial Class FormVerVales
         Me.lblSaldoVale.TabIndex = 9
         Me.lblSaldoVale.Text = "Saldo del vale: Q 0.00"
         '
-        'btnPagarSeleccionados
-        '
-        Me.btnPagarSeleccionados.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnPagarSeleccionados.Location = New System.Drawing.Point(600, 534)
-        Me.btnPagarSeleccionados.Name = "btnPagarSeleccionados"
-        Me.btnPagarSeleccionados.Size = New System.Drawing.Size(230, 44)
-        Me.btnPagarSeleccionados.TabIndex = 7
-        Me.btnPagarSeleccionados.Tag = "DB"
-        Me.btnPagarSeleccionados.Text = "Pagar seleccionados"
-        Me.btnPagarSeleccionados.UseVisualStyleBackColor = True
-        '
-        'btnPagarTodo
-        '
-        Me.btnPagarTodo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnPagarTodo.Location = New System.Drawing.Point(840, 534)
-        Me.btnPagarTodo.Name = "btnPagarTodo"
-        Me.btnPagarTodo.Size = New System.Drawing.Size(245, 44)
-        Me.btnPagarTodo.TabIndex = 8
-        Me.btnPagarTodo.Tag = "DB"
-        Me.btnPagarTodo.Text = "Pagar todo lo pendiente"
-        Me.btnPagarTodo.UseVisualStyleBackColor = True
-        '
         'FormVerVales
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1100, 600)
-        Me.Controls.Add(Me.btnPagarTodo)
-        Me.Controls.Add(Me.btnPagarSeleccionados)
         Me.Controls.Add(Me.lblSaldoVale)
         Me.Controls.Add(Me.lblSeleccionado)
         Me.Controls.Add(Me.DataGridView2)
@@ -270,6 +244,4 @@ Partial Class FormVerVales
     Friend WithEvents colPagado As DataGridViewCheckBoxColumn
     Friend WithEvents lblSeleccionado As Label
     Friend WithEvents lblSaldoVale As Label
-    Friend WithEvents btnPagarSeleccionados As Button
-    Friend WithEvents btnPagarTodo As Button
 End Class
