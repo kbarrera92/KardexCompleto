@@ -2,7 +2,88 @@
 
 Public Class frmCobrar
 
+    'El punto de venta está cobrando un vale: se registra el pago del vale (que genera la venta) en vez de una venta normal
+    Private Function CobrandoVale() As Boolean
+        Return pv = 1 AndAlso frmPuntoDeVentaMejorado.idValeEnCobro > 0
+    End Function
+
+    'sp_pagaVale registra en una sola transacción el pago del vale y la venta, sin descontar existencias
+    '(ya se descontaron al grabar el vale) y sin bonificación.
+    Private Function GrabaPagoVale() As Boolean
+        Dim idVale As Integer = frmPuntoDeVentaMejorado.idValeEnCobro
+        Dim rc As Integer = -3
+        Dim nventa As Integer
+
+        Try
+            Dim dtLineas As New DataTable()
+            dtLineas.Columns.Add("nDetalle", GetType(Short))
+            For Each n As Short In frmPuntoDeVentaMejorado.lineasVale
+                dtLineas.Rows.Add(n)
+            Next
+
+            Dim pMensaje As New SqlParameter("@message", SqlDbType.VarChar, 200) With {.Direction = ParameterDirection.Output}
+            Dim pVenta As New SqlParameter("@nVenta", SqlDbType.Int) With {.Direction = ParameterDirection.Output}
+            Dim pRetorno As New SqlParameter("@returnValue", SqlDbType.Int) With {.Direction = ParameterDirection.ReturnValue}
+
+            Dim parametros As New List(Of SqlParameter) From {
+                New SqlParameter("@idVale", SqlDbType.Int) With {.Value = idVale},
+                New SqlParameter("@usuario", SqlDbType.Int) With {.Value = usuarioActual},
+                New SqlParameter("@lineas", SqlDbType.Structured) With {.TypeName = "dbo.LINEASVALE", .Value = dtLineas},
+                New SqlParameter("@horasDiferencia", SqlDbType.Int) With {.Value = CInt(ConsultaParametro("horasDiferencia"))},
+                New SqlParameter("@cliente", SqlDbType.VarChar, 10) With {.Value = Trim(txtnit.Text)},
+                New SqlParameter("@documento", SqlDbType.VarChar, 20) With {.Value = If(Trim(txtFactura.Text) = "", CObj(DBNull.Value), CObj(Trim(txtFactura.Text)))},
+                New SqlParameter("@tarjeta", SqlDbType.Decimal) With {.Precision = 10, .Scale = 2, .Value = LeerMonto(txttarjeta)},
+                New SqlParameter("@autoriza", SqlDbType.VarChar, 16) With {.Value = Trim(txtautori.Text)},
+                New SqlParameter("@codempleado", SqlDbType.Int) With {.Value = CInt(TextBoxCodigoEmpleado.Text)},
+                pMensaje,
+                pVenta,
+                pRetorno
+            }
+
+            Serilog.Log.Information($"Cobrando vale {idVale} desde el punto de venta. Usuario: {usuarioActual}, líneas: {frmPuntoDeVentaMejorado.lineasVale.Count}, total: {LeerMonto(txttotal)}")
+
+            Dim resultado = EjecutarStoredProcedureMultiple("sp_pagaVale", parametros)
+
+            If resultado.Item2.StartsWith("Error") Then
+                Serilog.Log.Error($"Error al ejecutar sp_pagaVale. {resultado.Item2}")
+                MessageBox.Show("Hubo un error en el procesamiento", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return False
+            End If
+
+            rc = If(IsDBNull(pRetorno.Value) OrElse pRetorno.Value Is Nothing, -1, Convert.ToInt32(pRetorno.Value))
+            Dim mensaje As String = Convert.ToString(pMensaje.Value)
+            MessageBox.Show(mensaje, If(rc = 0, "Éxito", "Error"), MessageBoxButtons.OK, If(rc = 0, MessageBoxIcon.Information, MessageBoxIcon.Error))
+            If rc <> 0 Then
+                Serilog.Log.Warning($"El pago del vale {idVale} no se registró. {mensaje}")
+                Return False
+            End If
+
+            Serilog.Log.Information($"Pago del vale {idVale} registrado. {mensaje}")
+            nventa = If(IsDBNull(pVenta.Value), 0, Convert.ToInt32(pVenta.Value))
+            ImprimeTicket(nventa)
+            If nombreRol = "ADMINISTRADOR" Then
+                DibujaTarjetasResumen()
+            End If
+
+            'Si la consulta de vales está abierta se refresca con el nuevo saldo
+            For Each f As Form In Application.OpenForms
+                If TypeOf f Is FormVerVales Then
+                    DirectCast(f, FormVerVales).RecargarVales(idVale)
+                    Exit For
+                End If
+            Next
+        Catch ex As Exception
+            Serilog.Log.Error($"Error al cobrar el vale {idVale}. Error: {ex.Message}, Trace: {ex.StackTrace}")
+            MessageBox.Show($"Hubo un error al registrar el pago del vale. {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            rc = -3
+        End Try
+
+        Return rc = 0
+    End Function
+
     Function GrabaVenta(ByVal table As DataTable) As Boolean
+        If CobrandoVale() Then Return GrabaPagoVale()
+
         Dim cmd As SqlCommand
         Dim msg As String
         Dim rc As Integer, nventa As Integer
@@ -147,6 +228,12 @@ Public Class frmCobrar
         txtnit.Text = "C/F"
         txtnombrecliente.Text = "CONSUMIDOR FINAL"
         txtdircliente.Text = "CIUDAD"
+
+        'Pago de vale: el empleado de la venta es el vendedor del vale
+        If CobrandoVale() Then
+            TextBoxCodigoEmpleado.Text = frmPuntoDeVentaMejorado.idVendedorVale.ToString()
+            TextBoxCodigoEmpleado.ReadOnly = True
+        End If
     End Sub
 
     Private Sub txttotal_TextChanged(sender As Object, e As EventArgs) Handles txttotal.TextChanged

@@ -124,13 +124,14 @@ Partial Class frmCobrar
         '
         'Button1
         '
+        Me.Button1.BackColor = System.Drawing.Color.CornflowerBlue
         Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button1.Location = New System.Drawing.Point(18, 601)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(238, 47)
         Me.Button1.TabIndex = 4
         Me.Button1.Text = "Cobrar"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.Button1.UseVisualStyleBackColor = False
         '
         'Button2
         '
@@ -243,6 +244,7 @@ Partial Class frmCobrar
         'CheckBox1
         '
         Me.CheckBox1.AutoSize = True
+        Me.CheckBox1.Enabled = False
         Me.CheckBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CheckBox1.Location = New System.Drawing.Point(400, 37)
         Me.CheckBox1.Name = "CheckBox1"

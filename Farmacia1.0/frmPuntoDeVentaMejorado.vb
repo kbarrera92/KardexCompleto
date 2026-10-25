@@ -2,6 +2,65 @@
 
 Public Class frmPuntoDeVentaMejorado
 
+    'Modo "pago de vale": la venta se arma con las líneas de un vale y no admite cambios.
+    'Al cobrar, frmCobrar registra el pago del vale (sp_pagaVale) en lugar de una venta normal.
+    Public idValeEnCobro As Integer = 0
+    Public idVendedorVale As Integer = 0
+    Public lineasVale As New List(Of Short)
+
+    Private Function TextoNota() As String
+        Return "Nota" & vbCrLf _
+            & "Puede identificar el artículo " & vbCrLf _
+            & "con el código de barra o" & vbCrLf _
+            & " manualmente."
+    End Function
+
+    ''' <summary>
+    ''' Carga las líneas de un vale en la venta y bloquea su edición. Devuelve False si el usuario
+    ''' decide no descartar los productos que ya había en el punto de venta.
+    ''' </summary>
+    Public Function CargarVale(ByVal idVale As Integer, ByVal idVendedor As Integer, ByVal nombreVendedor As String, ByVal lineas As DataTable) As Boolean
+        If DataGridView1.Rows.Count > 0 Then
+            If MessageBox.Show("El punto de venta tiene productos agregados. ¿Desea descartarlos para cobrar el vale?", "Pagar vale",
+                               MessageBoxButtons.YesNo, MessageBoxIcon.Question) <> DialogResult.Yes Then
+                Return False
+            End If
+        End If
+
+        DataGridView1.Rows.Clear()
+        lineasVale = New List(Of Short)
+
+        For Each fila As DataRow In lineas.Rows
+            Dim precio As Decimal = Convert.ToDecimal(fila("precio"))
+            Dim cantidad As Integer = Convert.ToInt32(fila("cantidad"))
+            DataGridView1.Rows.Add(fila("producto"), fila("descripcion"), cantidad, precio, String.Format("{0:N2}", precio * cantidad))
+            lineasVale.Add(Convert.ToInt16(fila("nDetalle")))
+        Next
+
+        idValeEnCobro = idVale
+        idVendedorVale = idVendedor
+        txttotal.Text = String.Format("{0:N2}", calculartotal())
+        txttotalarti.Text = String.Format("{0:N2}", calculartotalarti())
+        lblNota.Text = $"PAGO DEL VALE No. {idVale}" & vbCrLf & $"Vendedor: {nombreVendedor}"
+        BloquearEdicion(True)
+        Return True
+    End Function
+
+    Private Sub SalirModoVale()
+        If idValeEnCobro = 0 Then Return
+        idValeEnCobro = 0
+        idVendedorVale = 0
+        lineasVale = New List(Of Short)
+        lblNota.Text = TextoNota()
+        BloquearEdicion(False)
+    End Sub
+
+    Private Sub BloquearEdicion(ByVal bloquear As Boolean)
+        txtbarcode.Enabled = Not bloquear
+        btbuscar.Enabled = Not bloquear
+        Button1.Enabled = Not bloquear
+    End Sub
+
     Private Sub frmPuntoDeVentaMejorado_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         With DataGridView1
             .EnableHeadersVisualStyles = False
@@ -15,15 +74,11 @@ Public Class frmPuntoDeVentaMejorado
 
         Estilos.AplicarEstilos(Me)
         Button6.Visible = ConsultaParametro("verMisVentas") <> "N"
-        lblNota.Text = "Nota" & vbCrLf _
-            & "Puede identificar el artículo " & vbCrLf _
-            & "con el código de barra o" & vbCrLf _
-            & " manualmente."
-
-
+        If idValeEnCobro = 0 Then lblNota.Text = TextoNota()
     End Sub
 
     Sub cleanAll()
+        SalirModoVale()
         DateTimePicker1.Value = DateTime.Now.Date
 
         DataGridView1.Rows.Clear()
@@ -105,6 +160,7 @@ Public Class frmPuntoDeVentaMejorado
     End Function
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        If idValeEnCobro > 0 Then Return
         If DataGridView1.SelectedRows.Count = 0 Then
             MessageBox.Show("Debe seleccionar un detalle", "Faltan datos", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Else
@@ -140,11 +196,13 @@ Public Class frmPuntoDeVentaMejorado
     End Sub
 
     Private Sub btbuscar_Click(sender As Object, e As EventArgs) Handles btbuscar.Click
+        If idValeEnCobro > 0 Then Return
         datosreq = 1
         frmProductos.Show()
     End Sub
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        SalirModoVale()
         DataGridView1.Rows.Clear()
         txtbarcode.Clear()
         txttotal.Text = "0.00"

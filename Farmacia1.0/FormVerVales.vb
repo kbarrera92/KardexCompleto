@@ -204,12 +204,9 @@ Public Class FormVerVales
 
     Private Sub ActualizarResumen()
         Dim vale As DataRowView = ValeActual()
-        Dim pendiente As Boolean = vale IsNot Nothing AndAlso Convert.ToString(vale("estadoVale")) <> "PAGADO"
 
         lblSaldoVale.Text = "Saldo del vale: Q " & If(vale Is Nothing, 0D, Convert.ToDecimal(vale("saldo"))).ToString("N2")
         lblSeleccionado.Text = "Monto seleccionado: Q " & MontoSeleccionado().ToString("N2")
-        btnPagarSeleccionados.Enabled = pendiente
-        btnPagarTodo.Enabled = pendiente
     End Sub
 
     Private Function LineaPagada(ByVal fila As DataGridViewRow) As Boolean
@@ -271,114 +268,95 @@ Public Class FormVerVales
         End If
     End Sub
 
-    Private Sub btnPagarSeleccionados_Click(sender As Object, e As EventArgs) Handles btnPagarSeleccionados.Click
-        Dim lineas As New List(Of Short)
-        For Each fila As DataGridViewRow In DataGridView2.Rows
-            If Not LineaPagada(fila) AndAlso Convert.ToBoolean(fila.Cells("colPagar").Value) Then
-                lineas.Add(Convert.ToInt16(fila.Cells("colNDetalle").Value))
-            End If
-        Next
+    'Doble clic en un vale: sus productos pendientes (los marcados, o todos si no hay marcados) se cargan en el
+    'punto de venta y se cobran como una venta normal. El pago del vale se registra al cobrar (sp_pagaVale).
+    Private Sub DataGridView1_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellDoubleClick
+        If e.RowIndex < 0 Then Return
 
-        If lineas.Count = 0 Then
-            MessageBox.Show("Marque los productos que desea pagar", "Pagar vale", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+        Dim vale As DataRowView = ValeActual()
+        If vale Is Nothing Then Return
+
+        If Convert.ToString(vale("estadoVale")) = "PAGADO" Then
+            MessageBox.Show("El vale ya está pagado", "Pagar vale", MessageBoxButtons.OK, MessageBoxIcon.Information)
             Return
         End If
 
-        PagarLineas(lineas, MontoSeleccionado())
-    End Sub
+        Dim sucursalLocal As Integer
+        If Not Integer.TryParse(ConsultaParametro("codigoSucursal"), sucursalLocal) Then sucursalLocal = sucActual
+        If Convert.ToInt32(vale("idSucursal")) <> sucursalLocal Then
+            MessageBox.Show($"El vale pertenece a la sucursal {vale("nombreSuc")}. Solo puede cobrarse desde esa sucursal.",
+                            "Pagar vale", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
 
-    Private Sub btnPagarTodo_Click(sender As Object, e As EventArgs) Handles btnPagarTodo.Click
-        Dim lineas As New List(Of Short)
-        Dim monto As Decimal = 0
-        For Each fila As DataGridViewRow In DataGridView2.Rows
-            If Not LineaPagada(fila) Then
-                lineas.Add(Convert.ToInt16(fila.Cells("colNDetalle").Value))
-                monto += Convert.ToDecimal(fila.Cells("colSubtotal").Value)
-            End If
-        Next
-
-        If lineas.Count = 0 Then
+        Dim lineas As DataTable = LineasACobrar()
+        If lineas.Rows.Count = 0 Then
             MessageBox.Show("El vale no tiene productos pendientes de pago", "Pagar vale", MessageBoxButtons.OK, MessageBoxIcon.Information)
             Return
         End If
 
-        PagarLineas(lineas, monto)
-    End Sub
-
-    Private Sub PagarLineas(ByVal lineas As List(Of Short), ByVal monto As Decimal)
-        Dim vale As DataRowView = ValeActual()
-        If vale Is Nothing Then Return
+        Dim monto As Decimal = Convert.ToDecimal(lineas.Compute("SUM(subtotal)", ""))
+        If Not PagoMinimoValido(Convert.ToDecimal(vale("saldo")), monto) Then Return
 
         Dim idVale As Integer = Convert.ToInt32(vale("idVale"))
+        frmPuntoDeVentaMejorado.Show()
+        frmPuntoDeVentaMejorado.Activate()
+        If Not frmPuntoDeVentaMejorado.CargarVale(idVale, Convert.ToInt32(vale("idVendedor")), Convert.ToString(vale("nombreVendedor")), lineas) Then Return
 
-        'Si el saldo supera el mínimo, cada pago debe ser al menos ese mínimo; si no, se paga el saldo completo
+        Log.Information($"Vale {idVale} cargado en el punto de venta. Usuario: {usuarioActual}, líneas: {lineas.Rows.Count}, monto: {monto}")
+    End Sub
+
+    'Líneas pendientes marcadas en "Pagar"; si no hay ninguna marcada, todas las pendientes
+    Private Function LineasACobrar() As DataTable
+        Dim dt As New DataTable()
+        dt.Columns.Add("nDetalle", GetType(Short))
+        dt.Columns.Add("producto", GetType(Integer))
+        dt.Columns.Add("descripcion", GetType(String))
+        dt.Columns.Add("cantidad", GetType(Integer))
+        dt.Columns.Add("precio", GetType(Decimal))
+        dt.Columns.Add("subtotal", GetType(Decimal))
+
+        Dim hayMarcadas As Boolean = False
+        For Each fila As DataGridViewRow In DataGridView2.Rows
+            If Not LineaPagada(fila) AndAlso Convert.ToBoolean(fila.Cells("colPagar").Value) Then
+                hayMarcadas = True
+                Exit For
+            End If
+        Next
+
+        For Each fila As DataGridViewRow In DataGridView2.Rows
+            If LineaPagada(fila) Then Continue For
+            If hayMarcadas AndAlso Not Convert.ToBoolean(fila.Cells("colPagar").Value) Then Continue For
+
+            dt.Rows.Add(Convert.ToInt16(fila.Cells("colNDetalle").Value),
+                        Convert.ToInt32(fila.Cells("colProducto").Value),
+                        Convert.ToString(fila.Cells("colDProducto").Value),
+                        Convert.ToInt32(fila.Cells("colCantidad").Value),
+                        Convert.ToDecimal(fila.Cells("colPrecio").Value),
+                        Convert.ToDecimal(fila.Cells("colSubtotal").Value))
+        Next
+        Return dt
+    End Function
+
+    'Si el saldo supera el mínimo, cada pago debe ser al menos ese mínimo; si no, se paga el saldo completo
+    Private Function PagoMinimoValido(ByVal saldo As Decimal, ByVal monto As Decimal) As Boolean
         Dim minimo As Decimal = ValePagoMinimo()
-        Dim saldo As Decimal = Convert.ToDecimal(vale("saldo"))
         If saldo > minimo Then
             If monto < minimo Then
                 MessageBox.Show($"El saldo del vale es Q {saldo:N2}. El pago mínimo es de Q {minimo:N2} (seleccionado: Q {monto:N2}).",
                                 "Pago mínimo", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                Return
+                Return False
             End If
         ElseIf monto < saldo Then
             MessageBox.Show($"El saldo del vale es Q {saldo:N2}, igual o menor al pago mínimo de Q {minimo:N2}. Debe pagarse completo (seleccionado: Q {monto:N2}).",
                             "Pago total requerido", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            Return
+            Return False
         End If
+        Return True
+    End Function
 
-        If MessageBox.Show($"¿Registrar el pago de Q {monto:N2} del vale No. {idVale} de {vale("nombreVendedor")}?" & vbCrLf &
-                           $"Productos incluidos: {lineas.Count}", "Confirmar pago",
-                           MessageBoxButtons.YesNo, MessageBoxIcon.Question) <> DialogResult.Yes Then
-            Return
-        End If
-
-        Try
-            Dim dtLineas As New DataTable()
-            dtLineas.Columns.Add("nDetalle", GetType(Short))
-            For Each n As Short In lineas
-                dtLineas.Rows.Add(n)
-            Next
-
-            Dim pMensaje As New SqlParameter("@message", SqlDbType.VarChar, 200) With {.Direction = ParameterDirection.Output}
-            Dim pRetorno As New SqlParameter("@returnValue", SqlDbType.Int) With {.Direction = ParameterDirection.ReturnValue}
-
-            Dim parametros As New List(Of SqlParameter) From {
-                New SqlParameter("@idVale", SqlDbType.Int) With {.Value = idVale},
-                New SqlParameter("@usuario", SqlDbType.Int) With {.Value = usuarioActual},
-                New SqlParameter("@lineas", SqlDbType.Structured) With {.TypeName = "dbo.LINEASVALE", .Value = dtLineas},
-                New SqlParameter("@horasDiferencia", SqlDbType.Int) With {.Value = CInt(ConsultaParametro("horasDiferencia"))},
-                pMensaje,
-                pRetorno
-            }
-
-            Log.Information($"Pagando vale {idVale}. Usuario: {usuarioActual}, líneas: {lineas.Count}, monto: {monto}")
-
-            Dim resultado = EjecutarStoredProcedureMultiple("sp_pagaVale", parametros)
-
-            If resultado.Item2.StartsWith("Error") Then
-                Log.Error($"Error al ejecutar sp_pagaVale. {resultado.Item2}")
-                MessageBox.Show("Hubo un error en el procesamiento", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                Return
-            End If
-
-            Dim codigoRetorno As Integer = If(IsDBNull(pRetorno.Value) OrElse pRetorno.Value Is Nothing, -1, Convert.ToInt32(pRetorno.Value))
-            Dim mensaje As String = Convert.ToString(pMensaje.Value)
-
-            If codigoRetorno = 0 Then
-                Log.Information($"Pago del vale {idVale} registrado. {mensaje}")
-                MessageBox.Show(mensaje, "Resultado", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                CargarVales(idVale)
-                If nombreRol = "ADMINISTRADOR" Then
-                    DibujaTarjetasResumen()
-                End If
-                BringToFront()
-            Else
-                Log.Warning($"El pago del vale {idVale} no se registró. {mensaje}")
-                MessageBox.Show(mensaje, "No se pudo registrar el pago", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            End If
-        Catch ex As Exception
-            Log.Error($"Ocurrió un error. Error: {ex.Message}, Trace: {ex.StackTrace}")
-            MessageBox.Show("Hubo un error en el procesamiento", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End Try
+    'Lo invoca el cobro del punto de venta al registrar el pago, para reflejar el nuevo saldo
+    Public Sub RecargarVales(ByVal idVale As Integer)
+        CargarVales(idVale)
     End Sub
 End Class

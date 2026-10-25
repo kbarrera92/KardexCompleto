@@ -152,6 +152,11 @@ Public Class frmProductos
                 End If
 
                 If datosreq = 1 Then
+                    If frmPuntoDeVentaMejorado.idValeEnCobro > 0 Then
+                        MessageBox.Show("El punto de venta está cobrando un vale y no admite más productos", "Pagar vale", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                        Return
+                    End If
+
                     If MessageBox.Show("¿Guardar los datos de este producto?", "Guardar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
 
                         Dim myValue As String = InputBox("Ingresa la cantidad", "Datos", "0")
