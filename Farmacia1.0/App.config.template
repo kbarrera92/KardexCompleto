@@ -2,8 +2,9 @@
 <configuration>
   <configSections>
   </configSections>
-  <!--La cadena IS_PRO2CS no va aquí: al primer arranque la aplicación pide la conexión y la guarda cifrada
-      (DPAPI). Para cambiarla después, ejecutar Farmacia1.0.exe /conexion.-->
+  <!--La cadena IS_PRO2CS no va aquí: al primer arranque la aplicación pide la conexión y el código de sucursal
+      y los guarda en %ProgramData%\FarmaciAhorro\terminal.xml (cadena cifrada con DPAPI), fuera de la carpeta
+      del programa. Para cambiarlos después, ejecutar Farmacia1.0.exe /conexion.-->
   <connectionStrings />
 
 

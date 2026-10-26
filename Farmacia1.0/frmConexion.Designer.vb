@@ -30,6 +30,8 @@ Partial Class frmConexion
         Me.txtUsuario = New System.Windows.Forms.TextBox()
         Me.lblPassword = New System.Windows.Forms.Label()
         Me.txtPassword = New System.Windows.Forms.TextBox()
+        Me.lblSucursal = New System.Windows.Forms.Label()
+        Me.txtSucursal = New System.Windows.Forms.TextBox()
         Me.btnProbar = New System.Windows.Forms.Button()
         Me.btnGuardar = New System.Windows.Forms.Button()
         Me.btnCancelar = New System.Windows.Forms.Button()
@@ -100,31 +102,47 @@ Partial Class frmConexion
         Me.txtPassword.TabIndex = 7
         Me.txtPassword.UseSystemPasswordChar = True
         '
+        'lblSucursal
+        '
+        Me.lblSucursal.AutoSize = True
+        Me.lblSucursal.Location = New System.Drawing.Point(12, 135)
+        Me.lblSucursal.Name = "lblSucursal"
+        Me.lblSucursal.Size = New System.Drawing.Size(92, 13)
+        Me.lblSucursal.TabIndex = 8
+        Me.lblSucursal.Text = "Código sucursal:"
+        '
+        'txtSucursal
+        '
+        Me.txtSucursal.Location = New System.Drawing.Point(110, 132)
+        Me.txtSucursal.Name = "txtSucursal"
+        Me.txtSucursal.Size = New System.Drawing.Size(250, 20)
+        Me.txtSucursal.TabIndex = 9
+        '
         'btnProbar
         '
-        Me.btnProbar.Location = New System.Drawing.Point(12, 145)
+        Me.btnProbar.Location = New System.Drawing.Point(12, 175)
         Me.btnProbar.Name = "btnProbar"
         Me.btnProbar.Size = New System.Drawing.Size(110, 28)
-        Me.btnProbar.TabIndex = 8
+        Me.btnProbar.TabIndex = 10
         Me.btnProbar.Text = "Probar conexión"
         Me.btnProbar.UseVisualStyleBackColor = True
         '
         'btnGuardar
         '
-        Me.btnGuardar.Location = New System.Drawing.Point(204, 145)
+        Me.btnGuardar.Location = New System.Drawing.Point(204, 175)
         Me.btnGuardar.Name = "btnGuardar"
         Me.btnGuardar.Size = New System.Drawing.Size(75, 28)
-        Me.btnGuardar.TabIndex = 9
+        Me.btnGuardar.TabIndex = 11
         Me.btnGuardar.Text = "Guardar"
         Me.btnGuardar.UseVisualStyleBackColor = True
         '
         'btnCancelar
         '
         Me.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnCancelar.Location = New System.Drawing.Point(285, 145)
+        Me.btnCancelar.Location = New System.Drawing.Point(285, 175)
         Me.btnCancelar.Name = "btnCancelar"
         Me.btnCancelar.Size = New System.Drawing.Size(75, 28)
-        Me.btnCancelar.TabIndex = 10
+        Me.btnCancelar.TabIndex = 12
         Me.btnCancelar.Text = "Cancelar"
         Me.btnCancelar.UseVisualStyleBackColor = True
         '
@@ -134,7 +152,7 @@ Partial Class frmConexion
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancelar
-        Me.ClientSize = New System.Drawing.Size(376, 189)
+        Me.ClientSize = New System.Drawing.Size(376, 219)
         Me.Controls.Add(Me.lblServidor)
         Me.Controls.Add(Me.txtServidor)
         Me.Controls.Add(Me.lblBase)
@@ -143,6 +161,8 @@ Partial Class frmConexion
         Me.Controls.Add(Me.txtUsuario)
         Me.Controls.Add(Me.lblPassword)
         Me.Controls.Add(Me.txtPassword)
+        Me.Controls.Add(Me.lblSucursal)
+        Me.Controls.Add(Me.txtSucursal)
         Me.Controls.Add(Me.btnProbar)
         Me.Controls.Add(Me.btnGuardar)
         Me.Controls.Add(Me.btnCancelar)
@@ -165,6 +185,8 @@ Partial Class frmConexion
     Friend WithEvents txtUsuario As System.Windows.Forms.TextBox
     Friend WithEvents lblPassword As System.Windows.Forms.Label
     Friend WithEvents txtPassword As System.Windows.Forms.TextBox
+    Friend WithEvents lblSucursal As System.Windows.Forms.Label
+    Friend WithEvents txtSucursal As System.Windows.Forms.TextBox
     Friend WithEvents btnProbar As System.Windows.Forms.Button
     Friend WithEvents btnGuardar As System.Windows.Forms.Button
     Friend WithEvents btnCancelar As System.Windows.Forms.Button

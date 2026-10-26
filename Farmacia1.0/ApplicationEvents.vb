@@ -15,6 +15,13 @@ Namespace My
 
             Serilog.Log.Information("Iniciando aplicación")
 
+            ' La configuración de usuario (impresora) va por versión: se trae la de la versión anterior.
+            If My.Settings.actualizarConfiguracion Then
+                My.Settings.Upgrade()
+                My.Settings.actualizarConfiguracion = False
+                My.Settings.Save()
+            End If
+
             ' Actualización automática: si hay versión nueva se aplica y se reinicia (/actualizado evita bucles).
             Actualizador.LimpiarArchivosViejos()
             If Not e.CommandLine.Contains("/actualizado") AndAlso Actualizador.BuscarYAplicar() Then
@@ -23,12 +30,8 @@ Namespace My
                 Return
             End If
 
-            ' Tras escribir el config cifrado, este proceso ya no puede releerlo: se reinicia y se cierra.
-            If ConfigSegura.ProtegerSiEstaEnClaro() Then
-                ConfigSegura.Reiniciar(e.CommandLine)
-                e.Cancel = True
-                Return
-            End If
+            ' Equipos con la cadena en el .exe.config: se pasa a la configuración de la terminal (%ProgramData%).
+            ConfigSegura.MigrarDesdeConfig()
 
             If Not ConfigSegura.HayCadena() OrElse e.CommandLine.Contains("/conexion") Then
                 Using f As New frmConexion()

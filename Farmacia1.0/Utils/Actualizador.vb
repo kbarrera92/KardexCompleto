@@ -9,7 +9,8 @@ Imports Serilog
 ''' Actualización automática al iniciar: lee version.xml del hosting por HTTPS, descarga el zip,
 ''' verifica SHA256 y reemplaza los archivos del programa. Un exe en uso se puede renombrar en Windows,
 ''' así que los archivos reemplazados pasan a *.old (se borran en el siguiente arranque).
-''' Nunca toca la cadena de conexión cifrada del .exe.config ni logs\ ni Factura.txt.
+''' La conexión y la sucursal de la terminal viven en %ProgramData%\FarmaciAhorro (ver ConfigSegura), fuera de
+''' la carpeta del programa. Del .exe.config solo se mezclan runtime y appSettings nuevos; logs\ y Factura.txt no se tocan.
 ''' </summary>
 Module Actualizador
 
@@ -38,7 +39,7 @@ Module Actualizador
             For Each f In Directory.EnumerateFiles(CarpetaApp, "*.old", SearchOption.AllDirectories)
                 Try
                     File.Delete(f)
-                Catch ex As IOException
+                Catch ex As Exception When TypeOf ex Is IOException OrElse TypeOf ex Is UnauthorizedAccessException
                     ' Sigue en uso; se intentará en el próximo arranque.
                 End Try
             Next
@@ -63,7 +64,7 @@ Module Actualizador
             Dim manifiesto As XElement
             Try
                 manifiesto = XElement.Parse(DescargarTexto(url & ArchivoManifiesto))
-            Catch ex As Exception When TypeOf ex Is WebException OrElse TypeOf ex Is Xml.XmlException
+            Catch ex As Exception When TypeOf ex Is WebException OrElse TypeOf ex Is System.Xml.XmlException
                 Log.Warning(ex, "No se pudo leer el manifiesto de actualización")
                 Return False
             End Try

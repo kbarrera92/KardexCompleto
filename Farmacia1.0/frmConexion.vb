@@ -1,7 +1,8 @@
 Imports System.Data.SqlClient
 
 ''' <summary>
-''' Captura la conexión a la base de datos y la guarda cifrada en el archivo de configuración.
+''' Captura la conexión a la base de datos y el código de sucursal, y los guarda en la configuración de la terminal
+''' (la conexión cifrada).
 ''' Se muestra cuando el equipo no tiene cadena o al ejecutar con /conexion.
 ''' </summary>
 Public Class frmConexion
@@ -13,6 +14,7 @@ Public Class frmConexion
         txtServidor.Text = actual.DataSource
         txtBase.Text = actual.InitialCatalog
         txtUsuario.Text = actual.UserID
+        txtSucursal.Text = ConsultaParametro("codigoSucursal")
     End Sub
 
     Private Function ConstruyeCadena() As String
@@ -29,6 +31,10 @@ Public Class frmConexion
     Private Function DatosCompletos() As Boolean
         If txtServidor.Text.Trim() = "" OrElse txtBase.Text.Trim() = "" OrElse txtUsuario.Text.Trim() = "" OrElse txtPassword.Text = "" Then
             MessageBox.Show("Complete servidor, base de datos, usuario y contraseña", "Faltan datos", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return False
+        End If
+        If Not Integer.TryParse(txtSucursal.Text.Trim(), Nothing) Then
+            MessageBox.Show("El código de sucursal debe ser un número", "Datos inválidos", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return False
         End If
         Return True
@@ -65,9 +71,9 @@ Public Class frmConexion
         Cursor = Cursors.WaitCursor
         Try
             If Not ProbarConexion(cadena) Then Return
-            ConfigSegura.GuardarCadena(cadena)
+            ConfigSegura.Guardar(cadena, txtSucursal.Text.Trim())
             DialogResult = DialogResult.OK
-        Catch ex As Exception When TypeOf ex Is UnauthorizedAccessException OrElse TypeOf ex Is Configuration.ConfigurationErrorsException
+        Catch ex As Exception When TypeOf ex Is UnauthorizedAccessException OrElse TypeOf ex Is IO.IOException
             MessageBox.Show("No se pudo guardar la configuración." & vbCrLf &
                             "Ejecute la aplicación como administrador e inténtelo de nuevo.",
                             "Permisos", MessageBoxButtons.OK, MessageBoxIcon.Error)
