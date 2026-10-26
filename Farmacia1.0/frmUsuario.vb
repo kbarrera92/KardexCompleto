@@ -6,8 +6,11 @@ Public Class frmUsuario
 
     Dim RegOAct As Integer = 0
     Dim correlativo As String = "SELECT IDENT_CURRENT ('USUARIO') AS Current_Identity"
-    Dim sqlUsuarios As String = "SELECT idUsuario, nombreUsuario FROM USUARIO U INNER JOIN TIPOUSUARIO TU ON U.tipoUsuario = TU.idTipoUsuario " _
+    Dim sqlUsuarios As String = "SELECT U.idUsuario, U.nombreUsuario FROM USUARIO U " _
+                                & "INNER JOIN TIPOUSUARIO TU ON U.tipoUsuario = TU.idTipoUsuario " _
+                                & "LEFT JOIN ESTADOUSUARIO EU ON U.estado = EU.idEstado " _
                                 & "WHERE TU.nombreTipo <> 'GERENTE'"
+    Dim filtroActivos As String = " AND EU.estadoUsuario = 'ACTIVO'"
     Dim sqlEstado As String = "SELECT idEstado, estadoUsuario FROM ESTADOUSUARIO"
     Dim sqlSucursalesPorUsuario As String = "SELECT S.idSucursal, S.nombreSuc 
                                  FROM USUARIO_SUCURSAL US
@@ -160,6 +163,19 @@ Public Class frmUsuario
         End Try
     End Function
 
+    Private Sub CargarUsuarios()
+        Dim sql As String = sqlUsuarios
+        If Not CheckBoxMostrarTodos.Checked Then sql &= filtroActivos
+
+        ListBox1.DataSource = updateList(sql)
+        ListBox1.ValueMember = "idUsuario"
+        ListBox1.DisplayMember = "nombreUsuario"
+    End Sub
+
+    Private Sub CheckBoxMostrarTodos_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBoxMostrarTodos.CheckedChanged
+        CargarUsuarios()
+    End Sub
+
     Private Sub frmUsuario_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ComboBoxEstadoUsuario.DataSource = updateCm(sqlEstado)
         ComboBoxEstadoUsuario.ValueMember = updateCm(sqlEstado).Columns(0).ToString
@@ -169,11 +185,7 @@ Public Class frmUsuario
         ComboBoxTipoUsuario.ValueMember = updateCm("SELECT idTipoUsuario, nombreTipo FROM TIPOUSUARIO WHERE nombreTipo <> 'GERENTE'").Columns(0).ToString
         ComboBoxTipoUsuario.DisplayMember = updateCm("SELECT idTipoUsuario, nombreTipo FROM TIPOUSUARIO WHERE nombreTipo <> 'GERENTE'").Columns(1).ToString
 
-        Dim dtUsuarios As DataTable = updateList(sqlUsuarios)
-
-        ListBox1.DataSource = dtUsuarios
-        ListBox1.ValueMember = "idUsuario"
-        ListBox1.DisplayMember = "nombreUsuario"
+        CargarUsuarios()
 
         LlenaListaSucursales("SELECT idSucursal, nombreSuc FROM SUCURSAL")
 
@@ -509,10 +521,7 @@ Public Class frmUsuario
         End If
 
         closeConnection()
-        With ListBox1
-            .DataSource = updateList(sqlUsuarios)
-            .ValueMember = updateList(sqlUsuarios).Columns(0).ToString()
-        End With
+        CargarUsuarios()
         TextBoxNombre.Clear() : TextBoxNickname.Clear() : TextBox3.Clear() : TextBoxIdUsuario.Clear() : TextBoxPass1.Clear() : TextBoxPass2.Clear() : TextBoxPass3.Clear()
         ComboBoxTipoUsuario.SelectedIndex = -1
         ComboBoxEstadoUsuario.SelectedIndex = -1
@@ -546,10 +555,7 @@ Public Class frmUsuario
                 MessageBox.Show("Algo salió mal" & vbCrLf & "Error: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             Finally
                 closeConnection()
-                With ListBox1
-                    .DataSource = updateList(sqlUsuarios)
-                    .ValueMember = updateList(sqlUsuarios).Columns(0).ToString
-                End With
+                CargarUsuarios()
                 ListBox1.Select()
             End Try
         End If

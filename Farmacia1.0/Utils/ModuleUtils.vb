@@ -23,6 +23,10 @@ Module ModuleUtils
                 Return retValue
             End If
 
+            If param = "codigoSucursal" AndAlso ConfigSegura.CodigoSucursal() <> "" Then
+                Return ConfigSegura.CodigoSucursal()
+            End If
+
             Dim appSetting As NameValueCollection = Configuration.ConfigurationManager.AppSettings
             retValue = If(appSetting(param), String.Empty)
         Catch ex As Exception

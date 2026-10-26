@@ -404,3 +404,6 @@ FodyWeavers.xsd
 *.sln.iml
 # Salida de scripts/publicar.ps1
 publicacion/
+# Salida de scripts/crear_copia_local.ps1 (esquema y log de produccion)
+scripts/copia_local/
+scripts/scripts_migraciones/

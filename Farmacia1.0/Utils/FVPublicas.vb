@@ -120,7 +120,7 @@ Module FVPublicas
     Sub openConnection()
         If conn.State = ConnectionState.Closed Then
 
-            conn.ConnectionString = ConfigurationManager.ConnectionStrings("IS_PRO2CS").ToString
+            conn.ConnectionString = ConfigSegura.Cadena()
             conn.Open()
         End If
     End Sub
