@@ -53,6 +53,7 @@ Partial Class frmUsuario
         Me.TextBoxPass1 = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.CheckedListBoxSucursales = New System.Windows.Forms.CheckedListBox()
+        Me.CheckBoxMostrarTodos = New System.Windows.Forms.CheckBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
@@ -372,11 +373,22 @@ Partial Class frmUsuario
         Me.CheckedListBoxSucursales.Size = New System.Drawing.Size(312, 184)
         Me.CheckedListBoxSucursales.TabIndex = 18
         '
+        'CheckBoxMostrarTodos
+        '
+        Me.CheckBoxMostrarTodos.AutoSize = True
+        Me.CheckBoxMostrarTodos.Location = New System.Drawing.Point(243, 20)
+        Me.CheckBoxMostrarTodos.Name = "CheckBoxMostrarTodos"
+        Me.CheckBoxMostrarTodos.Size = New System.Drawing.Size(90, 17)
+        Me.CheckBoxMostrarTodos.TabIndex = 19
+        Me.CheckBoxMostrarTodos.Text = "Mostrar todos"
+        Me.CheckBoxMostrarTodos.UseVisualStyleBackColor = True
+        '
         'frmUsuario
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(645, 480)
+        Me.Controls.Add(Me.CheckBoxMostrarTodos)
         Me.Controls.Add(Me.CheckedListBoxSucursales)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.ComboBoxEstadoUsuario)
@@ -436,4 +448,5 @@ Partial Class frmUsuario
     Friend WithEvents btnPass2 As Button
     Friend WithEvents btnPass1 As Button
     Friend WithEvents CheckedListBoxSucursales As CheckedListBox
+    Friend WithEvents CheckBoxMostrarTodos As CheckBox
 End Class

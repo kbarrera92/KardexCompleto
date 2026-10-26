@@ -40,23 +40,23 @@ Public Class frmVerDetalleVentas
         updateDet()
     End Sub
 
-    Private Sub DataGridView1_KeyDown(sender As Object, e As KeyEventArgs) Handles DataGridView1.KeyDown
-        If e.KeyCode = Keys.Delete Then
-            If MessageBox.Show("¿Desea eliminar este registro?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
-                Dim sqldeldet As String = "DELETE FROM DETALLEVENTA WHERE (nDetalleV = @nd AND nVenta = @nv)"
-                Dim cmd As SqlCommand
-                Try
-                    cmd = New SqlCommand(sqldeldet, conn)
-                    cmd.Parameters.AddWithValue("nd", CInt(DataGridView1.CurrentRow.Cells(0).Value))
-                    cmd.Parameters.AddWithValue("nv", CInt(TextBox1.Text))
-                    openConnection()
-                    cmd.ExecuteNonQuery()
-                    closeConnection()
-                    MsgBox("Eliminado correctamente", MsgBoxStyle.Information, "Éxito")
-                Catch ex As Exception
-                    MsgBox(ex.Message)
-                End Try
-            End If
-        End If
-    End Sub
+    'Private Sub DataGridView1_KeyDown(sender As Object, e As KeyEventArgs) Handles DataGridView1.KeyDown
+    '    If e.KeyCode = Keys.Delete Then
+    '        If MessageBox.Show("¿Desea eliminar este registro?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
+    '            Dim sqldeldet As String = "DELETE FROM DETALLEVENTA WHERE (nDetalleV = @nd AND nVenta = @nv)"
+    '            Dim cmd As SqlCommand
+    '            Try
+    '                cmd = New SqlCommand(sqldeldet, conn)
+    '                cmd.Parameters.AddWithValue("nd", CInt(DataGridView1.CurrentRow.Cells(0).Value))
+    '                cmd.Parameters.AddWithValue("nv", CInt(TextBox1.Text))
+    '                openConnection()
+    '                cmd.ExecuteNonQuery()
+    '                closeConnection()
+    '                MsgBox("Eliminado correctamente", MsgBoxStyle.Information, "Éxito")
+    '            Catch ex As Exception
+    '                MsgBox(ex.Message)
+    '            End Try
+    '        End If
+    '    End If
+    'End Sub
 End Class
