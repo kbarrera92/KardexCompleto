@@ -34,6 +34,7 @@ Partial Class FormVendedores
         Me.ButtonGrabar = New System.Windows.Forms.Button()
         Me.ButtonNuevo = New System.Windows.Forms.Button()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.CheckBoxMostrarTodos = New System.Windows.Forms.CheckBox()
         Me.GroupBox1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -164,11 +165,22 @@ Partial Class FormVendedores
         Me.DataGridView1.Size = New System.Drawing.Size(573, 252)
         Me.DataGridView1.TabIndex = 18
         '
+        'CheckBoxMostrarTodos
+        '
+        Me.CheckBoxMostrarTodos.AutoSize = True
+        Me.CheckBoxMostrarTodos.Location = New System.Drawing.Point(606, 172)
+        Me.CheckBoxMostrarTodos.Name = "CheckBoxMostrarTodos"
+        Me.CheckBoxMostrarTodos.Size = New System.Drawing.Size(90, 17)
+        Me.CheckBoxMostrarTodos.TabIndex = 19
+        Me.CheckBoxMostrarTodos.Text = "Mostrar todos"
+        Me.CheckBoxMostrarTodos.UseVisualStyleBackColor = True
+        '
         'FormVendedores
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(877, 291)
+        Me.Controls.Add(Me.CheckBoxMostrarTodos)
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.ComboBoxEstado)
@@ -199,4 +211,5 @@ Partial Class FormVendedores
     Friend WithEvents ButtonGrabar As Button
     Friend WithEvents ButtonNuevo As Button
     Friend WithEvents DataGridView1 As DataGridView
+    Friend WithEvents CheckBoxMostrarTodos As CheckBox
 End Class

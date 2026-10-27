@@ -7,6 +7,10 @@ Public Class FormVendedores
         CargarVendedores()
     End Sub
 
+    Private Sub CheckBoxMostrarTodos_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBoxMostrarTodos.CheckedChanged
+        CargarVendedores()
+    End Sub
+
     Private Sub DesactivarVendedor(ByVal idVendedor As Integer)
 
         Try
@@ -65,6 +69,9 @@ Public Class FormVendedores
 
                 cmd.Parameters.Add("@Accion", SqlDbType.VarChar, 20).Value = "LISTAR"
                 cmd.Parameters.Add("@mensaje", SqlDbType.VarChar, 200).Value = DBNull.Value
+
+                cmd.Parameters.Add("@estado", SqlDbType.Bit).Value =
+                If(CheckBoxMostrarTodos.Checked, DBNull.Value, CObj(True))
 
                 Using da As New SqlDataAdapter(cmd)
 
