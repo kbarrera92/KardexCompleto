@@ -66,7 +66,6 @@ Public Class FormReporteUtilidad
             dt = ds.Tables("dtutilidad")
 
             da = New SqlDataAdapter(cmd)
-            da.FillSchema(ds.Tables("dtutilidad"), SchemaType.Source)
             da.Fill(ds.Tables("dtutilidad"))
         Catch ex As Exception
             MessageBox.Show("Error al cargar los datos" & vbCrLf & "Error: " & ex.ToString)

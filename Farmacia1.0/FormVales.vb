@@ -1,5 +1,6 @@
 Imports System.Data.SqlClient
 Imports Serilog
+Imports System.Globalization
 
 Public Class FormVales
     Private dvProductos As DataView
@@ -160,8 +161,8 @@ Public Class FormVales
             txtprecio.Text = precioSeleccionado.ToString("N2")
             txtexistencia.Text = existenciaSeleccionada.ToString("N0")
             txtcantidad.Text = "1"
-            txtcantidad.Select()
-            txtcantidad.SelectAll()
+            txtprecio.Select()
+            txtprecio.SelectAll()
         Catch ex As Exception
             Log.Error($"Ocurrió un error. Error: {ex.Message}")
         End Try
@@ -187,14 +188,24 @@ Public Class FormVales
             Return
         End If
 
-        'Si el producto ya está en el vale se suma a la misma línea
+        Dim precio As Decimal
+        If Not Decimal.TryParse(txtprecio.Text.Trim(), NumberStyles.Number, CultureInfo.CurrentCulture, precio) OrElse precio <= 0 Then
+            MessageBox.Show("Precio no válido", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            txtprecio.Select()
+            txtprecio.SelectAll()
+            Return
+        End If
+        precio = Math.Round(precio, 2)
+
+        'Misma línea solo si coincide código y precio; la existencia se valida con todas las líneas del producto
         Dim filaExistente As DataGridViewRow = Nothing
         Dim cantidadEnVale As Integer = 0
         For Each fila As DataGridViewRow In DataGridView2.Rows
             If Convert.ToString(fila.Cells("clCodigo").Value) = txtcodpro.Text Then
-                filaExistente = fila
-                cantidadEnVale = Convert.ToInt32(fila.Cells("clCant").Value)
-                Exit For
+                cantidadEnVale += Convert.ToInt32(fila.Cells("clCant").Value)
+                If filaExistente Is Nothing AndAlso Decimal.Parse(Convert.ToString(fila.Cells("clPrecio").Value), NumberStyles.Number, CultureInfo.CurrentCulture) = precio Then
+                    filaExistente = fila
+                End If
             End If
         Next
 
@@ -205,13 +216,17 @@ Public Class FormVales
             Return
         End If
 
+        If precio <> precioSeleccionado Then
+            Log.Information($"Precio modificado en vale. Producto: {txtcodpro.Text}, precio lista: {precioSeleccionado}, precio aplicado: {precio}")
+        End If
+
         If filaExistente Is Nothing Then
             DataGridView2.Rows.Add(DataGridView2.Rows.Count + 1, txtcodpro.Text, txtdescpro.Text.Trim(), cantidad,
-                                   precioSeleccionado.ToString("N2"), (cantidad * precioSeleccionado).ToString("N2"))
+                                   precio.ToString("N2"), (cantidad * precio).ToString("N2"))
         Else
-            Dim nuevaCantidad As Integer = cantidadEnVale + cantidad
+            Dim nuevaCantidad As Integer = Convert.ToInt32(filaExistente.Cells("clCant").Value) + cantidad
             filaExistente.Cells("clCant").Value = nuevaCantidad
-            filaExistente.Cells("clSubt").Value = (nuevaCantidad * precioSeleccionado).ToString("N2")
+            filaExistente.Cells("clSubt").Value = (nuevaCantidad * precio).ToString("N2")
         End If
 
         LimpiarProducto()
@@ -294,7 +309,7 @@ Public Class FormVales
             detalles.Columns.Add("precio", GetType(Decimal))
             detalles.Columns.Add("subtotal", GetType(Decimal))
 
-            'El sp vuelve a calcular precio e importe en el servidor
+            'El sp graba el precio enviado (puede incluir descuento) y vuelve a calcular el importe en el servidor
             For i As Integer = 0 To DataGridView2.Rows.Count - 1
                 Dim cantidad As Integer = Convert.ToInt32(DataGridView2.Rows(i).Cells("clCant").Value)
                 Dim precio As Decimal = Convert.ToDecimal(DataGridView2.Rows(i).Cells("clPrecio").Value)
@@ -394,5 +409,13 @@ Public Class FormVales
         txttotal.Text = "0.00"
         ComboBoxVendedor.SelectedIndex = -1
         ComboBoxVendedor.Select()
+    End Sub
+
+    Private Sub txtprecio_KeyDown(sender As Object, e As KeyEventArgs) Handles txtprecio.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            txtcantidad.Select()
+            txtcantidad.SelectAll()
+            e.SuppressKeyPress = True
+        End If
     End Sub
 End Class

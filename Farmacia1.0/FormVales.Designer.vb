@@ -246,10 +246,8 @@ Partial Class FormVales
         '
         Me.txtprecio.Location = New System.Drawing.Point(435, 498)
         Me.txtprecio.Name = "txtprecio"
-        Me.txtprecio.ReadOnly = True
         Me.txtprecio.Size = New System.Drawing.Size(80, 20)
         Me.txtprecio.TabIndex = 25
-        Me.txtprecio.TabStop = False
         Me.txtprecio.Tag = "ES"
         Me.txtprecio.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
