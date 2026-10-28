@@ -358,7 +358,7 @@ Partial Class FormArqueoCaja
         Me.lblEfectivoCajaTitulo.Name = "lblEfectivoCajaTitulo"
         Me.lblEfectivoCajaTitulo.Size = New System.Drawing.Size(137, 19)
         Me.lblEfectivoCajaTitulo.TabIndex = 23
-        Me.lblEfectivoCajaTitulo.Text = "(+) Helados y bebidas"
+        Me.lblEfectivoCajaTitulo.Text = "(-) Entregado a administración"
         '
         'lblEfectivoCaja
         '

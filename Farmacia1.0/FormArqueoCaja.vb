@@ -21,10 +21,17 @@ Public Class FormArqueoCaja
         End Get
     End Property
 
-    ''' <summary>Lo que debe haber al contar la caja: el conteo incluye el fondo inicial y el efectivo de helados y bebidas.</summary>
+    ''' <summary>Lo que debe haber al contar la caja: solo el fondo inicial, porque el resto del efectivo se entrega al administrador.</summary>
     Private ReadOnly Property EfectivoEnCaja As Decimal
         Get
-            Return TotalEfectivo + helados + bebidas
+            Return inicial
+        End Get
+    End Property
+
+    ''' <summary>Efectivo que sale de la caja para entregarlo al administrador.</summary>
+    Private ReadOnly Property EntregadoAdministrador As Decimal
+        Get
+            Return TotalEfectivo + helados + bebidas - EfectivoEnCaja
         End Get
     End Property
 
@@ -142,7 +149,7 @@ Public Class FormArqueoCaja
         lblBebidas.Text = bebidas.ToString("N2")
         lblEgresos.Text = egresos.ToString("N2")
         lblTotalEfectivo.Text = TotalEfectivo.ToString("N2")
-        lblEfectivoCaja.Text = (helados + bebidas).ToString("N2")
+        lblEfectivoCaja.Text = EntregadoAdministrador.ToString("N2")
         lblEsperado.Text = EfectivoEnCaja.ToString("N2")
         lblDiferencia.Text = dif.ToString("+#,##0.00;-#,##0.00;0.00")
         lblDiferencia.ForeColor = If(dif < 0, Color.Red, If(dif > 0, Color.DarkOrange, Color.Green))
@@ -198,7 +205,7 @@ Public Class FormArqueoCaja
         End Try
 
         Dim total = TotalArqueo()
-        ImprimeTicketArqueo(idTurno, vendedor, Conteo(), total, sobrante, inicial, venta, tarjeta, helados, bebidas, egresos, TotalEfectivo, total - EfectivoEnCaja)
+        ImprimeTicketArqueo(idTurno, vendedor, Conteo(), total, sobrante, inicial, venta, tarjeta, helados, bebidas, egresos, TotalEfectivo, EfectivoEnCaja, total - EfectivoEnCaja)
         MessageBox.Show("El arqueo se guardó correctamente", "Correcto", MessageBoxButtons.OK, MessageBoxIcon.Information)
     End Sub
 
