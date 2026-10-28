@@ -468,7 +468,7 @@ Module ModuleUtils
     Public Sub ImprimeTicketArqueo(ByVal idTurno As Integer, ByVal vendedor As String, ByVal conteo As IEnumerable(Of KeyValuePair(Of Decimal, Integer)),
                                    ByVal totalArqueo As Decimal, ByVal sobrante As Decimal, ByVal inicial As Decimal, ByVal venta As Decimal, ByVal tarjeta As Decimal,
                                    ByVal helados As Decimal, ByVal bebidas As Decimal, ByVal egresos As Decimal,
-                                   ByVal totalEfectivo As Decimal, ByVal diferencia As Decimal)
+                                   ByVal totalEfectivo As Decimal, ByVal efectivoEnCaja As Decimal, ByVal diferencia As Decimal)
         If ConsultaParametro("imprimeTicketCuadre") = "S" Then
             Dim ticket As clsFunciones.crearTicket = New clsFunciones.crearTicket()
 
@@ -494,7 +494,8 @@ Module ModuleUtils
             ticket.agregaTotales("(-) Bebidas: ", bebidas)
             ticket.agregaTotales("(-) Egresos: ", egresos)
             ticket.agregaTotales("Total efectivo: ", totalEfectivo)
-            ticket.agregaTotales("Efectivo en caja: ", totalEfectivo + helados + bebidas)
+            ticket.agregaTotales("(-) Entregado admin: ", totalEfectivo + helados + bebidas - efectivoEnCaja)
+            ticket.agregaTotales("Efectivo en caja: ", efectivoEnCaja)
             ticket.textoIzquierda(" ")
             ticket.agregaTotales("Diferencia: ", diferencia)
 
